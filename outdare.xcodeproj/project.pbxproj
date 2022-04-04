@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062FE88327FB5C7500F2D0F7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062FE88227FB5C7500F2D0F7 /* MapView.swift */; };
+		062FE88527FB79EF00F2D0F7 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */; };
 		B1158B8627FAF53000552247 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1158B8527FAF53000552247 /* Color.swift */; };
 		B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31D27FAE4CE00BF950E /* outdareApp.swift */; };
 		B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31F27FAE4CE00BF950E /* ContentView.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		062FE88227FB5C7500F2D0F7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		B1158B8527FAF53000552247 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B167D31A27FAE4CE00BF950E /* outdare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outdare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B167D31D27FAE4CE00BF950E /* outdareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareApp.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				B1158B8427FAF51000552247 /* Theme */,
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				B167D31F27FAE4CE00BF950E /* ContentView.swift */,
+				062FE88227FB5C7500F2D0F7 /* MapView.swift */,
+				062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */,
 				B167D32127FAE4CF00BF950E /* Assets.xcassets */,
 				B167D32327FAE4CF00BF950E /* Preview Content */,
 			);
@@ -269,6 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */,
+				062FE88527FB79EF00F2D0F7 /* MapViewModel.swift in Sources */,
+				062FE88327FB5C7500F2D0F7 /* MapView.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				B1158B8627FAF53000552247 /* Color.swift in Sources */,
 			);
@@ -431,6 +439,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -461,6 +470,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
