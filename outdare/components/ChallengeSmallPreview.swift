@@ -28,6 +28,7 @@ struct ChallengeSmallPreview: View {
                 Text("+\(points)")
                     .font(.caption)
                     .padding(.trailing)
+                    .foregroundColor(Color.theme.rankingUp)
             }
             Divider()
         }

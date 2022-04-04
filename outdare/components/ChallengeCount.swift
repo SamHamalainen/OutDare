@@ -15,7 +15,7 @@ struct ChallengeCount: View {
             ForEach(1..<limit + 1) { num in
                 Text("\(num)")
                     .frame(maxWidth: 20)
-                    .background(num - 1 == index ? Color.orange : Color.gray)
+                    .background(num - 1 == index ? Color.theme.background : Color.theme.icon)
                     .foregroundColor(Color.white)
                     .cornerRadius(.infinity)
             }
