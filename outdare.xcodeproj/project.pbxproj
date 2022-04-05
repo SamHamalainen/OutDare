@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B1158B8627FAF53000552247 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1158B8527FAF53000552247 /* Color.swift */; };
+		B14BEC4227FB57C00022DD0B /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14BEC4127FB57C00022DD0B /* Leaderboard.swift */; };
+		B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21727FC0D0D00EADF66 /* Trapezium.swift */; };
 		B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31D27FAE4CE00BF950E /* outdareApp.swift */; };
 		B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31F27FAE4CE00BF950E /* ContentView.swift */; };
 		B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B167D32127FAE4CF00BF950E /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		B1158B8527FAF53000552247 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B14BEC4127FB57C00022DD0B /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
+		B166D21727FC0D0D00EADF66 /* Trapezium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezium.swift; sourceTree = "<group>"; };
 		B167D31A27FAE4CE00BF950E /* outdare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outdare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B167D31D27FAE4CE00BF950E /* outdareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareApp.swift; sourceTree = "<group>"; };
 		B167D31F27FAE4CE00BF950E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,6 +85,22 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		B14BEC4727FC00B10022DD0B /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				B14BEC4127FB57C00022DD0B /* Leaderboard.swift */,
+			);
+			path = Leaderboard;
+			sourceTree = "<group>";
+		};
+		B166D21627FC0C9400EADF66 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				B166D21727FC0D0D00EADF66 /* Trapezium.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		B167D31127FAE4CE00BF950E = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +124,8 @@
 		B167D31C27FAE4CE00BF950E /* outdare */ = {
 			isa = PBXGroup;
 			children = (
+				B166D21627FC0C9400EADF66 /* Shapes */,
+				B14BEC4727FC00B10022DD0B /* Leaderboard */,
 				B1158B8427FAF51000552247 /* Theme */,
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				B167D31F27FAE4CE00BF950E /* ContentView.swift */,
@@ -269,8 +291,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */,
+				B14BEC4227FB57C00022DD0B /* Leaderboard.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				B1158B8627FAF53000552247 /* Color.swift in Sources */,
+				B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
