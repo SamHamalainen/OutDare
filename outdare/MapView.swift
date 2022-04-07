@@ -14,6 +14,8 @@ struct Challenge: Identifiable {
     let coordinate: CLLocationCoordinate2D
     let icon: String
     let difficulty: String
+    let description: String
+    let points: Int
 }
 
 struct MapView: View {
@@ -22,12 +24,28 @@ struct MapView: View {
     @State private var challengeInfoOpened = false
     @State var challengePassed: Challenge?
     
-    
-    
     let challengeLocations = [
-        Challenge(name: "Tongue Twister", coordinate: CLLocationCoordinate2D(latitude: 60.22506138615499, longitude: 24.759728409055466), icon: "tongueTwister", difficulty: "Hard"),
-        Challenge(name: "Quiz", coordinate: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672), icon: "quiz", difficulty: "Easy"),
-        Challenge(name: "Finish the Lyrics", coordinate: CLLocationCoordinate2D(latitude: 60.2218728358288, longitude: 24.755961678670257), icon: "singing", difficulty: "Medium"),
+        Challenge(name: "Tongue Twister",
+                  coordinate: CLLocationCoordinate2D(latitude: 60.22506138615499, longitude: 24.759728409055466),
+                  icon: "tongueTwister",
+                  difficulty: "Hard",
+                  description: "You have 15 seconds to pronounce this tongue twister flawlessly! The faster the better!",
+                  points: 100
+                 ),
+        Challenge(name: "Quiz",
+                  coordinate: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672),
+                  icon: "quiz",
+                  difficulty: "Easy",
+                  description: "Answer these 5 super easy questions you have 10 seconds per question.",
+                  points: 25
+                 ),
+        Challenge(name: "Finish the Lyrics",
+                  coordinate: CLLocationCoordinate2D(latitude: 60.2218728358288, longitude: 24.755961678670257),
+                  icon: "singing",
+                  difficulty: "Medium",
+                  description: "Sing or type to finish the lyrics of these popular songs. You have 10 seconds per song.",
+                  points: 50
+                 ),
     ]
     
     var body: some View {
@@ -40,6 +58,7 @@ struct MapView: View {
                             challengePassed = challenge
                             challengeInfoOpened = true
                         }
+                        .contrast(0.3)
                 }
             }
             .ignoresSafeArea()
@@ -47,13 +66,13 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
             }
             if challengeInfoOpened {
-                    Rectangle()
-                        .ignoresSafeArea()
-                        .opacity(0.45)
-                        .onTapGesture {
-                            challengeInfoOpened = false
-                        }
-                    ChallengeInfo(locationPassed: $challengePassed)
+                Rectangle()
+                    .ignoresSafeArea()
+                    .opacity(0.45)
+                    .onTapGesture {
+                        challengeInfoOpened = false
+                    }
+                ChallengeInfo(locationPassed: $challengePassed)
             }
         }
     }
@@ -61,7 +80,16 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(challengePassed: Challenge(name: "Tongue Twister", coordinate: CLLocationCoordinate2D(latitude: 60.22506138615499, longitude: 24.759728409055466), icon: "tongueTwister", difficulty: "Hard"))
+        MapView(challengePassed: Challenge(name: "Tongue Twister",
+                                           coordinate: CLLocationCoordinate2D(
+                                            latitude: 60.22506138615499,
+                                            longitude: 24.759728409055466
+                                           ),
+                                           icon: "tongueTwister",
+                                           difficulty: "Hard",
+                                           description: "You have 15 seconds to pronounce this tongue twister flawlessly! The faster the better!",
+                                           points: 100
+                                          ))
     }
 }
 
@@ -122,7 +150,7 @@ struct ChallengeInfo: View {
                             .foregroundColor(getDifficultyColor())
                             .frame(width: 200, alignment: .leading)
                     }
-                    Text("+100")
+                    Text("+\(locationPassed!.points)")
                         .foregroundColor(Color("RankingUp"))
                 }
                 .frame(width: UIScreen.main.bounds.width - 35, alignment: .leading)
@@ -131,6 +159,19 @@ struct ChallengeInfo: View {
                     .frame(width: UIScreen.main.bounds.width - 40, height: 3)
                     .background(.gray)
                     .opacity(0.2)
+                
+                if challengeInfoExpanded {
+                    VStack(spacing: 30) {
+                        Text("Get ready!")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("\(locationPassed!.description)")
+                            .font(.headline)
+                            .padding(.horizontal, 50)
+                            .foregroundColor(Color("Icon"))
+                    }
+                    .padding(.top, 200)
+                }
             }
             Button(action: test) {
                 Text("Start")
