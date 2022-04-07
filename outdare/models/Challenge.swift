@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import CoreLocation
 
-struct Challenge {
+struct Challenge: Identifiable {
     let id: Int
     let challengeId: Int
     let name: String
@@ -24,12 +25,23 @@ struct Challenge {
     }
     let category: String
     let description: String
-    let logoName: String
-    let coordinates: (Double, Double)
+    var icon: String {
+        switch category {
+        case "quiz":
+           return "quiz"
+        case "tongue":
+           return "tongueTwister"
+        case "lyrics":
+            return "singing"
+        default:
+           return "quiz"
+        }
+    }
+    let coordinates: CLLocationCoordinate2D
 }
 
-extension Challenge {
-    static let sample: [Challenge] = [
-        Challenge(id: 1, challengeId: 1, name: "Quiz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy geography questions. You have 10 seconds per question.", logoName: "questionmark.circle", coordinates: (0,0))
-    ]
-}
+//extension Challenge {
+//    static let sample: [Challenge] = [
+//        Challenge(id: 1, challengeId: 1, name: "Quiz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy geography questions. You have 10 seconds per question.", icon: "questionmark.circle", coordinates: (0,0))
+//    ]
+//}

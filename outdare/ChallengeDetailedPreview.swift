@@ -6,20 +6,22 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ChallengeDetailedPreview: View {
     let challenge: Challenge
+    let notifyParent2: () -> Void
     let setState: (String) -> Void
     @State var ready = false
     func notifyParent(countDownOver: Bool) {
         if countDownOver {
             setState("playing")
+            notifyParent2()
         }
     }
     
     var body: some View {
         VStack {
-            ChallengeSmallPreview(logoName: challenge.logoName, title: challenge.name, difficulty: challenge.difficulty, points: challenge.points)
             Spacer()
             VStack {
                 Spacer()
@@ -57,6 +59,6 @@ struct ChallengeDetailedPreview: View {
 
 struct ChallengeDetailedPreview_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailedPreview(challenge: Challenge.sample[0], setState: {_ in})
+        ChallengeDetailedPreview(challenge: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)), notifyParent2: {}, setState: {_ in})
     }
 }

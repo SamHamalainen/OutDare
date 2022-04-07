@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import CoreLocation
 
 class ChallengeDAO: ObservableObject {
     let db = Firestore.firestore()
@@ -22,10 +23,11 @@ class ChallengeDAO: ObservableObject {
         let difficulty = data["difficulty"] as? String ?? "easy"
         let category = data["category"] as? String ?? "quiz"
         let description = data["description"] as? String ?? "no description"
-        let logoName = "questionmark.circle"
         let latitude = data["latitude"] as? Double ?? 0
         let longitude = data["longitude"] as? Double ?? 0
-        return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficulty, category: category, description: description, logoName: logoName, coordinates: (latitude, longitude))
+        
+        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficulty, category: category, description: description, coordinates: coordinates)
     }
     
     func convertToQuiz(data: [String:Any]) -> Quiz {

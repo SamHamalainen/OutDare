@@ -12,6 +12,7 @@
 		062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88727FEFC2B00F2D0F7 /* FirebaseAuth */; };
 		062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88927FEFC2B00F2D0F7 /* FirebaseFirestore */; };
 		062FE88C27FEFC2B00F2D0F7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */; };
+		062FE88E27FF130700F2D0F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */; };
 		6A6CDF9527FB6CA8002106F8 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF8E27FB6CA8002106F8 /* Challenge.swift */; };
 		6A6CDF9627FB6CA8002106F8 /* QuizData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF8F27FB6CA8002106F8 /* QuizData.swift */; };
 		6A6CDF9727FB6CA8002106F8 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF9027FB6CA8002106F8 /* Quiz.swift */; };
@@ -23,7 +24,6 @@
 		6A6CDFD027FB71D8002106F8 /* ChallengeSmallPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCC27FB71D7002106F8 /* ChallengeSmallPreview.swift */; };
 		6A6CDFD127FB71D8002106F8 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCD27FB71D7002106F8 /* CountdownTimer.swift */; };
 		6A6CDFD227FB71D8002106F8 /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCE27FB71D7002106F8 /* ChallengeTimer.swift */; };
-		6A6CDFDC27FDC31C002106F8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6A6CDFDB27FDC31C002106F8 /* FirebaseFirestore */; };
 		6A6CDFDF27FDC3E2002106F8 /* ChallengeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFDE27FDC3E2002106F8 /* ChallengeDAO.swift */; };
 		6A6CDFE127FDCC0E002106F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6CDFE027FDCC0E002106F8 /* GoogleService-Info.plist */; };
 		6A6CDFE327FE00EB002106F8 /* ChallengesTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFE227FE00EB002106F8 /* ChallengesTestView.swift */; };
@@ -59,6 +59,7 @@
 /* Begin PBXFileReference section */
 		062FE88227FB5C7500F2D0F7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A6CDF8E27FB6CA8002106F8 /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		6A6CDF8F27FB6CA8002106F8 /* QuizData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizData.swift; sourceTree = "<group>"; };
 		6A6CDF9027FB6CA8002106F8 /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 				B1158B8427FAF51000552247 /* Theme */,
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				6A6CDFE027FDCC0E002106F8 /* GoogleService-Info.plist */,
+				062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */,
 				B167D31F27FAE4CE00BF950E /* ContentView.swift */,
 				062FE88227FB5C7500F2D0F7 /* MapView.swift */,
 				062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */,
@@ -338,6 +340,7 @@
 			files = (
 				6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,
+				062FE88E27FF130700F2D0F7 /* GoogleService-Info.plist in Resources */,
 				B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */,
 				6A6CDFE127FDCC0E002106F8 /* GoogleService-Info.plist in Resources */,
 			);

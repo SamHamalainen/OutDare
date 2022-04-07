@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ChallengeContainer: View {
     let challenge: Challenge
+    let notifyParent2: () -> Void
     @State var challengeState = "awaiting"
     @State var score = 0
     @State var time = 0.0
@@ -26,7 +28,7 @@ struct ChallengeContainer: View {
         Group {
             switch challengeState {
             case "awaiting":
-                ChallengeDetailedPreview(challenge: challenge, setState: changeState)
+                ChallengeDetailedPreview(challenge: challenge, notifyParent2: notifyParent2, setState: changeState)
                     .onAppear() {
                         dao.getQuiz(id: challenge.challengeId)
                     }
@@ -43,6 +45,6 @@ struct ChallengeContainer: View {
 
 struct ChallengeContainer_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeContainer(challenge: Challenge.sample[0])
+        ChallengeContainer(challenge: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)), notifyParent2: {})
     }
 }

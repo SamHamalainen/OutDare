@@ -16,6 +16,7 @@ struct outdareApp: App {
     var body: some Scene {
         WindowGroup {
             MapView()
+//            ChallengesTestView()
         }
     }
 }
