@@ -10,6 +10,9 @@
 		B1158B8627FAF53000552247 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1158B8527FAF53000552247 /* Color.swift */; };
 		B14BEC4227FB57C00022DD0B /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14BEC4127FB57C00022DD0B /* Leaderboard.swift */; };
 		B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21727FC0D0D00EADF66 /* Trapezium.swift */; };
+		B166D21A27FC1DBF00EADF66 /* LeaderboardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21927FC1DBF00EADF66 /* LeaderboardCard.swift */; };
+		B166D21C27FC1E1B00EADF66 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = B166D21B27FC1E1B00EADF66 /* users.json */; };
+		B166D21E27FC20CC00EADF66 /* RankingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21D27FC20CC00EADF66 /* RankingListItem.swift */; };
 		B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31D27FAE4CE00BF950E /* outdareApp.swift */; };
 		B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31F27FAE4CE00BF950E /* ContentView.swift */; };
 		B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B167D32127FAE4CF00BF950E /* Assets.xcassets */; };
@@ -17,6 +20,12 @@
 		B167D32F27FAE4CF00BF950E /* outdareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D32E27FAE4CF00BF950E /* outdareTests.swift */; };
 		B167D33927FAE4CF00BF950E /* outdareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D33827FAE4CF00BF950E /* outdareUITests.swift */; };
 		B167D33B27FAE4CF00BF950E /* outdareUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D33A27FAE4CF00BF950E /* outdareUITestsLaunchTests.swift */; };
+		B194B38627FED5ED000F056E /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B38527FED5ED000F056E /* Font.swift */; };
+		B194B38827FEDB3F000F056E /* JetBrainsMono-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B194B38727FEDB37000F056E /* JetBrainsMono-ExtraBold.ttf */; };
+		B1D0B64127FD916600ECA79F /* TopRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D0B64027FD916600ECA79F /* TopRanking.swift */; };
+		B1D0B64727FECCD600ECA79F /* JetBrainsMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1D0B64527FECBE600ECA79F /* JetBrainsMono-Medium.ttf */; };
+		B1D0B64827FECCDA00ECA79F /* JetBrainsMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1D0B64427FECBDA00ECA79F /* JetBrainsMono-Bold.ttf */; };
+		B1D0B64927FECCDC00ECA79F /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1D0B64327FECBD100ECA79F /* JetBrainsMono-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +49,9 @@
 		B1158B8527FAF53000552247 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B14BEC4127FB57C00022DD0B /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		B166D21727FC0D0D00EADF66 /* Trapezium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezium.swift; sourceTree = "<group>"; };
+		B166D21927FC1DBF00EADF66 /* LeaderboardCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCard.swift; sourceTree = "<group>"; };
+		B166D21B27FC1E1B00EADF66 /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
+		B166D21D27FC20CC00EADF66 /* RankingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingListItem.swift; sourceTree = "<group>"; };
 		B167D31A27FAE4CE00BF950E /* outdare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outdare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B167D31D27FAE4CE00BF950E /* outdareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareApp.swift; sourceTree = "<group>"; };
 		B167D31F27FAE4CE00BF950E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +62,13 @@
 		B167D33427FAE4CF00BF950E /* outdareUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = outdareUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B167D33827FAE4CF00BF950E /* outdareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareUITests.swift; sourceTree = "<group>"; };
 		B167D33A27FAE4CF00BF950E /* outdareUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B194B38527FED5ED000F056E /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		B194B38727FEDB37000F056E /* JetBrainsMono-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-ExtraBold.ttf"; sourceTree = "<group>"; };
+		B1D0B64027FD916600ECA79F /* TopRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRanking.swift; sourceTree = "<group>"; };
+		B1D0B64327FECBD100ECA79F /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
+		B1D0B64427FECBDA00ECA79F /* JetBrainsMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Bold.ttf"; sourceTree = "<group>"; };
+		B1D0B64527FECBE600ECA79F /* JetBrainsMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Medium.ttf"; sourceTree = "<group>"; };
+		B1D0B64A27FECF7000ECA79F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +107,11 @@
 		B14BEC4727FC00B10022DD0B /* Leaderboard */ = {
 			isa = PBXGroup;
 			children = (
+				B166D21B27FC1E1B00EADF66 /* users.json */,
+				B166D21927FC1DBF00EADF66 /* LeaderboardCard.swift */,
 				B14BEC4127FB57C00022DD0B /* Leaderboard.swift */,
+				B166D21D27FC20CC00EADF66 /* RankingListItem.swift */,
+				B1D0B64027FD916600ECA79F /* TopRanking.swift */,
 			);
 			path = Leaderboard;
 			sourceTree = "<group>";
@@ -124,9 +147,11 @@
 		B167D31C27FAE4CE00BF950E /* outdare */ = {
 			isa = PBXGroup;
 			children = (
+				B1D0B64A27FECF7000ECA79F /* Info.plist */,
 				B166D21627FC0C9400EADF66 /* Shapes */,
 				B14BEC4727FC00B10022DD0B /* Leaderboard */,
 				B1158B8427FAF51000552247 /* Theme */,
+				B1D0B64227FECB4C00ECA79F /* Fonts */,
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				B167D31F27FAE4CE00BF950E /* ContentView.swift */,
 				B167D32127FAE4CF00BF950E /* Assets.xcassets */,
@@ -158,6 +183,18 @@
 				B167D33A27FAE4CF00BF950E /* outdareUITestsLaunchTests.swift */,
 			);
 			path = outdareUITests;
+			sourceTree = "<group>";
+		};
+		B1D0B64227FECB4C00ECA79F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B194B38727FEDB37000F056E /* JetBrainsMono-ExtraBold.ttf */,
+				B1D0B64527FECBE600ECA79F /* JetBrainsMono-Medium.ttf */,
+				B1D0B64427FECBDA00ECA79F /* JetBrainsMono-Bold.ttf */,
+				B1D0B64327FECBD100ECA79F /* JetBrainsMono-Regular.ttf */,
+				B194B38527FED5ED000F056E /* Font.swift */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,8 +301,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B166D21C27FC1E1B00EADF66 /* users.json in Resources */,
+				B1D0B64827FECCDA00ECA79F /* JetBrainsMono-Bold.ttf in Resources */,
+				B194B38827FEDB3F000F056E /* JetBrainsMono-ExtraBold.ttf in Resources */,
+				B1D0B64727FECCD600ECA79F /* JetBrainsMono-Medium.ttf in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,
 				B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */,
+				B1D0B64927FECCDC00ECA79F /* JetBrainsMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,8 +332,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1D0B64127FD916600ECA79F /* TopRanking.swift in Sources */,
+				B166D21E27FC20CC00EADF66 /* RankingListItem.swift in Sources */,
 				B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */,
+				B166D21A27FC1DBF00EADF66 /* LeaderboardCard.swift in Sources */,
 				B14BEC4227FB57C00022DD0B /* Leaderboard.swift in Sources */,
+				B194B38627FED5ED000F056E /* Font.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				B1158B8627FAF53000552247 /* Color.swift in Sources */,
 				B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */,
@@ -455,6 +501,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -485,6 +532,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
