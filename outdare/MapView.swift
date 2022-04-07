@@ -167,7 +167,7 @@ struct ChallengeInfo: View {
             if !challengeInfoExpanded {
                 Button(action: test) {
                     Text("Start")
-                        .font(.title)
+                        .font(Font.customFont.btnText)
                         .fontWeight(.semibold)
                         .frame(width: 250, height: 50)
                         .background(Color("Button"))
