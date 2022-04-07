@@ -8,12 +8,13 @@
 import Foundation
 
 struct Quiz {
+    let id: Int
     let timePerQuestion: Double
     let data: [QuizData]
 }
 
 extension Quiz {
     static let sample = [
-        Quiz(timePerQuestion: 10.0, data: QuizData.sample)
+        Quiz(id: 1, timePerQuestion: 10.0, data: QuizData.sample)
     ]
 }

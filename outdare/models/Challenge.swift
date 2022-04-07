@@ -8,17 +8,28 @@
 import Foundation
 
 struct Challenge {
-    let logoName: String
-    let title: String
+    let id: Int
+    let challengeId: Int
+    let name: String
     let difficulty: String
-    let points: Int
-    let headline: String
-    let instructions: String
-    let timer: Int
+    var points: Int {
+        switch difficulty {
+        case "easy":
+           return 20
+        case "medium":
+           return 50
+        default:
+           return 100
+        }
+    }
+    let category: String
+    let description: String
+    let logoName: String
+    let coordinates: (Double, Double)
 }
 
 extension Challenge {
     static let sample: [Challenge] = [
-        Challenge(logoName: "questionmark.circle", title: "Quiz", difficulty: "Easy", points: 20, headline: "Get Ready!", instructions: "Answer these 5 super easy geography questions. You have 10 seconds per question.", timer: 3)
+        Challenge(id: 1, challengeId: 1, name: "Quiz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy geography questions. You have 10 seconds per question.", logoName: "questionmark.circle", coordinates: (0,0))
     ]
 }

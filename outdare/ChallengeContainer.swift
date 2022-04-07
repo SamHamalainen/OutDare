@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ChallengeContainer: View {
+    let challenge: Challenge
     @State var challengeState = "awaiting"
     @State var score = 0
     @State var time = 0.0
+    
+    @StateObject var dao = ChallengeDAO()
+    
     func setScoreTime(scoreTime: (Int, Double)) -> Void {
         score = scoreTime.0
         time = scoreTime.1
@@ -22,9 +26,14 @@ struct ChallengeContainer: View {
         Group {
             switch challengeState {
             case "awaiting":
-                ChallengeDetailedPreview(challenge: Challenge.sample[0], setState: changeState)
+                ChallengeDetailedPreview(challenge: challenge, setState: changeState)
+                    .onAppear() {
+                        dao.getQuiz(id: challenge.challengeId)
+                    }
             case "playing":
-                QuizView(quiz: Quiz.sample[0], setState: changeState, setResult: setScoreTime)
+                if let quiz = dao.quiz {
+                    QuizView(quiz: quiz, setState: changeState, setResult: setScoreTime)
+                }
             default:
                 ChallengeCompleted(score: score, time: time)
             }
@@ -34,6 +43,6 @@ struct ChallengeContainer: View {
 
 struct ChallengeContainer_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeContainer()
+        ChallengeContainer(challenge: Challenge.sample[0])
     }
 }

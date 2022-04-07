@@ -19,14 +19,14 @@ struct ChallengeDetailedPreview: View {
     
     var body: some View {
         VStack {
-            ChallengeSmallPreview(logoName: challenge.logoName, title: challenge.title, difficulty: challenge.difficulty, points: challenge.points)
+            ChallengeSmallPreview(logoName: challenge.logoName, title: challenge.name, difficulty: challenge.difficulty, points: challenge.points)
             Spacer()
             VStack {
                 Spacer()
-                Text(challenge.headline)
+                Text("Get ready!")
                     .font(.headline)
                     .padding()
-                Text(challenge.instructions)
+                Text(challenge.description)
                     .font(.subheadline)
                     .multilineTextAlignment(.center)
                     .padding()
