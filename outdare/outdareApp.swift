@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct outdareApp: App {
+    @StateObject private var modelData = LeaderboardModel()
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Leaderboard()
+                .environmentObject(modelData)
         }
     }
 }

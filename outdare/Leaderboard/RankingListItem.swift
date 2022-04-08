@@ -8,7 +8,7 @@
 import SwiftUI
 // List item for leadearboard ranking list
 struct RankingListItem: View {
-    let users: LeaderboardCard
+    let users: User
     var body: some View {
         HStack {
             VStack {
@@ -22,7 +22,7 @@ struct RankingListItem: View {
                     .foregroundColor(Color.theme.rankingDown)
             }
         }
-            .font(Font.customFont.btnText)
+            .font(Font.customFont.smallText)
             Image("profile1")
                 .resizable()
                 .frame(width: 50, height: 50)
@@ -39,9 +39,9 @@ struct RankingListItem: View {
 }
 
 struct RankingListItem_Previews: PreviewProvider {
-    static var users = LeaderboardCard.userData[0]
+    static var users = LeaderboardModel().sorted
     static var previews: some View {
-        RankingListItem(users: users)
+        RankingListItem(users: users[0])
             .previewLayout(.fixed(width: 400, height: 50))
     }
 }
