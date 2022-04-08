@@ -15,10 +15,12 @@ struct SingleProfile: View {
             VStack {
                 if users.goneUp == true {
                 Text("1")
+                        .font(Font.customFont.largeText)
                 Image(systemName: "arrowtriangle.up.fill")
                     .foregroundColor(Color.theme.rankingUp)
             } else {
                 Text("1")
+                    .font(Font.customFont.largeText)
                 Image(systemName: "arrowtriangle.down.fill")
                     .foregroundColor(Color.theme.rankingDown)
             }

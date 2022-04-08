@@ -20,6 +20,7 @@ struct TopProfiles: View {
         SingleProfile(users: userData.sorted[2])
                 .offset(x: -25, y: 50)
         }
+        .foregroundColor(Color.theme.textLight)
     }
 }
 

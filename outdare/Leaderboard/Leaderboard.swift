@@ -25,7 +25,6 @@ struct Leaderboard: View {
         }
     }
 }
-
 struct Leaderboard_Previews: PreviewProvider {
     static var previews: some View {
         Leaderboard()

@@ -27,6 +27,7 @@ struct RankingListItem: View {
                 .resizable()
                 .frame(width: 50, height: 50)
                 .padding(10)
+                .shadow(color: Color.theme.icon, radius: 2, x: 1, y: 1)
             Text(users.username)
                 .padding(10)
                 .font(Font.customFont.normalText)

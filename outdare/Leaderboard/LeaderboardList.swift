@@ -16,7 +16,7 @@ struct LeaderboardList: View {
                 ZStack {
                 RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color.theme.transparent)
-                        .shadow(color: Color.theme.icon, radius: 2, x: 0, y: 4)
+                        .shadow(color: Color.theme.icon, radius: 2, x: 2, y: 3)
                     RankingListItem(users: user)
                         .padding(.horizontal, 15)
             }
