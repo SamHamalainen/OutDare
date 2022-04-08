@@ -19,12 +19,12 @@ struct SideMenuView: View {
                 VStack() {
                     ForEach(SideMenuViewModel.allCases, id: \.self) { item in
                         
-                        Button(action: {withAnimation(.spring()){
+                        Button(action: /*{withAnimation(.spring())*/{
                             currentTitle = item.title
                             isShowing.toggle()
                             currentView = AnyView(item.getView())
                             
-                        }}, label: {SideMenuItem(viewModel: item)})
+                        }/*}*/, label: {SideMenuItem(viewModel: item)})
                     }
                 }
             }

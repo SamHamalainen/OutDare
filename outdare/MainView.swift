@@ -12,11 +12,6 @@ struct MainView: View {
     @State private var currentTitle = "Map"
     @State private var currentView: AnyView = AnyView(MapView())
     
-    init() {
-        // Set navigation titles color to white
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-    }
-    
     var body: some View {
         NavigationView {
             ZStack(alignment: .topLeading) {
@@ -35,8 +30,12 @@ struct MainView: View {
                         }
                         
                     }, label: {Image(systemName: "list.bullet").foregroundColor(.white)}))
-                    .navigationTitle(currentTitle)
-                    .navigationBarTitleDisplayMode(.inline)
+                    //.navigationTitle(currentTitle)
+                    .navigationBarTitleDisplayMode(.inline).toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Text(currentTitle).font(Font.customFont.appBarText).foregroundColor(.white)
+                        }
+                    }
                     //.saturation(isShowingMenu ? 0 : 1)
                     .colorMultiply(isShowingMenu ? Color(UIColor.lightGray) : .white)
                     //.grayscale(isShowingMenu ? 0.9 : 0)
