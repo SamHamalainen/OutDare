@@ -71,6 +71,7 @@
 		062FE88227FB5C7500F2D0F7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		062FE88F27FF2EF400F2D0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6A6CDF8E27FB6CA8002106F8 /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		6A6CDF8F27FB6CA8002106F8 /* QuizData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizData.swift; sourceTree = "<group>"; };
 		6A6CDF9027FB6CA8002106F8 /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 		B167D31C27FAE4CE00BF950E /* outdare */ = {
 			isa = PBXGroup;
 			children = (
+				062FE88F27FF2EF400F2D0F7 /* Info.plist */,
 				6A6CDFDD27FDC3A1002106F8 /* repos */,
 				6A6CDF9827FB6CBA002106F8 /* ChallengeCompleted.swift */,
 				6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */,
@@ -616,6 +618,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -647,6 +650,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

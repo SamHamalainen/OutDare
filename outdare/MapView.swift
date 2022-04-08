@@ -15,30 +15,6 @@ struct MapView: View {
     @State var challengePassed: Challenge?
     @StateObject var dao = ChallengeDAO()
     
-//    let challengeLocations = [
-//        Challenge(name: "Tongue Twister",
-//                  coordinate: CLLocationCoordinate2D(latitude: 60.22506138615499, longitude: 24.759728409055466),
-//                  icon: "tongueTwister",
-//                  difficulty: "Hard",
-//                  description: "You have 15 seconds to pronounce this tongue twister flawlessly! The faster the better!",
-//                  points: 100
-//                 ),
-//        Challenge(name: "Quiz",
-//                  coordinate: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672),
-//                  icon: "quiz",
-//                  difficulty: "Easy",
-//                  description: "Answer these 5 super easy questions you have 10 seconds per question.",
-//                  points: 25
-//                 ),
-//        Challenge(name: "Finish the Lyrics",
-//                  coordinate: CLLocationCoordinate2D(latitude: 60.2218728358288, longitude: 24.755961678670257),
-//                  icon: "singing",
-//                  difficulty: "Medium",
-//                  description: "Sing or type to finish the lyrics of these popular songs. You have 10 seconds per song.",
-//                  points: 50
-//                 ),
-//    ]
-    
     var body: some View {
         ZStack(alignment: .top)  {
             Map(coordinateRegion: $viewModel.mapRegion,showsUserLocation: true, annotationItems: dao.challenges) { challenge in
@@ -150,16 +126,6 @@ struct ChallengeInfo: View {
                         .opacity(0.2)
                 }
                 if challengeInfoExpanded {
-//                    VStack(spacing: 30) {
-//                        Text("Get ready!")
-//                            .font(.largeTitle)
-//                            .fontWeight(.bold)
-//                        Text("\(locationPassed!.description)")
-//                            .font(.headline)
-//                            .padding(.horizontal, 50)
-//                            .foregroundColor(Color("Icon"))
-//                    }
-//                    .padding(.top, 200)
                     ChallengeContainer(challenge: locationPassed!, notifyParent2: updateUI)
                         .padding(.top, 25)
                 }
@@ -169,7 +135,8 @@ struct ChallengeInfo: View {
                     Text("Start")
                         .font(Font.customFont.btnText)
                         .fontWeight(.semibold)
-                        .frame(width: 250, height: 50)
+                        .frame(width: 200)
+                        .padding(.vertical, 10)
                         .background(Color("Button"))
                         .foregroundColor(.white)
                         .cornerRadius(70)
