@@ -27,7 +27,9 @@
 		B194B39927FF0E55000F056E /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B39827FF0E55000F056E /* CircleImage.swift */; };
 		B194B39B27FF1677000F056E /* LeaderboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B39A27FF1677000F056E /* LeaderboardModel.swift */; };
 		B194B39F27FF1CC0000F056E /* userData.json in Resources */ = {isa = PBXBuildFile; fileRef = B194B39E27FF1CC0000F056E /* userData.json */; };
-		B1D0B64127FD916600ECA79F /* TopRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D0B64027FD916600ECA79F /* TopRanking.swift */; };
+		B194B3A12800337B000F056E /* LeaderboardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A02800337B000F056E /* LeaderboardList.swift */; };
+		B194B3A3280040FD000F056E /* SingleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A2280040FD000F056E /* SingleProfile.swift */; };
+		B1D0B64127FD916600ECA79F /* TopProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D0B64027FD916600ECA79F /* TopProfiles.swift */; };
 		B1D0B64727FECCD600ECA79F /* JetBrainsMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1D0B64527FECBE600ECA79F /* JetBrainsMono-Medium.ttf */; };
 		B1D0B64827FECCDA00ECA79F /* JetBrainsMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1D0B64427FECBDA00ECA79F /* JetBrainsMono-Bold.ttf */; };
 		B1D0B64927FECCDC00ECA79F /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1D0B64327FECBD100ECA79F /* JetBrainsMono-Regular.ttf */; };
@@ -71,7 +73,9 @@
 		B194B39827FF0E55000F056E /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		B194B39A27FF1677000F056E /* LeaderboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardModel.swift; sourceTree = "<group>"; };
 		B194B39E27FF1CC0000F056E /* userData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = userData.json; sourceTree = "<group>"; };
-		B1D0B64027FD916600ECA79F /* TopRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRanking.swift; sourceTree = "<group>"; };
+		B194B3A02800337B000F056E /* LeaderboardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardList.swift; sourceTree = "<group>"; };
+		B194B3A2280040FD000F056E /* SingleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProfile.swift; sourceTree = "<group>"; };
+		B1D0B64027FD916600ECA79F /* TopProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopProfiles.swift; sourceTree = "<group>"; };
 		B1D0B64327FECBD100ECA79F /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
 		B1D0B64427FECBDA00ECA79F /* JetBrainsMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Bold.ttf"; sourceTree = "<group>"; };
 		B1D0B64527FECBE600ECA79F /* JetBrainsMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Medium.ttf"; sourceTree = "<group>"; };
@@ -120,10 +124,12 @@
 				B166D21927FC1DBF00EADF66 /* User.swift */,
 				B14BEC4127FB57C00022DD0B /* Leaderboard.swift */,
 				B166D21D27FC20CC00EADF66 /* RankingListItem.swift */,
-				B1D0B64027FD916600ECA79F /* TopRanking.swift */,
+				B1D0B64027FD916600ECA79F /* TopProfiles.swift */,
 				B194B39E27FF1CC0000F056E /* userData.json */,
 				B194B39827FF0E55000F056E /* CircleImage.swift */,
 				B194B39A27FF1677000F056E /* LeaderboardModel.swift */,
+				B194B3A02800337B000F056E /* LeaderboardList.swift */,
+				B194B3A2280040FD000F056E /* SingleProfile.swift */,
 			);
 			path = Leaderboard;
 			sourceTree = "<group>";
@@ -353,7 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B194B39B27FF1677000F056E /* LeaderboardModel.swift in Sources */,
-				B1D0B64127FD916600ECA79F /* TopRanking.swift in Sources */,
+				B1D0B64127FD916600ECA79F /* TopProfiles.swift in Sources */,
 				B166D21E27FC20CC00EADF66 /* RankingListItem.swift in Sources */,
 				B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */,
 				B166D21A27FC1DBF00EADF66 /* User.swift in Sources */,
@@ -361,6 +367,8 @@
 				B194B38627FED5ED000F056E /* Font.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				B1158B8627FAF53000552247 /* Color.swift in Sources */,
+				B194B3A3280040FD000F056E /* SingleProfile.swift in Sources */,
+				B194B3A12800337B000F056E /* LeaderboardList.swift in Sources */,
 				B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */,
 				B194B39927FF0E55000F056E /* CircleImage.swift in Sources */,
 			);
@@ -524,6 +532,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = outdare/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -555,6 +564,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = outdare/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

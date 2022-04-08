@@ -39,9 +39,9 @@ struct RankingListItem: View {
 }
 
 struct RankingListItem_Previews: PreviewProvider {
-    static var users = LeaderboardModel().sorted[0]
+    static var users = LeaderboardModel().sorted
     static var previews: some View {
-        RankingListItem(users: users)
+        RankingListItem(users: users[0])
             .previewLayout(.fixed(width: 400, height: 50))
     }
 }

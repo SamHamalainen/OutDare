@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 // Observable to be added
-class LeaderboardModel {
-    var users: [User] = load("userData.json")
+final class LeaderboardModel: ObservableObject {
+    @Published var users: [User] = load("userData.json")
     
     var sorted: [User] {
         users.sorted(by: { $0.score > $1.score })
