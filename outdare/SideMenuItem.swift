@@ -2,7 +2,7 @@
 //  SideMenuItem.swift
 //  outdare
 //
-//  Created by iosdev on 6.4.2022.
+//  Created by Tatu Ihaksi on 6.4.2022.
 //
 
 import SwiftUI
@@ -10,13 +10,13 @@ import SwiftUI
 struct SideMenuItem: View {
     let viewModel: SideMenuViewModel
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 15) {
             Image(systemName: viewModel.imageName)
-                .frame(width: 24, height: 24)
+                .frame(width: 25, height: 25)
             Text(viewModel.title).font(.system(size: 15, weight: .semibold))
             Spacer()
         }
-        .foregroundColor(.black)
+        .foregroundColor(Color("TextDark"))
         .padding()
     }
 }

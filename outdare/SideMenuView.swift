@@ -9,32 +9,31 @@ import SwiftUI
 
 struct SideMenuView: View {
     @Binding var isShowing: Bool
-    @Binding var currentView: String
-    @Binding var _view: AnyView
+    @Binding var currentTitle: String
+    @Binding var currentView: AnyView
     var body: some View {
-        ZStack(/*alignment: .topTrailing*/) {
+        ZStack(alignment: .bottomLeading) {
             Color(.white)
-                //.ignoresSafeArea()
-            
-            ZStack(/*alignment: .topTrailing*/) {
+            ZStack() {
                 
                 VStack() {
                     ForEach(SideMenuViewModel.allCases, id: \.self) { item in
                         
                         Button(action: {withAnimation(.spring()){
-                            currentView = item.title
+                            currentTitle = item.title
                             isShowing.toggle()
-                            _view = AnyView(item.getView())
+                            currentView = AnyView(item.getView())
                             
                         }}, label: {SideMenuItem(viewModel: item)})
                     }
-                    //Spacer()
                 }
             }
-        }.navigationBarHidden(true).frame(width: 200, height: 300).cornerRadius(20).ignoresSafeArea()
+        }.navigationBarHidden(true).frame(width: 200, height: 250).cornerRadius(20).ignoresSafeArea()
         
     }
 }
+
+
 
 /*struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {

@@ -2,7 +2,7 @@
 //  MainView.swift
 //  outdare
 //
-//  Created by iosdev on 6.4.2022.
+//  Created by Tatu Ihaksi on 6.4.2022.
 //
 
 import SwiftUI
@@ -11,6 +11,12 @@ struct MainView: View {
     @State private var isShowingMenu = false
     @State private var currentTitle = "Map"
     @State private var currentView: AnyView = AnyView(MapView())
+    
+    init() {
+        // Set navigation titles color to white
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .topLeading) {
@@ -24,7 +30,6 @@ struct MainView: View {
                         
                     }
                     .navigationBarItems(leading: Button(action: {
-                        //showMenu.toggle()
                         withAnimation(.spring()) {
                             isShowingMenu.toggle()
                         }
@@ -34,21 +39,29 @@ struct MainView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     //.saturation(isShowingMenu ? 0 : 1)
                     .colorMultiply(isShowingMenu ? Color(UIColor.lightGray) : .white)
+                    //.grayscale(isShowingMenu ? 0.9 : 0)
                     
+             
                 
                 if isShowingMenu {
-                    SideMenuView(isShowing: $isShowingMenu, currentView: $currentTitle, _view: $currentView)
+                    SideMenuView(isShowing: $isShowingMenu, currentTitle: $currentTitle, currentView: $currentView)
                 }
                 
             }
-            .background(Color("Background"))
+            .background(isShowingMenu ? Color("BackgroundDark") : Color("Background"))
+            
         }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        Group {
+            MainView()
+                .previewInterfaceOrientation(.portrait)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+            
+        }
     }
 }
 
@@ -60,6 +73,7 @@ struct HomeView: View {
             Color(.white)
             currentView
         }
+        
     }
 }
 
