@@ -33,6 +33,12 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
                 dao.getChallenges()
             }
+            .overlay {
+                Circle()
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.red)
+                    .opacity(0.3)
+            }
             if challengeInfoOpened {
                 Rectangle()
                     .ignoresSafeArea()
@@ -81,10 +87,13 @@ struct ChallengeInfo: View {
     }
     
     
-    func test() {
-        print("pressed button")
-        print("expanded: \(challengeInfoExpanded)")
-        print("\(locationPassed!)")
+    func expandChallengeInfo() {
+        withAnimation(.spring()) {
+            challengeInfoHeight = UIScreen.main.bounds.height * 0.9
+            endingOffsetY = -startingOffsetY
+            buttonEndOffsetY = 400
+            challengeInfoExpanded = true
+        }
     }
     
     func updateUI() {
@@ -131,7 +140,7 @@ struct ChallengeInfo: View {
                 }
             }
             if !challengeInfoExpanded {
-                Button(action: test) {
+                Button(action: expandChallengeInfo) {
                     Text("Start")
                         .font(Font.customFont.btnText)
                         .fontWeight(.semibold)
