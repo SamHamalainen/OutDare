@@ -28,7 +28,7 @@ struct SideMenuView: View {
                     }
                 }
             }
-        }.navigationBarHidden(true).frame(width: 200, height: 250).cornerRadius(20).ignoresSafeArea()
+        }.frame(width: 200, height: 250).cornerRadius(20).ignoresSafeArea()
         
     }
 }

@@ -16,23 +16,34 @@ struct MainView: View {
         NavigationView {
             ZStack(alignment: .topLeading) {
                 
-                HomeView(currentView: currentView)
+                // View that displays the selected view
+                ZStack {
+                    Color(.white)
+                    currentView
+                }
                     .onTapGesture {
                         if (isShowingMenu) {
                             isShowingMenu = false
                         }
                     }
-                    .navigationBarItems(leading: Button(action: {
-                        withAnimation(.spring()) {
-                            isShowingMenu.toggle()
-                        }
-                    }, label: {Image(systemName: "list.bullet").foregroundColor(.white)}))
+                    .navigationBarItems(leading: Button(
+                        action: {
+                            withAnimation(.spring()) {
+                                isShowingMenu.toggle()
+                            }
+                        }, label: {
+                        Image(systemName: "list.bullet").foregroundColor(.white)
+                        
+                    }))
                     .navigationBarTitleDisplayMode(.inline).toolbar {
                         ToolbarItem(placement: .principal) {
-                            Text(currentTitle).font(Font.customFont.appBarText).foregroundColor(.white)
+                            if(!isShowingMenu) {
+                                Text(currentTitle)
+                                    .font(Font.customFont.appBarText).foregroundColor(.white)
+                            }
                         }
                     }
-                    
+                
                 if isShowingMenu {
                     Rectangle()
                         .ignoresSafeArea()
@@ -55,16 +66,3 @@ struct MainView_Previews: PreviewProvider {
         }
     }
 }
-
-struct HomeView: View {
-    var currentView: AnyView = AnyView(MapView())
-    
-    var body: some View {
-        ZStack {
-            Color(.white)
-            currentView
-        }
-        
-    }
-}
-
