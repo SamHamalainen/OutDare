@@ -17,38 +17,30 @@ struct MainView: View {
             ZStack(alignment: .topLeading) {
                 
                 HomeView(currentView: currentView)
-                    .cornerRadius(0)
                     .onTapGesture {
                         if (isShowingMenu) {
                             isShowingMenu = false
                         }
-                        
                     }
                     .navigationBarItems(leading: Button(action: {
                         withAnimation(.spring()) {
                             isShowingMenu.toggle()
                         }
-                        
                     }, label: {Image(systemName: "list.bullet").foregroundColor(.white)}))
-                    //.navigationTitle(currentTitle)
                     .navigationBarTitleDisplayMode(.inline).toolbar {
                         ToolbarItem(placement: .principal) {
                             Text(currentTitle).font(Font.customFont.appBarText).foregroundColor(.white)
                         }
                     }
-                    //.saturation(isShowingMenu ? 0 : 1)
-                    .colorMultiply(isShowingMenu ? Color(UIColor.lightGray) : .white)
-                    //.grayscale(isShowingMenu ? 0.9 : 0)
                     
-             
-                
                 if isShowingMenu {
+                    Rectangle()
+                        .ignoresSafeArea()
+                        .opacity(0.45)
                     SideMenuView(isShowing: $isShowingMenu, currentTitle: $currentTitle, currentView: $currentView)
                 }
-                
             }
-            .background(isShowingMenu ? Color("BackgroundDark") : Color("Background"))
-            
+            .background(Color("Background"))
         }
     }
 }

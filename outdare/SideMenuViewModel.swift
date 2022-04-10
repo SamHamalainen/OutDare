@@ -2,17 +2,17 @@
 //  SideMenuViewModel.swift
 //  outdare
 //
-//  Created by iosdev on 6.4.2022.
+//  Created by Tatu Ihaksi on 6.4.2022.
 //
 
 import Foundation
 import SwiftUI
 
 enum SideMenuViewModel: Int, CaseIterable {
-    case map
-    case leaderboard
-    case profile
     
+    case map, leaderboard, profile
+    
+    // Sets the navigation title
     var title: String {
         switch self {
             case .map: return "Map"
@@ -21,6 +21,7 @@ enum SideMenuViewModel: Int, CaseIterable {
         }
     }
     
+    // Icon names for the menu items
     var imageName: String {
         switch self {
             case .map: return "map"
@@ -29,7 +30,9 @@ enum SideMenuViewModel: Int, CaseIterable {
         }
     }
     
-    @ViewBuilder func getView() -> some View {
+    // Returns the view which in the menu item will lead to
+    @ViewBuilder
+    func getView() -> some View {
         switch self {
             case .map: MapView()
             case .leaderboard: Leaderboard(users: LeaderboardCard.userData)
