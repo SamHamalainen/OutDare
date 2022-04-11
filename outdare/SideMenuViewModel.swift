@@ -35,8 +35,8 @@ enum SideMenuViewModel: Int, CaseIterable {
     func getView() -> some View {
         switch self {
             case .map: MapView()
-            case .leaderboard: Leaderboard(users: LeaderboardCard.userData)
-            case .profile: ProfileView()
+            case .leaderboard: Leaderboard()
+            case .profile: UserProfile()
         }
     }
 }
