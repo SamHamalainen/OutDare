@@ -8,32 +8,26 @@
 import SwiftUI
 
 struct Leaderboard: View {
-    let users: [LeaderboardCard]
+
     var body: some View {
         ZStack() {
             Trapezium()
             VStack {
-            ScrollView {
-                ForEach(users) { user in
-                    ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color.theme.transparent)
-                            .shadow(color: Color.theme.icon, radius: 2, x: 0, y: 4)
-                    RankingListItem(users: user)
-                            .padding(.horizontal, 15)
-                }
+                TopProfiles()
+                LeaderboardList()
             }
-                .padding(15)
-        }
-            .frame(height: 310)
-            .offset(y: 170)
-            }
+            Image(systemName: "arrowtriangle.down.fill")
+                .resizable()
+                .frame(width: 30, height: 15)
+                .foregroundColor(Color.theme.textLight)
+                .offset(y: 380)
+                .shadow(color: Color.theme.textDark, radius: 10, x: 2, y: 4)
         }
     }
 }
-
 struct Leaderboard_Previews: PreviewProvider {
     static var previews: some View {
-        Leaderboard(users: LeaderboardCard.userData)
+        Leaderboard()
+            .environmentObject(LeaderboardModel())
     }
 }
