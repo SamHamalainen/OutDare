@@ -17,16 +17,26 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         center: MapDetails.startingLocation,
         span: MapDetails.defaultSpan
     )
+    @Published var userLatitude: Double = 0
+    @Published var userLongitude: Double = 0
     
-    var locationManager: CLLocationManager?
+    private var locationManager: CLLocationManager?
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager!.delegate = self
+            locationManager!.startUpdatingLocation()
+            locationManager!.pausesLocationUpdatesAutomatically = true
         } else {
             print("Please turn on location services from the phone settings")
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        userLatitude = location.coordinate.latitude
+        userLongitude = location.coordinate.longitude
     }
     
     private func checkLocationAuthorization() {

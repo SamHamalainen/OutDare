@@ -33,12 +33,18 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
                 dao.getChallenges()
             }
-            .overlay {
-                Circle()
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.red)
-                    .opacity(0.3)
-            }
+//            MapViewCustom()
+//            ZStack {
+//                Rectangle()
+//                    .frame(width: 300, height: 150)
+//                    .foregroundColor(.white)
+//                .border(.black)
+//                VStack(spacing: 10) {
+//                    Text("latitude: \(viewModel.userLatitude)")
+//                    Text("longitude: \(viewModel.userLongitude)")
+//                }
+//
+//            }
             if challengeInfoOpened {
                 Rectangle()
                     .ignoresSafeArea()
@@ -181,5 +187,50 @@ struct ChallengeInfo: View {
                     }
                 }
         )
+    }
+}
+
+
+struct MapViewCustom: UIViewRepresentable {
+    @StateObject private var viewModel = MapViewModel()
+    let mapViewDelegate = MapViewDelegate()
+    let mapView = MKMapView()
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+    
+            viewModel.userLatitude = location.coordinate.latitude
+            viewModel.userLongitude = location.coordinate.longitude
+            let userLocation = CLLocationCoordinate2D(latitude: viewModel.userLatitude, longitude: viewModel.userLongitude)
+            let overlay = MKCircle(center: userLocation, radius: 100)
+            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+            mapView.setRegion(region, animated: true)
+            mapView.addOverlay(overlay)
+        
+        
+        
+    }
+    
+    func makeUIView(context: Context) -> MKMapView {
+        mapView.delegate = mapViewDelegate
+        mapView.showsUserLocation = true
+        viewModel.checkIfLocationServicesIsEnabled()
+        
+        return mapView
+    }
+    
+    func updateUIView(_ view: MKMapView, context: Context) {
+    }
+}
+
+class MapViewDelegate: NSObject, MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let overlay = overlay as? MKCircle {
+            print("Inside mapview delegate")
+            let circleRenderer = MKCircleRenderer(circle: overlay)
+            circleRenderer.fillColor = UIColor.orange
+            return circleRenderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
     }
 }

@@ -110,7 +110,6 @@
 		B1D0B64327FECBD100ECA79F /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
 		B1D0B64427FECBDA00ECA79F /* JetBrainsMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Bold.ttf"; sourceTree = "<group>"; };
 		B1D0B64527FECBE600ECA79F /* JetBrainsMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Medium.ttf"; sourceTree = "<group>"; };
-		B1D0B64A27FECF7000ECA79F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,7 +230,6 @@
 				6A6CDF9B27FB6CBA002106F8 /* QuizView.swift */,
 				6A6CDFA027FB6D13002106F8 /* components */,
 				6A6CDF8D27FB6CA8002106F8 /* models */,
-				B1D0B64A27FECF7000ECA79F /* Info.plist */,
 				B166D21627FC0C9400EADF66 /* Shapes */,
 				B14BEC4727FC00B10022DD0B /* Leaderboard */,
 				B1158B8427FAF51000552247 /* Theme */,
