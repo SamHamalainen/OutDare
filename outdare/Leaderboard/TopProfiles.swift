@@ -9,15 +9,15 @@ import SwiftUI
 
 
 struct TopProfiles: View {
-    @EnvironmentObject var userData: LeaderboardModel
+    @ObservedObject var leaderboardModel = LeaderboardModel()
     
     var body: some View {
         HStack {
-        SingleProfile(users: userData.sorted[1])
+            SingleProfile(users: leaderboardModel.sorted[1])
                 .offset(x: 25, y: 50)
-        SingleProfile(users: userData.sorted[0])
+        SingleProfile(users: leaderboardModel.sorted[0])
                 .zIndex(4)
-        SingleProfile(users: userData.sorted[2])
+        SingleProfile(users: leaderboardModel.sorted[2])
                 .offset(x: -25, y: 50)
         }
         .foregroundColor(Color.theme.textLight)

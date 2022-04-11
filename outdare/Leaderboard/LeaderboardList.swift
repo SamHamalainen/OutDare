@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct LeaderboardList: View {
-    @EnvironmentObject var userData: LeaderboardModel
+    @ObservedObject var leaderboardModel = LeaderboardModel()
     
     var body: some View {
         ScrollView {
-            ForEach(userData.sorted.dropFirst(3)) { user in
+            ForEach(leaderboardModel.sorted.dropFirst(3)) { user in
                 ZStack {
                 RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color.theme.transparent)
