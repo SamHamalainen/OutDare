@@ -34,6 +34,7 @@
 		6A59BFCB27FF6E400043D6E7 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */; };
 		6A59BFCD27FF6E720043D6E7 /* SideMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFCC27FF6E720043D6E7 /* SideMenuItem.swift */; };
 		B1158B8627FAF53000552247 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1158B8527FAF53000552247 /* Color.swift */; };
+		B12BA7902804520F0091C854 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B12BA78F2804520F0091C854 /* GoogleService-Info.plist */; };
 		B14BEC4227FB57C00022DD0B /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14BEC4127FB57C00022DD0B /* Leaderboard.swift */; };
 		B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21727FC0D0D00EADF66 /* Trapezium.swift */; };
 		B166D21A27FC1DBF00EADF66 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21927FC1DBF00EADF66 /* User.swift */; };
@@ -107,6 +108,7 @@
 		6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		6A59BFCC27FF6E720043D6E7 /* SideMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItem.swift; sourceTree = "<group>"; };
 		B1158B8527FAF53000552247 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B12BA78F2804520F0091C854 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B14BEC4127FB57C00022DD0B /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		B166D21727FC0D0D00EADF66 /* Trapezium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezium.swift; sourceTree = "<group>"; };
 		B166D21927FC1DBF00EADF66 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */,
 				B166D21C27FC1E1B00EADF66 /* users.json in Resources */,
 				B1D0B64827FECCDA00ECA79F /* JetBrainsMono-Bold.ttf in Resources */,
+				B12BA7902804520F0091C854 /* GoogleService-Info.plist in Resources */,
 				B194B38827FEDB3F000F056E /* JetBrainsMono-ExtraBold.ttf in Resources */,
 				B1D0B64727FECCD600ECA79F /* JetBrainsMono-Medium.ttf in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,

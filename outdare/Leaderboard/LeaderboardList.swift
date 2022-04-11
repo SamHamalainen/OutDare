@@ -22,9 +22,7 @@ struct LeaderboardList: View {
             }
         }
             .padding(15)
-    }
-        .frame(height: 420)
-        .offset(y: 115)
+        }
     }
 }
 
@@ -32,5 +30,6 @@ struct LeaderboardList_Previews: PreviewProvider {
     static var previews: some View {
         LeaderboardList()
             .environmentObject(LeaderboardModel())
+            .previewLayout(.sizeThatFits)
     }
 }

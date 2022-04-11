@@ -10,10 +10,7 @@ import SwiftUI
 struct ProfileBackground: View {
     var body: some View {
         ZStack {
-        RoundedRectangle(cornerRadius: 0)
-            .fill(Color.theme.background2)
-            .frame(height: .infinity)
-            
+        Color.theme.background2
         RoundedRectangle(cornerRadius: 0)
             .fill(Color.theme.background)
             .frame(height: 250)

@@ -32,7 +32,6 @@ struct Trapezium: View {
             TrapeziumShape(offset: 0.1, corner: .topRight)
                 .fill(Color.theme.background2)
         }
-        .frame(height: .infinity)
         .edgesIgnoringSafeArea(.vertical)
     }
 }
