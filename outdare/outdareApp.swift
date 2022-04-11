@@ -13,10 +13,13 @@ struct outdareApp: App {
     init() {
         FirebaseApp.configure()
     }
+    @StateObject private var modelData = LeaderboardModel()
+    
+    
     var body: some Scene {
         WindowGroup {
-            MapView()
-//            ChallengesTestView()
+            // ContentView()
+            MainView()
         }
     }
 }
