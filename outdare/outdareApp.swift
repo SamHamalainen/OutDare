@@ -14,12 +14,16 @@ struct outdareApp: App {
         FirebaseApp.configure()
     }
     @StateObject private var modelData = LeaderboardModel()
+    @State var showMap = false
     
     
     var body: some Scene {
         WindowGroup {
-            // ContentView()
-            MainView()
+            if showMap {
+                MainView()
+            } else {
+                StartView(showMap: $showMap)
+            }
         }
     }
 }
