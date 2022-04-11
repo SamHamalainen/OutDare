@@ -28,7 +28,7 @@ struct MapView: View {
                         .contrast(0.3)
                 }
             }
-            .ignoresSafeArea()
+            .ignoresSafeArea(edges: .bottom)
             .onAppear {
                 viewModel.checkIfLocationServicesIsEnabled()
                 dao.getChallenges()
