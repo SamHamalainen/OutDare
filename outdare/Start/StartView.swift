@@ -10,6 +10,9 @@ import SwiftUI
 
 
 struct StartView: View {
+    
+    @Binding var showMap: Bool
+    
     var body: some View {
         ZStack{
             Image("mapBackround")
@@ -32,7 +35,7 @@ struct StartView: View {
                     .frame(width: 200.0)
                     
             Button("CONTINUE") {
-                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                showMap = true
                 
             }
             .font(Font.customFont.btnText)
@@ -48,8 +51,8 @@ struct StartView: View {
     }
 }
 
-struct StartView_Previews: PreviewProvider {
-    static var previews: some View {
-        StartView()
-    }
-}
+//struct StartView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StartView(showMap: false)
+//    }
+//}
