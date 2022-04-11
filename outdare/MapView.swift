@@ -11,7 +11,7 @@ import MapKit
 struct MapView: View {
     
     @StateObject private var viewModel = MapViewModel()
-    @State private var challengeInfoOpened = false
+    @State var challengeInfoOpened = false
     @State var challengePassed: Challenge?
     @StateObject var dao = ChallengeDAO()
     
@@ -52,7 +52,7 @@ struct MapView: View {
                     .onTapGesture {
                         challengeInfoOpened = false
                     }
-                ChallengeInfo(locationPassed: $challengePassed)
+                ChallengeInfo(locationPassed: $challengePassed, challengeInfoOpened: $challengeInfoOpened)
             }
         }
     }
@@ -73,11 +73,12 @@ struct ChallengeInfo: View {
     @State private var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.6
     @State private var currentDragOffsetY: CGFloat = 0
     @State private var endingOffsetY: CGFloat = 0
-    @State private var buttonOffsetY: CGFloat = 200
+    @State private var buttonOffsetY: CGFloat = 175
     @State private var buttonEndOffsetY: CGFloat = 0
     @State private var challengeStarted = false
     
     @Binding var locationPassed: Challenge?
+    @Binding var challengeInfoOpened: Bool
     
     func getDifficultyColor() -> Color {
         switch locationPassed!.difficulty {
@@ -95,8 +96,8 @@ struct ChallengeInfo: View {
     
     func expandChallengeInfo() {
         withAnimation(.spring()) {
-            challengeInfoHeight = UIScreen.main.bounds.height * 0.9
-            endingOffsetY = -startingOffsetY
+            challengeInfoHeight = UIScreen.main.bounds.height * 0.85
+            endingOffsetY = -startingOffsetY + 15
             buttonEndOffsetY = 400
             challengeInfoExpanded = true
         }
@@ -141,7 +142,7 @@ struct ChallengeInfo: View {
                         .opacity(0.2)
                 }
                 if challengeInfoExpanded {
-                    ChallengeContainer(challenge: locationPassed!, notifyParent2: updateUI)
+                    ChallengeContainer(challengeInfoOpened: $challengeInfoOpened,challenge: locationPassed!, notifyParent2: updateUI)
                         .padding(.top, 25)
                 }
             }
@@ -168,16 +169,15 @@ struct ChallengeInfo: View {
                 .onChanged { value in
                     withAnimation(.spring()) {
                         currentDragOffsetY = value.translation.height
-                        challengeInfoHeight = UIScreen.main.bounds.height * 0.9
+                        challengeInfoHeight = UIScreen.main.bounds.height * 0.85
                     }
                 }
                 .onEnded { value in
                     withAnimation(.spring()) {
                         if currentDragOffsetY < -150 {
-                            endingOffsetY = -startingOffsetY
+                            endingOffsetY = -startingOffsetY + 15
                             buttonEndOffsetY = 400
                             challengeInfoExpanded = true
-                            
                         } else if endingOffsetY != 0 && currentDragOffsetY > 150 {
                             endingOffsetY = 0
                             buttonEndOffsetY = 0
