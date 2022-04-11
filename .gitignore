@@ -133,3 +133,6 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+
+### GoogleService ###
+GoogleService-Info.plist

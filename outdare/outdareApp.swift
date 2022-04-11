@@ -14,8 +14,8 @@ struct outdareApp: App {
     
     var body: some Scene {
         WindowGroup {
-            Leaderboard()
-                .environmentObject(modelData)
+            // ContentView()
+            MainView()
         }
     }
 }
