@@ -16,4 +16,3 @@ struct User: Hashable, Codable, Identifiable {
     var goneUp: Bool
     var profilePicture: String
 }
-
