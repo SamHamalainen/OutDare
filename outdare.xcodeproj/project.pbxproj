@@ -40,7 +40,6 @@
 		B166D21A27FC1DBF00EADF66 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21927FC1DBF00EADF66 /* User.swift */; };
 		B166D21E27FC20CC00EADF66 /* RankingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21D27FC20CC00EADF66 /* RankingListItem.swift */; };
 		B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31D27FAE4CE00BF950E /* outdareApp.swift */; };
-		B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31F27FAE4CE00BF950E /* ContentView.swift */; };
 		B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B167D32127FAE4CF00BF950E /* Assets.xcassets */; };
 		B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B167D32427FAE4CF00BF950E /* Preview Assets.xcassets */; };
 		B167D32F27FAE4CF00BF950E /* outdareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D32E27FAE4CF00BF950E /* outdareTests.swift */; };
@@ -112,7 +111,6 @@
 		B166D21D27FC20CC00EADF66 /* RankingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingListItem.swift; sourceTree = "<group>"; };
 		B167D31A27FAE4CE00BF950E /* outdare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outdare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B167D31D27FAE4CE00BF950E /* outdareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareApp.swift; sourceTree = "<group>"; };
-		B167D31F27FAE4CE00BF950E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B167D32127FAE4CF00BF950E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B167D32427FAE4CF00BF950E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B167D32A27FAE4CF00BF950E /* outdareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = outdareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,7 +265,6 @@
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				6A6CDFE027FDCC0E002106F8 /* GoogleService-Info.plist */,
 				062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */,
-				B167D31F27FAE4CE00BF950E /* ContentView.swift */,
 				062FE88227FB5C7500F2D0F7 /* MapView.swift */,
 				062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */,
 				6A59BFC427FF6CFD0043D6E7 /* MainView.swift */,
@@ -489,7 +486,6 @@
 				B166D21E27FC20CC00EADF66 /* RankingListItem.swift in Sources */,
 				B1D0B64127FD916600ECA79F /* TopProfiles.swift in Sources */,
 				6A59BFCB27FF6E400043D6E7 /* SideMenuView.swift in Sources */,
-				B167D32027FAE4CE00BF950E /* ContentView.swift in Sources */,
 				062FE88527FB79EF00F2D0F7 /* MapViewModel.swift in Sources */,
 				062FE88327FB5C7500F2D0F7 /* MapView.swift in Sources */,
 				B166D21A27FC1DBF00EADF66 /* User.swift in Sources */,
