@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>OutDate will use your microphone to pick up your answers in voice challenges</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>OutDare will use speech recognition to evaluate your answers to voice challenges :)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>JetBrainsMono-Medium.ttf</string>

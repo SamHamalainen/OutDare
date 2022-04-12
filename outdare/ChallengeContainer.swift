@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import Speech
 
 struct ChallengeContainer: View {
     @Binding var challengeInfoOpened: Bool

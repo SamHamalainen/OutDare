@@ -14,6 +14,11 @@
 		062FE88C27FEFC2B00F2D0F7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */; };
 		062FE88E27FF130700F2D0F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */; };
 		0663432D280477580046C92F /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0663432C280477580046C92F /* CircleImage.swift */; };
+		6A41A7E0280585150047FF2E /* SpeechAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7DF280585150047FF2E /* SpeechAnalyzer.swift */; };
+		6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */; };
+		6A41A7E42805BADE0047FF2E /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E32805BADE0047FF2E /* LyricsView.swift */; };
+		6A41A7F52805C8110047FF2E /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7F32805C80F0047FF2E /* ChallengeTimer.swift */; };
+		6A41A7F62805C8110047FF2E /* SRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7F42805C8110047FF2E /* SRButton.swift */; };
 		6A59BFC527FF6CFD0043D6E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFC427FF6CFD0043D6E7 /* MainView.swift */; };
 		6A59BFC727FF6D6F0043D6E7 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFC627FF6D6F0043D6E7 /* SideMenuViewModel.swift */; };
 		6A59BFCB27FF6E400043D6E7 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */; };
@@ -28,7 +33,7 @@
 		6A6CDFCF27FB71D8002106F8 /* ChallengeCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCB27FB71D7002106F8 /* ChallengeCount.swift */; };
 		6A6CDFD027FB71D8002106F8 /* ChallengeSmallPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCC27FB71D7002106F8 /* ChallengeSmallPreview.swift */; };
 		6A6CDFD127FB71D8002106F8 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCD27FB71D7002106F8 /* CountdownTimer.swift */; };
-		6A6CDFD227FB71D8002106F8 /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCE27FB71D7002106F8 /* ChallengeTimer.swift */; };
+		6A6CDFD227FB71D8002106F8 /* ChallengeTimerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFCE27FB71D7002106F8 /* ChallengeTimerBar.swift */; };
 		6A6CDFDF27FDC3E2002106F8 /* ChallengeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFDE27FDC3E2002106F8 /* ChallengeDAO.swift */; };
 		6A6CDFE127FDCC0E002106F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6CDFE027FDCC0E002106F8 /* GoogleService-Info.plist */; };
 		6A6CDFE327FE00EB002106F8 /* ChallengesTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFE227FE00EB002106F8 /* ChallengesTestView.swift */; };
@@ -84,6 +89,11 @@
 		062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		062FE88F27FF2EF400F2D0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		6A41A7DF280585150047FF2E /* SpeechAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechAnalyzer.swift; path = ../../../../../Desktop/SpeechAnalyzer.swift; sourceTree = "<group>"; };
+		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
+		6A41A7E32805BADE0047FF2E /* LyricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
+		6A41A7F32805C80F0047FF2E /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTimer.swift; sourceTree = "<group>"; };
+		6A41A7F42805C8110047FF2E /* SRButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRButton.swift; sourceTree = "<group>"; };
 		6A59BFC427FF6CFD0043D6E7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6A59BFC627FF6D6F0043D6E7 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
@@ -98,7 +108,7 @@
 		6A6CDFCB27FB71D7002106F8 /* ChallengeCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeCount.swift; path = outdare/components/ChallengeCount.swift; sourceTree = SOURCE_ROOT; };
 		6A6CDFCC27FB71D7002106F8 /* ChallengeSmallPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeSmallPreview.swift; path = outdare/components/ChallengeSmallPreview.swift; sourceTree = SOURCE_ROOT; };
 		6A6CDFCD27FB71D7002106F8 /* CountdownTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountdownTimer.swift; path = outdare/components/CountdownTimer.swift; sourceTree = SOURCE_ROOT; };
-		6A6CDFCE27FB71D7002106F8 /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeTimer.swift; path = outdare/components/ChallengeTimer.swift; sourceTree = SOURCE_ROOT; };
+		6A6CDFCE27FB71D7002106F8 /* ChallengeTimerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeTimerBar.swift; path = outdare/components/ChallengeTimerBar.swift; sourceTree = SOURCE_ROOT; };
 		6A6CDFDE27FDC3E2002106F8 /* ChallengeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDAO.swift; sourceTree = "<group>"; };
 		6A6CDFE027FDCC0E002106F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A6CDFE227FE00EB002106F8 /* ChallengesTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesTestView.swift; sourceTree = "<group>"; };
@@ -169,6 +179,7 @@
 				6A6CDF8F27FB6CA8002106F8 /* QuizData.swift */,
 				6A6CDF9027FB6CA8002106F8 /* Quiz.swift */,
 				6A6CDFE427FEE0F4002106F8 /* Attempt.swift */,
+				6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -176,9 +187,12 @@
 		6A6CDFA027FB6D13002106F8 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				6A41A7DF280585150047FF2E /* SpeechAnalyzer.swift */,
 				6A6CDFCB27FB71D7002106F8 /* ChallengeCount.swift */,
+				6A41A7F32805C80F0047FF2E /* ChallengeTimer.swift */,
+				6A41A7F42805C8110047FF2E /* SRButton.swift */,
 				6A6CDFCC27FB71D7002106F8 /* ChallengeSmallPreview.swift */,
-				6A6CDFCE27FB71D7002106F8 /* ChallengeTimer.swift */,
+				6A6CDFCE27FB71D7002106F8 /* ChallengeTimerBar.swift */,
 				6A6CDFCD27FB71D7002106F8 /* CountdownTimer.swift */,
 			);
 			name = components;
@@ -254,6 +268,7 @@
 				6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */,
 				6A6CDF9A27FB6CBA002106F8 /* ChallengeDetailedPreview.swift */,
 				6A6CDF9B27FB6CBA002106F8 /* QuizView.swift */,
+				6A41A7E32805BADE0047FF2E /* LyricsView.swift */,
 				6A6CDFA027FB6D13002106F8 /* components */,
 				6A6CDF8D27FB6CA8002106F8 /* models */,
 				E9F258A7280057BF00C615CE /* Start */,
@@ -481,10 +496,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A6CDFD127FB71D8002106F8 /* CountdownTimer.swift in Sources */,
-				6A6CDFD227FB71D8002106F8 /* ChallengeTimer.swift in Sources */,
+				6A41A7F62805C8110047FF2E /* SRButton.swift in Sources */,
+				6A6CDFD227FB71D8002106F8 /* ChallengeTimerBar.swift in Sources */,
+				6A41A7F52805C8110047FF2E /* ChallengeTimer.swift in Sources */,
 				B1D0B64127FD916600ECA79F /* TopProfiles.swift in Sources */,
 				B166D21E27FC20CC00EADF66 /* RankingListItem.swift in Sources */,
 				B1D0B64127FD916600ECA79F /* TopProfiles.swift in Sources */,
+				6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */,
 				6A59BFCB27FF6E400043D6E7 /* SideMenuView.swift in Sources */,
 				062FE88527FB79EF00F2D0F7 /* MapViewModel.swift in Sources */,
 				062FE88327FB5C7500F2D0F7 /* MapView.swift in Sources */,
@@ -504,10 +522,12 @@
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				6A6CDFE327FE00EB002106F8 /* ChallengesTestView.swift in Sources */,
 				6A6CDF9C27FB6CBA002106F8 /* ChallengeCompleted.swift in Sources */,
+				6A41A7E42805BADE0047FF2E /* LyricsView.swift in Sources */,
 				6A6CDF9E27FB6CBA002106F8 /* ChallengeDetailedPreview.swift in Sources */,
 				6A6CDFD027FB71D8002106F8 /* ChallengeSmallPreview.swift in Sources */,
 				B1158B8627FAF53000552247 /* Color.swift in Sources */,
 				6A6CDF9527FB6CA8002106F8 /* Challenge.swift in Sources */,
+				6A41A7E0280585150047FF2E /* SpeechAnalyzer.swift in Sources */,
 				6A6CDFCF27FB71D8002106F8 /* ChallengeCount.swift in Sources */,
 				6A6CDF9727FB6CA8002106F8 /* Quiz.swift in Sources */,
 				6A6CDFDF27FDC3E2002106F8 /* ChallengeDAO.swift in Sources */,

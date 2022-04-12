@@ -19,11 +19,12 @@ struct outdareApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if showMap {
-                MainView()
-            } else {
-                StartView(showMap: $showMap)
-            }
+//            if showMap {
+//                MainView()
+//            } else {
+//                StartView(showMap: $showMap)
+//            }
+            QuizView(quiz: Quiz.sample[0], setState: {_ in}, setResult: {_ in})
         }
     }
 }
