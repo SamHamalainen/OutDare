@@ -13,38 +13,38 @@ struct MapView: View {
     @StateObject private var viewModel = MapViewModel()
     @State var challengeInfoOpened = false
     @State var challengePassed: Challenge?
-    @StateObject var dao = ChallengeDAO()
+    
     
     var body: some View {
         ZStack(alignment: .top)  {
-            Map(coordinateRegion: $viewModel.mapRegion,showsUserLocation: true, annotationItems: dao.challenges) { challenge in
-                MapAnnotation(coordinate: challenge.coordinates) {
-                    Image(challenge.icon)
-                        .onTapGesture {
-                            print("clicked on \(challenge.name)")
-                            challengePassed = challenge
-                            challengeInfoOpened = true
-                        }
-                        .contrast(0.3)
-                }
-            }
-            .ignoresSafeArea(edges: .bottom)
-            .onAppear {
-                viewModel.checkIfLocationServicesIsEnabled()
-                dao.getChallenges()
-            }
-//            MapViewCustom()
-//            ZStack {
-//                Rectangle()
-//                    .frame(width: 300, height: 150)
-//                    .foregroundColor(.white)
-//                .border(.black)
-//                VStack(spacing: 10) {
-//                    Text("latitude: \(viewModel.userLatitude)")
-//                    Text("longitude: \(viewModel.userLongitude)")
+//            Map(coordinateRegion: $viewModel.mapRegion,showsUserLocation: true, annotationItems: dao.challenges) { challenge in
+//                MapAnnotation(coordinate: challenge.coordinates) {
+//                    Image(challenge.icon)
+//                        .onTapGesture {
+//                            print("clicked on \(challenge.name)")
+//                            challengePassed = challenge
+//                            challengeInfoOpened = true
+//                        }
+//                        .contrast(0.3)
 //                }
-//
 //            }
+//            .ignoresSafeArea(edges: .bottom)
+//            .onAppear {
+//                viewModel.checkIfLocationServicesIsEnabled()
+//                dao.getChallenges()
+//            }
+            MapViewCustom()
+            ZStack {
+                Rectangle()
+                    .frame(width: 200, height: 100)
+                    .foregroundColor(.white)
+                .border(.black)
+                VStack(spacing: 10) {
+                    Text("latitude: \(viewModel.userLatitude)")
+                    Text("longitude: \(viewModel.userLongitude)")
+                }
+
+            }
             if challengeInfoOpened {
                 Rectangle()
                     .ignoresSafeArea()
@@ -58,11 +58,12 @@ struct MapView: View {
     }
 }
 
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView(challengePassed: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)))
-    }
-}
+//struct MapView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        MapView(challengePassed: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)))
+////        MapViewCustom()
+//    }
+//}
 
 // MARK: ChallengeInfo Component
 
@@ -192,45 +193,84 @@ struct ChallengeInfo: View {
 
 
 struct MapViewCustom: UIViewRepresentable {
-    @StateObject private var viewModel = MapViewModel()
-    let mapViewDelegate = MapViewDelegate()
-    let mapView = MKMapView()
+    @ObservedObject var viewModel = MapViewModel()
+    @StateObject var dao = ChallengeDAO()
+    @State var annotations: [MKAnnotation] = []
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
     
-            viewModel.userLatitude = location.coordinate.latitude
-            viewModel.userLongitude = location.coordinate.longitude
-            let userLocation = CLLocationCoordinate2D(latitude: viewModel.userLatitude, longitude: viewModel.userLongitude)
-            let overlay = MKCircle(center: userLocation, radius: 100)
-            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-            mapView.setRegion(region, animated: true)
-            mapView.addOverlay(overlay)
-        
-        
+    func challengeToAnnotation() {
+        var count = 0
+        dao.challenges.forEach { challenge in
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = challenge.coordinates
+            annotation.title = "annotation \(count + 1)"
+            annotations.append(annotation)
+            count += 1
+        }
         
     }
     
     func makeUIView(context: Context) -> MKMapView {
-        mapView.delegate = mapViewDelegate
-        mapView.showsUserLocation = true
         viewModel.checkIfLocationServicesIsEnabled()
+        print("dao has \(dao.challenges)")
+        challengeToAnnotation()
+        let mapView = MKMapView()
+        
+        mapView.delegate = context.coordinator
+        mapView.showsUserLocation = true
+        mapView.showsCompass = false
+        
+        
+        let overlay = MKCircle(center: CLLocationCoordinate2D(latitude: viewModel.userLatitude, longitude: viewModel.userLongitude), radius: 100)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: viewModel.userLatitude, longitude: viewModel.userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+        mapView.addOverlay(overlay)
+        mapView.setRegion(region, animated: true)
         
         return mapView
     }
     
-    func updateUIView(_ view: MKMapView, context: Context) {
+    func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapViewCustom>) {
+        print("annotations \(annotations)")
+        print("dao has in update \(dao.challenges)")
+        print("map region \(mapView.centerCoordinate)")
+        mapView.addAnnotations(annotations)
     }
 }
 
-class MapViewDelegate: NSObject, MKMapViewDelegate {
+class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate{
+    var parent: MapViewCustom
+    init(_ parent: MapViewCustom){
+        self.parent = parent
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let overlay = overlay as? MKCircle {
-            print("Inside mapview delegate")
-            let circleRenderer = MKCircleRenderer(circle: overlay)
+        if let circle = overlay as? MKCircle {
+            let circleRenderer = MKCircleRenderer(circle: circle)
             circleRenderer.fillColor = UIColor.orange
             return circleRenderer
         }
-        return MKOverlayRenderer(overlay: overlay)
+        return MKOverlayRenderer()
+    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            let pin = mapView.view(for: annotation) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+            pin.image = UIImage(systemName: "person.circle.fill")
+            return pin
+        } else if annotation is MKPointAnnotation {
+            let identifier = "Annotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView!.canShowCallout = true
+            } else {
+                annotationView!.annotation = annotation
+            }
+            return annotationView
+        }
+        return nil
     }
 }
