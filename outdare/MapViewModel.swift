@@ -12,22 +12,48 @@ enum MapDetails {
     static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 }
 
+extension CLLocationCoordinate2D: Equatable {
+    static public func ==(lhs: Self, rhs: Self) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
+
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var mapRegion = MKCoordinateRegion(
         center: MapDetails.startingLocation,
         span: MapDetails.defaultSpan
     )
+    @Published var dao = ChallengeDAO()
     @Published var userLatitude: Double = 0
     @Published var userLongitude: Double = 0
+    @Published var userLocation: CLLocationCoordinate2D?
+    @Published var challengeInfoOpen: Bool = false
+    @Published var selectedAnnotationTitle: String = ""
+    @Published var selectedAnnotationCoords: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    @Published var selection: Challenge?
     
     private var locationManager: CLLocationManager?
+    
+    func filterChallengesBySelection(challenges: [Challenge]) {
+        if challenges.first(where:{ $0.name == selectedAnnotationTitle && $0.coordinates == selectedAnnotationCoords}) != nil {
+            selection = selection
+        }
+    }
+    
+    func getUserLocation() {
+        locationManager = CLLocationManager()
+        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    }
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager!.delegate = self
+            locationManager!.desiredAccuracy = kCLLocationAccuracyBest
             locationManager!.startUpdatingLocation()
             locationManager!.pausesLocationUpdatesAutomatically = true
+            locationManager!.activityType = .fitness
+            locationManager!.distanceFilter = 20.0
         } else {
             print("Please turn on location services from the phone settings")
         }
