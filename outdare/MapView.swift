@@ -16,16 +16,30 @@ struct MapView: View {
     @StateObject var dao = ChallengeDAO()
     
     var body: some View {
+        let span = viewModel.mapRegion.span.latitudeDelta
+        let isZoomedOut = (span > 0.8) ? true : false
+        
         ZStack(alignment: .top)  {
-            Map(coordinateRegion: $viewModel.mapRegion,showsUserLocation: true, annotationItems: dao.challenges) { challenge in
+            Map(coordinateRegion: $viewModel.mapRegion,showsUserLocation: true, annotationItems: dao.challenges) {challenge in
+                
                 MapAnnotation(coordinate: challenge.coordinates) {
-                    Image(challenge.icon)
+                    if(!isZoomedOut) {
+                    Image(challenge.icon).resizable()
                         .onTapGesture {
                             print("clicked on \(challenge.name)")
                             challengePassed = challenge
                             challengeInfoOpened = true
+                            print(viewModel.mapRegion.span.longitudeDelta)
                         }
                         .contrast(0.3)
+                        .frame(
+                            width:
+                                viewModel.getAnnotationSize().width,
+                            height: viewModel.getAnnotationSize().height
+                        )
+                        
+                        
+                    }
                 }
             }
             .ignoresSafeArea(edges: .bottom)
@@ -33,6 +47,7 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
                 dao.getChallenges()
             }
+            
 //            MapViewCustom()
 //            ZStack {
 //                Rectangle()
