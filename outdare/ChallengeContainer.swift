@@ -9,6 +9,7 @@ import SwiftUI
 import CoreLocation
 
 struct ChallengeContainer: View {
+    @Binding var challengeInfoOpened: Bool
     let challenge: Challenge
     let notifyParent2: () -> Void
     @State var challengeState = "awaiting"
@@ -37,14 +38,14 @@ struct ChallengeContainer: View {
                     QuizView(quiz: quiz, setState: changeState, setResult: setScoreTime)
                 }
             default:
-                ChallengeCompleted(score: score, time: time)
+                ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, score: score, time: time)
             }
         }
     }
 }
 
-struct ChallengeContainer_Previews: PreviewProvider {
-    static var previews: some View {
-        ChallengeContainer(challenge: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)), notifyParent2: {})
-    }
-}
+//struct ChallengeContainer_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChallengeContainer(challenge: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)), notifyParent2: {})
+//    }
+//}

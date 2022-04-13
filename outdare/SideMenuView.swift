@@ -16,7 +16,7 @@ struct SideMenuView: View {
             Color(.white)
             ZStack() {
                 
-                VStack() {
+                VStack {
                     ForEach(SideMenuViewModel.allCases, id: \.self) { item in
                         
                         Button(action: /*{withAnimation(.spring())*/{
