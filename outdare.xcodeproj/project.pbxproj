@@ -19,6 +19,9 @@
 		6A41A7E42805BADE0047FF2E /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E32805BADE0047FF2E /* LyricsView.swift */; };
 		6A41A7F52805C8110047FF2E /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7F32805C80F0047FF2E /* ChallengeTimer.swift */; };
 		6A41A7F62805C8110047FF2E /* SRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7F42805C8110047FF2E /* SRButton.swift */; };
+		6A41A7FA280602DD0047FF2E /* LyricsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7F9280602DD0047FF2E /* LyricsData.swift */; };
+		6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */; };
+		6A41A7FF28077F7D0047FF2E /* Lyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7FE28077F7D0047FF2E /* Lyrics.swift */; };
 		6A59BFC527FF6CFD0043D6E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFC427FF6CFD0043D6E7 /* MainView.swift */; };
 		6A59BFC727FF6D6F0043D6E7 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFC627FF6D6F0043D6E7 /* SideMenuViewModel.swift */; };
 		6A59BFCB27FF6E400043D6E7 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */; };
@@ -94,6 +97,8 @@
 		6A41A7E32805BADE0047FF2E /* LyricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		6A41A7F32805C80F0047FF2E /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTimer.swift; sourceTree = "<group>"; };
 		6A41A7F42805C8110047FF2E /* SRButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRButton.swift; sourceTree = "<group>"; };
+		6A41A7F9280602DD0047FF2E /* LyricsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsData.swift; sourceTree = "<group>"; };
+		6A41A7FE28077F7D0047FF2E /* Lyrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lyrics.swift; sourceTree = "<group>"; };
 		6A59BFC427FF6CFD0043D6E7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6A59BFC627FF6D6F0043D6E7 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */,
 				062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */,
 				062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */,
 				062FE88C27FEFC2B00F2D0F7 /* FirebaseStorage in Frameworks */,
@@ -180,6 +186,8 @@
 				6A6CDF9027FB6CA8002106F8 /* Quiz.swift */,
 				6A6CDFE427FEE0F4002106F8 /* Attempt.swift */,
 				6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */,
+				6A41A7F9280602DD0047FF2E /* LyricsData.swift */,
+				6A41A7FE28077F7D0047FF2E /* Lyrics.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -369,6 +377,7 @@
 				062FE88727FEFC2B00F2D0F7 /* FirebaseAuth */,
 				062FE88927FEFC2B00F2D0F7 /* FirebaseFirestore */,
 				062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */,
+				6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */,
 			);
 			productName = outdare;
 			productReference = B167D31A27FAE4CE00BF950E /* outdare.app */;
@@ -444,6 +453,7 @@
 			mainGroup = B167D31127FAE4CE00BF950E;
 			packageReferences = (
 				062FE88627FEFC2B00F2D0F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = B167D31B27FAE4CE00BF950E /* Products */;
 			projectDirPath = "";
@@ -511,6 +521,7 @@
 				6A59BFC527FF6CFD0043D6E7 /* MainView.swift in Sources */,
 				B166D21A27FC1DBF00EADF66 /* User.swift in Sources */,
 				B194B39B27FF1677000F056E /* LeaderboardModel.swift in Sources */,
+				6A41A7FF28077F7D0047FF2E /* Lyrics.swift in Sources */,
 				B1D0B64127FD916600ECA79F /* TopProfiles.swift in Sources */,
 				B166D21E27FC20CC00EADF66 /* RankingListItem.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
@@ -540,6 +551,7 @@
 				B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */,
 				B194B3A8280078ED000F056E /* UserDetails.swift in Sources */,
 				0663432D280477580046C92F /* CircleImage.swift in Sources */,
+				6A41A7FA280602DD0047FF2E /* LyricsData.swift in Sources */,
 				E9F258A9280057EC00C615CE /* StartView.swift in Sources */,
 				B194B3A8280078ED000F056E /* UserDetails.swift in Sources */,
 			);
@@ -878,6 +890,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -895,6 +915,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 062FE88627FEFC2B00F2D0F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

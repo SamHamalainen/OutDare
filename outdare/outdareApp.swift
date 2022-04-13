@@ -24,7 +24,7 @@ struct outdareApp: App {
 //            } else {
 //                StartView(showMap: $showMap)
 //            }
-            QuizView(quiz: Quiz.sample[0], setState: {_ in}, setResult: {_ in})
+            LyricsView(lyricsChallenge: Lyrics.sample[0])
         }
     }
 }

@@ -15,7 +15,7 @@ struct QuizView: View {
     @State var score: Int = 0
     let timeout = 2.0
     @ObservedObject var timer: ChallengeTimer
-    @State var voice = true
+    @State var voice = false
     @ObservedObject private var speechAnalyzer = SpeechAnalyzer()
     @State var input = ""
     @State var correct = false
