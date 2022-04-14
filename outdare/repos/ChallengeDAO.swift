@@ -25,6 +25,7 @@ class ChallengeDAO: ObservableObject {
             let annotation = MKPointAnnotation()
             annotation.coordinate = challenge.coordinates
             annotation.title = "\(challenge.name)"
+            annotation.subtitle = challenge.category
             annotations.append(annotation)
             count += 1
         }

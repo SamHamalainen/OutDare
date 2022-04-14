@@ -21,6 +21,7 @@ struct MainView: View {
                     Color(.white)
                     currentView
                 }
+                .ignoresSafeArea(edges: .bottom)
                     .onTapGesture {
                         if (isShowingMenu) {
                             isShowingMenu = false

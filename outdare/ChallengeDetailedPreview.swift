@@ -49,7 +49,7 @@ struct ChallengeDetailedPreview: View {
                         CountdownTimer(timer: 3, countdownOver: notifyParent)
                     }
                 }
-                .padding(.bottom)
+                .padding(.bottom, 35)
             }
             .padding(.horizontal)
         }

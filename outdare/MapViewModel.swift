@@ -37,16 +37,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     private var locationManager: CLLocationManager?
     
-    
-    func getChallengesInRange() {
-        dao.challenges.forEach { challenge in
-            if userLocation != nil {
-                print(userLocation!.distance(to: challenge.coordinates))
-                }
-        }
-    }
-    
-    
     func getUserLocation() {
         locationManager = CLLocationManager()
         userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
