@@ -35,12 +35,13 @@ struct MapView: View {
 //                dao.getChallenges()
 //            }
             if !dao.annotations.isEmpty && viewModel.userLocation != nil {
-                MapViewCustom(viewModel: viewModel, challengeInfoOpened: $viewModel.challengeInfoOpen, annotations: dao.annotations)
+                MapViewCustom(viewModel: viewModel, dao: dao, challengeInfoOpened: $viewModel.challengeInfoOpen, annotations: dao.annotations)
                     .ignoresSafeArea(edges: .bottom)
             } else {
                 ProgressView()
                     .frame(width: 50, height: 50)
                     .progressViewStyle(.circular)
+                    .ignoresSafeArea(edges: .bottom)
             }
             
                 
@@ -49,6 +50,10 @@ struct MapView: View {
 //                    .frame(width: 200, height: 100)
 //                    .foregroundColor(.white)
 //                    .border(.black)
+//                    .onTapGesture {
+//                        let selected = viewModel.selection ?? Challenge(id: 1, challengeId: 1, name: "empty", difficulty: "easy", category: "quiz", description: "empty", coordinates: CLLocationCoordinate2D(latitude: 60, longitude: 24))
+//                        print("open: \(viewModel.challengeInfoOpen) selection: \(selected)")
+//                    }
 //                VStack(spacing: 10) {
 //                    Text("latitude: \(viewModel.userLatitude)")
 //                    Text("longitude: \(viewModel.userLongitude)")
@@ -205,14 +210,16 @@ struct ChallengeInfo: View {
     }
 }
 
+// MARK: MapViewCustom
 
 struct MapViewCustom: UIViewRepresentable {
     @ObservedObject var viewModel: MapViewModel
+    @ObservedObject var dao: ChallengeDAO
     @Binding public var challengeInfoOpened: Bool
     let annotations: [MKAnnotation]
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, vm: viewModel)
+        Coordinator(self, vm: viewModel, dao: dao)
     }
     
     
@@ -249,13 +256,18 @@ struct MapViewCustom: UIViewRepresentable {
     }
 }
 
+// MARK: MapViewCustom Coordinator
+
 class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate{
     @Published var userLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     @ObservedObject var viewModel: MapViewModel
+    @ObservedObject var dao: ChallengeDAO
+    @Published var selection: Challenge?
     var parent: MapViewCustom
-    init(_ parent: MapViewCustom, vm: MapViewModel){
+    init(_ parent: MapViewCustom, vm: MapViewModel, dao: ChallengeDAO){
         self.parent = parent
         self.viewModel = vm
+        self.dao = dao
     }
     
     private var locationManager: CLLocationManager?
@@ -269,7 +281,7 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
         if let circle = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: circle)
             circleRenderer.fillColor = .orange
-            circleRenderer.alpha = 0.4
+            circleRenderer.alpha = 0.5
             return circleRenderer
         }
         return MKOverlayRenderer()
@@ -285,8 +297,6 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
             let annotation = mapView.view(for: annotation) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
             annotation.image = UIImage(named: "quiz")
             annotation.frame.size = CGSize(width: 30, height: 30)
-            let view = UILabel()
-            annotation.detailCalloutAccessoryView = view
             return annotation
         }
         return nil
@@ -294,10 +304,10 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotationTitle = view.annotation?.title {
             viewModel.challengeInfoOpen = true
-            viewModel.selectedAnnotationTitle = annotationTitle!
-            viewModel.selectedAnnotationCoords = view.annotation!.coordinate
-            print("filtered \(String(describing: viewModel.selection))")
-            print("clicked on \(annotationTitle!)")
+            selection = dao.challenges.first(where:{ $0.name == annotationTitle && $0.coordinates == view.annotation!.coordinate})
+            viewModel.selection = self.selection
+//            viewModel.getChallengesInRange()
+//            print("inrange \(String(describing: viewModel.challengesInRange))")
             mapView.setRegion(MKCoordinateRegion(center: view.annotation!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)), animated: true)
             
         }
