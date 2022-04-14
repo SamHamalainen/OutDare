@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import CoreLocation
+import MapKit
 
 class ChallengeDAO: ObservableObject {
     let db = Firestore.firestore()
@@ -15,6 +16,21 @@ class ChallengeDAO: ObservableObject {
     @Published var challenges: [Challenge] = []
     @Published var challenge: Challenge? = nil
     @Published var quiz: Quiz? = nil
+    @Published var annotations: [MKPointAnnotation] = []
+    
+    func challengeToAnnotation() {
+        var count = 0
+        print("dao count: \(challenges.count)")
+        challenges.forEach { challenge in
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = challenge.coordinates
+            annotation.title = "\(challenge.name)"
+            annotation.subtitle = challenge.category
+            annotations.append(annotation)
+            count += 1
+        }
+
+    }
     
     func convertToChallenge(data: [String:Any]) -> Challenge {
         let id = data["id"] as? Int ?? 0
@@ -55,6 +71,7 @@ class ChallengeDAO: ObservableObject {
                     let challenge = self.convertToChallenge(data: data)
                     challenges.append(challenge)
                 }
+                challengeToAnnotation()
             }
         }
     }
