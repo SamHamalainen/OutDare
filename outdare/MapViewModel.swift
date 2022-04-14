@@ -6,6 +6,7 @@
 //
 
 import MapKit
+import SwiftUI
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 60.22418227428884, longitude: 24.758741356204567)
@@ -16,6 +17,9 @@ extension CLLocationCoordinate2D: Equatable {
     static public func ==(lhs: Self, rhs: Self) -> Bool {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
+    func distance(to: CLLocationCoordinate2D) -> CLLocationDistance {
+            MKMapPoint(self).distance(to: MKMapPoint(to))
+        }
 }
 
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -28,17 +32,20 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var userLongitude: Double = 0
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var challengeInfoOpen: Bool = false
-    @Published var selectedAnnotationTitle: String = ""
-    @Published var selectedAnnotationCoords: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     @Published var selection: Challenge?
+    @Published var challengesInRange: [Challenge] = []
     
     private var locationManager: CLLocationManager?
     
-    func filterChallengesBySelection(challenges: [Challenge]) {
-        if challenges.first(where:{ $0.name == selectedAnnotationTitle && $0.coordinates == selectedAnnotationCoords}) != nil {
-            selection = selection
+    
+    func getChallengesInRange() {
+        dao.challenges.forEach { challenge in
+            if userLocation != nil {
+                print(userLocation!.distance(to: challenge.coordinates))
+                }
         }
     }
+    
     
     func getUserLocation() {
         locationManager = CLLocationManager()
