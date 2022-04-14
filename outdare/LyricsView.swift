@@ -20,7 +20,7 @@ extension String {
 struct LyricsView: View {
     let lyricsChallenge: Lyrics
     @ObservedObject var timer: ChallengeTimer
-    @State var index: Int = 1
+    @State var index: Int = 0
     @State var missingPart: String?
     @State var showAns = false
     @ObservedObject private var speechAnalyzer = SpeechAnalyzer()
@@ -46,8 +46,17 @@ struct LyricsView: View {
                 }
             ChallengeCount(index: index, limit: 3)
                 .padding(.bottom)
-            Text(data.title).font(Font.customFont.normalText)
-            Text(data.artist).font(Font.customFont.smallText)
+            VStack {
+                Text(data.title).font(Font.customFont.normalText)
+                Text(data.artist).font(Font.customFont.smallText)
+            }
+            .padding()
+            .background(Color.theme.background)
+            .foregroundColor(Color.white)
+            .cornerRadius(20)
+            .padding(.bottom)
+            
+            
             if let missingPart = missingPart {
                 lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
                     .font(Font.customFont.normalText.leading(.loose))
@@ -101,6 +110,7 @@ struct LyricsView: View {
             missingPart = getHiddenWords(index: index)
             timer.start()
         }
+        .allowsHitTesting(timer.isRunning)
     }
 }
 
@@ -109,15 +119,18 @@ extension LyricsView {
         showAns = true
         let result: LyricsResult = lyricsChallenge.data[index].checkAns(ans: ans)
         resultString = "\(result.matchStatus) \(result.comment.isEmpty ? "" : result.comment) \(result.score)/\(result.total)"
-//        DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
-//            if index + 1 < lyricsChallenge.data.count {
-//                resultString = ""
-//                input = ""
-//                correct = false
-//                showAns = false
-//                index += 1
-//            }
-//        }
+        speechAnalyzer.stop()
+        timer.stop()
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
+            if index + 1 < lyricsChallenge.data.count {
+                resultString = ""
+                input = ""
+                correct = false
+                showAns = false
+                index += 1
+                timer.restart()
+            }
+        }
     }
     
     func getHiddenWords(index: Int) -> String {

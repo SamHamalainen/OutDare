@@ -105,7 +105,7 @@ struct LyricsData {
 
 extension LyricsData {
     static let sample = [
-        LyricsData(timeLimit: 50, artist: "Bon Jovi", title: "Livin' On a Prayer",
+        LyricsData(timeLimit: 20, artist: "Bon Jovi", title: "Livin' On a Prayer",
                    lyrics: """
                     Woah, we're half way there
                     Woah, livin' on a prayer
@@ -113,14 +113,14 @@ extension LyricsData {
                     Woah, livin' on a prayer
                     """,
                    missingWords: "make it I swear"),
-        LyricsData(timeLimit: 50, artist: "Lil Nas X", title: "Old Town Road",
+        LyricsData(timeLimit: 20, artist: "Lil Nas X", title: "Old Town Road",
                    lyrics: """
                     Yeah, I'm gonna take my horse
                     To the old town road
                     I'm gonna ride 'til ___
                     """,
                    missingWords: "I can't no more"),
-        LyricsData(timeLimit: 50, artist: "Abba", title: "Dancing Queen",
+        LyricsData(timeLimit: 20, artist: "Abba", title: "Dancing Queen",
                    lyrics: """
                     You are the dancing queen
                     Young and sweet
