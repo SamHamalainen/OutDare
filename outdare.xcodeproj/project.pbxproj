@@ -16,11 +16,11 @@
 		062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88727FEFC2B00F2D0F7 /* FirebaseAuth */; };
 		062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88927FEFC2B00F2D0F7 /* FirebaseFirestore */; };
 		062FE88C27FEFC2B00F2D0F7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */; };
-		062FE88E27FF130700F2D0F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */; };
 		06312258280C25F0004BF504 /* TopProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06312257280C25F0004BF504 /* TopProfiles.swift */; };
 		0631225A280C26D5004BF504 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06312259280C26D5004BF504 /* User.swift */; };
 		0631225C280C2BC0004BF504 /* RankingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631225B280C2BC0004BF504 /* RankingListItem.swift */; };
 		0631225E280C2BEC004BF504 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631225D280C2BEC004BF504 /* UserDetails.swift */; };
+		06312260280C3025004BF504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0631225F280C3025004BF504 /* GoogleService-Info.plist */; };
 		0663432D280477580046C92F /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0663432C280477580046C92F /* CircleImage.swift */; };
 		0664DC85280878AE00899F55 /* MapViewCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC84280878AE00899F55 /* MapViewCustom.swift */; };
 		0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC862808792900899F55 /* ChallengeInfo.swift */; };
@@ -97,12 +97,12 @@
 		060A10DD280BF9280077F71F /* ChallengeSmallPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeSmallPreview.swift; sourceTree = "<group>"; };
 		062FE88227FB5C7500F2D0F7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		062FE88427FB79EF00F2D0F7 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewModel.swift; path = ../MapViewModel.swift; sourceTree = "<group>"; };
-		062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		062FE88F27FF2EF400F2D0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		06312257280C25F0004BF504 /* TopProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopProfiles.swift; sourceTree = "<group>"; };
 		06312259280C26D5004BF504 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0631225B280C2BC0004BF504 /* RankingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingListItem.swift; sourceTree = "<group>"; };
 		0631225D280C2BEC004BF504 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
+		0631225F280C3025004BF504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0664DC84280878AE00899F55 /* MapViewCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCustom.swift; sourceTree = "<group>"; };
 		0664DC862808792900899F55 /* ChallengeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfo.swift; sourceTree = "<group>"; };
@@ -307,9 +307,9 @@
 		B167D31C27FAE4CE00BF950E /* outdare */ = {
 			isa = PBXGroup;
 			children = (
+				0631225F280C3025004BF504 /* GoogleService-Info.plist */,
 				6A6CDFE627FF0BF2002106F8 /* .gitignore */,
 				062FE88F27FF2EF400F2D0F7 /* Info.plist */,
-				062FE88D27FF130700F2D0F7 /* GoogleService-Info.plist */,
 				B167D32127FAE4CF00BF950E /* Assets.xcassets */,
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				060A10D6280BF9280077F71F /* components */,
@@ -475,10 +475,10 @@
 			files = (
 				6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */,
 				B1D0B64827FECCDA00ECA79F /* JetBrainsMono-Bold.ttf in Resources */,
+				06312260280C3025004BF504 /* GoogleService-Info.plist in Resources */,
 				B194B38827FEDB3F000F056E /* JetBrainsMono-ExtraBold.ttf in Resources */,
 				B1D0B64727FECCD600ECA79F /* JetBrainsMono-Medium.ttf in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,
-				062FE88E27FF130700F2D0F7 /* GoogleService-Info.plist in Resources */,
 				B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */,
 				B1D0B64927FECCDC00ECA79F /* JetBrainsMono-Regular.ttf in Resources */,
 				B194B39F27FF1CC0000F056E /* userData.json in Resources */,
