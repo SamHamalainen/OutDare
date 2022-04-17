@@ -19,98 +19,131 @@ extension String {
 
 struct LyricsView: View {
     let lyricsChallenge: Lyrics
+    let setState: (String) -> Void
+    let setResult: ((Double, Double)) -> Void
     @ObservedObject var timer: ChallengeTimer
     @State var index: Int = 0
+    @State var score: Double = 0.0
     @State var missingPart: String?
     @State var showAns = false
     @ObservedObject private var speechAnalyzer = SpeechAnalyzer()
     @State var input = ""
     @State var correct = false
     @State var resultString = ""
+    
     let timeout = 3.0
     
-    init(lyricsChallenge: Lyrics) {
+    init(lyricsChallenge: Lyrics, setState: @escaping (String) -> Void, setResult: @escaping ((Double, Double)) -> Void) {
         self.lyricsChallenge = lyricsChallenge
+        self.setState = setState
+        self.setResult = setResult
         let timeLimit = Double(lyricsChallenge.data[0].timeLimit)
+        print(lyricsChallenge.data[0].lyrics.components(separatedBy: "\n"))
         timer = ChallengeTimer(timeLimit: timeLimit)
     }
     var body: some View {
         let data = lyricsChallenge.data[index]
         let lyrics = data.lyrics
         let answer = data.missingWords
-        VStack {
-            ChallengeTimerBar(timer: timer)
-                .onChange(of: index) { index in
-                    let timeLimit = Double(lyricsChallenge.data[index].timeLimit)
-                    timer.setTimeLimit(limit: timeLimit)
+        ZStack {
+            if !resultString.isEmpty {
+                Rectangle()
+                    .ignoresSafeArea()
+                    .opacity(0.45)
+                    .zIndex(1)
+                VStack() {
+                    Spacer()
+                    VStack(spacing: 40) {
+                        Text(resultString)
+                            .font(Font.customFont.largeText)
+                            .padding(.top, 30)
+                        Button(action: { next() }) {
+                            Text(index != lyricsChallenge.data.count - 1 ? "Continue" : "Finish")
+                        }
+                        .padding(.vertical, 10)
+                        .frame(width: 200)
+                        .font(Font.customFont.btnText)
+                        .background(Color.theme.background)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(40)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, 50)
+                    .background(Color.white)
+                    .cornerRadius(20)
                 }
-            ChallengeCount(index: index, limit: 3)
-                .padding(.bottom)
+                .zIndex(2)
+                .ignoresSafeArea()
+            }
             VStack {
-                Text(data.title).font(Font.customFont.normalText)
-                Text(data.artist).font(Font.customFont.smallText)
-            }
-            .padding()
-            .background(Color.theme.background)
-            .foregroundColor(Color.white)
-            .cornerRadius(20)
-            .padding(.bottom)
-            
-            
-            if let missingPart = missingPart {
-                lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
-                    .font(Font.customFont.normalText.leading(.loose))
-                    .lineSpacing(10)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxHeight: .infinity)
-            }
-            Spacer()
-            Text(resultString)
-            TextField("Sing or type here", text: $input)
-                .textFieldStyle(RoundedTextFieldStyle())
-                .foregroundColor(correct ? Color.theme.rankingUp : Color.theme.textDark)
-                .font(Font.customFont.normalText)
-                .autocapitalization(.none)
-                .onChange(of: speechAnalyzer.recognizedText ?? "") {newValue in
-                    if newValue.count > 0 && !correct {
-                        input = newValue
+                ChallengeTimerBar(timer: timer)
+                    .onChange(of: index) { index in
+                        let timeLimit = Double(lyricsChallenge.data[index].timeLimit)
+                        timer.setTimeLimit(limit: timeLimit)
                     }
+                ChallengeCount(index: index, limit: 3)
+                VStack {
+                    Text("\(data.title) - \(data.artist)").font(Font.customFont.normalText)
                 }
-                .onChange(of: input) { newValue in
-                    correct = (newValue.lowercased().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "’", with: "'") == answer.lowercased())
-                    if correct {
+                .padding()
+                
+                if let missingPart = missingPart {
+                    lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
+                        .font(Font.customFont.normalText.leading(.loose))
+                        .lineSpacing(10)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxHeight: .infinity)
+                        .padding()
+                }
+                HStack {
+                    TextField("Sing or type here", text: $input)
+                        .textFieldStyle(RoundedTextFieldStyle())
+                        .foregroundColor(correct ? Color.theme.rankingUp : Color.theme.textDark)
+                        .font(Font.customFont.normalText)
+                        .autocapitalization(.none)
+                        .onChange(of: speechAnalyzer.recognizedText ?? "") {newValue in
+                            if newValue.count > 0 && !correct {
+                                input = newValue
+                            }
+                        }
+                        .onChange(of: input) { newValue in
+                            correct = (newValue.lowercased().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "’", with: "'") == answer.lowercased())
+                            if correct {
+                                onAnswer(ans: input)
+                            }
+                        }
+                    Button(action: {
                         onAnswer(ans: input)
+                    }) {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.theme.background)
                     }
                 }
                 .padding()
-            Button(action: {
-                onAnswer(ans: input)
-            }) {
-                Text("Submit")
-                    .padding(.vertical, 10)
-                    .frame(width: 200)
-                    .font(Font.customFont.btnText)
-                    .background(Color.theme.button)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(40)
-                    
+                SRButton(speechAnalyzer: speechAnalyzer, size: 40, padding: 40, text: "Tap to sing")
+                    .padding(.bottom)
             }
-            SRButton(speechAnalyzer: speechAnalyzer, text: "Tap to sing")
-                .padding()
-        }
-        .onChange(of: showAns) { showAns in
-            if showAns {
-                missingPart = answer
+            .onChange(of: showAns) { showAns in
+                if showAns {
+                    missingPart = answer
+                }
             }
-        }
-        .onChange(of: index) { index in
-            missingPart = getHiddenWords(index: index)
-        }
-        .onAppear {
-            missingPart = getHiddenWords(index: index)
-            timer.start()
-        }
+            .onChange(of: index) { index in
+                missingPart = getHiddenWords(index: index)
+            }
+            .onChange(of: timer.isOver){ isOver in
+                if isOver {
+                    onAnswer(ans: input)
+                }
+            }
+            .onAppear {
+                missingPart = getHiddenWords(index: index)
+                timer.start()
+            }
         .allowsHitTesting(timer.isRunning)
+        }
     }
 }
 
@@ -118,19 +151,27 @@ extension LyricsView {
     func onAnswer(ans: String) {
         showAns = true
         let result: LyricsResult = lyricsChallenge.data[index].checkAns(ans: ans)
-        resultString = "\(result.matchStatus) \(result.comment.isEmpty ? "" : result.comment) \(result.score)/\(result.total)"
+        score += result.score
+        resultString = "\(result.matchStatus)"
         speechAnalyzer.stop()
         timer.stop()
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
-            if index + 1 < lyricsChallenge.data.count {
-                resultString = ""
-                input = ""
-                correct = false
-                showAns = false
-                index += 1
-                timer.restart()
-            }
+    }
+    
+    func next() {
+        if index < lyricsChallenge.data.count - 1 {
+            resultString = ""
+            input = ""
+            correct = false
+            showAns = false
+            index += 1
+            timer.restart()
+        } else {
+            print("final score \(score)")
+            print("total time \(timer.totalTime)")
+            setResult((score, timer.totalTime))
+            setState("done")
         }
+        
     }
     
     func getHiddenWords(index: Int) -> String {
@@ -145,8 +186,8 @@ extension LyricsView {
     }
 }
 
-struct LyricsView_Previews: PreviewProvider {
-    static var previews: some View {
-        LyricsView(lyricsChallenge: Lyrics.sample[0])
-    }
-}
+//struct LyricsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LyricsView(lyricsChallenge: Lyrics.sample[0])
+//    }
+//}

@@ -14,7 +14,8 @@ struct ChallengeTimerBar: View {
     var body: some View {
         VStack {
             ProgressView(value: timer.count, total: timer.timeLimit)
-                .padding()
+                .padding(.bottom)
+                .padding(.horizontal)
                 .tint(Color.theme.icon)
         }        
     }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChallengeCompleted: View {
     @Binding var challengeInfoOpened: Bool
-    let score: Int
+    let score: Double
     let time: Double
     var body: some View {
         VStack {

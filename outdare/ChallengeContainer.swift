@@ -14,12 +14,12 @@ struct ChallengeContainer: View {
     let challenge: Challenge
     let notifyParent2: () -> Void
     @State var challengeState = "awaiting"
-    @State var score = 0
+    @State var score = 0.0
     @State var time = 0.0
     
     @StateObject var dao = ChallengeDAO()
     
-    func setScoreTime(scoreTime: (Int, Double)) -> Void {
+    func setScoreTime(scoreTime: (Double, Double)) -> Void {
         score = scoreTime.0
         time = scoreTime.1
     }
@@ -32,12 +32,30 @@ struct ChallengeContainer: View {
             case "awaiting":
                 ChallengeDetailedPreview(challenge: challenge, notifyParent2: notifyParent2, setState: changeState)
                     .onAppear() {
-                        dao.getQuiz(id: challenge.challengeId)
+                        switch challenge.category {
+                        case "quiz":
+                            dao.getQuiz(id: challenge.challengeId)
+                        case "lyrics":
+                            dao.getLyrics(id: challenge.challengeId)
+                        default:
+                            return
+                        }
                     }
             case "playing":
-                if let quiz = dao.quiz {
-                    QuizView(quiz: quiz, setState: changeState, setResult: setScoreTime)
+                switch challenge.category {
+                case "quiz":
+                    if let quiz = dao.quiz {
+                        QuizView(quiz: quiz, setState: changeState, setResult: setScoreTime)
+                    }
+                case "lyrics":
+                    if let lyrics = dao.lyrics {
+                        LyricsView(lyricsChallenge: lyrics, setState: changeState, setResult: setScoreTime)
+                    }
+                default:
+                    Text("invalid category")
                 }
+                
+                
             default:
                 ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, score: score, time: time)
             }

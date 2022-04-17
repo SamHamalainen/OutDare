@@ -19,12 +19,12 @@ struct outdareApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            if showMap {
-//                MainView()
-//            } else {
-//                StartView(showMap: $showMap)
-//            }
-            LyricsView(lyricsChallenge: Lyrics.sample[0])
+            if showMap {
+                MainView()
+            } else {
+                StartView(showMap: $showMap)
+            }
+//            LyricsView(lyricsChallenge: Lyrics.sample[0])
         }
     }
 }

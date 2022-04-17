@@ -10,7 +10,7 @@ import SwiftUI
 struct QuizView: View {
     let quiz: Quiz
     let setState: (String) -> Void
-    let setResult: ((Int, Double)) -> Void
+    let setResult: ((Double, Double)) -> Void
     @State var index: Int = 0
     @State var score: Int = 0
     let timeout = 2.0
@@ -20,7 +20,7 @@ struct QuizView: View {
     @State var input = ""
     @State var correct = false
     
-    init(quiz: Quiz, setState: @escaping (String) -> Void, setResult: @escaping ((Int, Double)) -> Void) {
+    init(quiz: Quiz, setState: @escaping (String) -> Void, setResult: @escaping ((Double, Double)) -> Void) {
         self.quiz = quiz
         self.setState = setState
         self.setResult = setResult
@@ -112,7 +112,7 @@ extension QuizView {
             } else {
                 print("final score \(score)")
                 print("total time \(timer.totalTime)")
-                setResult((score, timer.totalTime))
+                setResult((Double(score), timer.totalTime))
                 setState("done")
             }
         }

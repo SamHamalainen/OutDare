@@ -11,7 +11,7 @@ struct LyricsData {
     let timeLimit: Int
     let artist: String
     let title: String
-    let lyrics: String
+    var lyrics: String
     let missingWords: String
     var missingWordsArray: [String] {
         missingWords.components(separatedBy: " ")
@@ -32,6 +32,12 @@ struct LyricsData {
                 }
             }
             return sameOrder.count
+        }
+    }
+    
+    mutating func toMultiLine() {
+        if lyrics.contains("\\n") {
+            lyrics = lyrics.replacingOccurrences(of: "\\n", with: "\n")
         }
     }
 
