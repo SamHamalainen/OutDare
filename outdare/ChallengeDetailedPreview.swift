@@ -7,12 +7,16 @@
 
 import SwiftUI
 import CoreLocation
+import Speech
 
 struct ChallengeDetailedPreview: View {
     let challenge: Challenge
     let notifyParent2: () -> Void
     let setState: (String) -> Void
     @State var ready = false
+    
+    @State private var showingAlert = false
+    
     func notifyParent(countDownOver: Bool) {
         if countDownOver {
             setState("playing")
@@ -36,7 +40,12 @@ struct ChallengeDetailedPreview: View {
                 Group {
                     if !ready {
                         Button(action: {
-                            ready = true
+                            if checkSRPermission() {
+                                ready = true
+                            } else {
+                                checkSRPermission()
+                            }
+                            
                         }) {
                             Text("I'm ready!")
                                 .padding(.vertical, 10)
@@ -44,6 +53,10 @@ struct ChallengeDetailedPreview: View {
                                 .background(Color.theme.button)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(40)
+                        }
+                        .alert("Speech Recognition permission is needed to complete challenges", isPresented: $showingAlert) {
+                            Button("Go to settings") { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) }
+                            Button("Cancel", role: .cancel) { }
                         }
                     } else {
                         CountdownTimer(timer: 3, countdownOver: notifyParent)
@@ -54,6 +67,21 @@ struct ChallengeDetailedPreview: View {
             .padding(.horizontal)
         }
         .padding(.vertical)
+    }
+}
+
+extension ChallengeDetailedPreview {
+    func checkSRPermission() -> Bool {
+        guard SFSpeechRecognizer.authorizationStatus() == .authorized else {
+            SFSpeechRecognizer.requestAuthorization({ (status) in
+                print("Need speech recognition authorization")
+                if status != .notDetermined {
+                    showingAlert = true
+                }
+            })
+            return false
+        }
+        return true
     }
 }
 

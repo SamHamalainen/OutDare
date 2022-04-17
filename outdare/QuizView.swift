@@ -10,21 +10,26 @@ import SwiftUI
 struct QuizView: View {
     let quiz: Quiz
     let setState: (String) -> Void
-    let setResult: ((Int, Double)) -> Void
+    let setResult: ((Double, Double)) -> Void
     @State var index: Int = 0
     @State var score: Int = 0
     let timeout = 2.0
-    let label: String = ""
-    @State var timeCount = 0.0
-    @State var timer: Timer? = nil
-    @State var selectedAns: String? = nil
-    @State var totalTime: Double = 0.0
+    @ObservedObject var timer: ChallengeTimer
+    @State var voice = false
+    @ObservedObject private var speechAnalyzer = SpeechAnalyzer()
+    @State var input = ""
+    @State var correct = false
+    
+    init(quiz: Quiz, setState: @escaping (String) -> Void, setResult: @escaping ((Double, Double)) -> Void) {
+        self.quiz = quiz
+        self.setState = setState
+        self.setResult = setResult
+        timer = ChallengeTimer(timeLimit: quiz.timePerQuestion)
+    }
     
     var body: some View {
         VStack {
-            ProgressView(label, value: timeCount, total: quiz.timePerQuestion)
-                .padding()
-                .tint(Color.theme.icon)
+            ChallengeTimerBar(timer: timer)
             ChallengeCount(index: index, limit: quiz.data.count)
             VStack {
                 Text(quiz.data[index].question)
@@ -34,69 +39,99 @@ struct QuizView: View {
                     .cornerRadius(20)
                     .padding(.bottom)
                     
-                VStack(spacing: 20) {
-                    ForEach(quiz.data[index].answers, id: \.self) { ans in
-                        Button(action: {onAnswer(ans: ans)}) {
-                            Text(ans)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background((selectedAns != nil && ans == quiz.data[index].correctAns && selectedAns != "") ? Color.theme.rankingUp : (selectedAns == ans && ans != quiz.data[index].correctAns) ? Color.theme.rankingDown : Color.theme.icon)
+                if !voice {
+                    VStack(spacing: 20) {
+                        ForEach(quiz.data[index].answers, id: \.self) { ans in
+                            Button(action: {onAnswer(ans: ans)}) {
+                                Text(ans)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background((!input.isEmpty && ans == quiz.data[index].correctAns) ? Color.theme.rankingUp : (input == ans && ans != quiz.data[index].correctAns) ? Color.theme.rankingDown : Color.theme.icon)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(20)
+                                    .shadow(color: Color.theme.icon, radius: (ans == input) ? 0 : 5, x: 0, y: (ans == input) ? 0 : 4)
+                            }
+                        }
+                    }
+                } else {
+                    VStack {
+                        Spacer()
+                        TextField("Type here if you cannot talk", text: $input)
+                            .textFieldStyle(RoundedTextFieldStyle())
+                            .foregroundColor(correct ? Color.theme.rankingUp : Color.theme.textDark)
+                            .onChange(of: speechAnalyzer.recognizedText ?? "") {newValue in
+                                if newValue.count > 0 {
+                                    input = newValue
+                                }
+                            }
+                            .padding()
+                        Button(action: {
+                            onAnswer(ans: input)
+                        }) {
+                            Text("Submit")
+                                .padding(.vertical, 10)
+                                .frame(width: 200)
+                                .background(Color.theme.button)
                                 .foregroundColor(Color.white)
-                                .cornerRadius(20)
-                                .shadow(color: Color.theme.icon, radius: (ans == selectedAns) ? 0 : 5, x: 0, y: (ans == selectedAns) ? 0 : 4)
+                                .cornerRadius(40)
                                 
                         }
-                        .disabled(selectedAns != nil)
+                        Spacer()
+                        SRButton(speechAnalyzer: speechAnalyzer)
+                        .padding()
                     }
+                    
                 }
+                
             }
             .padding(.horizontal)
         }
-        .onAppear {
-            start()
-        }
-    }
-    
-    func onAnswer(ans: String) {
-        selectedAns = ans
-        totalTime += timeCount
-        stop()
-        if ans == quiz.data[index].correctAns {
-            score += 1
-            print(score)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
-            if index + 1 < quiz.data.count {
-                index += 1
-                selectedAns = nil
-                restart()
-            } else {
-                print("final score \(score)")
-                print("total time \(totalTime)")
-                setResult((score, totalTime))
-                setState("done")
-            }
-        }
-    }
-    
-    func start() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) {timer in
-            if timeCount < quiz.timePerQuestion - 0.01 {
-                timeCount += 0.01
-            } else {
+        .onChange(of: timer.isOver) { isOver in
+            if isOver {
                 onAnswer(ans: "")
             }
         }
+        .onAppear {
+            timer.start()
+        }
+        .allowsHitTesting(timer.isRunning)
     }
-    
-    func stop() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    func restart() {
-        timeCount = 0.0
-        start()
+}
+
+extension QuizView {
+    func onAnswer(ans: String) {
+        input = ans
+        checkAnswer()
+        timer.stop()
+        speechAnalyzer.stop()
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
+            if index + 1 < quiz.data.count {
+                resetAnswer()
+                index += 1
+                timer.restart()
+            } else {
+                print("final score \(score)")
+                print("total time \(timer.totalTime)")
+                setResult((Double(score), timer.totalTime))
+                setState("done")
+            }
+        }
+        
+        func resetAnswer() {
+            input = ""
+            correct = false
+        }
+        
+        func checkAnswer() {
+            let correctAns = quiz.data[index].correctAns
+            print(input)
+            let isCorrect = !voice ? (input == correctAns) : (input.lowercased().trimmingCharacters(in: .whitespaces) == correctAns.lowercased())
+            correct = isCorrect
+            if isCorrect {
+                score += 1
+            }
+            print(score)
+        }
     }
 }
 

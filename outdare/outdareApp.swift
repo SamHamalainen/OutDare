@@ -24,6 +24,7 @@ struct outdareApp: App {
             } else {
                 StartView(showMap: $showMap)
             }
+//            LyricsView(lyricsChallenge: Lyrics.sample[0])
         }
     }
 }
