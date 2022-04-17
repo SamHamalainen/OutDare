@@ -85,8 +85,8 @@ struct LyricsData {
         }
         
         if perfectResidualMatch && wrong.isEmpty {
-            print("Partial match (no incorrect words)", "\(matching.count)/\(correctWordsCount)")
-            return LyricsResult(matchStatus: "Partial match!", comment: "no incorrect words", score: Double(matching.count), total: correctWordsCount)
+            print("Partial match (incomplete)", "\(matching.count)/\(correctWordsCount)")
+            return LyricsResult(matchStatus: "Partial match!", comment: "incomplete", score: Double(matching.count), total: correctWordsCount)
         }
         
         if perfectResidualMatch && !wrong.isEmpty {
