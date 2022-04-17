@@ -32,7 +32,7 @@ struct Challenge: Identifiable {
         case "tongue":
            return "tongueTwister"
         case "lyrics":
-            return "singing"
+            return "lyrics"
         default:
            return "quiz"
         }
