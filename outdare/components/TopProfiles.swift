@@ -4,7 +4,6 @@
 //
 //  Created by Jasmin Partanen on 6.4.2022.
 //
-
 import SwiftUI
 
 
@@ -32,4 +31,3 @@ struct TopProfiles_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
- 
