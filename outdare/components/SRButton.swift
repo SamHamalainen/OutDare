@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SRButton: View {
     @ObservedObject var speechAnalyzer: SpeechAnalyzer
-    let size: CGFloat = 50
+    var size: CGFloat = 50
+    var padding = 50.0
+    var text: String = "Tap to speak"
     
     @State var isAtMinScale = false
     private let animation = Animation.easeInOut(duration: 0.6)
@@ -23,7 +25,7 @@ struct SRButton: View {
                         .foregroundColor(speechAnalyzer.isProcessing ? Color.theme.background : Color.theme.icon)
                         .scaledToFit()
                         .frame(width: size, height: size)
-                        .padding(50)
+                        .padding(padding)
                         .overlay(
                             Circle()
                                 .stroke(speechAnalyzer.isProcessing ? Color.theme.background : Color.theme.icon, lineWidth: 5)
@@ -39,8 +41,9 @@ struct SRButton: View {
                 if speechAnalyzer.isProcessing {
                     ProgressView()
                 }
-                Text(speechAnalyzer.isProcessing ? "Listening" : "Tap to speak")
+                Text(speechAnalyzer.isProcessing ? "Listening" : text)
                     .foregroundColor(speechAnalyzer.isProcessing ? Color.theme.background : Color.theme.icon)
+                    .font(Font.customFont.normalText)
             }
         }
     }
