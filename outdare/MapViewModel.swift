@@ -28,12 +28,11 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         span: MapDetails.defaultSpan
     )
     @Published var dao = ChallengeDAO()
-    @Published var userLatitude: Double = 0
-    @Published var userLongitude: Double = 0
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var challengeInfoOpen: Bool = false
     @Published var selection: Challenge?
-    @Published var challengesInRange: [Challenge] = []
+    @Published var userSelectedTracking = false
+    @Published var totalDistanceWalked: Double = 0.0
     
     private var locationManager: CLLocationManager?
     
@@ -57,9 +56,12 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        userLatitude = location.coordinate.latitude
-        userLongitude = location.coordinate.longitude
+        guard let locationLast = locations.last else { return }
+        userLocation = locationLast.coordinate
+        totalDistanceWalked += locations.first!.coordinate.distance(to: locationLast.coordinate)
+        print("distance walked: \(totalDistanceWalked)")
+        
+        
     }
     
     private func checkLocationAuthorization() {

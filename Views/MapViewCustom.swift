@@ -29,16 +29,15 @@ struct MapViewCustom: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
         mapView.showsCompass = false
-        mapView.mapType = .satelliteFlyover
+        mapView.mapType = .mutedStandard
+        mapView.userTrackingMode = .none
         
         let overlay = MKCircle(center: viewModel.userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0), radius: 150)
         mapView.addOverlay(overlay)
-        var span: MKCoordinateSpan
-        if (viewModel.userLocation != nil) {
-            span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.001)
-        } else {
-            span = MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
-        }
+        let span = viewModel.userLocation != nil
+            ? MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.001)
+            : MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
+        
         mapView.setRegion(MKCoordinateRegion(center: viewModel.userLocation ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482), span: span), animated: true)
         mapView.addAnnotations(annotations)
         
@@ -46,8 +45,17 @@ struct MapViewCustom: UIViewRepresentable {
     }
     
     func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapViewCustom>) {
-        let location = viewModel.userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        print("userlocation \(location)")
+        if viewModel.userSelectedTracking {
+            mapView.userTrackingMode = .follow
+            mapView.addAnnotations(annotations)
+        } else {
+            mapView.userTrackingMode = .none
+        }
+        if viewModel.challengeInfoOpen == false {
+            for annotation in annotations {
+                mapView.deselectAnnotation(annotation, animated: false)
+            }
+        }
         
     }
 }
@@ -85,8 +93,6 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
         self.viewModel = vm
         self.dao = dao
     }
-    
-    private var locationManager: CLLocationManager?
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
