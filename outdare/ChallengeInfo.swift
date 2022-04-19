@@ -24,6 +24,7 @@ struct ChallengeInfo: View {
     @Binding var locationPassed: Challenge?
     @Binding var challengeInfoOpened: Bool
     @Binding var userLocation: CLLocationCoordinate2D?
+    @ObservedObject var navigationRoute: NavigationRoute
     
     func getDifficultyColor() -> Color {
         switch locationPassed!.difficulty {
@@ -53,7 +54,14 @@ struct ChallengeInfo: View {
     }
     
     func navigateFunction() {
-        print("navigating")
+        let source = userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        let directions = Directions(source: source, destination: locationPassed!)
+        navigationRoute.addDirections(directions: directions, keepPrevious: false)
+    }
+    func addToRoute() {
+        let source = navigationRoute.directionsArray.last?.destination.coordinates
+        let directions = Directions(source: source!, destination: locationPassed!)
+        navigationRoute.addDirections(directions: directions, keepPrevious: true)
     }
     
     var body: some View {
@@ -91,18 +99,35 @@ struct ChallengeInfo: View {
                             .background(.gray)
                             .opacity(0.2)
                     }
-                    Button(action: navigateFunction) {
-                        Text("Navigate")
-                            .font(Font.customFont.btnText)
-                            .fontWeight(.semibold)
-                            .frame(width: 200)
-                            .padding(.vertical, 10)
-                            .background(Color("Button"))
-                            .foregroundColor(.white)
-                            .cornerRadius(70)
-                    }
-                    .offset(y: buttonOffsetY)
+                    HStack {
+                        Button(action: {navigateFunction()}) {
+                            Text("Navigate")
+                                .font(Font.customFont.btnText)
+                                .fontWeight(.semibold)
+                                .frame(width: 200)
+                                .padding(.vertical, 10)
+                                .background(Color("Button"))
+                                .foregroundColor(.white)
+                                .cornerRadius(70)
+                        }
+                        .offset(y: buttonOffsetY)
                     .offset(y: buttonEndOffsetY)
+                        Button(action: {
+                            navigationRoute.directionsArray.isEmpty ? navigateFunction() : addToRoute()
+                        }) {
+                            Text("Add to the route")
+                                .font(Font.customFont.btnText)
+                                .fontWeight(.semibold)
+                                .frame(width: 200)
+                                .padding(.vertical, 10)
+                                .background(Color("Button"))
+                                .foregroundColor(.white)
+                                .cornerRadius(70)
+                        }
+                        .offset(y: buttonOffsetY)
+                        .offset(y: buttonEndOffsetY)
+                    }
+                    
                 }
                 .offset(y: startingOffsetY)
             } else {
