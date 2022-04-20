@@ -12,13 +12,13 @@ struct MapView: View {
     
     @ObservedObject private var viewModel = MapViewModel()
     @ObservedObject var dao = ChallengeDAO()
+    @ObservedObject var userDao = UserDAO()
     @ObservedObject private var navigationRoute = NavigationRoute()
     @State private var showingSheet = false
+    @EnvironmentObject var loginViewModel: AppViewModel
     
     func setLocationToUser() {
-        print("user tracking before: \(viewModel.userSelectedTracking)")
         viewModel.userSelectedTracking.toggle()
-        print("user tracking after: \(viewModel.userSelectedTracking)")
     }
     
     func updateUserLocationButtonUI() -> String {
@@ -47,6 +47,11 @@ struct MapView: View {
                         .cornerRadius(10)
                 }
                 .offset(x: UIScreen.main.bounds.width * 0.42, y: 25)
+                Text("\(viewModel.distanceTravelled)")
+                    .padding(.top, 200)
+                if loginViewModel.userLoggedInEmail != nil {
+                    Text("\(loginViewModel.userLoggedInEmail!)")
+                }
                 
             } else {
                 ProgressView()
@@ -74,6 +79,7 @@ struct MapView: View {
         .onAppear {
             dao.getChallenges()
             viewModel.getUserLocation()
+            loginViewModel.getCurrentUser()
         }
     }
 }

@@ -8,10 +8,21 @@ import SwiftUI
 import FirebaseAuth
 
 class AppViewModel: ObservableObject {
+    @Published var userDao = UserDAO()
     
     let auth = Auth.auth()
     
     @Published var signedIn = false
+    @Published var userLoggedInEmail: String?
+    
+    func getCurrentUser() {
+        let user = auth.currentUser
+        if user != nil {
+            userDao.loggedInUserEmail = user?.email
+        } else {
+            print("no user")
+        }
+    }
     
     var isSignedIn: Bool {
         return auth.currentUser != nil

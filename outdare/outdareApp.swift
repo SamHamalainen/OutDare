@@ -10,9 +10,6 @@ import Firebase
 
 @main
 struct outdareApp: App {
-    init() {
-        FirebaseApp.configure()
-    }
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var modelData = LeaderboardModel()
     @State var showMap = false
@@ -40,7 +37,7 @@ struct outdareApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinihLaunchingWithOptions launchOptions:
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
     [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
       
         FirebaseApp.configure()

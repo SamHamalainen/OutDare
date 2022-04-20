@@ -28,10 +28,13 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         span: MapDetails.defaultSpan
     )
     @Published var dao = ChallengeDAO()
+    @Published var userDao = UserDAO()
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var challengeInfoOpen: Bool = false
     @Published var selection: Challenge?
     @Published var userSelectedTracking = false
+    @Published var distanceTravelled: Double = 0
+    var locationOld: CLLocation? = nil
     
     private var locationManager: CLLocationManager?
     
@@ -48,14 +51,26 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             locationManager!.startUpdatingLocation()
             locationManager!.pausesLocationUpdatesAutomatically = true
             locationManager!.activityType = .fitness
-            locationManager!.distanceFilter = 20.0
+            locationManager!.distanceFilter = 10.0
         } else {
             print("Please turn on location services from the phone settings")
         }
     }
     
+    func calculateDistanceTravelled(_ current: CLLocation) {
+        guard locationOld != nil else {
+            locationOld = current
+            return
+        }
+        distanceTravelled += locationOld!.distance(from: current)
+        locationOld = current
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locationLast = locations.last else { return }
+        for location in locations {
+            calculateDistanceTravelled(location)
+        }
         userLocation = locationLast.coordinate
     }
     
