@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Challenge: Identifiable {
+struct Challenge: Identifiable, Equatable {
     let id: Int
     let challengeId: Int
     let name: String

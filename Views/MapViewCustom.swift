@@ -14,6 +14,7 @@ struct MapViewCustom: UIViewRepresentable {
     @ObservedObject var viewModel: MapViewModel
     @ObservedObject var dao: ChallengeDAO
     @Binding public var challengeInfoOpened: Bool
+    @ObservedObject var navigationRoute: NavigationRoute
     let annotations: [MKAnnotation]
     
     func makeCoordinator() -> Coordinator {
@@ -25,6 +26,8 @@ struct MapViewCustom: UIViewRepresentable {
         viewModel.checkIfLocationServicesIsEnabled()
         print("annotations: \(annotations)")
         let mapView = MKMapView()
+        navigationRoute.mapView = mapView
+        navigationRoute.userLocation = viewModel.userLocation!
         
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
@@ -100,6 +103,12 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
             circleRenderer.fillColor = .orange
             circleRenderer.alpha = 0.5
             return circleRenderer
+        }
+        if let dir = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: dir)
+            renderer.strokeColor = .systemBlue
+            renderer.lineWidth = 5
+            return renderer
         }
         return MKOverlayRenderer()
     }

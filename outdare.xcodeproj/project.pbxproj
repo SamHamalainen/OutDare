@@ -33,6 +33,8 @@
 		6A59BFC727FF6D6F0043D6E7 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFC627FF6D6F0043D6E7 /* SideMenuViewModel.swift */; };
 		6A59BFCB27FF6E400043D6E7 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */; };
 		6A59BFCD27FF6E720043D6E7 /* SideMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFCC27FF6E720043D6E7 /* SideMenuItem.swift */; };
+		6A59BFDF280A00460043D6E7 /* NavigationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFDE280A00450043D6E7 /* NavigationRoute.swift */; };
+		6A59BFE1280AA78D0043D6E7 /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A59BFE0280AA78D0043D6E7 /* DirectionsView.swift */; };
 		6A6CDF9527FB6CA8002106F8 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF8E27FB6CA8002106F8 /* Challenge.swift */; };
 		6A6CDF9627FB6CA8002106F8 /* QuizData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF8F27FB6CA8002106F8 /* QuizData.swift */; };
 		6A6CDF9727FB6CA8002106F8 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF9027FB6CA8002106F8 /* Quiz.swift */; };
@@ -114,6 +116,8 @@
 		6A59BFC627FF6D6F0043D6E7 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SideMenuViewModel.swift; path = ../SideMenuViewModel.swift; sourceTree = "<group>"; };
 		6A59BFCA27FF6E400043D6E7 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		6A59BFCC27FF6E720043D6E7 /* SideMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItem.swift; sourceTree = "<group>"; };
+		6A59BFDE280A00450043D6E7 /* NavigationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
+		6A59BFE0280AA78D0043D6E7 /* DirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
 		6A6CDF8E27FB6CA8002106F8 /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		6A6CDF8F27FB6CA8002106F8 /* QuizData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizData.swift; sourceTree = "<group>"; };
 		6A6CDF9027FB6CA8002106F8 /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
@@ -318,6 +322,11 @@
 				6A6CDFDD27FDC3A1002106F8 /* repos */,
 				6A6CDF8D27FB6CA8002106F8 /* models */,
 				B167D32327FAE4CF00BF950E /* Preview Content */,
+				6A6CDFE227FE00EB002106F8 /* ChallengesTestView.swift */,
+				6A6CDFE627FF0BF2002106F8 /* .gitignore */,
+				6A59BFCC27FF6E720043D6E7 /* SideMenuItem.swift */,
+				6A59BFDE280A00450043D6E7 /* NavigationRoute.swift */,
+				6A59BFE0280AA78D0043D6E7 /* DirectionsView.swift */,
 			);
 			path = outdare;
 			sourceTree = "<group>";
@@ -510,6 +519,7 @@
 				6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */,
 				6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */,
 				6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */,
+                6A59BFE1280AA78D0043D6E7 /* DirectionsView.swift in Sources */,
 				6A59BFCB27FF6E400043D6E7 /* SideMenuView.swift in Sources */,
 				062FE88527FB79EF00F2D0F7 /* MapViewModel.swift in Sources */,
 				062FE88327FB5C7500F2D0F7 /* MapView.swift in Sources */,
@@ -521,6 +531,7 @@
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
 				B194B3A628006476000F056E /* UserProfile.swift in Sources */,
 				B14BEC4227FB57C00022DD0B /* Leaderboard.swift in Sources */,
+				6A59BFDF280A00460043D6E7 /* NavigationRoute.swift in Sources */,
 				B194B38627FED5ED000F056E /* Font.swift in Sources */,
 				6A59BFCD27FF6E720043D6E7 /* SideMenuItem.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,

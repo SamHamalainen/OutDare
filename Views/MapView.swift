@@ -12,6 +12,8 @@ struct MapView: View {
     
     @ObservedObject private var viewModel = MapViewModel()
     @ObservedObject var dao = ChallengeDAO()
+    @ObservedObject private var navigationRoute = NavigationRoute()
+    @State private var showingSheet = false
     
     func setLocationToUser() {
         print("user tracking before: \(viewModel.userSelectedTracking)")
@@ -24,11 +26,15 @@ struct MapView: View {
     }
     
     var body: some View {
+        //let span = viewModel.mapRegion.span.latitudeDelta
+        //let isZoomedOut = (span > 0.8) ? true : false
+        
         ZStack(alignment: .top)  {
             if !dao.annotations.isEmpty && viewModel.userLocation != nil {
                 MapViewCustom(
                     viewModel: viewModel,
                     dao: dao, challengeInfoOpened: $viewModel.challengeInfoOpen,
+                    navigationRoute: navigationRoute,
                     annotations: dao.annotations
                 )
                 .ignoresSafeArea(edges: .bottom)
@@ -55,8 +61,15 @@ struct MapView: View {
                     .onTapGesture {
                         viewModel.challengeInfoOpen = false
                     }
-                ChallengeInfo(locationPassed: $viewModel.selection, challengeInfoOpened: $viewModel.challengeInfoOpen, userLocation: $viewModel.userLocation)
+                ChallengeInfo(locationPassed: $viewModel.selection, challengeInfoOpened: $viewModel.challengeInfoOpen, userLocation: $viewModel.userLocation, navigationRoute: navigationRoute)
             }
+            Button("Directions info") {
+                showingSheet.toggle()
+            }.background(.white).frame(height: 50)
+            .sheet(isPresented: $showingSheet) {
+                DirectionsView(navigationRoute: navigationRoute)
+            }
+            
         }
         .onAppear {
             dao.getChallenges()

@@ -81,4 +81,22 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
+    
+    func getAnnotationSize() -> CGSize {
+        let max: CGFloat = 64, min: CGFloat = 35
+        var sideLength = max
+        let span = mapRegion.span.latitudeDelta
+        let defaultSpan = MapDetails.defaultSpan.latitudeDelta
+        let scale = sideLength * defaultSpan
+        
+
+        sideLength = scale / (span * 0.5)
+        
+        if sideLength > max {sideLength = max}
+        if sideLength < min {sideLength = min}
+
+        print("side \(sideLength) span \(span)")
+        
+        return CGSize(width: sideLength, height: sideLength)
+    }
 }
