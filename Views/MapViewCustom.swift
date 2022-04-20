@@ -131,9 +131,6 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
             viewModel.challengeInfoOpen = true
             selection = dao.challenges.first(where:{ $0.name == annotationTitle && $0.coordinates == view.annotation!.coordinate})
             viewModel.selection = self.selection
-            if viewModel.selection != nil {
-                print("selection \(viewModel.selection!)")
-            }
             mapView.setRegion(MKCoordinateRegion(center: view.annotation!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)), animated: true)
             
         }

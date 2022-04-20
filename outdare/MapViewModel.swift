@@ -32,7 +32,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var challengeInfoOpen: Bool = false
     @Published var selection: Challenge?
     @Published var userSelectedTracking = false
-    @Published var totalDistanceWalked: Double = 0.0
     
     private var locationManager: CLLocationManager?
     
@@ -58,10 +57,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locationLast = locations.last else { return }
         userLocation = locationLast.coordinate
-        totalDistanceWalked += locations.first!.coordinate.distance(to: locationLast.coordinate)
-        print("distance walked: \(totalDistanceWalked)")
-        
-        
     }
     
     private func checkLocationAuthorization() {
