@@ -22,6 +22,10 @@
 		0631225E280C2BEC004BF504 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631225D280C2BEC004BF504 /* UserDetails.swift */; };
 		06312260280C3025004BF504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0631225F280C3025004BF504 /* GoogleService-Info.plist */; };
 		064F1202280FF1C300C642CF /* SideMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F1201280FF1C300C642CF /* SideMenuItem.swift */; };
+		064F120C28100D9B00C642CF /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F120B28100D9B00C642CF /* LoginForm.swift */; };
+		064F120E28100DBC00C642CF /* LogInOrSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F120D28100DBC00C642CF /* LogInOrSignIn.swift */; };
+		064F121028100DDA00C642CF /* SignUpForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F120F28100DDA00C642CF /* SignUpForm.swift */; };
+		064F121228100E0400C642CF /* openingpageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F121128100E0400C642CF /* openingpageView.swift */; };
 		0663432D280477580046C92F /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0663432C280477580046C92F /* CircleImage.swift */; };
 		0664DC85280878AE00899F55 /* MapViewCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC84280878AE00899F55 /* MapViewCustom.swift */; };
 		0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC862808792900899F55 /* ChallengeInfo.swift */; };
@@ -105,6 +109,10 @@
 		0631225D280C2BEC004BF504 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		0631225F280C3025004BF504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		064F1201280FF1C300C642CF /* SideMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuItem.swift; sourceTree = "<group>"; };
+		064F120B28100D9B00C642CF /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
+		064F120D28100DBC00C642CF /* LogInOrSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInOrSignIn.swift; sourceTree = "<group>"; };
+		064F120F28100DDA00C642CF /* SignUpForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpForm.swift; sourceTree = "<group>"; };
+		064F121128100E0400C642CF /* openingpageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = openingpageView.swift; sourceTree = "<group>"; };
 		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0664DC84280878AE00899F55 /* MapViewCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCustom.swift; sourceTree = "<group>"; };
 		0664DC862808792900899F55 /* ChallengeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfo.swift; sourceTree = "<group>"; };
@@ -321,6 +329,10 @@
 				6A6CDFE627FF0BF2002106F8 /* .gitignore */,
 				6A59BFDE280A00450043D6E7 /* NavigationRoute.swift */,
 				6A59BFE0280AA78D0043D6E7 /* DirectionsView.swift */,
+				064F120B28100D9B00C642CF /* LoginForm.swift */,
+				064F120D28100DBC00C642CF /* LogInOrSignIn.swift */,
+				064F120F28100DDA00C642CF /* SignUpForm.swift */,
+				064F121128100E0400C642CF /* openingpageView.swift */,
 			);
 			path = outdare;
 			sourceTree = "<group>";
@@ -520,6 +532,7 @@
 				6A59BFC727FF6D6F0043D6E7 /* SideMenuViewModel.swift in Sources */,
 				6A59BFC527FF6CFD0043D6E7 /* MainView.swift in Sources */,
 				060A10E4280BF9280077F71F /* ChallengeSmallPreview.swift in Sources */,
+				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
 				B194B39B27FF1677000F056E /* LeaderboardModel.swift in Sources */,
 				6A41A7FF28077F7D0047FF2E /* Lyrics.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
@@ -540,7 +553,9 @@
 				0664DC85280878AE00899F55 /* MapViewCustom.swift in Sources */,
 				6A6CDF9D27FB6CBA002106F8 /* ChallengeContainer.swift in Sources */,
 				0631225E280C2BEC004BF504 /* UserDetails.swift in Sources */,
+				064F120E28100DBC00C642CF /* LogInOrSignIn.swift in Sources */,
 				6A6CDF9F27FB6CBA002106F8 /* QuizView.swift in Sources */,
+				064F121028100DDA00C642CF /* SignUpForm.swift in Sources */,
 				6A6CDF9627FB6CA8002106F8 /* QuizData.swift in Sources */,
 				6A6CDFE527FEE0F4002106F8 /* Attempt.swift in Sources */,
 				B194B3A3280040FD000F056E /* SingleProfile.swift in Sources */,
@@ -554,6 +569,7 @@
 				0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */,
 				6A41A7FA280602DD0047FF2E /* LyricsData.swift in Sources */,
 				E9F258A9280057EC00C615CE /* StartView.swift in Sources */,
+				064F121228100E0400C642CF /* openingpageView.swift in Sources */,
 				0631225A280C26D5004BF504 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
