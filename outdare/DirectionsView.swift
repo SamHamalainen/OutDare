@@ -62,7 +62,10 @@ struct DirectionsView: View {
                 Image("chuckTheChick").resizable().scaledToFit().frame(width: 50, height: 70)
                 ForEach(navigationRoute.directionsArray) {directions in
                     HStack {
-                        Image(systemName: "arrow.down").resizable().scaledToFit().frame(width: 50, height: 50)
+                        VStack {
+                            Image(systemName: "arrow.down").resizable().scaledToFit().frame(width: 30, height: 30)
+                        }.frame(width: 50)
+                        
                         HStack {
                             Image(systemName: "clock")
                             Text(formattedTime(time: directions.mkRoute.expectedTravelTime))

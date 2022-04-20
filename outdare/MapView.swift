@@ -45,7 +45,7 @@ struct MapView: View {
             }
             Button("Directions info") {
                 showingSheet.toggle()
-            }.background(.white)
+            }.background(.white).frame(height: 50)
             .sheet(isPresented: $showingSheet) {
                 DirectionsView(navigationRoute: navigationRoute)
             }
