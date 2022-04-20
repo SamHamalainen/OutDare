@@ -148,7 +148,7 @@ class ChallengeDAO: ObservableObject {
     }
     
     func addAttempt(attempt: Attempt) {
-        var ref: DocumentReference? = nil
+        let ref: DocumentReference? = nil
         let attemptRef = db.collection("attempts")
         attemptRef.addDocument(data: attempt.toDB()) { err in
             if let err = err {
