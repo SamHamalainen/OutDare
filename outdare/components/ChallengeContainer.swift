@@ -11,6 +11,7 @@ import Speech
 
 struct ChallengeContainer: View {
     @Binding var challengeInfoOpened: Bool
+    @Binding var revealedChallenge: Bool
     let challenge: Challenge
     let notifyParent2: () -> Void
     @State var challengeState = "awaiting"
@@ -57,7 +58,7 @@ struct ChallengeContainer: View {
                 
                 
             default:
-                ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, score: score, time: time)
+                ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, revealedChallenge: $revealedChallenge, score: score, time: time)
             }
         }
     }
