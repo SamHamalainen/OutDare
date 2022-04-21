@@ -28,13 +28,17 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         span: MapDetails.defaultSpan
     )
     @Published var dao = ChallengeDAO()
-    @Published var userDao = UserDAO()
+    @Published var userDao: UserDAO?
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var challengeInfoOpen: Bool = false
     @Published var selection: Challenge?
     @Published var userSelectedTracking = false
     @Published var distanceTravelled: Double = 0
     var locationOld: CLLocation? = nil
+    
+    func setup(_ userDao: UserDAO){
+        self.userDao = userDao
+    }
     
     private var locationManager: CLLocationManager?
     
@@ -71,6 +75,19 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         for location in locations {
             calculateDistanceTravelled(location)
         }
+        if userDao != nil {
+            if distanceTravelled >= 900 {
+                userDao!.getLoggedInUserScore()
+            }
+            if distanceTravelled >= 1000 {
+                if let userScore = userDao?.loggedUserScore {
+                    userDao?.updateUsersScore(newScore: userScore + 5)
+                    userDao?.loggedUserScore = userScore + 5
+                    distanceTravelled = 0
+                }
+            }
+        }
+        
         userLocation = locationLast.coordinate
     }
     

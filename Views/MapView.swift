@@ -12,7 +12,6 @@ struct MapView: View {
     
     @ObservedObject private var viewModel = MapViewModel()
     @ObservedObject var dao = ChallengeDAO()
-    @ObservedObject var userDao = UserDAO()
     @ObservedObject private var navigationRoute = NavigationRoute()
     @State private var showingSheet = false
     @EnvironmentObject var loginViewModel: AppViewModel
@@ -49,9 +48,11 @@ struct MapView: View {
                 .offset(x: UIScreen.main.bounds.width * 0.42, y: 25)
                 Text("\(viewModel.distanceTravelled)")
                     .padding(.top, 200)
-                if loginViewModel.userLoggedInEmail != nil {
-                    Text("\(loginViewModel.userLoggedInEmail!)")
+                if loginViewModel.userDao.loggedUserScore != nil {
+                    Text("\(loginViewModel.userDao.loggedUserScore!)")
+                        .padding(.top, 100)
                 }
+                
                 
             } else {
                 ProgressView()
@@ -80,6 +81,7 @@ struct MapView: View {
             dao.getChallenges()
             viewModel.getUserLocation()
             loginViewModel.getCurrentUser()
+            self.viewModel.setup(self.loginViewModel.userDao)
         }
     }
 }

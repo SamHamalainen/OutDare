@@ -12,7 +12,7 @@ class UserDAO: ObservableObject {
     let db = Firestore.firestore()
     
     @Published var loggedInUserEmail: String?
-    @Published var loggedUser: User?
+    @Published var loggedUserScore: Int?
     
     func convertoToUser(data: [String:Any]) -> User {
         let id = data["userId"] as? Int ?? 0
@@ -24,7 +24,8 @@ class UserDAO: ObservableObject {
         return User(id: id, username: username, score: score, goneUp: goneUp, profilePicture: profilePicture)
     }
     
-    func getLoggedInUser(userEmail: String) {
+    func getLoggedInUserScore() {
+        let userEmail = self.loggedInUserEmail ?? "no email"
         let userRef = db.collection("users")
         let query = userRef.whereField("email", isEqualTo: userEmail)
         query.getDocuments() { (querySnapshot, err) in
@@ -33,13 +34,14 @@ class UserDAO: ObservableObject {
             } else {
                 let document = querySnapshot!.documents[0]
                 let user = self.convertoToUser(data: document.data())
-                self.loggedUser = user
+                self.loggedUserScore = user.score
             }
         }
     }
-    func updateUsersScore(email: String, newScore: Int) {
+    func updateUsersScore(newScore: Int) {
+        let userEmail = self.loggedInUserEmail ?? "no email"
         let userRef = db.collection("users")
-        let query = userRef.whereField("email", isEqualTo: email)
+        let query = userRef.whereField("email", isEqualTo: userEmail)
         query.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")

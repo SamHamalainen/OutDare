@@ -13,12 +13,13 @@ class AppViewModel: ObservableObject {
     let auth = Auth.auth()
     
     @Published var signedIn = false
-    @Published var userLoggedInEmail: String?
     
     func getCurrentUser() {
         let user = auth.currentUser
         if user != nil {
-            userDao.loggedInUserEmail = user?.email
+            print("user email before \(String(describing: user!.email))")
+            userDao.loggedInUserEmail = user!.email
+            print("user email after \(userDao.loggedInUserEmail!)")
         } else {
             print("no user")
         }
