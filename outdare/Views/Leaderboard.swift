@@ -14,17 +14,13 @@ struct Leaderboard: View {
             Trapezium()
             VStack {
                 TopProfiles()
-                    .padding(.bottom, 60)
                 LeaderboardList()
-                    .frame(height: 370)
-                    .offset(y: 50)
-                    
             }
             Image(systemName: "arrowtriangle.down.fill")
                 .resizable()
                 .frame(width: 30, height: 15)
                 .foregroundColor(Color.theme.textLight)
-                .offset(y: 360)
+                .offset(y: 380)
                 .shadow(color: Color.theme.textDark, radius: 10, x: 2, y: 4)
         }
     }
