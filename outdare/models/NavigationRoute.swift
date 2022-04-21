@@ -4,7 +4,6 @@
 //
 //  Created by Tatu Ihaksi on 15.4.2022.
 //
-
 import Foundation
 import CoreLocation
 import MapKit
@@ -24,12 +23,16 @@ final class NavigationRoute: ObservableObject {
     var userLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     @Published var totalTime: Double = 0.0
     @Published var totalDistance: Double = 0.0
+    @Published var userPolylines: [MKOverlay] = []
     
+    /// Updates routes total distance and time
+    private func updateDistanceAndTime() {
+        totalTime = directionsArray.reduce(0) { $0 + $1.mkRoute.expectedTravelTime }
+        totalDistance = directionsArray.reduce(0) { $0 + $1.mkRoute.distance }
+    }
     func removeDirections(destination: Challenge? = nil) {
         let polylines = mapView.overlays.filter({ $0 is MKPolyline })
         mapView.removeOverlays(polylines)
-        totalDistance = 0.0
-        totalTime = 0.0
         if destination != nil {
             let i = directionsArray.firstIndex(where: {$0.destination == destination})!
             directionsArray.remove(at: i)
@@ -39,10 +42,7 @@ final class NavigationRoute: ObservableObject {
             directionsArray.removeAll()
         }
     }
-    func addDirections(directions: Directions, keepPrevious: Bool) {
-        if !keepPrevious {
-            removeDirections()
-        }
+    private func createDirectionsRequest(directions: Directions) -> MKDirections.Request {
         let request = MKDirections.Request()
         let source = MKPlacemark(coordinate: directions.source)
         let destination = MKPlacemark(coordinate: directions.destination.coordinates)
@@ -50,22 +50,35 @@ final class NavigationRoute: ObservableObject {
         request.source = MKMapItem(placemark: source)
         request.destination = MKMapItem(placemark: destination)
         request.transportType = .walking
-        
-        var mkRoute = MKRoute()
-        var polyline = MKPolyline()
+        return request
+    }
+    func addDirections(directions: Directions, keepPrevious: Bool, update: Bool = false) {
+        if !keepPrevious {
+            removeDirections()
+        }
+        let request = createDirectionsRequest(directions: directions)
         let mkDirections = MKDirections(request: request)
         mkDirections.calculate { response, error in
             guard let route = response?.routes.first else { return }
-            mkRoute = route
-            polyline = route.polyline
-            self.totalTime += route.expectedTravelTime
-            self.totalDistance += route.distance
-            self.mapView.addAnnotations([source,destination])
             self.mapView.addOverlay(route.polyline)
-            self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
+            if update || !keepPrevious {
+                self.userPolylines.append(route.polyline)
+            }
+            if !update {
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
+            }
             // Make directions instance and add it to the array
-            let directions = Directions(source: directions.source, destination: directions.destination, mkRoute: mkRoute, polyline: polyline)
-            self.directionsArray.append(directions)
+            let directions = Directions(source: directions.source, destination: directions.destination, mkRoute: route, polyline: route.polyline)
+            if update {
+                if self.directionsArray.isEmpty {
+                    self.directionsArray.append(directions)
+                } else {
+                self.directionsArray[0] = directions
+                }
+            } else {
+                self.directionsArray.append(directions)
+            }
+            self.updateDistanceAndTime()
         }
     }
     private func reCreateExistingDirections() {
@@ -81,5 +94,17 @@ final class NavigationRoute: ObservableObject {
             }
         }
         directionsArray = Array(directionsArray.dropFirst(count))
+    }
+    func updateDirections(userLocation: CLLocationCoordinate2D) {
+        if !directionsArray.isEmpty {
+            let destination = directionsArray.first?.destination
+            let s = Directions(source: userLocation, destination: destination!)
+            addDirections(directions: s, keepPrevious: true, update: true)
+            
+            if userPolylines.count > 1 {
+                mapView.removeOverlay(userPolylines.first!)
+                userPolylines.removeFirst()
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@ struct MapViewCustom: UIViewRepresentable {
     let annotations: [MKAnnotation]
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, vm: viewModel, dao: dao)
+        Coordinator(self, vm: viewModel, dao: dao, nr: navigationRoute)
     }
     
     
@@ -59,6 +59,12 @@ struct MapViewCustom: UIViewRepresentable {
                 mapView.deselectAnnotation(annotation, animated: false)
             }
         }
+        if !navigationRoute.directionsArray.isEmpty {
+            let firstDestination = navigationRoute.directionsArray.first?.destination
+            if (firstDestination?.coordinates.distance(to: viewModel.userLocation!))! <= 150 {
+                navigationRoute.removeDirections(destination: firstDestination)
+            }
+        }
         
     }
 }
@@ -89,12 +95,14 @@ extension Array where Element: Hashable {
 class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate{
     @ObservedObject var viewModel: MapViewModel
     @ObservedObject var dao: ChallengeDAO
+    @ObservedObject var navigationRoute: NavigationRoute
     @Published var selection: Challenge?
     var parent: MapViewCustom
-    init(_ parent: MapViewCustom, vm: MapViewModel, dao: ChallengeDAO){
+    init(_ parent: MapViewCustom, vm: MapViewModel, dao: ChallengeDAO, nr: NavigationRoute){
         self.parent = parent
         self.viewModel = vm
         self.dao = dao
+        self.navigationRoute = nr
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -143,5 +151,9 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
             mapView.setRegion(MKCoordinateRegion(center: view.annotation!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)), animated: true)
             
         }
+    }
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        // print("location changed")
+        navigationRoute.updateDirections(userLocation: userLocation.coordinate)
     }
 }
