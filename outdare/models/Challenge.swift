@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Challenge: Identifiable {
+struct Challenge: Identifiable, Equatable {
     let id: Int
     let challengeId: Int
     let name: String
@@ -32,7 +32,7 @@ struct Challenge: Identifiable {
         case "tongue":
            return "tongueTwister"
         case "lyrics":
-            return "singing"
+            return "lyrics"
         default:
            return "quiz"
         }

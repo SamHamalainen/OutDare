@@ -10,227 +10,85 @@ import MapKit
 
 struct MapView: View {
     
-    @StateObject private var viewModel = MapViewModel()
-    @State var challengeInfoOpened = false
-    @State var challengePassed: Challenge?
-    @StateObject var dao = ChallengeDAO()
+    @ObservedObject private var viewModel = MapViewModel()
+    @ObservedObject var dao = ChallengeDAO()
+    @ObservedObject private var navigationRoute = NavigationRoute()
+    @State private var showingSheet = false
+    @EnvironmentObject var loginViewModel: AppViewModel
+    
+    func setLocationToUser() {
+        viewModel.userSelectedTracking.toggle()
+    }
+    
+    func updateUserLocationButtonUI() -> String {
+        return viewModel.userSelectedTracking ? "location.fill" : "location"
+    }
     
     var body: some View {
+        //let span = viewModel.mapRegion.span.latitudeDelta
+        //let isZoomedOut = (span > 0.8) ? true : false
+        
         ZStack(alignment: .top)  {
-            Map(coordinateRegion: $viewModel.mapRegion,showsUserLocation: true, annotationItems: dao.challenges) { challenge in
-                MapAnnotation(coordinate: challenge.coordinates) {
-                    Image(challenge.icon)
-                        .onTapGesture {
-                            print("clicked on \(challenge.name)")
-                            challengePassed = challenge
-                            challengeInfoOpened = true
-                        }
-                        .contrast(0.3)
+            if !dao.annotations.isEmpty && viewModel.userLocation != nil {
+                MapViewCustom(
+                    viewModel: viewModel,
+                    dao: dao, challengeInfoOpened: $viewModel.challengeInfoOpen,
+                    navigationRoute: navigationRoute,
+                    annotations: dao.annotations
+                )
+                .ignoresSafeArea(edges: .bottom)
+                Button(action: setLocationToUser) {
+                    Image(systemName: updateUserLocationButtonUI())
+                        .frame(width: 35, height: 35)
+                        .background(.black)
+                        .foregroundColor(.white)
+                        .opacity(0.8)
+                        .cornerRadius(10)
                 }
+                .offset(x: UIScreen.main.bounds.width * 0.42, y: 25)
+                Text("\(viewModel.distanceTravelled)")
+                    .padding(.top, 200)
+                if loginViewModel.userDao.loggedUserScore != nil {
+                    Text("\(loginViewModel.userDao.loggedUserScore!)")
+                        .padding(.top, 100)
+                }
+                
+                
+            } else {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .ignoresSafeArea(edges: .bottom)
+                    .scaleEffect(x: 2, y: 2, anchor: .center)
             }
-            .ignoresSafeArea(edges: .bottom)
-            .onAppear {
-                viewModel.checkIfLocationServicesIsEnabled()
-                dao.getChallenges()
-            }
-//            MapViewCustom()
-//            ZStack {
-//                Rectangle()
-//                    .frame(width: 300, height: 150)
-//                    .foregroundColor(.white)
-//                .border(.black)
-//                VStack(spacing: 10) {
-//                    Text("latitude: \(viewModel.userLatitude)")
-//                    Text("longitude: \(viewModel.userLongitude)")
-//                }
-//
-//            }
-            if challengeInfoOpened {
+            if viewModel.challengeInfoOpen && viewModel.selection != nil {
                 Rectangle()
                     .ignoresSafeArea()
                     .opacity(0.45)
                     .onTapGesture {
-                        challengeInfoOpened = false
+                        viewModel.challengeInfoOpen = false
                     }
-                ChallengeInfo(locationPassed: $challengePassed, challengeInfoOpened: $challengeInfoOpened)
+                ChallengeInfo(locationPassed: $viewModel.selection, challengeInfoOpened: $viewModel.challengeInfoOpen, userLocation: $viewModel.userLocation, navigationRoute: navigationRoute)
             }
-        }
-    }
-}
-
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView(challengePassed: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)))
-    }
-}
-
-// MARK: ChallengeInfo Component
-
-struct ChallengeInfo: View {
-    
-    @State private var challengeInfoHeight: CGFloat = 350.0
-    @State private var challengeInfoExpanded = false
-    @State private var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.6
-    @State private var currentDragOffsetY: CGFloat = 0
-    @State private var endingOffsetY: CGFloat = 0
-    @State private var buttonOffsetY: CGFloat = 175
-    @State private var buttonEndOffsetY: CGFloat = 0
-    @State private var challengeStarted = false
-    
-    @Binding var locationPassed: Challenge?
-    @Binding var challengeInfoOpened: Bool
-    
-    func getDifficultyColor() -> Color {
-        switch locationPassed!.difficulty {
-        case "hard":
-            return Color("DifficultyHard")
-        case "medium":
-            return Color("DifficultyMedium")
-        case "easy":
-            return Color("DifficultyEasy")
-        default:
-            return Color(.black)
-        }
-    }
-    
-    
-    func expandChallengeInfo() {
-        withAnimation(.spring()) {
-            challengeInfoHeight = UIScreen.main.bounds.height * 0.85
-            endingOffsetY = -startingOffsetY + 15
-            buttonEndOffsetY = 400
-            challengeInfoExpanded = true
-        }
-    }
-    
-    func updateUI() {
-        challengeStarted = true
-    }
-    
-    var body: some View {
-        ZStack(alignment: .top) {
-            RoundedRectangle(cornerRadius: 50)
-                .frame(width: UIScreen.main.bounds.width, height: challengeInfoHeight)
-                .foregroundColor(.white)
-            VStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 100, height: 5)
-                    .padding(.top)
-                HStack(alignment: .center, spacing: 10){
-                    Image("\(locationPassed!.icon)")
-                        .padding(.top)
-                    VStack {
-                        Text("\(locationPassed!.name)")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.top)
-                            .frame(width: 200, alignment: .topLeading)
-                        Text("\(locationPassed!.difficulty.capitalized)")
-                            .font(.headline)
-                            .foregroundColor(getDifficultyColor())
-                            .frame(width: 200, alignment: .leading)
-                    }
-                    Text("+\(locationPassed!.points)")
-                        .foregroundColor(Color("RankingUp"))
-                }
-                .frame(width: UIScreen.main.bounds.width - 35, alignment: .leading)
-                if !challengeStarted {
-                    Divider()
-                        .padding(.top)
-                        .frame(width: UIScreen.main.bounds.width - 40, height: 3)
-                        .background(.gray)
-                        .opacity(0.2)
-                }
-                if challengeInfoExpanded {
-                    ChallengeContainer(challengeInfoOpened: $challengeInfoOpened,challenge: locationPassed!, notifyParent2: updateUI)
-                        .padding(.top, 25)
-                }
+            Button("Directions info") {
+                showingSheet.toggle()
+            }.background(.white).frame(height: 50)
+            .sheet(isPresented: $showingSheet) {
+                DirectionsView(navigationRoute: navigationRoute)
             }
-            if !challengeInfoExpanded {
-                Button(action: expandChallengeInfo) {
-                    Text("Start")
-                        .font(Font.customFont.btnText)
-                        .fontWeight(.semibold)
-                        .frame(width: 200)
-                        .padding(.vertical, 10)
-                        .background(Color("Button"))
-                        .foregroundColor(.white)
-                        .cornerRadius(70)
-                }
-                .offset(y: buttonOffsetY)
-                .offset(y: buttonEndOffsetY)
-            }
+            
         }
-        .offset(y: startingOffsetY)
-        .offset(y: currentDragOffsetY)
-        .offset(y: endingOffsetY)
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    withAnimation(.spring()) {
-                        currentDragOffsetY = value.translation.height
-                        challengeInfoHeight = UIScreen.main.bounds.height * 0.85
-                    }
-                }
-                .onEnded { value in
-                    withAnimation(.spring()) {
-                        if currentDragOffsetY < -150 {
-                            endingOffsetY = -startingOffsetY + 15
-                            buttonEndOffsetY = 400
-                            challengeInfoExpanded = true
-                        } else if endingOffsetY != 0 && currentDragOffsetY > 150 {
-                            endingOffsetY = 0
-                            buttonEndOffsetY = 0
-                            challengeInfoExpanded = false
-                        }
-                        currentDragOffsetY = 0
-                    }
-                }
-        )
-    }
-}
-
-
-struct MapViewCustom: UIViewRepresentable {
-    @StateObject private var viewModel = MapViewModel()
-    let mapViewDelegate = MapViewDelegate()
-    let mapView = MKMapView()
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-    
-            viewModel.userLatitude = location.coordinate.latitude
-            viewModel.userLongitude = location.coordinate.longitude
-            let userLocation = CLLocationCoordinate2D(latitude: viewModel.userLatitude, longitude: viewModel.userLongitude)
-            let overlay = MKCircle(center: userLocation, radius: 100)
-            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-            mapView.setRegion(region, animated: true)
-            mapView.addOverlay(overlay)
-        
-        
-        
-    }
-    
-    func makeUIView(context: Context) -> MKMapView {
-        mapView.delegate = mapViewDelegate
-        mapView.showsUserLocation = true
-        viewModel.checkIfLocationServicesIsEnabled()
-        
-        return mapView
-    }
-    
-    func updateUIView(_ view: MKMapView, context: Context) {
-    }
-}
-
-class MapViewDelegate: NSObject, MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let overlay = overlay as? MKCircle {
-            print("Inside mapview delegate")
-            let circleRenderer = MKCircleRenderer(circle: overlay)
-            circleRenderer.fillColor = UIColor.orange
-            return circleRenderer
+        .onAppear {
+            dao.getChallenges()
+            viewModel.getUserLocation()
+            loginViewModel.getCurrentUser()
+            self.viewModel.setup(self.loginViewModel.userDao)
         }
-        return MKOverlayRenderer(overlay: overlay)
     }
 }
+
+//struct MapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapViewCustom()
+//    }
+//}
+

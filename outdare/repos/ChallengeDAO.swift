@@ -16,6 +16,7 @@ class ChallengeDAO: ObservableObject {
     @Published var challenges: [Challenge] = []
     @Published var challenge: Challenge? = nil
     @Published var quiz: Quiz? = nil
+    @Published var lyrics: Lyrics? = nil
     @Published var annotations: [MKPointAnnotation] = []
     
     func challengeToAnnotation() {
@@ -25,6 +26,7 @@ class ChallengeDAO: ObservableObject {
             let annotation = MKPointAnnotation()
             annotation.coordinate = challenge.coordinates
             annotation.title = "\(challenge.name)"
+            annotation.subtitle = challenge.category
             annotations.append(annotation)
             count += 1
         }
@@ -43,6 +45,24 @@ class ChallengeDAO: ObservableObject {
         
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficulty, category: category, description: description, coordinates: coordinates)
+    }
+    
+    func convertToLyrics (data: [String:Any]) -> Lyrics {
+        let id = data["id"] as? Int ?? 0
+        let timeLimit = data["timeLimit"] as? Int ?? 0
+        let artists = data["artists"] as? [String] ?? []
+        let titles = data["titles"] as? [String] ?? []
+        let lyrics = data["lyrics"] as? [String] ?? []
+        let difficulty = data["difficulty"] as? String ?? ""
+        let missingWords = data["missingWords"] as? [String] ?? []
+        
+        var lyricsData: [LyricsData] = []
+        for i in titles.indices {
+            var data = LyricsData(timeLimit: timeLimit, artist: artists[i], title: titles[i], lyrics: lyrics[i], missingWords: missingWords[i])
+            data.toMultiLine()
+            lyricsData.append(data)
+        }
+        return Lyrics(id: id, difficulty: difficulty, data: lyricsData)
     }
     
     func convertToQuiz(data: [String:Any]) -> Quiz {
@@ -85,8 +105,15 @@ class ChallengeDAO: ObservableObject {
                 let document = querySnapshot!.documents[0]
                 let challenge = self.convertToChallenge(data: document.data())
                 self.challenge = challenge
-                if let id = self.challenge?.challengeId {
-                    self.getQuiz(id: id)
+                if let id = self.challenge?.challengeId, let category = self.challenge?.category {
+                    switch category {
+                    case "quiz":
+                        self.getQuiz(id: id)
+                    case "lyrics":
+                        self.getLyrics(id: id)
+                    default:
+                        return
+                    }
                 }
             }
         }
@@ -106,8 +133,22 @@ class ChallengeDAO: ObservableObject {
         }
     }
     
+    func getLyrics(id: Int) {
+        let quizRef = db.collection("lyrics")
+        let query = quizRef.whereField("id", isEqualTo: id)
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let document = querySnapshot!.documents[0]
+                let lyrics = self.convertToLyrics(data: document.data())
+                self.lyrics = lyrics
+            }
+        }
+    }
+    
     func addAttempt(attempt: Attempt) {
-        var ref: DocumentReference? = nil
+        let ref: DocumentReference? = nil
         let attemptRef = db.collection("attempts")
         attemptRef.addDocument(data: attempt.toDB()) { err in
             if let err = err {

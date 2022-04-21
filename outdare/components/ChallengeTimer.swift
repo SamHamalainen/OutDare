@@ -1,49 +1,50 @@
 //
 //  ChallengeTimer.swift
-//  quiz
+//  outdare
 //
-//  Created by iosdev on 3.4.2022.
+//  Created by iosdev on 12.4.2022.
 //
 
-import SwiftUI
-import Combine
+import Foundation
 
-struct ChallengeTimer: View {
-    let timeLimit: Double
-    let label: String
-    @State var timeCount = 0.0
-    @State var timer: Timer? = nil
+final class ChallengeTimer: ObservableObject {
+    @Published var count = 0.0
+    @Published var isRunning = false
+    @Published var totalTime = 0.0
+    @Published var isOver = false
+    var timeLimit: Double
+    private var timer: Timer? = nil
+    var test = ""
     
-    var body: some View {
-        VStack {
-            ProgressView(label, value: timeCount, total: timeLimit)
-                .padding()
-                .tint(Color.gray)
-        }        
+    init(timeLimit: Double) {
+        self.timeLimit = timeLimit
+    }
+    
+    func setTimeLimit(limit: Double) {
+        self.timeLimit = limit
     }
     
     func start() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) {timer in
-            if timeCount < timeLimit - 0.01 {
-                timeCount += 0.01
+        self.isRunning = true
+        self.isOver = false
+        self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) {timer in
+            if self.count < self.timeLimit - 0.01 {
+                self.count += 0.01
+            } else {
+                self.isOver = true
             }
-            
         }
     }
     
     func stop() {
-        timer?.invalidate()
-        timer = nil
+        self.isRunning = false
+        self.totalTime += count
+        self.timer?.invalidate()
+        self.timer = nil
     }
     
     func restart() {
-        timeCount = 0.0
-        start()
-    }
-}
-
-struct ChallengeTimer_Previews: PreviewProvider {
-    static var previews: some View {
-        ChallengeTimer(timeLimit: 10.0, label: "Time left...")
+        self.count = 0.0
+        self.start()
     }
 }

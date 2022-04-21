@@ -1,0 +1,23 @@
+//
+//  User.swift
+//  outdare
+//
+//  Created by Jasmin Partanen on 5.4.2022.
+//
+import Foundation
+import SwiftUI
+
+struct User: Hashable, Codable, Identifiable {
+    var id: Int
+    var username: String
+    var score: Int
+    var goneUp: Bool
+    var profilePicture: String
+}
+
+struct CurrentUser: Decodable, Identifiable {
+    var id: Int
+    var username, location, email: String
+    var score: Int
+    var goneUp: Bool
+}

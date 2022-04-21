@@ -21,21 +21,27 @@ struct MainView: View {
                     Color(.white)
                     currentView
                 }
+                .ignoresSafeArea(edges: .bottom)
                     .onTapGesture {
                         if (isShowingMenu) {
                             isShowingMenu = false
                         }
                     }
-                    .navigationBarItems(leading: Button(
-                        action: {
-                            withAnimation(.spring()) {
-                                isShowingMenu.toggle()
-                            }
-                        }, label: {
-                        Image(systemName: "list.bullet").foregroundColor(.white)
-                        
-                    }))
                     .navigationBarTitleDisplayMode(.inline).toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button(
+                                action: {
+                                    withAnimation(.spring()) {
+                                        isShowingMenu.toggle()
+                                    }
+                                }, label: {
+                                    if !isShowingMenu {
+                                        Image(systemName: "list.bullet").foregroundColor(.white)
+                                    } else {
+                                        Image(systemName: "list.bullet").foregroundColor(.black)
+                                    }
+                                })
+                        }
                         ToolbarItem(placement: .principal) {
                             if(!isShowingMenu) {
                                 Text(currentTitle)
