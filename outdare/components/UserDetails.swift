@@ -4,10 +4,11 @@
 //
 //  Created by Jasmin Partanen on 8.4.2022.
 //
-
 import SwiftUI
 
 struct UserDetails: View {
+    @ObservedObject private var vm = UserViewModel()
+    
     var body: some View {
         VStack {
             VStack {
@@ -15,14 +16,16 @@ struct UserDetails: View {
                 .resizable()
                 .frame(width: 150, height: 150)
                 .shadow(radius: 7)
-            Text("Username")
+                
+                Text(vm.currentUser?.username ?? "")
                 .font(Font.customFont.largeText)
+                
             HStack {
                 Image(systemName: "mappin")
-                Text("Finland")
+                Text(vm.currentUser?.location ?? "")
                     .font(Font.customFont.smallText)
             }
-            .padding(.bottom, 25)
+            .padding(.vertical, 2)
         }
             
             ZStack {
@@ -32,11 +35,10 @@ struct UserDetails: View {
                 .opacity(0.5)
                 .shadow(color: Color.theme.textDark, radius: 1, x: 1, y: 1)
                 HStack {
-            Text("230")
+                    Text("\(vm.currentUser?.score ?? 0)")
                 .font(Font.customFont.extraLargeText)
                 .foregroundColor(Color.theme.textLight)
-            Image(systemName: "arrowtriangle.down.fill")
-                        .foregroundColor(Color.theme.rankingDown)
+                GetCurrentUserPrevRanking()
                 }
             }
         }

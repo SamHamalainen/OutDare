@@ -4,11 +4,10 @@
 //
 //  Created by Jasmin Partanen on 5.4.2022.
 //
-
 import SwiftUI
 // List item for leadearboard ranking list
 struct RankingListItem: View {
-    let users: User
+    let users: CurrentUser
     var body: some View {
         HStack {
             VStack {
@@ -40,7 +39,7 @@ struct RankingListItem: View {
 }
 
 struct RankingListItem_Previews: PreviewProvider {
-    static var users = LeaderboardModel().sorted
+    static var users = UserViewModel().users
     static var previews: some View {
         RankingListItem(users: users[0])
             .previewLayout(.fixed(width: 400, height: 50))

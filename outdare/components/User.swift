@@ -4,11 +4,9 @@
 //
 //  Created by Jasmin Partanen on 5.4.2022.
 //
-
 import Foundation
 import SwiftUI
 
-// Hard coded data for leaderboard from userData.json
 struct User: Hashable, Codable, Identifiable {
     var id: Int
     var username: String
@@ -17,3 +15,9 @@ struct User: Hashable, Codable, Identifiable {
     var profilePicture: String
 }
 
+struct CurrentUser: Decodable, Identifiable {
+    var id: Int
+    var username, location, email: String
+    var score: Int
+    var goneUp: Bool
+}

@@ -37,7 +37,6 @@
 		065FEC732811830700237AFB /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC652811830700237AFB /* DirectionsView.swift */; };
 		065FEC742811830700237AFB /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC662811830700237AFB /* LyricsView.swift */; };
 		065FEC752811830700237AFB /* ChallengeCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC672811830700237AFB /* ChallengeCompleted.swift */; };
-		065FEC802811832F00237AFB /* userData.json in Resources */ = {isa = PBXBuildFile; fileRef = 065FEC772811832F00237AFB /* userData.json */; };
 		065FEC812811832F00237AFB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC792811832F00237AFB /* Color.swift */; };
 		065FEC822811832F00237AFB /* JetBrainsMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 065FEC7B2811832F00237AFB /* JetBrainsMono-Bold.ttf */; };
 		065FEC832811832F00237AFB /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 065FEC7C2811832F00237AFB /* JetBrainsMono-Regular.ttf */; };
@@ -52,7 +51,6 @@
 		065FEC97281183FB00237AFB /* NavigationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC8D281183FB00237AFB /* NavigationRoute.swift */; };
 		065FEC98281183FB00237AFB /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC8E281183FB00237AFB /* MapViewModel.swift */; };
 		065FEC99281183FB00237AFB /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC8F281183FB00237AFB /* Quiz.swift */; };
-		065FEC9A281183FB00237AFB /* LeaderboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC90281183FB00237AFB /* LeaderboardModel.swift */; };
 		065FEC9B281183FB00237AFB /* LyricsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC91281183FB00237AFB /* LyricsData.swift */; };
 		0663432D280477580046C92F /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0663432C280477580046C92F /* CircleImage.swift */; };
 		0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC862808792900899F55 /* ChallengeInfo.swift */; };
@@ -75,6 +73,12 @@
 		B194B3A12800337B000F056E /* LeaderboardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A02800337B000F056E /* LeaderboardList.swift */; };
 		B194B3A3280040FD000F056E /* SingleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A2280040FD000F056E /* SingleProfile.swift */; };
 		B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A928007C50000F056E /* ProfileBackground.swift */; };
+		B1A867AC28118D0F001B38F1 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AB28118D0F001B38F1 /* UserViewModel.swift */; };
+		B1A867AE28118DC1001B38F1 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AD28118DC1001B38F1 /* UserSettings.swift */; };
+		B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AF28118E31001B38F1 /* ImagePicker.swift */; };
+		B1A867B228118EBE001B38F1 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B128118EBE001B38F1 /* SettingsItem.swift */; };
+		B1A867B428118F60001B38F1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B328118F60001B38F1 /* FirebaseManager.swift */; };
+		B1A867B628118FC6001B38F1 /* GetCurrentUserPrevRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +130,6 @@
 		065FEC652811830700237AFB /* DirectionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
 		065FEC662811830700237AFB /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		065FEC672811830700237AFB /* ChallengeCompleted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCompleted.swift; sourceTree = "<group>"; };
-		065FEC772811832F00237AFB /* userData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = userData.json; sourceTree = "<group>"; };
 		065FEC792811832F00237AFB /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		065FEC7B2811832F00237AFB /* JetBrainsMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Bold.ttf"; sourceTree = "<group>"; };
 		065FEC7C2811832F00237AFB /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -141,7 +144,6 @@
 		065FEC8D281183FB00237AFB /* NavigationRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
 		065FEC8E281183FB00237AFB /* MapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		065FEC8F281183FB00237AFB /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
-		065FEC90281183FB00237AFB /* LeaderboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardModel.swift; sourceTree = "<group>"; };
 		065FEC91281183FB00237AFB /* LyricsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsData.swift; sourceTree = "<group>"; };
 		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0664DC862808792900899F55 /* ChallengeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfo.swift; sourceTree = "<group>"; };
@@ -166,6 +168,12 @@
 		B194B3A02800337B000F056E /* LeaderboardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardList.swift; sourceTree = "<group>"; };
 		B194B3A2280040FD000F056E /* SingleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProfile.swift; sourceTree = "<group>"; };
 		B194B3A928007C50000F056E /* ProfileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBackground.swift; sourceTree = "<group>"; };
+		B1A867AB28118D0F001B38F1 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		B1A867AD28118DC1001B38F1 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		B1A867AF28118E31001B38F1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B1A867B128118EBE001B38F1 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
+		B1A867B328118F60001B38F1 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrentUserPrevRanking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +240,10 @@
 				06312257280C25F0004BF504 /* TopProfiles.swift */,
 				06312259280C26D5004BF504 /* User.swift */,
 				0631225B280C2BC0004BF504 /* RankingListItem.swift */,
+				B1A867B128118EBE001B38F1 /* SettingsItem.swift */,
 				0631225D280C2BEC004BF504 /* UserDetails.swift */,
+				B1A867AF28118E31001B38F1 /* ImagePicker.swift */,
+				B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 				065FEC652811830700237AFB /* DirectionsView.swift */,
 				065FEC662811830700237AFB /* LyricsView.swift */,
 				065FEC672811830700237AFB /* ChallengeCompleted.swift */,
+				B1A867AD28118DC1001B38F1 /* UserSettings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,7 +273,6 @@
 		065FEC762811832F00237AFB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				065FEC772811832F00237AFB /* userData.json */,
 				065FEC782811832F00237AFB /* Theme */,
 				065FEC7A2811832F00237AFB /* Fonts */,
 			);
@@ -299,8 +310,9 @@
 				065FEC8D281183FB00237AFB /* NavigationRoute.swift */,
 				065FEC8E281183FB00237AFB /* MapViewModel.swift */,
 				065FEC8F281183FB00237AFB /* Quiz.swift */,
-				065FEC90281183FB00237AFB /* LeaderboardModel.swift */,
 				065FEC91281183FB00237AFB /* LyricsData.swift */,
+				B1A867AB28118D0F001B38F1 /* UserViewModel.swift */,
+				B1A867B328118F60001B38F1 /* FirebaseManager.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -492,7 +504,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065FEC802811832F00237AFB /* userData.json in Resources */,
 				065FEC822811832F00237AFB /* JetBrainsMono-Bold.ttf in Resources */,
 				065FEC832811832F00237AFB /* JetBrainsMono-Regular.ttf in Resources */,
 				6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */,
@@ -528,7 +539,9 @@
 				065FEC6F2811830700237AFB /* SideMenuView.swift in Sources */,
 				6A9F88A5280BF6A3009168D2 /* SRButton.swift in Sources */,
 				6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */,
+				B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */,
 				065FEC6E2811830700237AFB /* QuizView.swift in Sources */,
+				B1A867AC28118D0F001B38F1 /* UserViewModel.swift in Sources */,
 				065FEC6B2811830700237AFB /* ChallengesTestView.swift in Sources */,
 				6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */,
 				6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */,
@@ -537,6 +550,7 @@
 				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
 				065FEC692811830700237AFB /* StartView.swift in Sources */,
+				B1A867B228118EBE001B38F1 /* SettingsItem.swift in Sources */,
 				065FEC95281183FB00237AFB /* SideMenuViewModel.swift in Sources */,
 				064F1202280FF1C300C642CF /* SideMenuItem.swift in Sources */,
 				064F12142810340A00C642CF /* UserDAO.swift in Sources */,
@@ -547,6 +561,7 @@
 				065FEC732811830700237AFB /* DirectionsView.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				065FEC94281183FB00237AFB /* Challenge.swift in Sources */,
+				B1A867AE28118DC1001B38F1 /* UserSettings.swift in Sources */,
 				060A10E2280BF9280077F71F /* ChallengeTimerBar.swift in Sources */,
 				6A6CDF9E27FB6CBA002106F8 /* ChallengeDetailedPreview.swift in Sources */,
 				6A6CDFDF27FDC3E2002106F8 /* ChallengeDAO.swift in Sources */,
@@ -564,7 +579,9 @@
 				B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */,
 				065FEC99281183FB00237AFB /* Quiz.swift in Sources */,
 				06312258280C25F0004BF504 /* TopProfiles.swift in Sources */,
+				B1A867B628118FC6001B38F1 /* GetCurrentUserPrevRanking.swift in Sources */,
 				060A10E3280BF9280077F71F /* ChallengeCount.swift in Sources */,
+				B1A867B428118F60001B38F1 /* FirebaseManager.swift in Sources */,
 				065FEC92281183FB00237AFB /* Lyrics.swift in Sources */,
 				065FEC98281183FB00237AFB /* MapViewModel.swift in Sources */,
 				065FEC742811830700237AFB /* LyricsView.swift in Sources */,
@@ -575,7 +592,6 @@
 				065FEC752811830700237AFB /* ChallengeCompleted.swift in Sources */,
 				0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */,
 				065FEC682811830700237AFB /* Leaderboard.swift in Sources */,
-				065FEC9A281183FB00237AFB /* LeaderboardModel.swift in Sources */,
 				0631225A280C26D5004BF504 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

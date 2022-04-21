@@ -8,15 +8,16 @@ import SwiftUI
 
 
 struct TopProfiles: View {
-    @ObservedObject var leaderboardModel = LeaderboardModel()
+    @ObservedObject private var vm = UserViewModel()
+    let defaultData = CurrentUser(id: 2, username: "Username", location: "Location not set", email: "email not set", score: 0, goneUp: false)
     
     var body: some View {
         HStack {
-            SingleProfile(users: leaderboardModel.sorted[1])
+            SingleProfile(users: vm.secondUser ?? defaultData)
                 .offset(x: 25, y: 50)
-        SingleProfile(users: leaderboardModel.sorted[0])
+            SingleProfile(users: vm.firstUser ?? defaultData)
                 .zIndex(4)
-        SingleProfile(users: leaderboardModel.sorted[2])
+            SingleProfile(users: vm.thirdUser ?? defaultData)
                 .offset(x: -25, y: 50)
         }
         .foregroundColor(Color.theme.textLight)
@@ -24,10 +25,11 @@ struct TopProfiles: View {
 }
 
 struct TopProfiles_Previews: PreviewProvider {
-    static var users = LeaderboardModel().sorted[0]
+    static var users = UserViewModel().firstUser
     static var previews: some View {
         TopProfiles()
-            .environmentObject(LeaderboardModel())
+            .environmentObject(UserViewModel())
             .previewLayout(.sizeThatFits)
     }
 }
+ 

@@ -11,7 +11,7 @@ import Firebase
 @main
 struct outdareApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject private var modelData = LeaderboardModel()
+    @StateObject private var modelData = UserViewModel()
     @State var showMap = false
     @StateObject var viewModel = AppViewModel()
     

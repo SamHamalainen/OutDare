@@ -4,15 +4,14 @@
 //
 //  Created by Jasmin Partanen on 8.4.2022.
 //
-
 import SwiftUI
 
 struct LeaderboardList: View {
-    @ObservedObject var leaderboardModel = LeaderboardModel()
+    @ObservedObject private var vm = UserViewModel()
     
     var body: some View {
         ScrollView {
-            ForEach(leaderboardModel.sorted.dropFirst(3)) { user in
+            ForEach(vm.users.dropFirst(3)) { user in
                 ZStack {
                 RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color.theme.transparent)
@@ -22,15 +21,15 @@ struct LeaderboardList: View {
             }
         }
             .padding(15)
-    }
-        .frame(height: 420)
-        .offset(y: 115)
+        }
     }
 }
 
+// leaderboardModel.sorted.dropFirst(3)
 struct LeaderboardList_Previews: PreviewProvider {
     static var previews: some View {
         LeaderboardList()
-            .environmentObject(LeaderboardModel())
+            .environmentObject(UserViewModel())
+            .previewLayout(.sizeThatFits)
     }
 }

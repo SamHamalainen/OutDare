@@ -4,11 +4,10 @@
 //
 //  Created by Jasmin Partanen on 8.4.2022.
 //
-
 import SwiftUI
 
 struct SingleProfile: View {
-    var users: User
+    var users: CurrentUser
     
     var body: some View {
         VStack {
@@ -38,9 +37,9 @@ struct SingleProfile: View {
 }
 
 struct SingleProfile_Previews: PreviewProvider {
-    static var users = LeaderboardModel().sorted
+    static var users = UserViewModel().firstUser
     static var previews: some View {
-        SingleProfile(users: users[0])
+        SingleProfile(users: users ?? CurrentUser(id: 2, username: "Username", location: "Location not set", email: "email not set", score: 0, goneUp: false))
             .previewLayout(.sizeThatFits)
     }
 }
