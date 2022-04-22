@@ -63,6 +63,11 @@
 		6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */; };
 		6A9F88A5280BF6A3009168D2 /* SRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A4280BF6A2009168D2 /* SRButton.swift */; };
 		6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A8280BF7F6009168D2 /* SpeechAnalyzer.swift */; };
+		6AF5294E2811AD74005189F3 /* TwisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5294D2811AD74005189F3 /* TwisterView.swift */; };
+		6AF529502811AE2B005189F3 /* ContinueOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5294F2811AE2B005189F3 /* ContinueOverlay.swift */; };
+		6AF529522811AF80005189F3 /* Twister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF529512811AF80005189F3 /* Twister.swift */; };
+		6AF529542811AF8F005189F3 /* TwisterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF529532811AF8F005189F3 /* TwisterData.swift */; };
+		6AF529572811B040005189F3 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF529562811B040005189F3 /* WrappingStack */; };
 		B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21727FC0D0D00EADF66 /* Trapezium.swift */; };
 		B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31D27FAE4CE00BF950E /* outdareApp.swift */; };
 		B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B167D32127FAE4CF00BF950E /* Assets.xcassets */; };
@@ -155,6 +160,10 @@
 		6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeTimer.swift; path = outdare/components/ChallengeTimer.swift; sourceTree = SOURCE_ROOT; };
 		6A9F88A4280BF6A2009168D2 /* SRButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SRButton.swift; path = outdare/components/SRButton.swift; sourceTree = SOURCE_ROOT; };
 		6A9F88A8280BF7F6009168D2 /* SpeechAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechAnalyzer.swift; path = outdare/components/SpeechAnalyzer.swift; sourceTree = SOURCE_ROOT; };
+		6AF5294D2811AD74005189F3 /* TwisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwisterView.swift; sourceTree = "<group>"; };
+		6AF5294F2811AE2B005189F3 /* ContinueOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueOverlay.swift; sourceTree = "<group>"; };
+		6AF529512811AF80005189F3 /* Twister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twister.swift; sourceTree = "<group>"; };
+		6AF529532811AF8F005189F3 /* TwisterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwisterData.swift; sourceTree = "<group>"; };
 		B166D21727FC0D0D00EADF66 /* Trapezium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezium.swift; sourceTree = "<group>"; };
 		B167D31A27FAE4CE00BF950E /* outdare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outdare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B167D31D27FAE4CE00BF950E /* outdareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareApp.swift; sourceTree = "<group>"; };
@@ -181,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AF529572811B040005189F3 /* WrappingStack in Frameworks */,
 				6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */,
 				062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */,
 				062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */,
@@ -244,6 +254,7 @@
 				0631225D280C2BEC004BF504 /* UserDetails.swift */,
 				B1A867AF28118E31001B38F1 /* ImagePicker.swift */,
 				B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */,
+				6AF5294F2811AE2B005189F3 /* ContinueOverlay.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -266,6 +277,7 @@
 				065FEC662811830700237AFB /* LyricsView.swift */,
 				065FEC672811830700237AFB /* ChallengeCompleted.swift */,
 				B1A867AD28118DC1001B38F1 /* UserSettings.swift */,
+				6AF5294D2811AD74005189F3 /* TwisterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,6 +325,8 @@
 				065FEC91281183FB00237AFB /* LyricsData.swift */,
 				B1A867AB28118D0F001B38F1 /* UserViewModel.swift */,
 				B1A867B328118F60001B38F1 /* FirebaseManager.swift */,
+				6AF529512811AF80005189F3 /* Twister.swift */,
+				6AF529532811AF8F005189F3 /* TwisterData.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -411,6 +425,7 @@
 				062FE88927FEFC2B00F2D0F7 /* FirebaseFirestore */,
 				062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */,
 				6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */,
+				6AF529562811B040005189F3 /* WrappingStack */,
 			);
 			productName = outdare;
 			productReference = B167D31A27FAE4CE00BF950E /* outdare.app */;
@@ -487,6 +502,7 @@
 			packageReferences = (
 				062FE88627FEFC2B00F2D0F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */,
 			);
 			productRefGroup = B167D31B27FAE4CE00BF950E /* Products */;
 			projectDirPath = "";
@@ -538,6 +554,7 @@
 			files = (
 				065FEC6F2811830700237AFB /* SideMenuView.swift in Sources */,
 				6A9F88A5280BF6A3009168D2 /* SRButton.swift in Sources */,
+				6AF529522811AF80005189F3 /* Twister.swift in Sources */,
 				6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */,
 				B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */,
 				065FEC6E2811830700237AFB /* QuizView.swift in Sources */,
@@ -550,10 +567,13 @@
 				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
 				065FEC692811830700237AFB /* StartView.swift in Sources */,
+				6AF529502811AE2B005189F3 /* ContinueOverlay.swift in Sources */,
 				B1A867B228118EBE001B38F1 /* SettingsItem.swift in Sources */,
 				065FEC95281183FB00237AFB /* SideMenuViewModel.swift in Sources */,
 				064F1202280FF1C300C642CF /* SideMenuItem.swift in Sources */,
+				6AF5294E2811AD74005189F3 /* TwisterView.swift in Sources */,
 				064F12142810340A00C642CF /* UserDAO.swift in Sources */,
+				6AF529542811AF8F005189F3 /* TwisterData.swift in Sources */,
 				065FEC9B281183FB00237AFB /* LyricsData.swift in Sources */,
 				065FEC6D2811830700237AFB /* UserProfile.swift in Sources */,
 				065FEC852811832F00237AFB /* Font.swift in Sources */,
@@ -753,6 +773,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				DEVELOPMENT_TEAM = TLVM85ERAZ;
 				ENABLE_PREVIEWS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
@@ -787,6 +808,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"outdare/Preview Content\"";
 				DEVELOPMENT_TEAM = TLVM85ERAZ;
 				ENABLE_PREVIEWS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
@@ -941,6 +963,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/diniska/swiftui-wrapping-stack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -963,6 +993,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		6AF529562811B040005189F3 /* WrappingStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */;
+			productName = WrappingStack;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

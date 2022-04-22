@@ -21,7 +21,7 @@ struct LyricsView: View {
     let lyricsChallenge: Lyrics
     let setState: (String) -> Void
     let setResult: ((Double, Double)) -> Void
-    @ObservedObject var timer: ChallengeTimer
+    @StateObject var timer: ChallengeTimer = ChallengeTimer()
     @State var index: Int = 0
     @State var score: Double = 0.0
     @State var missingPart: String?
@@ -37,64 +37,38 @@ struct LyricsView: View {
         self.lyricsChallenge = lyricsChallenge
         self.setState = setState
         self.setResult = setResult
-        let timeLimit = Double(lyricsChallenge.data[0].timeLimit)
-        print(lyricsChallenge.data[0].lyrics.components(separatedBy: "\n"))
-        timer = ChallengeTimer(timeLimit: timeLimit)
     }
+    
     var body: some View {
         let data = lyricsChallenge.data[index]
         let lyrics = data.lyrics
         let answer = data.missingWords
         ZStack {
             if !resultString.isEmpty {
-                Rectangle()
-                    .ignoresSafeArea()
-                    .opacity(0.45)
-                    .zIndex(1)
-                VStack() {
-                    Spacer()
-                    VStack(spacing: 40) {
-                        Text(resultString)
-                            .font(Font.customFont.largeText)
-                            .padding(.top, 30)
-                        Button(action: { next() }) {
-                            Text(index != lyricsChallenge.data.count - 1 ? "Continue" : "Finish")
-                        }
-                        .padding(.vertical, 10)
-                        .frame(width: 200)
-                        .font(Font.customFont.btnText)
-                        .background(Color.theme.background)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(40)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.bottom, 50)
-                    .background(Color.white)
-                    .cornerRadius(20)
+                ContinueOverlay(message: $resultString, index: $index, correct: $correct, lastIndex: lyricsChallenge.data.count - 1) {
+                    next()
                 }
-                .zIndex(2)
-                .ignoresSafeArea()
             }
             VStack {
                 ChallengeTimerBar(timer: timer)
+                    .onAppear {
+                        timer.setTimeLimit(limit: Double(data.timeLimit))
+                    }
                     .onChange(of: index) { index in
-                        let timeLimit = Double(lyricsChallenge.data[index].timeLimit)
-                        timer.setTimeLimit(limit: timeLimit)
+                        timer.setTimeLimit(limit: Double(data.timeLimit))
                     }
                 ChallengeCount(index: index, limit: 3)
                 VStack {
                     Text("\(data.title) - \(data.artist)").font(Font.customFont.normalText)
+                    if let missingPart = missingPart {
+                        lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
+                            .font(Font.customFont.normalText.leading(.loose))
+                            .lineSpacing(10)
+                            .multilineTextAlignment(.leading)
+                            .frame(maxHeight: .infinity)
+                    }
                 }
                 .padding()
-                
-                if let missingPart = missingPart {
-                    lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
-                        .font(Font.customFont.normalText.leading(.loose))
-                        .lineSpacing(10)
-                        .multilineTextAlignment(.leading)
-                        .frame(maxHeight: .infinity)
-                        .padding()
-                }
                 HStack {
                     TextField("Sing or type here", text: $input)
                         .textFieldStyle(RoundedTextFieldStyle())
@@ -152,26 +126,28 @@ extension LyricsView {
         showAns = true
         let result: LyricsResult = lyricsChallenge.data[index].checkAns(ans: ans)
         score += result.score
-        resultString = "\(result.matchStatus)"
         speechAnalyzer.stop()
         timer.stop()
+        withAnimation {
+            resultString = "\(result.matchStatus)"
+
+        }
     }
     
     func next() {
-        if index < lyricsChallenge.data.count - 1 {
-            resultString = ""
-            input = ""
-            correct = false
-            showAns = false
-            index += 1
-            timer.restart()
-        } else {
-            print("final score \(score)")
-            print("total time \(timer.totalTime)")
-            setResult((score, timer.totalTime))
-            setState("done")
-        }
-        
+            if index < lyricsChallenge.data.count - 1 {
+                resultString = ""
+                input = ""
+                correct = false
+                showAns = false
+                index += 1
+                timer.restart()
+            } else {
+                print("final score \(score)")
+                print("total time \(timer.totalTime)")
+                setResult((score, timer.totalTime))
+                setState("done")
+            }
     }
     
     func getHiddenWords(index: Int) -> String {
