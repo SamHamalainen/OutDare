@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChallengeCompleted: View {
     @Binding var challengeInfoOpened: Bool
+    @Binding var revealedChallenge: Bool
     let score: Double
     let time: Double
     var body: some View {
@@ -28,6 +29,7 @@ struct ChallengeCompleted: View {
             Spacer()
             Button("Continue") {
                 challengeInfoOpened = false
+                revealedChallenge = false
             }
             .padding(.vertical, 10)
             .frame(width: 200)

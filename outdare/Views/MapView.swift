@@ -14,6 +14,7 @@ struct MapView: View {
     @ObservedObject var dao = ChallengeDAO()
     @ObservedObject private var navigationRoute = NavigationRoute()
     @State private var showingSheet = false
+    @State var revealedChallenge = false
     @EnvironmentObject var loginViewModel: AppViewModel
     
     func setLocationToUser() {
@@ -46,7 +47,8 @@ struct MapView: View {
                         .cornerRadius(10)
                 }
                 .offset(x: UIScreen.main.bounds.width * 0.42, y: 25)
-                Text("\(viewModel.distanceTravelled)")
+                let formatted = String(format: "Distance: %.1f meters", viewModel.distanceTravelled)
+                Text("\(formatted)")
                     .padding(.top, 200)
                 if loginViewModel.userDao.loggedUserScore != nil {
                     Text("\(loginViewModel.userDao.loggedUserScore!)")
@@ -66,8 +68,14 @@ struct MapView: View {
                     .opacity(0.45)
                     .onTapGesture {
                         viewModel.challengeInfoOpen = false
+                        revealedChallenge = false
                     }
-                ChallengeInfo(locationPassed: $viewModel.selection, challengeInfoOpened: $viewModel.challengeInfoOpen, userLocation: $viewModel.userLocation, navigationRoute: navigationRoute)
+                ChallengeInfo(revealedChallenge: $revealedChallenge,
+                              locationPassed: $viewModel.selection,
+                              challengeInfoOpened: $viewModel.challengeInfoOpen,
+                              userLocation: $viewModel.userLocation,
+                              navigationRoute: navigationRoute
+                )
             }
             Button("Directions info") {
                 showingSheet.toggle()

@@ -14,17 +14,21 @@ struct ChallengeInfo: View {
     
     @State private var challengeInfoHeight: CGFloat = 350.0
     @State private var challengeInfoExpanded = false
-    @State private var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.6
+    @State private var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.5
     @State private var currentDragOffsetY: CGFloat = 0
     @State private var endingOffsetY: CGFloat = 0
     @State private var buttonOffsetY: CGFloat = 175
     @State private var buttonEndOffsetY: CGFloat = 0
     @State private var challengeStarted = false
+    @State private var showingAlert = false
+    @Binding var revealedChallenge: Bool
     
     @Binding var locationPassed: Challenge?
     @Binding var challengeInfoOpened: Bool
     @Binding var userLocation: CLLocationCoordinate2D?
     @ObservedObject var navigationRoute: NavigationRoute
+    
+    @EnvironmentObject var userVM: AppViewModel
     
     func getDifficultyColor() -> Color {
         switch locationPassed!.difficulty {
@@ -65,9 +69,22 @@ struct ChallengeInfo: View {
         navigationRoute.addDirections(directions: directions, keepPrevious: true)
     }
     
+    func showAlert() {
+        showingAlert = true
+        userVM.userDao.getLoggedInUserScore()
+    }
+    
+    func revealChallenge() {
+        revealedChallenge = true
+        if let userScore = userVM.userDao.loggedUserScore {
+            print("userScore \(userScore)")
+            userVM.userDao.updateUsersScore(newScore: userScore - 50)
+        }
+    }
+    
     var body: some View {
         if userLocation != nil {
-            if (locationPassed?.coordinates.distance(to: userLocation!))! >= 150 {
+            if (locationPassed?.coordinates.distance(to: userLocation!))! >= 150 && revealedChallenge == false {
                 ZStack(alignment: .top) {
                     RoundedRectangle(cornerRadius: 50)
                         .frame(width: UIScreen.main.bounds.width, height: challengeInfoHeight)
@@ -100,7 +117,27 @@ struct ChallengeInfo: View {
                             .background(.gray)
                             .opacity(0.2)
                     }
-                    HStack {
+                    VStack {
+                        Button(action: {showAlert()}) {
+                                Text("Reveal Challenge")
+                                    .font(Font.customFont.btnText)
+                                    .fontWeight(.semibold)
+                                    .frame(width: 200)
+                                    .padding(.vertical, 10)
+                                    .background(Color("Button"))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(70)
+                        }
+                        .offset(y: buttonOffsetY)
+                        .offset(y: buttonEndOffsetY)
+                        .alert(isPresented: $showingAlert) {
+                            Alert(title: Text("Are you sure you want to reveal challenge?"),
+                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 50 points"),
+                                  primaryButton: .default(Text("Reveal")) {
+                                revealChallenge()
+                            },
+                                  secondaryButton: .cancel())
+                        }
                         Button(action: {navigateFunction()}) {
                             Text("Navigate")
                                 .font(Font.customFont.btnText)
@@ -112,7 +149,7 @@ struct ChallengeInfo: View {
                                 .cornerRadius(70)
                         }
                         .offset(y: buttonOffsetY)
-                    .offset(y: buttonEndOffsetY)
+                        .offset(y: buttonEndOffsetY)
                         Button(action: {
                             navigationRoute.directionsArray.isEmpty ? navigateFunction() : addToRoute()
                         }) {
@@ -131,7 +168,7 @@ struct ChallengeInfo: View {
                     
                 }
                 .offset(y: startingOffsetY)
-            } else {
+            } else if (locationPassed?.coordinates.distance(to: userLocation!))! <= 150 || revealedChallenge {
                 ZStack(alignment: .top) {
                     RoundedRectangle(cornerRadius: 50)
                         .frame(width: UIScreen.main.bounds.width, height: challengeInfoHeight)
@@ -166,7 +203,7 @@ struct ChallengeInfo: View {
                                 .opacity(0.2)
                         }
                         if challengeInfoExpanded {
-                            ChallengeContainer(challengeInfoOpened: $challengeInfoOpened,challenge: locationPassed!, notifyParent2: updateUI)
+                            ChallengeContainer(challengeInfoOpened: $challengeInfoOpened, revealedChallenge: $revealedChallenge,challenge: locationPassed!, notifyParent2: updateUI)
                                 .padding(.top, 25)
                         }
                     }

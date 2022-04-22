@@ -11,46 +11,66 @@ import Firebase
 class UserDAO: ObservableObject {
     let db = Firestore.firestore()
     
+    @Published var errorMessage = ""
     @Published var loggedInUserEmail: String?
     @Published var loggedUserScore: Int?
     
-    func convertoToUser(data: [String:Any]) -> User {
+    // Logged in user
+    @Published var currentUser: CurrentUser?
+    
+    func convertToUser(data: [String:Any]) -> CurrentUser {
         let id = data["userId"] as? Int ?? 0
         let username = data["username"] as? String ?? "no username"
+        let email = data["email"] as? String ?? "no email"
+        let location = data["location"] as? String ?? "Unknown location"
         let score = data["score"] as? Int ?? 0
         let goneUp = data["goneUp"] as? Bool ?? false
-        let profilePicture = data["profilePicture"] as? String ?? "no picture"
+//        let profilePicture = data["profilePicture"] as? String ?? "no picture"
         
-        return User(id: id, username: username, score: score, goneUp: goneUp, profilePicture: profilePicture)
+        return CurrentUser(id: id, username: username, location: location, email: email, score: score, goneUp: goneUp)
     }
     
+    // Fetching current user score
     func getLoggedInUserScore() {
-        let userEmail = self.loggedInUserEmail ?? "no email"
-        let userRef = db.collection("users")
-        let query = userRef.whereField("email", isEqualTo: userEmail)
-        query.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                let document = querySnapshot!.documents[0]
-                let user = self.convertoToUser(data: document.data())
-                self.loggedUserScore = user.score
+        // Storing current user to uid
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            self.errorMessage = "Can not get firebase uid"
+            return
+        }
+        // Accessing firebase collection with uid
+        FirebaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, error in
+            if let error = error {
+                self.errorMessage = "Failed to fetch current user: \(error)"
+                return
             }
+            guard let data = snapshot?.data() else {
+                self.errorMessage = "No data found"
+                return
+            }
+            let currentUser = self.convertToUser(data: data)
+            self.loggedUserScore = currentUser.score
         }
     }
+    
     func updateUsersScore(newScore: Int) {
-        let userEmail = self.loggedInUserEmail ?? "no email"
-        let userRef = db.collection("users")
-        let query = userRef.whereField("email", isEqualTo: userEmail)
-        query.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                let document = querySnapshot!.documents[0]
-                document.reference.updateData([
-                    "score": newScore
-                ])
+        // Storing current user to uid
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            self.errorMessage = "Can not get firebase uid"
+            return
+        }
+        // Accessing firebase collection with uid
+        FirebaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, error in
+            if let error = error {
+                self.errorMessage = "Failed to fetch current user: \(error)"
+                return
             }
+            guard let data = snapshot?.reference else {
+                self.errorMessage = "No data found"
+                return
+            }
+            data.updateData([
+                "score": newScore
+            ])
         }
     }
 }
