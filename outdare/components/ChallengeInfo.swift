@@ -54,13 +54,14 @@ struct ChallengeInfo: View {
     }
     
     func navigateFunction() {
-        let source = userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        let directions = Directions(source: source, destination: locationPassed!)
+        guard let source = userLocation else { return }
+        guard let destination = locationPassed else { return }
+        let directions = Directions(source: source, destination: destination)
         navigationRoute.addDirections(directions: directions, keepPrevious: false)
     }
     func addToRoute() {
-        let source = navigationRoute.directionsArray.last?.destination.coordinates
-        let directions = Directions(source: source!, destination: locationPassed!)
+        guard let source = navigationRoute.directionsArray.last?.destination.coordinates else { return }
+        let directions = Directions(source: source, destination: locationPassed!)
         navigationRoute.addDirections(directions: directions, keepPrevious: true)
     }
     

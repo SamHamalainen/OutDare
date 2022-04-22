@@ -34,7 +34,7 @@ final class NavigationRoute: ObservableObject {
         let polylines = mapView.overlays.filter({ $0 is MKPolyline })
         mapView.removeOverlays(polylines)
         if destination != nil {
-            let i = directionsArray.firstIndex(where: {$0.destination == destination})!
+            guard let i = directionsArray.firstIndex(where: {$0.destination == destination}) else { return }
             directionsArray.remove(at: i)
             reCreateExistingDirections()
         }
@@ -52,7 +52,7 @@ final class NavigationRoute: ObservableObject {
         request.transportType = .walking
         return request
     }
-    func addDirections(directions: Directions, keepPrevious: Bool, update: Bool = false) {
+    func addDirections(directions: Directions, keepPrevious: Bool, updateFirst: Bool = false) {
         if !keepPrevious {
             removeDirections()
         }
@@ -61,24 +61,24 @@ final class NavigationRoute: ObservableObject {
         mkDirections.calculate { response, error in
             guard let route = response?.routes.first else { return }
             self.mapView.addOverlay(route.polyline)
-            if update || !keepPrevious {
+            if updateFirst || !keepPrevious {
                 self.userPolylines.append(route.polyline)
             }
-            if !update {
+            if !updateFirst {
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
             }
             // Make directions instance and add it to the array
             let directions = Directions(source: directions.source, destination: directions.destination, mkRoute: route, polyline: route.polyline)
-            if update {
-                if self.directionsArray.isEmpty {
-                    self.directionsArray.append(directions)
-                } else {
-                self.directionsArray[0] = directions
-                }
-            } else {
-                self.directionsArray.append(directions)
-            }
+
+            self.updateDirectionsArray(directions: directions, firstElement: updateFirst)
             self.updateDistanceAndTime()
+        }
+    }
+    private func updateDirectionsArray(directions: Directions, firstElement: Bool) {
+        if firstElement && !directionsArray.isEmpty {
+            directionsArray[0] = directions
+        } else {
+            directionsArray.append(directions)
         }
     }
     private func reCreateExistingDirections() {
@@ -95,16 +95,15 @@ final class NavigationRoute: ObservableObject {
         }
         directionsArray = Array(directionsArray.dropFirst(count))
     }
+    /// Updates directions by replacing the first directions object by new one
     func updateDirections(userLocation: CLLocationCoordinate2D) {
-        if !directionsArray.isEmpty {
-            let destination = directionsArray.first?.destination
-            let s = Directions(source: userLocation, destination: destination!)
-            addDirections(directions: s, keepPrevious: true, update: true)
+        guard let firstDirections = directionsArray.first else { return }
+        let s = Directions(source: userLocation, destination: firstDirections.destination)
+            addDirections(directions: s, keepPrevious: true, updateFirst: true)
             
-            if userPolylines.count > 1 {
-                mapView.removeOverlay(userPolylines.first!)
-                userPolylines.removeFirst()
-            }
+        if userPolylines.count > 1 {
+            mapView.removeOverlay(userPolylines.first!)
+            userPolylines.removeFirst()
         }
     }
 }
