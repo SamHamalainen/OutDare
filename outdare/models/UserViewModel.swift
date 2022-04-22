@@ -26,7 +26,6 @@ class UserViewModel: ObservableObject {
     init() {
         fetchCurrentUser()
         fetchAllUsers()
-        fetchTopUsers()
     }
     
     func convertToUser(data: [String:Any]) -> CurrentUser {
@@ -64,27 +63,9 @@ class UserViewModel: ObservableObject {
     
     // Fetching all users
     private func fetchAllUsers() {
-        FirebaseManager.shared.firestore.collection("users").order(by: "score", descending: true)
-            .getDocuments { [self] (documentSnapshot, error) in
-                if let error = error {
-                    self.errorMessage = "Failed to fetch users: \(error)"
-                    print("Failed to fetch users: \(error)")
-                    return
-                }
-                for document in documentSnapshot!.documents {
-                    let data = document.data()
-                    let user = self.convertToUser(data: data)
-                    users.append(user)
-                }
-                self.errorMessage = "Successfully fetched users"
-            }
-        }
-    
-    // Fetch top users
-    private func fetchTopUsers() {
         let userRef = FirebaseManager.shared.firestore.collection("users")
-        let query = userRef.order(by: "score", descending: true).limit(to: 3)
-        query.getDocuments() { (querySnapshot, error) in
+        let query = userRef.order(by: "score", descending: true).limit(to: 20)
+        query.getDocuments() { [self] (querySnapshot, error) in
             if let error = error {
                 self.errorMessage = "Failed to fetch users: \(error)"
                 print("Failed to fetch users: \(error)")
@@ -101,6 +82,13 @@ class UserViewModel: ObservableObject {
             self.firstUser = userOne
             self.secondUser = userTwo
             self.thirdUser = userThree
+            
+            for document in querySnapshot!.documents {
+                let data = document.data()
+                let user = self.convertToUser(data: data)
+                users.append(user)
+            }
+            self.errorMessage = "Successfully fetched users"
         }
     }
     

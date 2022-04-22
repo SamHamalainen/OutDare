@@ -70,6 +70,30 @@ struct UserSettings: View {
         }
     }
     @State var image: UIImage?
+    @State var errorMessage = ""
+    
+    
+    // Saving profile picture firebase storage
+    private func saveImageToStorage() {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid
+        else {return}
+        let ref = FirebaseManager.shared.storage.reference(withPath: uid)
+        guard let imageData = self.image?.jpegData(compressionQuality: 0.5) else {return}
+                
+        ref.putData(imageData, metadata: nil) { metaData, error in
+            if let error = error {
+                self.errorMessage = "Failed to store image to storage \(error)"
+                return
+            }
+            ref.downloadURL { url, error in
+                if let error = error {
+                    self.errorMessage = "Failed to get downloadUrl \(error)"
+                    return
+                }
+                self.errorMessage = "Successfully stored image with url \(url?.absoluteString ?? "")"
+            }
+        }
+    }
 }
 
 struct UserSettings_Previews: PreviewProvider {
