@@ -33,7 +33,8 @@ struct outdareApp: App {
 //                showMap = viewModel.signedIn
 //            }
 //            LyricsView(lyricsChallenge: Lyrics.sample[0], setState: {_ in}, setResult: {_ in})
-            TwisterView(twister: Twister.sample[0], setState: {_ in}, setResult: {_ in})
+//            TwisterView(twister: Twister.sample[0], setState: {_ in}, setResult: {_ in})
+            StringGameView()
         }
     }
 }
