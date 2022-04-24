@@ -8,65 +8,58 @@
 import SwiftUI
 
 struct QuizView: View {
-    let quiz: Quiz
-    let setState: (String) -> Void
-    let setResult: ((Double, Double)) -> Void
-    @State var index: Int = 0
+    @StateObject var game: QuizGame
+    @Binding var state: String
+    @Binding var resultHandler: ResultHandler
     @State var score: Int = 0
-    let timeout = 2.0
     @StateObject var timer: ChallengeTimer = ChallengeTimer()
     @State var voice = false
-    @ObservedObject private var speechAnalyzer = SpeechAnalyzer()
+    @StateObject private var speechAnalyzer = SpeechAnalyzer()
     @State var input = ""
-    @State var correct = false
-    @State var submitted = false
-    @State var message = ""
-    
-    init(quiz: Quiz, setState: @escaping (String) -> Void, setResult: @escaping ((Double, Double)) -> Void) {
-        self.quiz = quiz
-        self.setState = setState
-        self.setResult = setResult
-    }
     
     var body: some View {
         ZStack {
-            if submitted {
-                ContinueOverlay(message: $message, index: $index, correct: $correct, lastIndex: quiz.data.count - 1, action: {next()})
-            }
             VStack {
                 ChallengeTimerBar(timer: timer)
                     .onAppear {
-                        timer.setTimeLimit(limit: quiz.timePerQuestion)
+                        timer.setTimeLimit(limit: Double(game.timePerQ))
                     }
-                ChallengeCount(index: index, limit: quiz.data.count)
+                ChallengeCount(index: game.index, limit: game.length)
                 VStack {
-                    Text(quiz.data[index].question)
-                        .frame(maxWidth: .infinity, maxHeight: 100)
-                        .background(Color.theme.background)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(20)
-                        .padding(.bottom)
-                        
+                    if let question = game.question {
+                        Text(question)
+                            .frame(maxWidth: .infinity, maxHeight: 100)
+                            .background(Color.theme.background)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(20)
+                            .padding(.bottom)
+                    }
+                    
                     if !voice {
-                        VStack(spacing: 20) {
-                            ForEach(quiz.data[index].answers, id: \.self) { ans in
-                                Button(action: {onAnswer(ans: ans)}) {
-                                    Text(ans)
-                                        .frame(maxWidth: .infinity)
-                                        .padding()
-                                        .background((!input.isEmpty && ans == quiz.data[index].correctAns) ? Color.theme.rankingUp : (input == ans && ans != quiz.data[index].correctAns) ? Color.theme.rankingDown : Color.theme.icon)
-                                        .foregroundColor(Color.white)
-                                        .cornerRadius(20)
-                                        .shadow(color: Color.theme.icon, radius: (ans == input) ? 0 : 5, x: 0, y: (ans == input) ? 0 : 4)
+                        if let answers = game.answers, let correctAns = game.correctAns {
+                            VStack(spacing: 20) {
+                                ForEach(answers, id: \.self) { ans in
+                                    Button(action: {
+                                        onAnswer(ans: ans)
+                                    }) {
+                                        Text(ans)
+                                            .frame(maxWidth: .infinity)
+                                            .padding()
+                                            .background(getTileColor(ans: ans, correctAns: correctAns))
+                                            .foregroundColor(Color.white)
+                                            .cornerRadius(20)
+                                            .shadow(color: Color.theme.icon, radius: (ans == input) ? 0 : 5, x: 0, y: (ans == input) ? 0 : 4)
+                                    }
                                 }
                             }
                         }
+                        
                     } else {
                         VStack {
                             Spacer()
                             TextField("Type here if you cannot talk", text: $input)
                                 .textFieldStyle(RoundedTextFieldStyle())
-                                .foregroundColor(correct ? Color.theme.rankingUp : Color.theme.textDark)
+                                .foregroundColor(game.correct == true ? Color.theme.rankingUp : Color.theme.textDark)
                                 .onChange(of: speechAnalyzer.recognizedText ?? "") {newValue in
                                     if newValue.count > 0 {
                                         input = newValue
@@ -82,17 +75,18 @@ struct QuizView: View {
                                     .background(Color.theme.button)
                                     .foregroundColor(Color.white)
                                     .cornerRadius(40)
-                                    
+                                
                             }
                             Spacer()
                             SRButton(speechAnalyzer: speechAnalyzer)
-                            .padding()
+                                .padding()
                         }
                         
                     }
                     
                 }
                 .padding(.horizontal)
+                Spacer()
             }
             .onChange(of: timer.isOver) { isOver in
                 if isOver {
@@ -100,61 +94,58 @@ struct QuizView: View {
                 }
             }
             .onAppear {
+                game.gatherData()
                 timer.start()
             }
             .allowsHitTesting(timer.isRunning)
+            if let correct = game.correct, let message = game.message {
+                ContinueOverlay(message: message, index: game.index, correct: correct, length: game.length, action: {next()})
+                    .zIndex(2)
+            }
+            
         }
+        
     }
 }
 
 extension QuizView {
     func onAnswer(ans: String) {
         input = ans
-        checkAnswer()
         timer.stop()
         speechAnalyzer.stop()
         withAnimation {
-            submitted = true
+            game.checkAns(ans: ans)
         }
     }
-        
+    
     func next() {
-        submitted = false
-        if index + 1 < quiz.data.count {
-            resetAnswer()
-            index += 1
+        game.next()
+        if !game.over {
+            input = ""
             timer.restart()
         } else {
-            print("final score \(score)")
-            print("total time \(timer.totalTime)")
-            setResult((Double(score), timer.totalTime))
-            setState("done")
+            print(game.results)
+            resultHandler = ResultHandler(userId: 1, challengeId: game.quiz.id, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
+            state = "done"
         }
     }
     
-    func resetAnswer() {
-        input = ""
-        correct = false
-    }
-    
-    func checkAnswer() {
-        let correctAns = quiz.data[index].correctAns
-        print(input)
-        let isCorrect = !voice ? (input == correctAns) : (input.lowercased().trimmingCharacters(in: .whitespaces) == correctAns.lowercased())
-        correct = isCorrect
-        if isCorrect {
-            score += 1
-            message = "Correct answer 🔥"
-        } else {
-            message = "Answer: \(correctAns)"
-                      
+    func getTileColor(ans: String, correctAns: String) -> Color {
+        var color = Color.theme.icon
+        if game.correct != nil {
+            if ans == correctAns {
+                color = Color.theme.rankingUp
+            }
+            if ans == input && ans != correctAns {
+                color = Color.theme.rankingDown
+            }
         }
-        print(score)
+        return color
     }
 }
 
-struct QuizView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuizView(quiz: Quiz.sample[0], setState: {_ in}, setResult: {_ in})
-    }
-}
+//struct QuizView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        QuizView(quiz: Quiz.sample[0], setState: {_ in}, setResult: {_ in})
+//    }
+//}

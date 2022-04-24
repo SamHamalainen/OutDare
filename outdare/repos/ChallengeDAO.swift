@@ -70,6 +70,7 @@ class ChallengeDAO: ObservableObject {
         let timePerQ = data["timePerQ"] as? Double ?? 0
         let questions = data["questions"] as? [String] ?? []
         let correctAns = data["correctAns"] as? [String] ?? []
+        let difficulty = data["difficulty"] as? String ?? ""
         let answersFetched = data["answers"] as? [String:[String]] ?? [:]
         let answers = answersFetched.sorted {$0.key < $1.key}.map {$1}
         var quizData: [QuizData] = []
@@ -77,7 +78,7 @@ class ChallengeDAO: ObservableObject {
             let data = QuizData(question: questions[i], answers: answers[i], correctAns: correctAns[i])
             quizData.append(data)
         }
-        return Quiz(id: id, timePerQuestion: timePerQ, data: quizData)
+        return Quiz(id: id, timePerQuestion: timePerQ, data: quizData, difficulty: difficulty)
     }
     
     func getChallenges() {
@@ -150,7 +151,9 @@ class ChallengeDAO: ObservableObject {
     func addAttempt(attempt: Attempt) {
         let ref: DocumentReference? = nil
         let attemptRef = db.collection("attempts")
-        attemptRef.addDocument(data: attempt.toDB()) { err in
+        var data = attempt.toDB()
+        data["data"] = Timestamp()
+        attemptRef.addDocument(data: data) { err in
             if let err = err {
                     print("Error adding document: \(err)")
                 } else {

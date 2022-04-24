@@ -32,11 +32,11 @@ struct TwisterView: View {
     var body: some View {
         let data = twister.data[index]
         ZStack {
-            if handler.matchingIndices.count == data.textArray.count {
-                ContinueOverlay(message: $resultString, index: $index, correct: $correct, lastIndex: twister.data.count - 1) {
-                    next()
-                }
-            }
+//            if handler.matchingIndices.count == data.textArray.count {
+//                ContinueOverlay(message: $resultString, index: $index, correct: $correct, lastIndex: twister.data.count - 1) {
+//                    next()
+//                }
+//            }
             VStack {
                 ChallengeTimerBar(timer: timer)
                     .onChange(of: index) { index in

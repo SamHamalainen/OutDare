@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-struct ResultItem {
+struct ResultItem: Hashable {
     let text: String
-    let percentage: Int? = nil
-    let score: Int
-    
-    
+    var percentage: Int? = nil
+    let score: Double
 }

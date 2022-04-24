@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-class StringGame: ObservableObject{
+class StringGame: ObservableObject {
     @Published var random = ""
     @Published var results: [ResultItem] = []
-    @Published var score = 0
+    @Published var score = 0.0
     var length: Int
     let excellentThreshold = 8
-    let goodScore = 3
-    let excellentScore = 5
-    let outstandingScore = 10
+    let goodScore = 3.0
+    let excellentScore = 5.0
+    let outstandingScore = 10.0
     @Published var skips = 1
     
     init(length: Int = 2) {
@@ -65,7 +65,7 @@ class StringGame: ObservableObject{
     }
     
     func getScore() {
-        score = results.map {$0.score}.reduce(0, +)
+        score = results.map {$0.score}.reduce(0.0, +)
     }
     
     func isReal(word: String) -> Bool {

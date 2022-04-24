@@ -18,50 +18,38 @@ extension String {
 }
 
 struct LyricsView: View {
-    let lyricsChallenge: Lyrics
-    let setState: (String) -> Void
-    let setResult: ((Double, Double)) -> Void
+    let game: LyricsGame
+    @Binding var state: String
+    @Binding var resultHandler: ResultHandler
     @StateObject var timer: ChallengeTimer = ChallengeTimer()
-    @State var index: Int = 0
-    @State var score: Double = 0.0
-    @State var missingPart: String?
     @State var showAns = false
-    @ObservedObject private var speechAnalyzer = SpeechAnalyzer()
+    @StateObject private var speechAnalyzer = SpeechAnalyzer()
     @State var input = ""
-    @State var correct = false
-    @State var resultString = ""
-    
-    let timeout = 3.0
-    
-    init(lyricsChallenge: Lyrics, setState: @escaping (String) -> Void, setResult: @escaping ((Double, Double)) -> Void) {
-        self.lyricsChallenge = lyricsChallenge
-        self.setState = setState
-        self.setResult = setResult
-    }
     
     var body: some View {
-        let data = lyricsChallenge.data[index]
-        let lyrics = data.lyrics
-        let answer = data.missingWords
         ZStack {
-            if !resultString.isEmpty {
-                ContinueOverlay(message: $resultString, index: $index, correct: $correct, lastIndex: lyricsChallenge.data.count - 1) {
-                    next()
+            if showAns {
+                if let correct = game.correct {
+                    ContinueOverlay(message: game.resultString, index: game.index, correct: correct, length: game.length, action: {next()})
                 }
             }
             VStack {
-                ChallengeTimerBar(timer: timer)
-                    .onAppear {
-                        timer.setTimeLimit(limit: Double(data.timeLimit))
-                    }
-                    .onChange(of: index) { index in
-                        timer.setTimeLimit(limit: Double(data.timeLimit))
-                    }
-                ChallengeCount(index: index, limit: 3)
+                if let timeLimit = game.timeLimit {
+                    ChallengeTimerBar(timer: timer)
+                        .onChange(of: game.index) { index in
+                            timer.setTimeLimit(limit: Double(timeLimit))
+                        }
+                        .onAppear {
+                            timer.setTimeLimit(limit: Double(timeLimit))
+                        }
+                }
+                ChallengeCount(index: game.index, limit: game.length)
                 VStack {
-                    Text("\(data.title) - \(data.artist)").font(Font.customFont.normalText)
-                    if let missingPart = missingPart {
-                        lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
+                    if let artist = game.artist, let title = game.title {
+                        Text("\(title) - \(artist)").font(Font.customFont.normalText)
+                    }
+                    if let missingPart = game.missingPart {
+                        game.lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
                             .font(Font.customFont.normalText.leading(.loose))
                             .lineSpacing(10)
                             .multilineTextAlignment(.leading)
@@ -72,17 +60,17 @@ struct LyricsView: View {
                 HStack {
                     TextField("Sing or type here", text: $input)
                         .textFieldStyle(RoundedTextFieldStyle())
-                        .foregroundColor(correct ? Color.theme.rankingUp : Color.theme.textDark)
+                        .foregroundColor(game.correct == true ? Color.theme.rankingUp : Color.theme.textDark)
                         .font(Font.customFont.normalText)
                         .autocapitalization(.none)
                         .onChange(of: speechAnalyzer.recognizedText ?? "") {newValue in
-                            if newValue.count > 0 && !correct {
+                            if newValue.count > 0 && game.correct != true {
                                 input = newValue
                             }
                         }
                         .onChange(of: input) { newValue in
-                            correct = (newValue.lowercased().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "’", with: "'") == answer.lowercased())
-                            if correct {
+                            let isCorrect = (newValue.lowercased().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "’", with: "'") == game.missingWords.lowercased())
+                            if isCorrect {
                                 onAnswer(ans: input)
                             }
                         }
@@ -99,21 +87,12 @@ struct LyricsView: View {
                 SRButton(speechAnalyzer: speechAnalyzer, size: 40, padding: 40, text: "Tap to sing")
                     .padding(.bottom)
             }
-            .onChange(of: showAns) { showAns in
-                if showAns {
-                    missingPart = answer
-                }
-            }
-            .onChange(of: index) { index in
-                missingPart = getHiddenWords(index: index)
-            }
             .onChange(of: timer.isOver){ isOver in
                 if isOver {
                     onAnswer(ans: input)
                 }
             }
             .onAppear {
-                missingPart = getHiddenWords(index: index)
                 timer.start()
             }
         .allowsHitTesting(timer.isRunning)
@@ -124,42 +103,27 @@ struct LyricsView: View {
 extension LyricsView {
     func onAnswer(ans: String) {
         showAns = true
-        let result: LyricsResult = lyricsChallenge.data[index].checkAns(ans: ans)
-        score += result.score
         speechAnalyzer.stop()
         timer.stop()
         withAnimation {
-            resultString = "\(result.matchStatus)"
-
+            game.checkAns(ans: input)
         }
     }
     
     func next() {
-            if index < lyricsChallenge.data.count - 1 {
-                resultString = ""
-                input = ""
-                correct = false
-                showAns = false
-                index += 1
-                timer.restart()
-            } else {
-                print("final score \(score)")
-                print("total time \(timer.totalTime)")
-                setResult((score, timer.totalTime))
-                setState("done")
-            }
+        game.next()
+        if !game.over {
+            input = ""
+            showAns = false
+            timer.restart()
+        } else {
+            print(game.results)
+            resultHandler = ResultHandler(userId: 1, challengeId: game.lyricsChallenge.id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
+            state = "done"
+        }
     }
     
-    func getHiddenWords(index: Int) -> String {
-        var string = ""
-        let answerArray = lyricsChallenge.data[index].missingWordsArray
-        for (index, word) in answerArray.enumerated() {
-            let isLast = (index == answerArray.count - 1)
-            string += (String(repeating: "_", count: word.count))
-            string += (isLast) ? "" : " "
-        }
-        return string
-    }
+    
 }
 
 //struct LyricsView_Previews: PreviewProvider {

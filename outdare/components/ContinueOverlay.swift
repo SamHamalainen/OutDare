@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct ContinueOverlay: View {
-    @Binding var message: String
-    @Binding var index: Int
-    @Binding var correct: Bool
-    var lastIndex: Int
+    var message: String
+    var index: Int
+    var correct: Bool
+    var length: Int
     var action: () -> Void
+    
     var body: some View {
-        Rectangle()
-            .ignoresSafeArea()
-            .opacity(0.45)
-            .zIndex(1)
-        VStack() {
+        VStack {
             Spacer()
             VStack(spacing: 40) {
                 Text(message)
@@ -27,7 +24,7 @@ struct ContinueOverlay: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(correct ? Color.theme.rankingUp : Color.theme.textDark)
                 Button(action: { action() }) {
-                    Text((index != lastIndex) ? "Continue" : "Finish")
+                    Text((index != length - 1) ? "Continue" : "Finish")
                 }
                 .padding(.vertical, 10)
                 .frame(width: 200)
@@ -39,7 +36,7 @@ struct ContinueOverlay: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom, 50)
             .padding(.horizontal)
-            .background(Color.white)
+            .background(Color.theme.backgroundOverlay)
             .cornerRadius(20)
         }
         .zIndex(2)
@@ -50,6 +47,6 @@ struct ContinueOverlay: View {
 
 struct ContinueOverlay_Previews: PreviewProvider {
     static var previews: some View {
-        ContinueOverlay(message: .constant("Ready?"), index: .constant(3), correct: .constant(true), lastIndex: 4, action: {})
+        ContinueOverlay(message: "Ready?", index: 3, correct: true, length: 4, action: {})
     }
 }
