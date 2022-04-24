@@ -14,17 +14,6 @@ class AppViewModel: ObservableObject {
     
     @Published var signedIn = false
     
-    func getCurrentUser() {
-        let user = auth.currentUser
-        if user != nil {
-            print("user email before \(String(describing: user!.email))")
-            userDao.loggedInUserEmail = user!.email
-            print("user email after \(userDao.loggedInUserEmail!)")
-        } else {
-            print("no user")
-        }
-    }
-    
     var isSignedIn: Bool {
         return auth.currentUser != nil
     }

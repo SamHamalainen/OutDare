@@ -88,7 +88,6 @@ struct MapView: View {
         .onAppear {
             dao.getChallenges()
             viewModel.getUserLocation()
-            loginViewModel.getCurrentUser()
             self.viewModel.setup(self.loginViewModel.userDao)
         }
     }

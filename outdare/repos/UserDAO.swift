@@ -12,7 +12,6 @@ class UserDAO: ObservableObject {
     let db = Firestore.firestore()
     
     @Published var errorMessage = ""
-    @Published var loggedInUserEmail: String?
     @Published var loggedUserScore: Int?
     
     // Logged in user

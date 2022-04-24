@@ -24,8 +24,7 @@ struct MapViewCustom: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         viewModel.checkIfLocationServicesIsEnabled()
-        print("annotations: \(annotations)")
-        let mapView = MKMapView()
+        let mapView = viewModel.map
         navigationRoute.mapView = mapView
         navigationRoute.userLocation = viewModel.userLocation!
         
@@ -35,8 +34,6 @@ struct MapViewCustom: UIViewRepresentable {
         mapView.mapType = .mutedStandard
         mapView.userTrackingMode = .none
         
-        let overlay = MKCircle(center: viewModel.userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0), radius: 150)
-        mapView.addOverlay(overlay)
         let span = viewModel.userLocation != nil
             ? MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.001)
             : MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
@@ -101,7 +98,7 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
         if let circle = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: circle)
             circleRenderer.fillColor = .orange
-            circleRenderer.alpha = 0.5
+            circleRenderer.alpha = 0.3
             return circleRenderer
         }
         if let dir = overlay as? MKPolyline {

@@ -33,6 +33,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var selection: Challenge?
     @Published var userSelectedTracking = false
     @Published var distanceTravelled: Double = 0
+    @Published var circle: MKCircle?
+    @Published var map = MKMapView()
     var locationOld: CLLocation? = nil
     
     func setup(_ userDao: UserDAO){
@@ -43,7 +45,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     func getUserLocation() {
         locationManager = CLLocationManager()
-        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482)
     }
     
     func checkIfLocationServicesIsEnabled() {
@@ -54,7 +56,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             locationManager!.startUpdatingLocation()
             locationManager!.pausesLocationUpdatesAutomatically = true
             locationManager!.activityType = .fitness
-            locationManager!.distanceFilter = 10.0
+//            locationManager!.distanceFilter = 10.0
         } else {
             print("Please turn on location services from the phone settings")
         }
@@ -69,10 +71,19 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         locationOld = current
     }
     
+    func showCircle(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance, mapView: MKMapView) {
+        if self.circle != nil {
+            map.removeOverlay(self.circle!)
+        }
+        self.circle = MKCircle(center: coordinate, radius: radius)
+        mapView.addOverlay(circle!)
+       }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locationLast = locations.last else { return }
         for location in locations {
             calculateDistanceTravelled(location)
+            showCircle(coordinate: location.coordinate, radius: 150, mapView: self.map)
         }
         if userDao != nil {
             if distanceTravelled >= 900 {
