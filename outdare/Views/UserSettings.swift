@@ -56,7 +56,7 @@ struct UserSettings: View {
                     TextField("New password", text: $newPassword)
                     
                     Button {
-                        updateUserDetails()
+                        saveImageToStorage()
                     } label: {
                             Text("UPDATE")
                     }
@@ -74,25 +74,8 @@ struct UserSettings: View {
             ImagePicker(image: $image)
         }
     }
-    
-    
-    // Update user details
-    func updateUserDetails() {
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let userData = ["email": email, "username": username, "location": location]
-        FirebaseManager.shared.firestore.collection("users")
-            .document(uid).updateData(userData) { err in
-                    if let err = err {
-                        print(err)
-                        self.errorMessage = "\(err)"
-                        return
-                    }
-                    print("Success")
-                    self.saveImageToStorage()
-                    updateEmailAndPassword()
-                }
-            }
 
+    // Update user email and password to firebase auth
     private func updateEmailAndPassword() {
         let user = FirebaseManager.shared.auth.currentUser
         let credentials = EmailAuthProvider.credential(withEmail: vm.currentUser?.email ?? "", password: oldPassword)
@@ -118,7 +101,7 @@ struct UserSettings: View {
         })
     }
 
-    // Saving profile picture firebase storage
+    // Saving profile picture to firebase storage
     private func saveImageToStorage() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid
         else {return}
@@ -136,9 +119,28 @@ struct UserSettings: View {
                     return
                 }
                 self.errorMessage = "Successfully stored image with url \(url?.absoluteString ?? "")"
+                
+                // Store url in collection
+                guard let url = url else { return }
+                self.updateUserDetails(imageProfileUrl: url)
             }
         }
     }
+    
+    // Update user details to collection
+    func updateUserDetails(imageProfileUrl: URL) {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        let userData = ["email": email, "profilePicture": imageProfileUrl.absoluteString, "username": username, "location": location]
+        FirebaseManager.shared.firestore.collection("users")
+            .document(uid).updateData(userData) { err in
+                    if let err = err {
+                        print(err)
+                        self.errorMessage = "\(err)"
+                        return
+                    }
+                    print("Success")
+                }
+            }
 }
 
 struct UserSettings_Previews: PreviewProvider {

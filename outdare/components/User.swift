@@ -17,7 +17,7 @@ struct User: Hashable, Codable, Identifiable {
 
 struct CurrentUser: Decodable, Identifiable {
     var id: Int
-    var username, location, email: String
+    var username, location, email, profilePicture: String
     var score: Int
     var goneUp: Bool
 }

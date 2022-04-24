@@ -34,10 +34,11 @@ class UserViewModel: ObservableObject {
         let username = data["username"] as? String ?? ""
         let location = data["location"] as? String ?? ""
         let email = data["email"] as? String ?? ""
+        let profilePicture = data["profilePicture"] as? String ?? ""
         let score = data["score"] as? Int ?? 0
         let goneUp = data["goneUp"] as? Bool ?? false
         
-        return CurrentUser(id: id, username: username, location: location, email: email, score: score, goneUp: goneUp)
+        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: score, goneUp: goneUp)
     }
     
     // Fetching current user
