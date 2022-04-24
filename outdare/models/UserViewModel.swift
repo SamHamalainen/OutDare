@@ -10,6 +10,7 @@ import Firebase
 
 class UserViewModel: ObservableObject {
     @Published var errorMessage = ""
+    @Published var image: UIImage?
     
     // Logged in user
     @Published var currentUser: CurrentUser?
@@ -90,10 +91,5 @@ class UserViewModel: ObservableObject {
             }
             self.errorMessage = "Successfully fetched users"
         }
-    }
-    
-    
-    func updateUsername() {
-        
     }
 }

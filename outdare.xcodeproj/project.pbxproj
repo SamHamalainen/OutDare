@@ -76,7 +76,6 @@
 		B1A867AC28118D0F001B38F1 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AB28118D0F001B38F1 /* UserViewModel.swift */; };
 		B1A867AE28118DC1001B38F1 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AD28118DC1001B38F1 /* UserSettings.swift */; };
 		B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AF28118E31001B38F1 /* ImagePicker.swift */; };
-		B1A867B228118EBE001B38F1 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B128118EBE001B38F1 /* SettingsItem.swift */; };
 		B1A867B428118F60001B38F1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B328118F60001B38F1 /* FirebaseManager.swift */; };
 		B1A867B628118FC6001B38F1 /* GetCurrentUserPrevRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */; };
 /* End PBXBuildFile section */
@@ -171,7 +170,6 @@
 		B1A867AB28118D0F001B38F1 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		B1A867AD28118DC1001B38F1 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		B1A867AF28118E31001B38F1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		B1A867B128118EBE001B38F1 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		B1A867B328118F60001B38F1 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrentUserPrevRanking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,7 +238,6 @@
 				06312257280C25F0004BF504 /* TopProfiles.swift */,
 				06312259280C26D5004BF504 /* User.swift */,
 				0631225B280C2BC0004BF504 /* RankingListItem.swift */,
-				B1A867B128118EBE001B38F1 /* SettingsItem.swift */,
 				0631225D280C2BEC004BF504 /* UserDetails.swift */,
 				B1A867AF28118E31001B38F1 /* ImagePicker.swift */,
 				B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */,
@@ -550,7 +547,6 @@
 				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
 				065FEC692811830700237AFB /* StartView.swift in Sources */,
-				B1A867B228118EBE001B38F1 /* SettingsItem.swift in Sources */,
 				065FEC95281183FB00237AFB /* SideMenuViewModel.swift in Sources */,
 				064F1202280FF1C300C642CF /* SideMenuItem.swift in Sources */,
 				064F12142810340A00C642CF /* UserDAO.swift in Sources */,

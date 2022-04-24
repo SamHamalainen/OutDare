@@ -5,21 +5,20 @@
 //  Created by Jasmin Partanen on 14.4.2022.
 //
 import SwiftUI
+import FirebaseAuth
 
 // Settings list for editing profile details
 struct UserSettings: View {
     @ObservedObject private var vm = UserViewModel()
     
-    @State var openEditUsername = false
-    @State var openEditEmail = false
-    @State var openEditLocation = false
-    @State var openEditPassword = false
     @State var showImagePicker = false
-    
     @State var username = ""
     @State var email = ""
     @State var location = ""
-    @State var password = ""
+    @State var oldPassword = ""
+    @State var newPassword = ""
+    @State var image: UIImage?
+    @State var errorMessage = ""
     
     var body: some View {
         ZStack (alignment: .top) {
@@ -50,11 +49,17 @@ struct UserSettings: View {
                 .padding(.vertical, 20)
             
                 VStack(alignment: .center, spacing: 20) {
-                    SettingsItem(placeholder: vm.currentUser?.username ?? "Username", text: username)
-                    SettingsItem(placeholder: vm.currentUser?.email ?? "Email", text: email)
-                    SettingsItem(placeholder: vm.currentUser?.location ?? "Location", text: location)
-                    SettingsItem(placeholder: "Password", text: password)
-                    Button("SAVE", action: vm.updateUsername)
+                    TextField(vm.currentUser?.username ?? "Username", text: $username)
+                    TextField(vm.currentUser?.email ?? "Email", text: $email)
+                    TextField(vm.currentUser?.location ?? "Location", text: $location)
+                    TextField("Old password", text: $oldPassword)
+                    TextField("New password", text: $newPassword)
+                    
+                    Button {
+                        updateUserDetails()
+                    } label: {
+                            Text("UPDATE")
+                    }
                         .padding()
                         .frame(width: 100)
                         .background(Color.theme.button)
@@ -69,10 +74,50 @@ struct UserSettings: View {
             ImagePicker(image: $image)
         }
     }
-    @State var image: UIImage?
-    @State var errorMessage = ""
     
     
+    // Update user details
+    func updateUserDetails() {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        let userData = ["email": email, "username": username, "location": location]
+        FirebaseManager.shared.firestore.collection("users")
+            .document(uid).updateData(userData) { err in
+                    if let err = err {
+                        print(err)
+                        self.errorMessage = "\(err)"
+                        return
+                    }
+                    print("Success")
+                    self.saveImageToStorage()
+                    updateEmailAndPassword()
+                }
+            }
+
+    private func updateEmailAndPassword() {
+        let user = FirebaseManager.shared.auth.currentUser
+        let credentials = EmailAuthProvider.credential(withEmail: vm.currentUser?.email ?? "", password: oldPassword)
+        user?.reauthenticate(with: credentials, completion: { (result, error) in
+           if let err = error {
+              print("\(err)")
+           } else {
+               user?.updateEmail(to: email) { error in
+                   if let err = error {
+                       print(err)
+                       self.errorMessage = "\(err)"
+                       return
+                   }
+                   user?.updatePassword(to: newPassword) { error in
+                       if let err = error {
+                           print(err)
+                           self.errorMessage = "\(err)"
+                           return
+                       }
+                   }
+               }
+           }
+        })
+    }
+
     // Saving profile picture firebase storage
     private func saveImageToStorage() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid
