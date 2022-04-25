@@ -26,6 +26,9 @@ struct MapViewCustom: UIViewRepresentable {
         viewModel.checkIfLocationServicesIsEnabled()
         let mapView = viewModel.map
         navigationRoute.mapView = mapView
+        if let userLocation = viewModel.userLocation {
+            navigationRoute.userLocation = userLocation
+        }
         
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
@@ -54,9 +57,6 @@ struct MapViewCustom: UIViewRepresentable {
             for annotation in annotations {
                 mapView.deselectAnnotation(annotation, animated: false)
             }
-        }
-        if let userLocation = viewModel.userLocation {
-            navigationRoute.userLocation = userLocation
         }
         if !navigationRoute.directionsArray.isEmpty {
             let firstDestination = navigationRoute.directionsArray.first?.destination
