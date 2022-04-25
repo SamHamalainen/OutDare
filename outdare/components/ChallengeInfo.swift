@@ -57,16 +57,17 @@ struct ChallengeInfo: View {
         challengeStarted = true
     }
     
-    func navigateFunction() {
+    private func addToRouteFirst() {
         guard let source = userLocation else { return }
         guard let destination = locationPassed else { return }
+//        print("//info \(locationPassed?.name)")
         let directions = Directions(source: source, destination: destination)
-        navigationRoute.addDirections(directions: directions, keepPrevious: false)
+        navigationRoute.addDirections(directions: directions, option: .makeFirst)
     }
-    func addToRoute() {
+    private func addToRouteLast() {
         guard let source = navigationRoute.directionsArray.last?.destination.coordinates else { return }
         let directions = Directions(source: source, destination: locationPassed!)
-        navigationRoute.addDirections(directions: directions, keepPrevious: true)
+        navigationRoute.addDirections(directions: directions, option: .makeLast)
     }
     
     func showAlert() {
@@ -138,11 +139,11 @@ struct ChallengeInfo: View {
                             },
                                   secondaryButton: .cancel())
                         }
-                        Button(action: {navigateFunction()}) {
-                            Text("Navigate")
+                        Button(action: {addToRouteFirst()}) {
+                            Text("Add to the route(first)")
                                 .font(Font.customFont.btnText)
                                 .fontWeight(.semibold)
-                                .frame(width: 200)
+                                .frame(width: 250)
                                 .padding(.vertical, 10)
                                 .background(Color("Button"))
                                 .foregroundColor(.white)
@@ -151,12 +152,12 @@ struct ChallengeInfo: View {
                         .offset(y: buttonOffsetY)
                         .offset(y: buttonEndOffsetY)
                         Button(action: {
-                            navigationRoute.directionsArray.isEmpty ? navigateFunction() : addToRoute()
+                            navigationRoute.directionsArray.isEmpty ? addToRouteFirst() : addToRouteLast()
                         }) {
-                            Text("Add to the route")
+                            Text("Add to the route(last)")
                                 .font(Font.customFont.btnText)
                                 .fontWeight(.semibold)
-                                .frame(width: 200)
+                                .frame(width: 250)
                                 .padding(.vertical, 10)
                                 .background(Color("Button"))
                                 .foregroundColor(.white)
