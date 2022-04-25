@@ -5,6 +5,8 @@
 //  Created by Jasmin Partanen on 5.4.2022.
 //
 import SwiftUI
+import SDWebImageSwiftUI
+
 // List item for leadearboard ranking list
 struct RankingListItem: View {
     let users: CurrentUser
@@ -22,11 +24,22 @@ struct RankingListItem: View {
             }
         }
             .font(Font.customFont.smallText)
-            Image("profile1")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .padding(10)
-                .shadow(color: Color.theme.icon, radius: 2, x: 1, y: 1)
+            
+            VStack {
+                if users.profilePicture == "" {
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: 55))
+                } else {
+                    WebImage(url: URL(string: users.profilePicture))
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                        .clipped()
+                        .cornerRadius(60)
+                }
+            }
+            .foregroundColor(Color.theme.textDark)
+            .padding(.vertical, 10)
+            
             Text(users.username)
                 .padding(10)
                 .font(Font.customFont.normalText)

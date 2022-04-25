@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import FirebaseAuth
+import SDWebImageSwiftUI
 
 // Settings list for editing profile details
 struct UserSettings: View {
@@ -13,7 +14,8 @@ struct UserSettings: View {
     
     @State var showImagePicker = false
     @State var username = ""
-    @State var email = ""
+    @State var oldEmail = ""
+    @State var newEmail = ""
     @State var location = ""
     @State var oldPassword = ""
     @State var newPassword = ""
@@ -37,23 +39,59 @@ struct UserSettings: View {
                                 .frame(width: 128, height: 128)
                                 .cornerRadius(64)
                         } else {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 64))
-                                .padding()
+                            if vm.currentUser?.profilePicture == "" {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 120))
+                            } else {
+                                WebImage(url: URL(string: vm.currentUser?.profilePicture ?? ""))
+                                    .resizable()
+                                    .frame(width: 120, height: 120)
+                                    .clipped()
+                                    .cornerRadius(120)
+                            }
                         }
                     }
-                    .overlay(RoundedRectangle(cornerRadius: 64)
-                        .stroke(Color.theme.textDark, lineWidth: 4))
                     .foregroundColor(Color.theme.textDark)
                 }
                 .padding(.vertical, 20)
             
-                VStack(alignment: .center, spacing: 20) {
+                VStack(alignment: .center, spacing: 15) {
+                        ZStack{
+                    RoundedRectangle(cornerRadius: 20)
                     TextField(vm.currentUser?.username ?? "Username", text: $username)
-                    TextField(vm.currentUser?.email ?? "Email", text: $email)
+                                .padding()
+                                .foregroundColor(Color.theme.textDark)
+                        }  .frame(width: 300, height: 50)
+                        ZStack{
+                    RoundedRectangle(cornerRadius: 20)
+                    TextField(vm.currentUser?.email ?? "Old email", text: $oldEmail)
+                                .padding()
+                                .foregroundColor(Color.theme.textDark)
+                        }   .frame(width: 300, height: 50)
+                        ZStack{
+                    RoundedRectangle(cornerRadius: 20)
+                    TextField(vm.currentUser?.email ?? "New email", text: $newEmail)
+                                .padding()
+                                .foregroundColor(Color.theme.textDark)
+                        }   .frame(width: 300, height: 50)
+                        ZStack{
+                    RoundedRectangle(cornerRadius: 20)
                     TextField(vm.currentUser?.location ?? "Location", text: $location)
+                                .padding()
+                                .foregroundColor(Color.theme.textDark)
+                        }   .frame(width: 300, height: 50)
+                        ZStack{
+                    RoundedRectangle(cornerRadius: 20)
                     TextField("Old password", text: $oldPassword)
+                                .padding()
+                                .foregroundColor(Color.theme.textDark)
+                        }   .frame(width: 300, height: 50)
+                        ZStack{
+                    RoundedRectangle(cornerRadius: 20)
                     TextField("New password", text: $newPassword)
+                                .padding()
+                                .foregroundColor(Color.theme.textDark)
+                        }   .frame(width: 300, height: 50)
                     
                     Button {
                         saveImageToStorage()
@@ -66,39 +104,13 @@ struct UserSettings: View {
                         .foregroundColor(Color.theme.textLight)
                         .cornerRadius(20)
                 }
-                .frame(width: 200)
+                .foregroundColor(Color.theme.transparent)
                 .font(Font.customFont.normalText)
             }
         }
         .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
             ImagePicker(image: $image)
         }
-    }
-
-    // Update user email and password to firebase auth
-    private func updateEmailAndPassword() {
-        let user = FirebaseManager.shared.auth.currentUser
-        let credentials = EmailAuthProvider.credential(withEmail: vm.currentUser?.email ?? "", password: oldPassword)
-        user?.reauthenticate(with: credentials, completion: { (result, error) in
-           if let err = error {
-              print("\(err)")
-           } else {
-               user?.updateEmail(to: email) { error in
-                   if let err = error {
-                       print(err)
-                       self.errorMessage = "\(err)"
-                       return
-                   }
-                   user?.updatePassword(to: newPassword) { error in
-                       if let err = error {
-                           print(err)
-                           self.errorMessage = "\(err)"
-                           return
-                       }
-                   }
-               }
-           }
-        })
     }
 
     // Saving profile picture to firebase storage
@@ -122,15 +134,42 @@ struct UserSettings: View {
                 
                 // Store url in collection
                 guard let url = url else { return }
+                self.updateEmailAndPassword()
                 self.updateUserDetails(imageProfileUrl: url)
             }
         }
     }
     
+    // Update user email and password to firebase auth
+    private func updateEmailAndPassword() {
+        let user = FirebaseManager.shared.auth.currentUser
+        let credentials = EmailAuthProvider.credential(withEmail: oldEmail, password: oldPassword)
+        user?.reauthenticate(with: credentials, completion: { (result, error) in
+           if let err = error {
+              print("\(err)")
+           } else {
+               user?.updateEmail(to: newEmail) { error in
+                   if let err = error {
+                       print(err)
+                       self.errorMessage = "\(err)"
+                       return
+                   }
+                   user?.updatePassword(to: newPassword) { error in
+                       if let err = error {
+                           print(err)
+                           self.errorMessage = "\(err)"
+                           return
+                       }
+                   }
+               }
+           }
+        })
+    }
+    
     // Update user details to collection
     func updateUserDetails(imageProfileUrl: URL) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let userData = ["email": email, "profilePicture": imageProfileUrl.absoluteString, "username": username, "location": location]
+        let userData = ["profilePicture": imageProfileUrl.absoluteString, "email": newEmail, "username": username, "location": location]
         FirebaseManager.shared.firestore.collection("users")
             .document(uid).updateData(userData) { err in
                     if let err = err {
@@ -141,6 +180,7 @@ struct UserSettings: View {
                     print("Success")
                 }
             }
+
 }
 
 struct UserSettings_Previews: PreviewProvider {

@@ -5,6 +5,7 @@
 //  Created by Jasmin Partanen on 8.4.2022.
 //
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct UserDetails: View {
     @ObservedObject private var vm = UserViewModel()
@@ -12,21 +13,32 @@ struct UserDetails: View {
     var body: some View {
         VStack {
             VStack {
-            Image("profile1")
-                .resizable()
-                .frame(width: 150, height: 150)
-                .shadow(radius: 7)
+                VStack {
+                    if vm.currentUser?.profilePicture == "" {
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 120))
+                            .padding()
+                    } else {
+                        WebImage(url: URL(string: vm.currentUser?.profilePicture ?? ""))
+                            .resizable()
+                            .frame(width: 170, height: 170)
+                            .clipped()
+                            .cornerRadius(170)
+                    }
+                }
+                    .overlay(RoundedRectangle(cornerRadius: 170)
+                        .stroke(Color.theme.stroke, lineWidth: 4))
                 
                 Text(vm.currentUser?.username ?? "")
-                .font(Font.customFont.largeText)
+                    .font(Font.customFont.largeText)
                 
-            HStack {
-                Image(systemName: "mappin")
-                Text(vm.currentUser?.location ?? "")
-                    .font(Font.customFont.smallText)
+                HStack {
+                    Image(systemName: "mappin")
+                    Text(vm.currentUser?.location ?? "")
+                        .font(Font.customFont.smallText)
+                }
+                .padding(.vertical, 2)
             }
-            .padding(.vertical, 2)
-        }
             
             ZStack {
             RoundedRectangle(cornerRadius: 20)

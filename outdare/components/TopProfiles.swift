@@ -14,11 +14,11 @@ struct TopProfiles: View {
     var body: some View {
         HStack {
             SingleProfile(users: vm.secondUser ?? defaultData)
-                .offset(x: 25, y: 50)
+                .offset(x: 20, y: 50)
             SingleProfile(users: vm.firstUser ?? defaultData)
                 .zIndex(4)
             SingleProfile(users: vm.thirdUser ?? defaultData)
-                .offset(x: -25, y: 50)
+                .offset(x: -20, y: 50)
         }
         .foregroundColor(Color.theme.textLight)
     }
