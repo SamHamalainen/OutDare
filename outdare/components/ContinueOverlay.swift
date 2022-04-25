@@ -36,7 +36,7 @@ struct ContinueOverlay: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom, 50)
             .padding(.horizontal)
-            .background(Color.theme.backgroundOverlay)
+            .background(Color.theme.background2)
             .cornerRadius(20)
         }
         .zIndex(2)

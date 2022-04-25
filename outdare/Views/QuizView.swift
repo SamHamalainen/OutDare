@@ -16,6 +16,7 @@ struct QuizView: View {
     @State var voice = false
     @StateObject private var speechAnalyzer = SpeechAnalyzer()
     @State var input = ""
+    let id: Int
     
     var body: some View {
         ZStack {
@@ -125,7 +126,8 @@ extension QuizView {
             timer.restart()
         } else {
             print(game.results)
-            resultHandler = ResultHandler(userId: 1, challengeId: game.quiz.id, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
+            resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
+            resultHandler.pushToDB()
             state = "done"
         }
     }

@@ -28,6 +28,8 @@ struct ChallengeContainer: View {
                             dao.getQuiz(id: challenge.challengeId)
                         case "lyrics":
                             dao.getLyrics(id: challenge.challengeId)
+                        case "twister":
+                            dao.getTwister(id: challenge.challengeId)
                         default:
                             return
                         }
@@ -37,13 +39,20 @@ struct ChallengeContainer: View {
                 case "quiz":
                     if let quiz = dao.quiz {
                         let game = QuizGame(quiz: quiz)
-                        QuizView(game: game, state: $challengeState, resultHandler: $resultHandler)
+                        QuizView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
                 case "lyrics":
                     if let lyrics = dao.lyrics {
                         let game = LyricsGame(lyricsChallenge: lyrics)
-                        LyricsView(game: game, state: $challengeState, resultHandler: $resultHandler)
+                        LyricsView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
+                case "twister":
+                    if let twister = dao.twister {
+                        let game = TwisterGame(twister: twister)
+                        TwisterView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
+                    }
+                case "string":
+                    StringGameView(state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                 default:
                     Text("invalid category")
                 }

@@ -75,6 +75,7 @@
 		6AF5296728158110005189F3 /* ResultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5296628158110005189F3 /* ResultHandler.swift */; };
 		6AF52969281586B9005189F3 /* ResultRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF52968281586B9005189F3 /* ResultRow.swift */; };
 		6AF5296B2815F81D005189F3 /* LyricsGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5296A2815F81D005189F3 /* LyricsGame.swift */; };
+		6AF5296D28161613005189F3 /* TwisterGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5296C28161613005189F3 /* TwisterGame.swift */; };
 		B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166D21727FC0D0D00EADF66 /* Trapezium.swift */; };
 		B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B167D31D27FAE4CE00BF950E /* outdareApp.swift */; };
 		B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B167D32127FAE4CF00BF950E /* Assets.xcassets */; };
@@ -178,6 +179,7 @@
 		6AF5296628158110005189F3 /* ResultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHandler.swift; sourceTree = "<group>"; };
 		6AF52968281586B9005189F3 /* ResultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRow.swift; sourceTree = "<group>"; };
 		6AF5296A2815F81D005189F3 /* LyricsGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsGame.swift; sourceTree = "<group>"; };
+		6AF5296C28161613005189F3 /* TwisterGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwisterGame.swift; sourceTree = "<group>"; };
 		B166D21727FC0D0D00EADF66 /* Trapezium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezium.swift; sourceTree = "<group>"; };
 		B167D31A27FAE4CE00BF950E /* outdare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outdare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B167D31D27FAE4CE00BF950E /* outdareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outdareApp.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				6AF529622814CB4C005189F3 /* QuizGame.swift */,
 				6AF52968281586B9005189F3 /* ResultRow.swift */,
 				6AF5296A2815F81D005189F3 /* LyricsGame.swift */,
+				6AF5296C28161613005189F3 /* TwisterGame.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */,
 				065FEC682811830700237AFB /* Leaderboard.swift in Sources */,
 				0631225A280C26D5004BF504 /* User.swift in Sources */,
+				6AF5296D28161613005189F3 /* TwisterGame.swift in Sources */,
 				6AF5295D28130663005189F3 /* StringGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

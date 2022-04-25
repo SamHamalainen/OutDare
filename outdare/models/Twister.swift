@@ -9,11 +9,12 @@ import Foundation
 
 struct Twister {
     var id: Int = 0
+    let difficulty: String
     let data: [TwisterData]
 }
 
 extension Twister {
     static let sample = [
-        Twister(data: TwisterData.sample)
+        Twister(difficulty: "easy", data: TwisterData.sample)
     ]
 }

@@ -25,6 +25,7 @@ struct LyricsView: View {
     @State var showAns = false
     @StateObject private var speechAnalyzer = SpeechAnalyzer()
     @State var input = ""
+    let id: Int
     
     var body: some View {
         ZStack {
@@ -118,7 +119,7 @@ extension LyricsView {
             timer.restart()
         } else {
             print(game.results)
-            resultHandler = ResultHandler(userId: 1, challengeId: game.lyricsChallenge.id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
+            resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
             state = "done"
         }
     }

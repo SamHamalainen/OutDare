@@ -29,8 +29,10 @@ struct Challenge: Identifiable, Equatable {
         switch category {
         case "quiz":
            return "quiz"
-        case "tongue":
+        case "twister":
            return "tongueTwister"
+        case "string":
+            return "tongueTwister"
         case "lyrics":
             return "lyrics"
         default:

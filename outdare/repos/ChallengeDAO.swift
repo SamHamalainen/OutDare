@@ -17,6 +17,7 @@ class ChallengeDAO: ObservableObject {
     @Published var challenge: Challenge? = nil
     @Published var quiz: Quiz? = nil
     @Published var lyrics: Lyrics? = nil
+    @Published var twister: Twister? = nil
     @Published var annotations: [MKPointAnnotation] = []
     
     func challengeToAnnotation() {
@@ -26,7 +27,7 @@ class ChallengeDAO: ObservableObject {
             let annotation = MKPointAnnotation()
             annotation.coordinate = challenge.coordinates
             annotation.title = "\(challenge.name)"
-            annotation.subtitle = challenge.category
+            annotation.subtitle = challenge.icon
             annotations.append(annotation)
             count += 1
         }
@@ -44,6 +45,9 @@ class ChallengeDAO: ObservableObject {
         let longitude = data["longitude"] as? Double ?? 0
         
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        if category == "twister" {
+            print("twister")
+        }
         return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficulty, category: category, description: description, coordinates: coordinates)
     }
     
@@ -81,6 +85,19 @@ class ChallengeDAO: ObservableObject {
         return Quiz(id: id, timePerQuestion: timePerQ, data: quizData, difficulty: difficulty)
     }
     
+    func convertToTwister(data: [String:Any]) -> Twister {
+        let id = data["id"] as? Int ?? 0
+        let texts = data["texts"] as? [String] ?? []
+        let timeLimits = data["timeLimits"] as? [Int] ?? []
+        let difficulty = data["difficulty"] as? String ?? ""
+        var twisterData: [TwisterData] = []
+        for i in texts.indices {
+            let data = TwisterData(timeLimit: timeLimits[i], text: texts[i])
+            twisterData.append(data)
+        }
+        return Twister(id: id, difficulty: difficulty, data: twisterData)
+    }
+    
     func getChallenges() {
         db.collection("challenges").getDocuments() { [self] (querySnapshot, err) in
             if let err = err {
@@ -112,6 +129,8 @@ class ChallengeDAO: ObservableObject {
                         self.getQuiz(id: id)
                     case "lyrics":
                         self.getLyrics(id: id)
+                    case "twister":
+                        self.getTwister(id: id)
                     default:
                         return
                     }
@@ -148,8 +167,21 @@ class ChallengeDAO: ObservableObject {
         }
     }
     
+    func getTwister(id: Int) {
+        let quizRef = db.collection("twisters")
+        let query = quizRef.whereField("id", isEqualTo: id)
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let document = querySnapshot!.documents[0]
+                let twister = self.convertToTwister(data: document.data())
+                self.twister = twister
+            }
+        }
+    }
+    
     func addAttempt(attempt: Attempt) {
-        let ref: DocumentReference? = nil
         let attemptRef = db.collection("attempts")
         var data = attempt.toDB()
         data["data"] = Timestamp()
@@ -157,7 +189,7 @@ class ChallengeDAO: ObservableObject {
             if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    print("Document added with ID: \(ref!.documentID)")
+                    print("Document added!")
                 }
         }
     }
