@@ -9,7 +9,8 @@ import SwiftUI
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 60.22418227428884, longitude: 24.758741356204567)
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
+    
 }
 
 extension CLLocationCoordinate2D: Equatable {
@@ -43,20 +44,23 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     private var locationManager: CLLocationManager?
     
-    func getUserLocation() {
-        locationManager = CLLocationManager()
-        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482)
-    }
+//    func getUserLocation() {
+//        locationManager = CLLocationManager()
+//        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482)
+//    }
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
-            locationManager!.delegate = self
-            locationManager!.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager!.startUpdatingLocation()
-            locationManager!.pausesLocationUpdatesAutomatically = true
-            locationManager!.activityType = .fitness
-//            locationManager!.distanceFilter = 10.0
+            if let locManager = locationManager {
+                self.userLocation = locManager.location?.coordinate
+                locManager.delegate = self
+                locManager.desiredAccuracy = kCLLocationAccuracyBest
+                locManager.startUpdatingLocation()
+                locManager.pausesLocationUpdatesAutomatically = true
+                locManager.activityType = .fitness
+//              locManager.distanceFilter = 10.0
+            }
         } else {
             print("Please turn on location services from the phone settings")
         }
@@ -72,8 +76,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
     
     func showCircle(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance, mapView: MKMapView) {
-        if self.circle != nil {
-            map.removeOverlay(self.circle!)
+        if let circle = self.circle {
+            map.removeOverlay(circle)
         }
         self.circle = MKCircle(center: coordinate, radius: radius)
         mapView.addOverlay(circle!)
@@ -85,14 +89,14 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             calculateDistanceTravelled(location)
             showCircle(coordinate: location.coordinate, radius: 150, mapView: self.map)
         }
-        if userDao != nil {
+        if let userDao = userDao {
             if distanceTravelled >= 900 {
-                userDao!.getLoggedInUserScore()
+                userDao.getLoggedInUserScore()
             }
             if distanceTravelled >= 1000 {
-                if let userScore = userDao?.loggedUserScore {
-                    userDao?.updateUsersScore(newScore: userScore + 5)
-                    userDao?.loggedUserScore = userScore + 5
+                if let userScore = userDao.loggedUserScore {
+                    userDao.updateUsersScore(newScore: userScore + 5)
+                    userDao.loggedUserScore = userScore + 5
                     distanceTravelled = 0
                 }
             }
@@ -113,8 +117,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         case .denied:
             print("You have denied this app location permission. Go into settings to change it.")
         case .authorizedAlways, .authorizedWhenInUse:
-            mapRegion = MKCoordinateRegion(center: locationManager.location!.coordinate,
-                                           span: MapDetails.defaultSpan)
+            if let userLoc = locationManager.location {
+                mapRegion = MKCoordinateRegion(center: userLoc.coordinate, span: MapDetails.defaultSpan)
+            }
         @unknown default:
             break
         }

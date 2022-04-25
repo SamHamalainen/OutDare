@@ -82,8 +82,8 @@ struct ChallengeInfo: View {
     }
     
     var body: some View {
-        if userLocation != nil {
-            if (locationPassed?.coordinates.distance(to: userLocation!))! >= 150 && revealedChallenge == false {
+        if let userLocation = userLocation {
+            if (locationPassed?.coordinates.distance(to: userLocation))! >= 150 && revealedChallenge == false {
                 ZStack(alignment: .top) {
                     RoundedRectangle(cornerRadius: 50)
                         .frame(width: UIScreen.main.bounds.width, height: challengeInfoHeight)
@@ -131,7 +131,7 @@ struct ChallengeInfo: View {
                         .offset(y: buttonEndOffsetY)
                         .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Are you sure you want to reveal challenge?"),
-                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 50 points"),
+                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 50 points."),
                                   primaryButton: .default(Text("Reveal")) {
                                 revealChallenge()
                             },
@@ -167,7 +167,7 @@ struct ChallengeInfo: View {
                     
                 }
                 .offset(y: startingOffsetY)
-            } else if (locationPassed?.coordinates.distance(to: userLocation!))! <= 150 || revealedChallenge {
+            } else if (locationPassed?.coordinates.distance(to: userLocation))! <= 150 || revealedChallenge {
                 ZStack(alignment: .top) {
                     RoundedRectangle(cornerRadius: 50)
                         .frame(width: UIScreen.main.bounds.width, height: challengeInfoHeight)

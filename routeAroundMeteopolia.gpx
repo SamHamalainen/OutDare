@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="Open GPX Tracker for iOS">
+	<wpt lat="60.22564892326786" lon="24.7445817336782">
+		<time>2022-04-24T15:29:15Z</time>
+		<name>18.29.15</name>
+		<desc>24. Apr 2022 at 18.29.15</desc>
+	</wpt>
+	<wpt lat="60.22532976408269" lon="24.751918262058304">
+		<time>2022-04-24T15:29:21Z</time>
+		<name>18.29.21</name>
+		<desc>24. Apr 2022 at 18.29.21</desc>
+	</wpt>
+	<wpt lat="60.225648923543524" lon="24.760649337595762">
+		<time>2022-04-24T15:29:27Z</time>
+		<name>18.29.27</name>
+		<desc>24. Apr 2022 at 18.29.27</desc>
+	</wpt>
+	<wpt lat="60.22595001427101" lon="24.76847092609818">
+		<time>2022-04-24T15:29:31Z</time>
+		<name>18.29.31</name>
+		<desc>24. Apr 2022 at 18.29.31</desc>
+	</wpt>
+	<wpt lat="60.22331838875366" lon="24.766300283522543">
+		<time>2022-04-24T15:29:37Z</time>
+		<name>18.29.37</name>
+		<desc>24. Apr 2022 at 18.29.37</desc>
+	</wpt>
+	<wpt lat="60.22273422332073" lon="24.757860243836255">
+		<time>2022-04-24T15:29:42Z</time>
+		<name>18.29.42</name>
+		<desc>24. Apr 2022 at 18.29.42</desc>
+	</wpt>
+	<wpt lat="60.22249934982267" lon="24.74986888423565">
+		<time>2022-04-24T15:29:47Z</time>
+		<name>18.29.47</name>
+		<desc>24. Apr 2022 at 18.29.47</desc>
+	</wpt>
+	<trk>
+	</trk>
+</gpx>

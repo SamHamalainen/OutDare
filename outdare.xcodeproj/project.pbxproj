@@ -145,6 +145,7 @@
 		065FEC8E281183FB00237AFB /* MapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		065FEC8F281183FB00237AFB /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		065FEC91281183FB00237AFB /* LyricsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsData.swift; sourceTree = "<group>"; };
+		065FEC9C2815A4E800237AFB /* routeAroundMeteopolia.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = routeAroundMeteopolia.gpx; sourceTree = "<group>"; };
 		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0664DC862808792900899F55 /* ChallengeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfo.swift; sourceTree = "<group>"; };
 		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -329,6 +330,7 @@
 		B167D31127FAE4CE00BF950E = {
 			isa = PBXGroup;
 			children = (
+				065FEC9C2815A4E800237AFB /* routeAroundMeteopolia.gpx */,
 				B167D31C27FAE4CE00BF950E /* outdare */,
 				B167D32D27FAE4CF00BF950E /* outdareTests */,
 				B167D33727FAE4CF00BF950E /* outdareUITests */,

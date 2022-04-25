@@ -30,7 +30,7 @@ struct MapView: View {
         //let isZoomedOut = (span > 0.8) ? true : false
         
         ZStack(alignment: .top)  {
-            if !dao.annotations.isEmpty && viewModel.userLocation != nil {
+            if !dao.annotations.isEmpty {
                 MapViewCustom(
                     viewModel: viewModel,
                     dao: dao, challengeInfoOpened: $viewModel.challengeInfoOpen,
@@ -50,8 +50,8 @@ struct MapView: View {
                 let formatted = String(format: "Distance: %.1f meters", viewModel.distanceTravelled)
                 Text("\(formatted)")
                     .padding(.top, 200)
-                if loginViewModel.userDao.loggedUserScore != nil {
-                    Text("\(loginViewModel.userDao.loggedUserScore!)")
+                if let score = loginViewModel.userDao.loggedUserScore {
+                    Text("\(score)")
                         .padding(.top, 100)
                 }
                 
@@ -87,7 +87,7 @@ struct MapView: View {
         }
         .onAppear {
             dao.getChallenges()
-            viewModel.getUserLocation()
+//            viewModel.getUserLocation()
             self.viewModel.setup(self.loginViewModel.userDao)
         }
     }

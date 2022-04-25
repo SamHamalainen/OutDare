@@ -26,7 +26,6 @@ struct MapViewCustom: UIViewRepresentable {
         viewModel.checkIfLocationServicesIsEnabled()
         let mapView = viewModel.map
         navigationRoute.mapView = mapView
-        navigationRoute.userLocation = viewModel.userLocation!
         
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
@@ -34,11 +33,11 @@ struct MapViewCustom: UIViewRepresentable {
         mapView.mapType = .mutedStandard
         mapView.userTrackingMode = .none
         
-        let span = viewModel.userLocation != nil
-            ? MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.001)
-            : MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
+//        let span = viewModel.userLocation != nil
+//            ? MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.001)
+//            : MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
         
-        mapView.setRegion(MKCoordinateRegion(center: viewModel.userLocation ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482), span: span), animated: true)
+        mapView.setRegion(viewModel.mapRegion, animated: true)
         mapView.addAnnotations(annotations)
         
         return mapView
@@ -47,7 +46,7 @@ struct MapViewCustom: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapViewCustom>) {
         if viewModel.userSelectedTracking {
             mapView.userTrackingMode = .follow
-            mapView.addAnnotations(annotations)
+//            mapView.addAnnotations(annotations)
         } else {
             mapView.userTrackingMode = .none
         }
@@ -56,7 +55,11 @@ struct MapViewCustom: UIViewRepresentable {
                 mapView.deselectAnnotation(annotation, animated: false)
             }
         }
-        
+        mapView.addAnnotations(annotations)
+//        print("annotations: \(annotations)")
+        if let userLocation = viewModel.userLocation {
+            navigationRoute.userLocation = userLocation
+        }
     }
 }
 
@@ -116,8 +119,8 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
             pin.frame.size = CGSize(width: 30, height: 60)
             return pin
         } else if annotation is MKPointAnnotation {
-            if viewModel.userLocation != nil {
-                if annotation.coordinate.distance(to: viewModel.userLocation!) <= 150 {
+            if let userLocation = viewModel.userLocation {
+                if annotation.coordinate.distance(to: userLocation) <= 150 {
                     let annotation2 = mapView.view(for: annotation) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
                     annotation2.image = UIImage(named: (annotation.subtitle!!))
                     annotation2.frame.size = CGSize(width: 30, height: 30)
