@@ -54,7 +54,7 @@ struct ChallengeInfo: View {
     }
     
     func updateUI() {
-        challengeStarted = true
+        challengeStarted.toggle()
     }
     
     func navigateFunction() {
@@ -202,8 +202,8 @@ struct ChallengeInfo: View {
                                 .opacity(0.2)
                         }
                         if challengeInfoExpanded {
-                            ChallengeContainer(challengeInfoOpened: $challengeInfoOpened, revealedChallenge: $revealedChallenge,challenge: locationPassed!, notifyParent2: updateUI)
-                                .padding(.top, 25)
+                            ChallengeContainer(challengeInfoOpened: $challengeInfoOpened, revealedChallenge: $revealedChallenge,challenge: locationPassed!, notifyParent: updateUI)
+                                .padding(.top)
                         }
                     }
                     if !challengeInfoExpanded {

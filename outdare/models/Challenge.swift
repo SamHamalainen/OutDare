@@ -29,8 +29,10 @@ struct Challenge: Identifiable, Equatable {
         switch category {
         case "quiz":
            return "quiz"
-        case "tongue":
+        case "twister":
            return "tongueTwister"
+        case "string":
+            return "tongueTwister"
         case "lyrics":
             return "lyrics"
         default:
@@ -40,6 +42,16 @@ struct Challenge: Identifiable, Equatable {
     let coordinates: CLLocationCoordinate2D
 }
 
+func getPoints(difficulty: String) -> Int {
+    switch difficulty {
+    case "easy" :
+        return 20
+    case "medium" :
+        return 40
+    default:
+        return 50
+    }
+}
 //extension Challenge {
 //    static let sample: [Challenge] = [
 //        Challenge(id: 1, challengeId: 1, name: "Quiz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy geography questions. You have 10 seconds per question.", icon: "questionmark.circle", coordinates: (0,0))

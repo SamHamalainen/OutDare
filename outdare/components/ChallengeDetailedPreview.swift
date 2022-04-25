@@ -11,18 +11,10 @@ import Speech
 
 struct ChallengeDetailedPreview: View {
     let challenge: Challenge
-    let notifyParent2: () -> Void
-    let setState: (String) -> Void
+    @Binding var state: String
     @State var ready = false
-    
+    @State var countdownOver = false
     @State private var showingAlert = false
-    
-    func notifyParent(countDownOver: Bool) {
-        if countDownOver {
-            setState("playing")
-            notifyParent2()
-        }
-    }
     
     var body: some View {
         VStack {
@@ -40,12 +32,7 @@ struct ChallengeDetailedPreview: View {
                 Group {
                     if !ready {
                         Button(action: {
-                            if checkSRPermission() {
-                                ready = true
-                            } else {
-                                checkSRPermission()
-                            }
-                            
+                            checkSRPermission()
                         }) {
                             Text("I'm ready!")
                                 .padding(.vertical, 10)
@@ -59,7 +46,12 @@ struct ChallengeDetailedPreview: View {
                             Button("Cancel", role: .cancel) { }
                         }
                     } else {
-                        CountdownTimer(timer: 3, countdownOver: notifyParent)
+                        CountdownTimer(timer: 3, over: $countdownOver)
+                            .onChange(of: countdownOver) { over in
+                                if over {
+                                    state = "playing"
+                                }
+                            }
                     }
                 }
                 .padding(.bottom, 35)
@@ -71,22 +63,22 @@ struct ChallengeDetailedPreview: View {
 }
 
 extension ChallengeDetailedPreview {
-    func checkSRPermission() -> Bool {
-        guard SFSpeechRecognizer.authorizationStatus() == .authorized else {
+    func checkSRPermission() {
+        if SFSpeechRecognizer.authorizationStatus() == .authorized {
+            ready = true
+        } else {
             SFSpeechRecognizer.requestAuthorization({ (status) in
                 print("Need speech recognition authorization")
                 if status != .notDetermined {
                     showingAlert = true
                 }
             })
-            return false
         }
-        return true
     }
 }
 
-struct ChallengeDetailedPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        ChallengeDetailedPreview(challenge: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)), notifyParent2: {}, setState: {_ in})
-    }
-}
+//struct ChallengeDetailedPreview_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChallengeDetailedPreview(challenge: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)), notifyParent2: {}, setState: {_ in})
+//    }
+//}

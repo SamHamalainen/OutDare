@@ -14,5 +14,6 @@ struct RoundedTextFieldStyle: TextFieldStyle {
             .cornerRadius(20)
             .shadow(color: .gray, radius: 1, x: 0, y: 3)
             .multilineTextAlignment(.center)
+            .font(Font.customFont.normalText)
     }
 }

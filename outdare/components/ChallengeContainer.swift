@@ -13,31 +13,24 @@ struct ChallengeContainer: View {
     @Binding var challengeInfoOpened: Bool
     @Binding var revealedChallenge: Bool
     let challenge: Challenge
-    let notifyParent2: () -> Void
+    let notifyParent: () -> Void
     @State var challengeState = "awaiting"
-    @State var score = 0.0
-    @State var time = 0.0
-    
+    @State var resultHandler = ResultHandler()
     @StateObject var dao = ChallengeDAO()
     
-    func setScoreTime(scoreTime: (Double, Double)) -> Void {
-        score = scoreTime.0
-        time = scoreTime.1
-    }
-    func changeState(newState: String) {
-        challengeState = newState
-    }
     var body: some View {
         Group {
             switch challengeState {
             case "awaiting":
-                ChallengeDetailedPreview(challenge: challenge, notifyParent2: notifyParent2, setState: changeState)
+                ChallengeDetailedPreview(challenge: challenge, state: $challengeState)
                     .onAppear() {
                         switch challenge.category {
                         case "quiz":
                             dao.getQuiz(id: challenge.challengeId)
                         case "lyrics":
                             dao.getLyrics(id: challenge.challengeId)
+                        case "twister":
+                            dao.getTwister(id: challenge.challengeId)
                         default:
                             return
                         }
@@ -46,19 +39,33 @@ struct ChallengeContainer: View {
                 switch challenge.category {
                 case "quiz":
                     if let quiz = dao.quiz {
-                        QuizView(quiz: quiz, setState: changeState, setResult: setScoreTime)
+                        let game = QuizGame(quiz: quiz)
+                        QuizView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
                 case "lyrics":
                     if let lyrics = dao.lyrics {
-                        LyricsView(lyricsChallenge: lyrics, setState: changeState, setResult: setScoreTime)
+                        let game = LyricsGame(lyricsChallenge: lyrics)
+                        LyricsView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
+                case "twister":
+                    if let twister = dao.twister {
+                        let game = TwisterGame(twister: twister)
+                        TwisterView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
+                    }
+                case "string":
+                    StringGameView(state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                 default:
                     Text("invalid category")
                 }
                 
                 
             default:
-                ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, revealedChallenge: $revealedChallenge, score: score, time: time)
+                ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, resultHandler: $resultHandler)
+            }
+        }
+        .onChange(of: challengeState) { state in
+            if state != "awaiting" {
+                notifyParent()
             }
         }
     }

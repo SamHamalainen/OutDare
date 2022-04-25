@@ -8,21 +8,19 @@
 import Foundation
 
 struct Attempt {
-    let userId = 0
+    var userId = 0
     let challengeId: Int
-    let date: String = ""
     let score: Int
-    let time: Int
-    let points: Int
+    let time: Int?
+    var speedBonus: Bool?
     
     func toDB() -> [String:Any] {
         return [
             "userId": userId,
             "challengeId": challengeId,
-            "date": date,
             "score": score,
-            "time": time,
-            "points": points
+            "time": time ?? nil,
+            "speedBonus": speedBonus ?? nil
         ]
     }
 }
