@@ -11,16 +11,16 @@ struct DirectionsView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var navigationRoute: NavigationRoute
     
-    private func formattedTime(time: Double) -> String {
-        let formattedTime = time / 60
-        if formattedTime > 60 {
-            let min = Int(formattedTime) % 60
-            let hour = (Int(formattedTime) - min) / 60
+    private func formattedTime(of seconds: Double) -> String {
+        let minutes = seconds / 60
+        if minutes > 60 {
+            let min = Int(minutes) % 60
+            let hour = (Int(minutes) - min) / 60
             return String("\(hour) h \(min) min")
         }
-        return String(format: "%.0f min", formattedTime)
+        return String(format: "%.0f min", minutes)
     }
-    private func formatDistance(meters: Double) -> String {
+    private func formattedDistance(of meters: Double) -> String {
         if meters >= 1000 {
             let km = meters / 1000
             return String(format: "%.2f km", km)
@@ -46,16 +46,20 @@ struct DirectionsView: View {
                 navigationRoute.removeDirections()
             }) {
                 Text("Remove all")
-                    
+            }
+            Button(action: {
+                navigationRoute.sortDirectionsByDistance()
+            }) {
+                Text("Sort by distance")
             }
             VStack(alignment: .leading) {
                 Text("Your route").font(Font.title).padding(.bottom)
                 HStack {
                     if !navigationRoute.directionsArray.isEmpty {
                         Image(systemName: "clock")
-                        Text(formattedTime(time:navigationRoute.totalTime))
+                        Text(formattedTime(of: navigationRoute.totalTime))
                         Image(systemName: "arrow.left.and.right")
-                        Text(formatDistance(meters:navigationRoute.totalDistance))}
+                        Text(formattedDistance(of: navigationRoute.totalDistance))}
                     Spacer()
                 }
 
@@ -68,9 +72,9 @@ struct DirectionsView: View {
                         
                         HStack {
                             Image(systemName: "clock")
-                            Text(formattedTime(time: directions.mkRoute.expectedTravelTime))
+                            Text(formattedTime(of: directions.mkRoute.expectedTravelTime))
                             Image(systemName: "arrow.left.and.right")
-                            Text(formatDistance(meters: directions.mkRoute.distance))
+                            Text(formattedDistance(of: directions.mkRoute.distance))
                         }.padding()
                         Spacer()
                     }

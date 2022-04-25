@@ -56,6 +56,7 @@
 		0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC862808792900899F55 /* ChallengeInfo.swift */; };
 		6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */; };
 		6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */; };
+		6A59BFE52811A3E10043D6E7 /* TestRoute.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */; };
 		6A6CDF9D27FB6CBA002106F8 /* ChallengeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */; };
 		6A6CDF9E27FB6CBA002106F8 /* ChallengeDetailedPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDF9A27FB6CBA002106F8 /* ChallengeDetailedPreview.swift */; };
 		6A6CDFDF27FDC3E2002106F8 /* ChallengeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CDFDE27FDC3E2002106F8 /* ChallengeDAO.swift */; };
@@ -161,6 +162,7 @@
 		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0664DC862808792900899F55 /* ChallengeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfo.swift; sourceTree = "<group>"; };
 		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
+		6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestRoute.gpx; sourceTree = "<group>"; };
 		6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeContainer.swift; sourceTree = "<group>"; };
 		6A6CDF9A27FB6CBA002106F8 /* ChallengeDetailedPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailedPreview.swift; sourceTree = "<group>"; };
 		6A6CDFDE27FDC3E2002106F8 /* ChallengeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDAO.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			children = (
 				065FEC5728108B2D00237AFB /* GoogleService-Info.plist */,
 				062FE88F27FF2EF400F2D0F7 /* Info.plist */,
+				6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */,
 				B167D32127FAE4CF00BF950E /* Assets.xcassets */,
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				060A10D6280BF9280077F71F /* components */,
@@ -551,6 +554,7 @@
 				065FEC862811832F00237AFB /* JetBrainsMono-Medium.ttf in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,
 				B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */,
+				6A59BFE52811A3E10043D6E7 /* TestRoute.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
