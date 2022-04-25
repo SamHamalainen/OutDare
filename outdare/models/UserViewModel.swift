@@ -10,6 +10,7 @@ import Firebase
 
 class UserViewModel: ObservableObject {
     @Published var errorMessage = ""
+    @Published var image: UIImage?
     
     // Logged in user
     @Published var currentUser: CurrentUser?
@@ -26,7 +27,6 @@ class UserViewModel: ObservableObject {
     init() {
         fetchCurrentUser()
         fetchAllUsers()
-        fetchTopUsers()
     }
     
     func convertToUser(data: [String:Any]) -> CurrentUser {
@@ -34,10 +34,11 @@ class UserViewModel: ObservableObject {
         let username = data["username"] as? String ?? ""
         let location = data["location"] as? String ?? ""
         let email = data["email"] as? String ?? ""
+        let profilePicture = data["profilePicture"] as? String ?? ""
         let score = data["score"] as? Int ?? 0
         let goneUp = data["goneUp"] as? Bool ?? false
         
-        return CurrentUser(id: id, username: username, location: location, email: email, score: score, goneUp: goneUp)
+        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: score, goneUp: goneUp)
     }
     
     // Fetching current user
@@ -64,27 +65,9 @@ class UserViewModel: ObservableObject {
     
     // Fetching all users
     private func fetchAllUsers() {
-        FirebaseManager.shared.firestore.collection("users").order(by: "score", descending: true)
-            .getDocuments { [self] (documentSnapshot, error) in
-                if let error = error {
-                    self.errorMessage = "Failed to fetch users: \(error)"
-                    print("Failed to fetch users: \(error)")
-                    return
-                }
-                for document in documentSnapshot!.documents {
-                    let data = document.data()
-                    let user = self.convertToUser(data: data)
-                    users.append(user)
-                }
-                self.errorMessage = "Successfully fetched users"
-            }
-        }
-    
-    // Fetch top users
-    private func fetchTopUsers() {
         let userRef = FirebaseManager.shared.firestore.collection("users")
-        let query = userRef.order(by: "score", descending: true).limit(to: 3)
-        query.getDocuments() { (querySnapshot, error) in
+        let query = userRef.order(by: "score", descending: true).limit(to: 20)
+        query.getDocuments() { [self] (querySnapshot, error) in
             if let error = error {
                 self.errorMessage = "Failed to fetch users: \(error)"
                 print("Failed to fetch users: \(error)")
@@ -101,11 +84,13 @@ class UserViewModel: ObservableObject {
             self.firstUser = userOne
             self.secondUser = userTwo
             self.thirdUser = userThree
+            
+            for document in querySnapshot!.documents {
+                let data = document.data()
+                let user = self.convertToUser(data: data)
+                users.append(user)
+            }
+            self.errorMessage = "Successfully fetched users"
         }
-    }
-    
-    
-    func updateUsername() {
-        
     }
 }

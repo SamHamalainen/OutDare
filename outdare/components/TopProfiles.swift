@@ -9,16 +9,16 @@ import SwiftUI
 
 struct TopProfiles: View {
     @ObservedObject private var vm = UserViewModel()
-    let defaultData = CurrentUser(id: 2, username: "Username", location: "Location not set", email: "email not set", score: 0, goneUp: false)
+    let defaultData = CurrentUser(id: 2, username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0, goneUp: false)
     
     var body: some View {
         HStack {
             SingleProfile(users: vm.secondUser ?? defaultData)
-                .offset(x: 25, y: 50)
+                .offset(x: 20, y: 50)
             SingleProfile(users: vm.firstUser ?? defaultData)
                 .zIndex(4)
             SingleProfile(users: vm.thirdUser ?? defaultData)
-                .offset(x: -25, y: 50)
+                .offset(x: -20, y: 50)
         }
         .foregroundColor(Color.theme.textLight)
     }
