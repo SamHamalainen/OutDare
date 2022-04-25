@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ChallengeCompleted: View {
     @Binding var challengeInfoOpened: Bool
-    @Binding var revealedChallenge: Bool
     @Binding var resultHandler: ResultHandler
+    @Binding var revealedChallenge: Bool
    
     var body: some View {
         GeometryReader { metrics in
@@ -49,8 +49,6 @@ struct ChallengeCompleted: View {
                     .padding(.vertical)
                 }
                 .padding()
-            HStack {
-                Text("Score")
                 .padding(.top)
                 .frame(minHeight: metrics.size.height * 0.6)
                 .background(Color.white)
@@ -60,7 +58,6 @@ struct ChallengeCompleted: View {
                 HStack (alignment: .center) {
                     Button("Continue") {
                         challengeInfoOpened = false
-                        revealedChallenge = false
                     }
                     .padding(.vertical, 10)
                     .frame(width: 200)
@@ -69,18 +66,20 @@ struct ChallengeCompleted: View {
                 .cornerRadius(40)
                 }
                 .frame(maxHeight: .infinity)
+            }
+            .padding(.horizontal)
         }
     }
 }
 
-struct ChallengeCompleted_Previews: PreviewProvider {
-    static var previews: some View {
-        let results = [
-            ResultItem(text: "Test1 loooooo ooooooooo", score: 20),
-            ResultItem(text: "Test1", score: 20),
-            ResultItem(text: "Test1", score: 20),
-            ResultItem(text: "Test1", score: 20)
-        ]
-        ChallengeCompleted(challengeInfoOpened: .constant(true), resultHandler: .constant(ResultHandler(results: results, time: 5, maxTime: 8)))
-    }
-}
+//struct ChallengeCompleted_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let results = [
+//            ResultItem(text: "Test1 loooooo ooooooooo", score: 20),
+//            ResultItem(text: "Test1", score: 20),
+//            ResultItem(text: "Test1", score: 20),
+//            ResultItem(text: "Test1", score: 20)
+//        ]
+//        ChallengeCompleted(challengeInfoOpened: .constant(true), resultHandler: .constant(ResultHandler(results: results, time: 5, maxTime: 8)), revealedChallenge: $revealedChallenge)
+//    }
+//}

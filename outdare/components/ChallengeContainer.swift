@@ -60,7 +60,7 @@ struct ChallengeContainer: View {
                 
                 
             default:
-                ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, resultHandler: $resultHandler)
+                ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, resultHandler: $resultHandler, revealedChallenge: $revealedChallenge)
             }
         }
         .onChange(of: challengeState) { state in
