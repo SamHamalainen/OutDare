@@ -35,6 +35,8 @@ struct Challenge: Identifiable, Equatable {
             return "tongueTwister"
         case "lyrics":
             return "lyrics"
+        case "stringGame":
+            return "stringGame"
         default:
            return "quiz"
         }

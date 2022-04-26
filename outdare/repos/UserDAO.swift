@@ -11,11 +11,15 @@ import Firebase
 class UserDAO: ObservableObject {
     let db = Firestore.firestore()
     
+    init() {
+        getLoggedInUserScore()
+    }
+    
     @Published var errorMessage = ""
     @Published var loggedUserScore: Int?
     
     // Logged in user
-    @Published var currentUser: CurrentUser?
+//    @Published var currentUser: CurrentUser?
     
     func convertToUser(data: [String:Any]) -> CurrentUser {
         let id = data["userId"] as? Int ?? 0
@@ -71,5 +75,6 @@ class UserDAO: ObservableObject {
                 "score": newScore
             ])
         }
+        self.getLoggedInUserScore()
     }
 }

@@ -11,6 +11,7 @@ struct MainView: View {
     @State private var isShowingMenu = false
     @State private var currentTitle = "Map"
     @State private var currentView: AnyView = AnyView(MapView())
+    @EnvironmentObject var vm: AppViewModel
     
     var body: some View {
         NavigationView {
@@ -43,9 +44,24 @@ struct MainView: View {
                                 })
                         }
                         ToolbarItem(placement: .principal) {
-                            if(!isShowingMenu) {
+                            if(!isShowingMenu && currentTitle != "Store") {
                                 Text(currentTitle)
                                     .font(Font.customFont.appBarText).foregroundColor(.white)
+                            } else if !isShowingMenu && currentTitle == "Store" {
+                                Text("")
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            ZStack (alignment: .leading) {
+                                HStack {
+                                    Image("oneCoin")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    Text("\(vm.userDao.loggedUserScore ?? 0)")
+                                        .font(Font.customFont.normalText)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
                             }
                         }
                     }
@@ -62,13 +78,13 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MainView()
-                .previewInterfaceOrientation(.portrait)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
-            
-        }
-    }
-}
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            MainView()
+//                .previewInterfaceOrientation(.portrait)
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+//
+//        }
+//    }
+//}

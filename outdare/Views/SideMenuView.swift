@@ -45,7 +45,7 @@ struct SideMenuView: View {
                     }
                 }
             }
-        }.frame(width: 200, height: 340).cornerRadius(20).ignoresSafeArea()
+        }.frame(width: 200, height: 400).cornerRadius(20).ignoresSafeArea()
         
     }
 }
