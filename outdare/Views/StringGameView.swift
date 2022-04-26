@@ -33,7 +33,7 @@ struct StringGameView: View {
                     VStack (alignment: .leading){
                         Text("Score")
                             .font(Font.customFont.normalText)
-                        Text("\(game.score)")
+                        Text("\(Int(game.score))")
                             .font(Font.customFont.smallText)
                     }
                     Spacer()
@@ -119,7 +119,7 @@ struct StringGameView: View {
                 SRButton(speechAnalyzer: speechAnalyzer, size: 30, padding: 30)
             }
             .padding()
-            
+            .allowsHitTesting(timer.isRunning)
         }
         
     }
@@ -129,6 +129,7 @@ extension StringGameView {
     func next() {
         print(game.results)
         resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results)
+        resultHandler.pushToDB()
         state = "done"
     }
     

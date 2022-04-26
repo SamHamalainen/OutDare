@@ -9,6 +9,6 @@ import SwiftUI
 
 struct ResultItem: Hashable {
     let text: String
-    var percentage: Int? = nil
+    var comment: String? = nil
     let score: Double
 }

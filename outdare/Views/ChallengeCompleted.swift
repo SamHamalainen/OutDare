@@ -15,15 +15,19 @@ struct ChallengeCompleted: View {
     var body: some View {
         GeometryReader { metrics in
             VStack {
-                Text("Challenge completed")
+                Text("Challenge completed 🎉")
                     .padding()
                     .font(Font.customFont.largeText)
                 VStack {
+                    Text("Score")
+                        .padding()
+                        .foregroundColor(Color.theme.background)
+                        .font(Font.customFont.largeText)
                     ScrollView {
-                        ForEach(resultHandler.results, id: \.self) { item in
-                            ResultRow(resultItem: item)
-                                .frame(maxHeight: 60)
-                                .padding(.bottom)
+                        VStack(spacing: 20) {
+                            ForEach(resultHandler.results, id: \.self) { item in
+                                ResultRow(resultItem: item)
+                            }
                         }
                     }
                     .frame(maxHeight: metrics.size.height * 0.5)
@@ -72,14 +76,14 @@ struct ChallengeCompleted: View {
     }
 }
 
-//struct ChallengeCompleted_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let results = [
-//            ResultItem(text: "Test1 loooooo ooooooooo", score: 20),
-//            ResultItem(text: "Test1", score: 20),
-//            ResultItem(text: "Test1", score: 20),
-//            ResultItem(text: "Test1", score: 20)
-//        ]
-//        ChallengeCompleted(challengeInfoOpened: .constant(true), resultHandler: .constant(ResultHandler(results: results, time: 5, maxTime: 8)), revealedChallenge: $revealedChallenge)
-//    }
-//}
+struct ChallengeCompleted_Previews: PreviewProvider {
+    static var previews: some View {
+        let results = [
+            ResultItem(text: "Test1", comment: "blablablabla", score: 20),
+            ResultItem(text: "Test1", score: 20),
+            ResultItem(text: "Test1", score: 20),
+            ResultItem(text: "Test1", comment: "blablablabla", score: 20)
+        ]
+        ChallengeCompleted(challengeInfoOpened: .constant(true), resultHandler: .constant(ResultHandler(results: results)), revealedChallenge: .constant(true))
+    }
+}

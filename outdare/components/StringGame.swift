@@ -41,17 +41,17 @@ class StringGame: ObservableObject {
                 if word.count >= (random.count + excellentThreshold) {
                     if repeated {
                         status = "Outstanding"
-                        results.append(ResultItem(text: "\(status)\n\tLong and Repeated", score: outstandingScore))
+                        results.append(ResultItem(text: status, comment: "\(random.lowercased()) > \(word.lowercased())", score: outstandingScore))
                     } else {
                         status = "Excellent"
-                        results.append(ResultItem(text: "\(status)\n\tLong word", score: excellentScore))
+                        results.append(ResultItem(text: status, comment: "\(random.lowercased()) > \(word.lowercased())", score: excellentScore))
                     }
                 } else if repeated {
                     status = "Excellent"
-                    results.append(ResultItem(text: "\(status)\n\tRepeated in word", score: excellentScore))
+                    results.append(ResultItem(text: status, comment: "\(random.lowercased()) > \(word.lowercased())", score: excellentScore))
                 } else {
                     status = "Good"
-                    results.append(ResultItem(text: status, score: goodScore))
+                    results.append(ResultItem(text: status, comment: "\(random.lowercased()) > \(word.lowercased())", score: goodScore))
                 }
                 getScore()
                 randomString()

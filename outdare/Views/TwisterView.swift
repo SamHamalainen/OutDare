@@ -96,6 +96,7 @@ extension TwisterView {
         } else {
             print(game.results)
             resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
+            resultHandler.pushToDB()
             state = "done"
         }
     }
