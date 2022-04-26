@@ -17,6 +17,7 @@ class UserViewModel: ObservableObject {
     
     // All users in the users db
     @Published var users: [CurrentUser] = []
+    @Published var rankedUsers = []
     
     // Top users
     @Published var firstUser: CurrentUser? = nil

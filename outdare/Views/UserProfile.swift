@@ -17,15 +17,23 @@ struct UserProfile: View {
             ProfileBackground()
             UserDetails()
                 .offset(y: -170)
-            Image(systemName: "ellipsis")
-                .resizable()
-                .frame(width: 40, height: 8)
-                .offset(x: -170, y: -150)
-                .foregroundColor(Color.theme.button)
-                .rotationEffect(Angle(degrees: 90))
-                .onTapGesture {
-                    settingsOpened = true
-                }
+            
+            Button (
+                action: {
+                    withAnimation(.spring()) {
+                        settingsOpened.toggle()
+                    }
+                }, label: {
+                    if !settingsOpened {
+                        Image(systemName: "ellipsis").foregroundColor(.white)
+                    } else {
+                        Image(systemName: "ellipsis").foregroundColor(.black)
+                    }
+                })
+            .font(.largeTitle)
+            .offset(x: -170, y: -150)
+            .rotationEffect(Angle(degrees: 90))
+            
                 Text("Achievements")
                     .font(Font.customFont.largeText)
                     .frame(maxWidth: 320, maxHeight: 220, alignment: .bottomLeading)
@@ -39,7 +47,7 @@ struct UserProfile: View {
                     .onTapGesture {
                         settingsOpened = false
                     }
-                        UserSettings()
+                    SettingsMenu()
                     }
                 .edgesIgnoringSafeArea(.bottom)
             }
