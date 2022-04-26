@@ -14,7 +14,7 @@ struct RankingListItem: View {
         HStack {
             VStack {
                 if users.goneUp == true {
-                Text("1")
+                    Text("1")
                 Image(systemName: "arrowtriangle.up.fill")
                     .foregroundColor(Color.theme.rankingUp)
             } else {

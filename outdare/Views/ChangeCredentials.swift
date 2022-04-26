@@ -1,58 +1,44 @@
 //
-//  UserSettings.swift
+//  ChangeCredentials.swift
 //  outdare
 //
-//  Created by Jasmin Partanen on 14.4.2022.
+//  Created by Jasmin Partanen on 26.4.2022.
 //
+
 import SwiftUI
 import FirebaseAuth
-import SDWebImageSwiftUI
 
-// Settings list for editing profile details
-struct UserSettings: View {
+struct ChangeCredentials: View {
     @ObservedObject private var vm = UserViewModel()
-    @State var showAlert = false
-    
-    @State var username: String
     @State var oldEmail: String
     @State var newEmail = ""
-    @State var location: String
     @State var oldPassword = ""
     @State var newPassword = ""
-    @State var image: UIImage?
     @State var errorMessage = ""
+    
     
     var body: some View {
         ZStack (alignment: .top) {
             RoundedRectangle(cornerRadius: 0)
                 .fill(Color.theme.background2)
                 .frame(height: 640)
-                
-                VStack(alignment: .center) {
-                    VStack(alignment: .leading) {
-                    Text("Username")
-                    TextField("Username", text: $username)
-                    } .textFieldStyle(CustomTextFieldStyle())
-
+            VStack {
                     VStack(alignment: .leading) {
                     Text("Email")
                     TextField(vm.currentUser?.email ?? "Old email", text: $oldEmail)
                     TextField("New email", text: $newEmail)
-                    } .textFieldStyle(CustomTextFieldStyle()).padding(.top, 5)
-                    
-                    VStack(alignment: .leading) {
-                    Text("Location")
-                    TextField(vm.currentUser?.location ?? "Location", text: $location)
-                    } .textFieldStyle(CustomTextFieldStyle()).padding(.top, 5)
+                    } .textFieldStyle(CustomTextFieldStyle())
+                    .padding(.vertical, 20)
                         
                     VStack(alignment: .leading) {
                     Text("Password")
                     SecureField("Old password", text: $oldPassword)
                     SecureField("New password", text: $newPassword)
-                    } .textFieldStyle(CustomTextFieldStyle()).padding(.top, 5)
+                    } .textFieldStyle(CustomTextFieldStyle())
+                    .padding(.vertical, 20)
                         
                         Button {
-                            updateUserDetails()
+                            updateEmailAndPassword()
                         } label: {
                                 Text("UPDATE")
                         }
@@ -92,13 +78,14 @@ struct UserSettings: View {
                    }
                }
            }
+            self.updateUserEmail()
         })
     }
     
-    // Update user details to collection
-    func updateUserDetails() {
+    // Update user email to collection
+    func updateUserEmail() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let userData = ["email": newEmail, "username": username, "location": location]
+        let userData = ["email": newEmail]
         FirebaseManager.shared.firestore.collection("users")
             .document(uid).updateData(userData) { err in
                     if let err = err {
@@ -109,12 +96,12 @@ struct UserSettings: View {
                     print("Success")
                 }
             }
-}
+        }
 
-struct UserSettings_Previews: PreviewProvider {
+
+struct ChangeCredentials_Previews: PreviewProvider {
     static var vm = UserViewModel()
     static var previews: some View {
-        UserSettings(username: vm.currentUser?.username ?? "", oldEmail: vm.currentUser?.email ?? "", location: vm.currentUser?.location ?? "")
-            .previewLayout(.sizeThatFits)
+        ChangeCredentials(oldEmail: vm.currentUser?.email ?? "")
     }
 }
