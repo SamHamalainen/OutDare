@@ -96,7 +96,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             if distanceTravelled >= 1000 {
                 if let userScore = userDao.loggedUserScore {
                     userDao.updateUsersScore(newScore: userScore + 5)
-                    userDao.loggedUserScore = userScore + 5
                     distanceTravelled = 0
                 }
             }

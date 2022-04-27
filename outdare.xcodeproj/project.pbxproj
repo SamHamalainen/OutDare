@@ -54,6 +54,7 @@
 		065FEC9B281183FB00237AFB /* LyricsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC91281183FB00237AFB /* LyricsData.swift */; };
 		065FEC9E281820B600237AFB /* PointPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC9D281820B600237AFB /* PointPurchaseView.swift */; };
 		065FECA0281834E000237AFB /* PointPurchaseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC9F281834E000237AFB /* PointPurchaseItem.swift */; };
+		065FECA22819C18D00237AFB /* PurchasePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FECA12819C18D00237AFB /* PurchasePopUp.swift */; };
 		0663432D280477580046C92F /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0663432C280477580046C92F /* CircleImage.swift */; };
 		0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC862808792900899F55 /* ChallengeInfo.swift */; };
 		6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */; };
@@ -163,6 +164,7 @@
 		065FEC9C2815A4E800237AFB /* routeAroundMeteopolia.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = routeAroundMeteopolia.gpx; sourceTree = "<group>"; };
 		065FEC9D281820B600237AFB /* PointPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPurchaseView.swift; sourceTree = "<group>"; };
 		065FEC9F281834E000237AFB /* PointPurchaseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPurchaseItem.swift; sourceTree = "<group>"; };
+		065FECA12819C18D00237AFB /* PurchasePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePopUp.swift; sourceTree = "<group>"; };
 		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0664DC862808792900899F55 /* ChallengeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfo.swift; sourceTree = "<group>"; };
 		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				6AF5296A2815F81D005189F3 /* LyricsGame.swift */,
 				6AF5296C28161613005189F3 /* TwisterGame.swift */,
 				065FEC9F281834E000237AFB /* PointPurchaseItem.swift */,
+				065FECA12819C18D00237AFB /* PurchasePopUp.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 			files = (
 				065FEC6F2811830700237AFB /* SideMenuView.swift in Sources */,
 				6A9F88A5280BF6A3009168D2 /* SRButton.swift in Sources */,
+				065FECA22819C18D00237AFB /* PurchasePopUp.swift in Sources */,
 				6AF529522811AF80005189F3 /* Twister.swift in Sources */,
 				6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */,
 				B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */,

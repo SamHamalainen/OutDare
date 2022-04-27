@@ -16,7 +16,13 @@ struct PointOrdered: Identifiable {
 
 struct PointPurchaseView: View {
     @State private var selectedItem: PointOrdered?
+    @State private var pointsPopUp: Int = 0
+    @State private var popUpVisible: Bool = false
     @EnvironmentObject var vm: AppViewModel
+    
+    func closePopUp() {
+        popUpVisible = false
+    }
     
     var body: some View {
         ZStack {
@@ -54,6 +60,38 @@ struct PointPurchaseView: View {
                         }
                 }
             }
+            if popUpVisible {
+            ZStack {
+                ZStack (alignment: .top) {
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(Color("Background"))
+                    VStack {
+                        Text("Points added!")
+                            .font(Font.customFont.extraLargeText)
+                            .foregroundColor(.white)
+                            .padding(.top, 15)
+                        Rectangle()
+                            .fill(.white)
+                            .frame(width: UIScreen.main.bounds.width * 0.7, height: 2)
+                        Text("\(pointsPopUp) points has been added to your account.")
+                            .frame(width: UIScreen.main.bounds.width * 0.8, height: 100)
+                            .foregroundColor(.white)
+                        Button(action: closePopUp) {
+                            Text("OK")
+                                .frame(width: 100, height: 30)
+                                .background(Color("Button"))
+                                .cornerRadius(25)
+                                .foregroundColor(.white)
+                        }
+                        .padding(.bottom, 15)
+                    }
+                    
+                }
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(.black, lineWidth: 3)
+            }
+            .frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
+        }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color("Background"))
@@ -62,6 +100,8 @@ struct PointPurchaseView: View {
                 title: Text("Purchace \(item.points) points?"),
                 message: Text("By purchasing this item, \(item.points) points will be added to your accounts points."),
                 primaryButton: .default(Text("Purchase")) {
+                    pointsPopUp = item.points
+                    popUpVisible = true
                     if let userScore = vm.userDao.loggedUserScore {
                         vm.userDao.updateUsersScore(newScore: userScore + item.points)
                     }
