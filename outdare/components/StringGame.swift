@@ -38,7 +38,6 @@ class StringGame: ObservableObject {
         let wordLower = word.lowercased()
         let randomLower = random.lowercased()
         
-        
         if isReal(word: word) {
             let repeated = checkOccurence(word: wordLower, characters: random) > 1
             if word.lowercased().contains(randomLower) {
