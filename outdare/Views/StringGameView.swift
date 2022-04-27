@@ -29,17 +29,18 @@ struct StringGameView: View {
                         timer.setTimeLimit(limit: 60.0)
                         timer.start()
                     }
-                HStack {
-                    VStack (alignment: .leading){
+                HStack(alignment: .top) {
+                    VStack {
                         Text("Score")
                             .font(Font.customFont.normalText)
                         Text("\(Int(game.score))")
-                            .font(Font.customFont.smallText)
+                            .font(Font.customFont.largeText)
+                            .foregroundColor(Color.theme.background)
                     }
                     Spacer()
-                    VStack (alignment: .trailing){
+                    VStack {
                         Text("Skips left: \(game.skips)")
-                            .font(Font.customFont.smallText)
+                            .font(Font.customFont.normalText)
                         Button(action: {
                             game.skip()
                         }) {
@@ -53,9 +54,8 @@ struct StringGameView: View {
                         }
                         .disabled(game.skips == 0)
                     }
-                    .frame(height: 70)
-                .padding(.horizontal)
                 }
+                .padding(.horizontal)
                 
                 Text(game.random)
                     .padding(50)

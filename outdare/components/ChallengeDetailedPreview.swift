@@ -41,7 +41,7 @@ struct ChallengeDetailedPreview: View {
                                 .foregroundColor(Color.white)
                                 .cornerRadius(40)
                         }
-                        .alert("Speech Recognition permission is needed to complete challenges", isPresented: $showingAlert) {
+                        .alert("Speech Recognition permission is needed to complete challenges. Please authorize it in app settings", isPresented: $showingAlert) {
                             Button("Go to settings") { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) }
                             Button("Cancel", role: .cancel) { }
                         }
@@ -64,15 +64,10 @@ struct ChallengeDetailedPreview: View {
 
 extension ChallengeDetailedPreview {
     func checkSRPermission() {
-        if SFSpeechRecognizer.authorizationStatus() == .authorized {
+        if SFSpeechRecognizer.authorizationStatus() == .authorized || challenge.category == "quiz" {
             ready = true
         } else {
-            SFSpeechRecognizer.requestAuthorization({ (status) in
-                print("Need speech recognition authorization")
-                if status != .notDetermined {
-                    showingAlert = true
-                }
-            })
+            showingAlert = true
         }
     }
 }

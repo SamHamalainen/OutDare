@@ -6,6 +6,7 @@
 //
 import MapKit
 import SwiftUI
+import Speech
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 60.22418227428884, longitude: 24.758741356204567)
@@ -63,6 +64,25 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             }
         } else {
             print("Please turn on location services from the phone settings")
+        }
+    }
+    
+    func checkSRPermission() {
+        if SFSpeechRecognizer.authorizationStatus() != .authorized {
+            SFSpeechRecognizer.requestAuthorization({ (status) in
+                switch status {
+                case .notDetermined:
+                    print("SR permission not determined")
+                case .denied:
+                    print("SR permission denied")
+                case .restricted:
+                    print("SR permission restricted")
+                case .authorized:
+                    return
+                @unknown default:
+                    print("SR permision status unknown")
+                }
+            })
         }
     }
     
