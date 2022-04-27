@@ -23,6 +23,9 @@ class UserViewModel: ObservableObject {
     @Published var firstUser: CurrentUser? = nil
     @Published var secondUser: CurrentUser? = nil
     @Published var thirdUser: CurrentUser? = nil
+    
+    private var achievements: [Achievement] = []
+    @Published var achievementsWithCategory: [Achievement] = []
 
     
     init() {
@@ -41,6 +44,22 @@ class UserViewModel: ObservableObject {
         
         return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: score, goneUp: goneUp)
     }
+    
+    func convertToAchievement(data: [String:Any]) -> Achievement {
+        let id = data ["challengeId"] as? Int ?? 0
+        let score = data["score"] as? Int ?? 0
+        let time = data["time"] as? Int ?? 0
+        let userId = data["userId"] as? Int ?? 0
+        let date = data["date"] as? Date ?? Date()
+        let speedBonus = data["speedBonus"] as? Bool ?? false
+        return Achievement(id: id, score: score, time: time, userId: userId, date: date, speedBonus: speedBonus, category: "")
+    }
+    
+    func convertToCategory(data: [String:Any]) -> Category {
+        let name = data ["category"] as? String ?? ""
+        return Category(name: name)
+    }
+    
     
     // Fetching current user
     private func fetchCurrentUser() {
@@ -61,6 +80,7 @@ class UserViewModel: ObservableObject {
             }
             let currentUser = self.convertToUser(data: data)
             self.currentUser = currentUser
+            self.fetchUserAchievements(id: currentUser.id)
         }
     }
     
@@ -94,4 +114,40 @@ class UserViewModel: ObservableObject {
             self.errorMessage = "Successfully fetched users"
         }
     }
+    
+    // Fetching current user achievements
+    func fetchUserAchievements(id: Int) {
+        let attemptRef = FirebaseManager.shared.firestore.collection("attempts")
+        let query = attemptRef.whereField("userId", isEqualTo: id)
+        query.getDocuments() {[self] (querySnapshot, err) in
+            if let err = err {
+                print("Error getting achievements: \(err)")
+            }
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let achievement = self.convertToAchievement(data: data)
+                    achievements.append(achievement)
+                }
+            getCategories()
+            }
+        }
+    
+    func getCategories() {
+        let challengeRef = FirebaseManager.shared.firestore.collection("challenges")
+        for item in achievements {
+            let query = challengeRef.whereField("id", isEqualTo: item.id).limit(to: 1)
+            query.getDocuments() {[self] (challengeSnapshot, error) in
+                 if let error = error {
+                    print("Error getting challenges: \(error)")
+                 }
+                let challenge = challengeSnapshot!.documents[0]
+                let data = challenge.data()
+                let category = self.convertToCategory(data: data)
+                
+                achievementsWithCategory.append(Achievement(id: item.id, score: item.score, time: item.time, userId: item.userId, date: item.date, speedBonus: item.speedBonus, category: category.name))
+                print(self.achievementsWithCategory.last ?? "")
+            }
+        }
+    }
 }
+    

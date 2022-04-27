@@ -14,10 +14,16 @@ struct SettingsMenu: View {
     
     var body: some View {
         ZStack (alignment: .top) {
-            RoundedRectangle(cornerRadius: 0)
+            RoundedRectangle(cornerRadius: 20)
                 .fill(Color.theme.background2)
                 .frame(height: 640)
             VStack(alignment: .leading) {
+            Rectangle()
+                    .frame(width: 100, height: 5)
+                    .padding(.leading, 140)
+                    .padding(.top, 20)
+                    .foregroundColor(Color.theme.button)
+                    
             Section {
                 Button (
                     action: {
@@ -53,7 +59,7 @@ struct SettingsMenu: View {
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
             }
-        }
+        } .ignoresSafeArea(edges: .bottom)
         
         if changeCredentials {
             ZStack(alignment: .bottom) {

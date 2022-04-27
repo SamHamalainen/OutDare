@@ -13,14 +13,28 @@ struct TopProfiles: View {
     
     var body: some View {
         HStack {
+            
+            VStack {
+            Text("2.")
             SingleProfile(users: vm.secondUser ?? defaultData)
-                .offset(x: 20, y: 50)
+            }
+                .offset(x: 20, y: 65)
+            VStack {
+            Image("crown")
+                    .resizable()
+                    .frame(width: 70, height: 50)
             SingleProfile(users: vm.firstUser ?? defaultData)
-                .zIndex(4)
+            }
+            .zIndex(4)
+            
+            VStack {
+            Text("3.")
             SingleProfile(users: vm.thirdUser ?? defaultData)
-                .offset(x: -20, y: 50)
+            }
+                .offset(x: -20, y: 65)
         }
         .foregroundColor(Color.theme.textLight)
+        .font(Font.customFont.largeText)
     }
 }
 

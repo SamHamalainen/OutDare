@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 // List item for leadearboard ranking list
 struct RankingListItem: View {
     let users: CurrentUser
+    
     var body: some View {
         HStack {
             VStack {

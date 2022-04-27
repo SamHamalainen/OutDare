@@ -12,20 +12,20 @@ struct SingleProfile: View {
     
     var body: some View {
         VStack {
-            VStack {
-                if users.goneUp == true {
-                Text("1")
-                        .font(Font.customFont.largeText)
-                Image(systemName: "arrowtriangle.up.fill")
-                    .foregroundColor(Color.theme.rankingUp)
-            } else {
-                Text("1")
-                    .font(Font.customFont.largeText)
-                Image(systemName: "arrowtriangle.down.fill")
-                    .foregroundColor(Color.theme.rankingDown)
-            }
-        }
-            .padding(2)
+//            VStack {
+//                if users.goneUp == true {
+//                Text("1")
+//                        .font(Font.customFont.largeText)
+//                Image(systemName: "arrowtriangle.up.fill")
+//                    .foregroundColor(Color.theme.rankingUp)
+//            } else {
+//                Text("1")
+//                    .font(Font.customFont.largeText)
+//                Image(systemName: "arrowtriangle.down.fill")
+//                    .foregroundColor(Color.theme.rankingDown)
+//            }
+//        }
+//            .padding(2)
             VStack {
                 if users.profilePicture == "" {
                     Image(systemName: "person.fill")

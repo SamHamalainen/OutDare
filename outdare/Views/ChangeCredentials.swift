@@ -19,7 +19,7 @@ struct ChangeCredentials: View {
     
     var body: some View {
         ZStack (alignment: .top) {
-            RoundedRectangle(cornerRadius: 0)
+            RoundedRectangle(cornerRadius: 20)
                 .fill(Color.theme.background2)
                 .frame(height: 640)
             VStack {
@@ -53,6 +53,7 @@ struct ChangeCredentials: View {
                 .frame(width: 300)
                 .padding()
             }
+        .ignoresSafeArea(edges: .bottom)
         }
     
     // Update user email and password to firebase auth

@@ -11,12 +11,13 @@ struct UserProfile: View {
     @ObservedObject private var vm = UserViewModel()
     @State var settingsOpened = false
     
-    
     var body: some View {
         ZStack {
             ProfileBackground()
+            
+            VStack {
             UserDetails()
-                .offset(y: -170)
+                    .padding(.top, 30)
             
             Button (
                 action: {
@@ -24,20 +25,18 @@ struct UserProfile: View {
                         settingsOpened.toggle()
                     }
                 }, label: {
-                    if !settingsOpened {
-                        Image(systemName: "ellipsis").foregroundColor(.white)
-                    } else {
                         Image(systemName: "ellipsis").foregroundColor(.black)
-                    }
                 })
-            .font(.largeTitle)
-            .offset(x: -170, y: -150)
-            .rotationEffect(Angle(degrees: 90))
-            
+                    .font(.largeTitle)
+                    .rotationEffect(Angle(degrees: 90))
+                    .offset(x: 150, y: -170)
+                
                 Text("Achievements")
                     .font(Font.customFont.largeText)
-                    .frame(maxWidth: 320, maxHeight: 220, alignment: .bottomLeading)
-            }
+                    .frame(width: 350, alignment: .leading)
+                    .padding(.top, 60)
+            AchievementList()
+        }
             
             if settingsOpened {
                 ZStack(alignment: .bottom) {
@@ -53,6 +52,7 @@ struct UserProfile: View {
             }
         }
     }
+}
 
 
 struct UserProfile_Previews: PreviewProvider {

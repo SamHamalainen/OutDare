@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ChangeInformation: View {
     @ObservedObject private var vm = UserViewModel()
+    @ObservedObject private var settingsVm = SettingsViewModel()
     @State var username: String
     @State var location: String
     @State var errorMessage = ""
     
     var body: some View {
         ZStack (alignment: .top) {
-            RoundedRectangle(cornerRadius: 0)
+            RoundedRectangle(cornerRadius: 20)
                 .fill(Color.theme.background2)
                 .frame(height: 640)
             
@@ -48,6 +49,7 @@ struct ChangeInformation: View {
             .frame(width: 300)
             .padding()
         }
+        .ignoresSafeArea(edges: .bottom)
     }
     
     // Update user details to collection
