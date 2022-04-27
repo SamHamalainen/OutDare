@@ -127,8 +127,8 @@ struct StringGameView: View {
 
 extension StringGameView {
     func next() {
-        print(game.results)
-        resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results)
+        let challengeId = resultHandler.challengeId        
+        resultHandler = ResultHandler(challengeId: challengeId, results: game.results)
         resultHandler.pushToDB()
         state = "done"
     }

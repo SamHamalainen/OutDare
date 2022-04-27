@@ -11,67 +11,85 @@ struct ChallengeCompleted: View {
     @Binding var challengeInfoOpened: Bool
     @Binding var resultHandler: ResultHandler
     @Binding var revealedChallenge: Bool
+    @State var showScore = false
    
     var body: some View {
         GeometryReader { metrics in
             VStack {
-                Text("Challenge completed 🎉")
-                    .padding()
-                    .font(Font.customFont.largeText)
-                VStack {
-                    Text("Score")
+                HStack {
+                    Text("Challenge completed 🎉")
                         .padding()
-                        .foregroundColor(Color.theme.background)
                         .font(Font.customFont.largeText)
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            ForEach(resultHandler.results, id: \.self) { item in
-                                ResultRow(resultItem: item)
+                        .transition(.fade)
+                }
+                .frame(maxWidth: .infinity)
+                
+                if showScore {
+                    VStack {
+                        Text("Score")
+                            .padding()
+                            .foregroundColor(Color.theme.background)
+                            .font(Font.customFont.largeText)
+                        ScrollView {
+                            VStack(spacing: 20) {
+                                ForEach(resultHandler.results, id: \.self) { item in
+                                    ResultRow(resultItem: item)
+                                }
                             }
                         }
-                    }
-                    .frame(maxHeight: metrics.size.height * 0.5)
-                    if resultHandler.gotSpeedBonus() == true {
+                        .frame(maxHeight: metrics.size.height * 0.5)
+                        if resultHandler.gotSpeedBonus() == true {
+                            Divider()
+                            HStack {
+                                Text("Speed bonus")
+                                    .foregroundColor(Color.theme.rankingUp)
+                                Spacer()
+                                Text("x\(resultHandler.speedBonus, specifier: "%.2f")")
+                            }
+                            .font(Font.customFont.normalText)
+                            .padding(.vertical)
+                        }
                         Divider()
                         HStack {
-                            Text("Speed bonus")
-                                .foregroundColor(Color.theme.rankingUp)
+                            Text("Total")
                             Spacer()
-                            Text("x\(resultHandler.speedBonus, specifier: "%.2f")")
+                            Text(String(resultHandler.score))
                         }
-                        .font(Font.customFont.normalText)
+                        .font(Font.customFont.largeText)
+                        .foregroundColor(Color.theme.background)
                         .padding(.vertical)
                     }
-                    Divider()
-                    HStack {
-                        Text("Total")
-                        Spacer()
-                        Text(String(resultHandler.score))
+                    .padding()
+                    .padding(.top)
+                    .frame(minHeight: metrics.size.height * 0.6)
+                    .background(Color.white)
+                    .cornerRadius(30)
+                    .shadow(color: .gray, radius: 2, x: 0, y: 3)
+                    .transition(.slide)
+                    
+                    HStack (alignment: .center) {
+                        Button("Continue") {
+                            challengeInfoOpened = false
+                        }
+                        .padding(.vertical, 10)
+                        .frame(width: 200)
+                        .background(Color.theme.button)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(40)
                     }
-                    .font(Font.customFont.largeText)
-                    .foregroundColor(Color.theme.background)
-                    .padding(.vertical)
+                    .frame(maxHeight: .infinity)
+                    .transition(.fade)
                 }
-                .padding()
-                .padding(.top)
-                .frame(minHeight: metrics.size.height * 0.6)
-                .background(Color.white)
-                .cornerRadius(30)
-                .shadow(color: .gray, radius: 2, x: 0, y: 3)
-                                       
-                HStack (alignment: .center) {
-                    Button("Continue") {
-                        challengeInfoOpened = false
-                    }
-                    .padding(.vertical, 10)
-                    .frame(width: 200)
-                    .background(Color.theme.button)
-                    .foregroundColor(Color.white)
-                .cornerRadius(40)
-                }
-                .frame(maxHeight: .infinity)
             }
             .padding(.horizontal)
+            .onAppear {
+                play(sound: "success.mp3")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    withAnimation {
+                        showScore = true
+                    }                    
+                }
+            }
         }
     }
 }

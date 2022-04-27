@@ -23,30 +23,30 @@ class AppViewModel: ObservableObject {
                 return
             }
             DispatchQueue.main.async {
-            //Success
-            self?.signedIn = true
+                //Success
+                self?.signedIn = true
             }
-    }
+        }
     }
     func signUp(email: String, password: String){
         auth.createUser(withEmail: email, password: password){[weak self] result, error in
             guard result != nil, error == nil else {
                 return
-        }
+            }
             DispatchQueue.main.async {
                 //Success
-                    self?.signedIn = true
+                self?.signedIn = true
             }
+            
+        }
         
     }
-    
-}
     func signOut(){
         try? auth.signOut()
         self.signedIn = false
-        
+        UserDefaults.standard.removeObject(forKey: "userId")
     }
-    }
+}
 
 
 struct ContentView: View {
@@ -57,12 +57,12 @@ struct ContentView: View {
         NavigationView {
             
             if viewModel.signedIn {
-//                VStack{
-//                    Button(action: {viewModel.signOut()}, label: {Text("Sign Out")
-//                            .foregroundColor(Color.pink)
-//                    })
-//                    Text("Welcome")
-//                }
+                //                VStack{
+                //                    Button(action: {viewModel.signOut()}, label: {Text("Sign Out")
+                //                            .foregroundColor(Color.pink)
+                //                    })
+                //                    Text("Welcome")
+                //                }
             }else{
                 LogInOrSignIn()
             }
@@ -72,7 +72,7 @@ struct ContentView: View {
             viewModel.signedIn = viewModel.isSignedIn
         }
     }
-    }
+}
 
 struct openingpageView: View {
     

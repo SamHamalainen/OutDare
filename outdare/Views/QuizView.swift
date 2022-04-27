@@ -30,6 +30,7 @@ struct QuizView: View {
                     if let question = game.question {
                         Text(question)
                             .frame(maxWidth: .infinity, maxHeight: 100)
+                            .padding(.horizontal)
                             .background(Color.theme.background)
                             .foregroundColor(Color.white)
                             .cornerRadius(20)
@@ -126,7 +127,8 @@ extension QuizView {
             timer.restart()
         } else {
             print(game.results)
-            resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
+            let challengeId = resultHandler.challengeId
+            resultHandler = ResultHandler(challengeId: challengeId, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
             resultHandler.pushToDB()
             state = "done"
         }

@@ -31,6 +31,7 @@ struct outdareApp: App {
             }
             .onAppear {
                 showMap = viewModel.signedIn
+                print(UserDefaults.standard.integer(forKey: "userId"))
             }
         }
     }

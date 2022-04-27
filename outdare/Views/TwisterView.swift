@@ -95,7 +95,8 @@ extension TwisterView {
             timer.restart()
         } else {
             print(game.results)
-            resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
+            let challengeId = resultHandler.challengeId
+            resultHandler = ResultHandler(challengeId: challengeId, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
             resultHandler.pushToDB()
             state = "done"
         }

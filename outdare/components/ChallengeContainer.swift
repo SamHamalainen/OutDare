@@ -15,7 +15,7 @@ struct ChallengeContainer: View {
     let challenge: Challenge
     let notifyParent: () -> Void
     @State var challengeState = "awaiting"
-    @State var resultHandler = ResultHandler()
+    @State var resultHandler: ResultHandler = ResultHandler()
     @StateObject var dao = ChallengeDAO()
     
     var body: some View {
@@ -24,6 +24,7 @@ struct ChallengeContainer: View {
             case "awaiting":
                 ChallengeDetailedPreview(challenge: challenge, state: $challengeState)
                     .onAppear() {
+                        resultHandler = ResultHandler(challengeId: challenge.id)
                         switch challenge.category {
                         case "quiz":
                             dao.getQuiz(id: challenge.challengeId)

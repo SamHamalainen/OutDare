@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ResultHandler {
     let dao = ChallengeDAO()
-    var userId: Int = 0
+    let userId: Int = UserDefaults.standard.integer(forKey: "userId")
     var challengeId: Int = 0
     var results: [ResultItem] = []
     var time: Int? = nil
@@ -22,10 +22,14 @@ struct ResultHandler {
         }
         return Int(score)
     }
-    var maxTime: Int = 0
+    var maxTime: Int? = nil
+    
+    func addResult(results: [ResultItem], time: Int? = nil, maxTime: Int? = nil) {
+        
+    }
     
     func gotSpeedBonus() -> Bool? {
-        if let time = time {
+        if let time = time, let maxTime = maxTime {
             return time < maxTime/2
         } else {
             return nil
