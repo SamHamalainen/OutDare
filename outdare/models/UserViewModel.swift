@@ -18,6 +18,7 @@ class UserViewModel: ObservableObject {
     // All users in the users db
     @Published var users: [CurrentUser] = []
     @Published var userScore: Int?
+    @Published var usersWithScores: [CurrentUser] = []
     
     // Top users
     @Published var firstUser: CurrentUser? = nil
@@ -34,7 +35,7 @@ class UserViewModel: ObservableObject {
     }
     
     func convertToUser(data: [String:Any]) -> CurrentUser {
-        let id = data ["userId"] as? Int ?? 0
+        let id = data ["userId"] as? String ?? ""
         let username = data["username"] as? String ?? ""
         let location = data["location"] as? String ?? ""
         let email = data["email"] as? String ?? ""
@@ -109,17 +110,15 @@ class UserViewModel: ObservableObject {
             for document in querySnapshot!.documents {
                 let data = document.data()
                 let uid = document.documentID
-                print("HERE IT IS:", uid)
                 let user = self.convertToUser(data: data)
-                users.append(user)
+                fetchAllScores(uid: uid)
+                
+                usersWithScores.append(CurrentUser(id: uid, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore ?? 0, goneUp: user.goneUp))
             }
-            
-//            for var user in users {
-//                let score = fetchAllScores(uid: )
-//            }
-            
             self.errorMessage = "Successfully fetched users"
         }
+        
+        print("users", self.usersWithScores.last ?? "")
     }
     
     // Fetching current user achievements

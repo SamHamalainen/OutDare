@@ -56,7 +56,7 @@ struct SingleProfile: View {
 struct SingleProfile_Previews: PreviewProvider {
     static var users = UserViewModel().firstUser
     static var previews: some View {
-        SingleProfile(users: users ?? CurrentUser(id: 2, username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0, goneUp: false))
+        SingleProfile(users: users ?? CurrentUser(id: "", username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0, goneUp: false))
             .previewLayout(.sizeThatFits)
     }
 }

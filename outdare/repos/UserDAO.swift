@@ -22,7 +22,7 @@ class UserDAO: ObservableObject {
 //    @Published var currentUser: CurrentUser?
     
     func convertToUser(data: [String:Any]) -> CurrentUser {
-        let id = data["userId"] as? Int ?? 0
+        let id = data["userId"] as? String ?? ""
         let username = data["username"] as? String ?? "no username"
         let email = data["email"] as? String ?? "no email"
         let location = data["location"] as? String ?? "Unknown location"

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TopProfiles: View {
     @ObservedObject private var vm = UserViewModel()
-    let defaultData = CurrentUser(id: 2, username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0, goneUp: false)
+    let defaultData = CurrentUser(id: "", username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0, goneUp: false)
     
     var body: some View {
         HStack {
