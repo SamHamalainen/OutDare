@@ -35,7 +35,8 @@ struct MapView: View {
                     viewModel: viewModel,
                     dao: dao, challengeInfoOpened: $viewModel.challengeInfoOpen,
                     navigationRoute: navigationRoute,
-                    annotations: dao.annotations
+                    annotations: dao.annotations,
+                    oldAnnotations: dao.oldAnnotations
                 )
                 .ignoresSafeArea(edges: .bottom)
                 Button(action: setLocationToUser) {
@@ -76,15 +77,15 @@ struct MapView: View {
             Button("Directions info") {
                 showingSheet.toggle()
             }.background(.white).frame(height: 50)
-            .sheet(isPresented: $showingSheet) {
-                DirectionsView(navigationRoute: navigationRoute)
+            if showingSheet {
+                DirectionsView(navigationRoute: navigationRoute, isOpen: $showingSheet)
             }
             
         }
         .onAppear {
             dao.getChallenges()
             loginViewModel.userDao.getLoggedInUserScore()
-            self.viewModel.setup(self.loginViewModel.userDao)
+            self.viewModel.setup(self.loginViewModel.userDao, self.dao)
         }
     }
 }

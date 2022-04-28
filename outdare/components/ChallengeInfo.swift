@@ -60,14 +60,11 @@ struct ChallengeInfo: View {
     private func addToRouteFirst() {
         guard let source = userLocation else { return }
         guard let destination = locationPassed else { return }
-//        print("//info \(locationPassed?.name)")
-        let directions = Directions(source: source, destination: destination)
-        navigationRoute.addDirections(directions: directions, option: .makeFirst)
+        navigationRoute.addDirections(from: source, to: destination, option: .makeFirst)
     }
     private func addToRouteLast() {
         guard let source = navigationRoute.directionsArray.last?.destination.coordinates else { return }
-        let directions = Directions(source: source, destination: locationPassed!)
-        navigationRoute.addDirections(directions: directions, option: .makeLast)
+        navigationRoute.addDirections(from: source, to: locationPassed!, option: .makeLast)
     }
     
     func showAlert() {
@@ -130,13 +127,15 @@ struct ChallengeInfo: View {
                         .offset(y: buttonEndOffsetY)
                         .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Are you sure you want to reveal challenge?"),
-                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 50 points."),
+                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 25 points."),
                                   primaryButton: .default(Text("Reveal")) {
                                 revealChallenge()
                             },
                                   secondaryButton: .cancel())
                         }
-                        Button(action: {addToRouteFirst()}) {
+                        Button(action: {addToRouteFirst()
+                            challengeInfoOpened = false
+                        }) {
                             Text("Add to the route(first)")
                                 .font(Font.customFont.btnText)
                                 .fontWeight(.semibold)
@@ -150,6 +149,7 @@ struct ChallengeInfo: View {
                         .offset(y: buttonEndOffsetY)
                         Button(action: {
                             navigationRoute.directionsArray.isEmpty ? addToRouteFirst() : addToRouteLast()
+                            challengeInfoOpened = false
                         }) {
                             Text("Add to the route(last)")
                                 .font(Font.customFont.btnText)

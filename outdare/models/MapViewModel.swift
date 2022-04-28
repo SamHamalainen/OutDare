@@ -9,7 +9,7 @@ import SwiftUI
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 60.22418227428884, longitude: 24.758741356204567)
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
     
 }
 
@@ -27,7 +27,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         center: MapDetails.startingLocation,
         span: MapDetails.defaultSpan
     )
-    @Published var dao = ChallengeDAO()
+    @Published var dao: ChallengeDAO?
     @Published var userDao: UserDAO?
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var challengeInfoOpen: Bool = false
@@ -35,19 +35,17 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var userSelectedTracking = false
     @Published var distanceTravelled: Double = 0
     @Published var circle: MKCircle?
+    @Published var annotationsArray: [MKPointAnnotation]?
     @Published var map = MKMapView()
     var locationOld: CLLocation? = nil
+    @Published var count = 0
     
-    func setup(_ userDao: UserDAO){
+    func setup(_ userDao: UserDAO, _ challengeDao: ChallengeDAO){
         self.userDao = userDao
+        self.dao = challengeDao
     }
     
     private var locationManager: CLLocationManager?
-    
-//    func getUserLocation() {
-//        locationManager = CLLocationManager()
-//        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482)
-//    }
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
@@ -59,7 +57,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 locManager.startUpdatingLocation()
                 locManager.pausesLocationUpdatesAutomatically = true
                 locManager.activityType = .fitness
-//              locManager.distanceFilter = 10.0
             }
         } else {
             print("Please turn on location services from the phone settings")
@@ -83,16 +80,25 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         mapView.addOverlay(circle!)
        }
     
+    func updateAnnotations(coordinate: CLLocationCoordinate2D, mapView: MKMapView) {
+        if let annotationsArray1 = self.annotationsArray {
+            self.annotationsArray = dao!.updateAnnotationsBasedOnDistance(userLoc: coordinate, annotationsArray: dao!.annotations)
+            mapView.addAnnotations(annotationsArray!)
+            map.removeAnnotations(annotationsArray1)
+        } else {
+            self.annotationsArray = dao!.updateAnnotationsBasedOnDistance(userLoc: coordinate, annotationsArray: dao!.annotations)
+            mapView.addAnnotations(annotationsArray!)
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locationLast = locations.last else { return }
         for location in locations {
             calculateDistanceTravelled(location)
             showCircle(coordinate: location.coordinate, radius: 150, mapView: self.map)
+            updateAnnotations(coordinate: location.coordinate, mapView: self.map)
         }
         if let userDao = userDao {
-//            if distanceTravelled >= 900 {
-//                userDao.getLoggedInUserScore()
-//            }
             if distanceTravelled >= 1000 {
                 userDao.updateWalkingScore()
                 distanceTravelled = 0

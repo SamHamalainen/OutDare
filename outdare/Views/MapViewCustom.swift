@@ -16,6 +16,7 @@ struct MapViewCustom: UIViewRepresentable {
     @Binding public var challengeInfoOpened: Bool
     @ObservedObject var navigationRoute: NavigationRoute
     let annotations: [MKAnnotation]
+    let oldAnnotations: [MKAnnotation]
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self, vm: viewModel, dao: dao, nr: navigationRoute)
@@ -35,21 +36,13 @@ struct MapViewCustom: UIViewRepresentable {
         mapView.showsCompass = false
         mapView.mapType = .mutedStandard
         mapView.userTrackingMode = .none
-        
-//        let span = viewModel.userLocation != nil
-//            ? MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.001)
-//            : MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
-        
         mapView.setRegion(viewModel.mapRegion, animated: true)
-        mapView.addAnnotations(annotations)
-        
         return mapView
     }
     
     func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapViewCustom>) {
         if viewModel.userSelectedTracking {
             mapView.userTrackingMode = .follow
-//            mapView.addAnnotations(annotations)
         } else {
             mapView.userTrackingMode = .none
         }
@@ -58,13 +51,6 @@ struct MapViewCustom: UIViewRepresentable {
                 mapView.deselectAnnotation(annotation, animated: false)
             }
         }
-        if !navigationRoute.directionsArray.isEmpty {
-            let firstDestination = navigationRoute.directionsArray.first?.destination
-            if (firstDestination?.coordinates.distance(to: viewModel.userLocation!))! <= 150 {
-                navigationRoute.removeDirections(destination: firstDestination)
-            }
-        }
-        
     }
 }
 
@@ -144,15 +130,18 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotationTitle = view.annotation?.title {
+            print("opened before: \(viewModel.challengeInfoOpen)")
             viewModel.challengeInfoOpen = true
+            print("opened after: \(viewModel.challengeInfoOpen)")
+            print("selection before: \(String(describing: viewModel.selection))")
             selection = dao.challenges.first(where:{ $0.name == annotationTitle && $0.coordinates == view.annotation!.coordinate})
             viewModel.selection = self.selection
+            print("selection after: \(String(describing: viewModel.selection))")
             mapView.setRegion(MKCoordinateRegion(center: view.annotation!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)), animated: true)
             
         }
     }
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        // print("location changed")
         navigationRoute.updateDirections(userLocation: userLocation.coordinate)
     }
 }
