@@ -74,9 +74,6 @@ struct MainView: View {
                 }
             }
             .background(Color("Background"))
-            .onAppear {
-                vm.userDao.getLoggedInUserScore()
-            }
         }
     }
 }
