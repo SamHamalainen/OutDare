@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ChangeInformation: View {
-    @ObservedObject private var vm = UserViewModel()
-    @ObservedObject private var settingsVm = SettingsViewModel()
+    @StateObject private var vm = UserViewModel()
+    @StateObject private var settingsVm = SettingsViewModel()
     @State var username: String
     @State var location: String
     @State var errorMessage = ""

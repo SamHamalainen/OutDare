@@ -13,17 +13,7 @@ struct RankingListItem: View {
     
     var body: some View {
         HStack {
-            VStack {
-                if users.goneUp == true {
-                    Text("1")
-                Image(systemName: "arrowtriangle.up.fill")
-                    .foregroundColor(Color.theme.rankingUp)
-            } else {
-                Text("1")
-                Image(systemName: "arrowtriangle.down.fill")
-                    .foregroundColor(Color.theme.rankingDown)
-            }
-        }
+            Text("1")
             .font(Font.customFont.smallText)
             
             VStack {
@@ -53,6 +43,7 @@ struct RankingListItem: View {
 }
 
 struct RankingListItem_Previews: PreviewProvider {
+    static var defaultData = CurrentUser(id: "", username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0)
     static var users = UserViewModel().usersSorted
     static var previews: some View {
         RankingListItem(users: users[0])

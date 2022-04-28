@@ -12,20 +12,6 @@ struct SingleProfile: View {
     
     var body: some View {
         VStack {
-//            VStack {
-//                if users.goneUp == true {
-//                Text("1")
-//                        .font(Font.customFont.largeText)
-//                Image(systemName: "arrowtriangle.up.fill")
-//                    .foregroundColor(Color.theme.rankingUp)
-//            } else {
-//                Text("1")
-//                    .font(Font.customFont.largeText)
-//                Image(systemName: "arrowtriangle.down.fill")
-//                    .foregroundColor(Color.theme.rankingDown)
-//            }
-//        }
-//            .padding(2)
             VStack {
                 if users.profilePicture == "" {
                     Image(systemName: "person.fill")
@@ -54,9 +40,9 @@ struct SingleProfile: View {
 }
 
 struct SingleProfile_Previews: PreviewProvider {
-    static var users = UserViewModel().firstUser
+    static var users = UserViewModel().usersSorted
     static var previews: some View {
-        SingleProfile(users: users ?? CurrentUser(id: "", username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0, goneUp: false))
+        SingleProfile(users: users[0])
             .previewLayout(.sizeThatFits)
     }
 }

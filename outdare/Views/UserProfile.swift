@@ -8,7 +8,7 @@ import SwiftUI
 import Firebase
 
 struct UserProfile: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     @State var settingsOpened = false
     
     var body: some View {

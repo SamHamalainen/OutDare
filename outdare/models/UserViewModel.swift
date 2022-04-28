@@ -11,7 +11,6 @@ import SwiftUI
 
 class UserViewModel: ObservableObject {
     @Published var errorMessage = ""
-    @Published var image: UIImage?
     
     // Logged in user
     @Published var currentUser: CurrentUser?
@@ -21,11 +20,6 @@ class UserViewModel: ObservableObject {
     private var usersWithScores: [CurrentUser] = []
     @Published var usersSorted: [CurrentUser] = []
     
-    // Top users
-    @Published var firstUser: CurrentUser? = nil
-    @Published var secondUser: CurrentUser? = nil
-    @Published var thirdUser: CurrentUser? = nil
-    
     private var achievements: [Achievement] = []
     @Published var achievementsWithCategory: [Achievement] = []
 
@@ -34,6 +28,7 @@ class UserViewModel: ObservableObject {
         fetchCurrentUser()
         fetchAllUsers()
     }
+
     
     func convertToUser(data: [String:Any]) -> CurrentUser {
         let id = data ["userId"] as? String ?? ""
@@ -41,9 +36,8 @@ class UserViewModel: ObservableObject {
         let location = data["location"] as? String ?? ""
         let email = data["email"] as? String ?? ""
         let profilePicture = data["profilePicture"] as? String ?? ""
-        let goneUp = data["goneUp"] as? Bool ?? false
         
-        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: 0, goneUp: goneUp)
+        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: 0)
     }
     
     func convertToAchievement(data: [String:Any]) -> Achievement {
@@ -95,24 +89,11 @@ class UserViewModel: ObservableObject {
                 print("Failed to fetch users: \(error)")
                 return
             }
-            // Will be deleted
-            let firstUser = querySnapshot!.documents[0]
-            let secondUser = querySnapshot!.documents[1]
-            let thirdUser = querySnapshot!.documents[2]
-            let userOne = self.convertToUser(data: firstUser.data())
-            let userTwo = self.convertToUser(data: secondUser.data())
-            let userThree = self.convertToUser(data: thirdUser.data())
-            self.firstUser = userOne
-            self.secondUser = userTwo
-            self.thirdUser = userThree
-            // Will be deleted
-            
-            
             for document in querySnapshot!.documents {
                 let data = document.data()
                 let useruid = document.documentID
                 let user = self.convertToUser(data: data)
-                users.append(CurrentUser(id: useruid, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: user.score, goneUp: user.goneUp))
+                users.append(CurrentUser(id: useruid, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: user.score))
             }
             self.errorMessage = "Successfully fetched users"
             fetchAllScores()
@@ -137,12 +118,38 @@ class UserViewModel: ObservableObject {
                     }
                 let userScore = scores.reduce(0, +)
                 
-                usersWithScores.append(CurrentUser(id: user.id, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore , goneUp: user.goneUp))
-                
+                usersWithScores.append(CurrentUser(id: user.id, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore))
                 self.usersSorted = usersWithScores.sorted(by: { $0.score > $1.score })
         }
     }
 }
+    
+    func getUserRanking(users: [CurrentUser]) -> [Int:[CurrentUser]] {
+        let sorted = users.sorted(by: {$0.score > $1.score})
+        var previousScore = sorted[0].score
+        var grouped: [[CurrentUser]] = Array(repeating: [], count: sorted.count)
+        grouped[0].append(sorted[0])
+        var arrayIndex = 0
+        
+        for user in self.usersSorted.dropFirst() {
+               if user.score == previousScore {
+                   grouped[arrayIndex].append(user)
+               } else {
+                   arrayIndex += 1
+                   grouped[arrayIndex].append(user)
+                   previousScore = user.score
+               }
+           }
+        let emptyRemoved = grouped.filter {!$0.isEmpty}
+        var ranking: [Int:[CurrentUser]] = [:]
+        var rank = 1
+        
+        for userArray in emptyRemoved {
+               ranking[rank] = userArray
+               rank += userArray.count
+           }
+        return ranking
+    }
     
     // Fetching current user achievements
     func fetchLoggedUserAchievements(uid: String) {

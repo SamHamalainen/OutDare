@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct ChangeCredentials: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     @State var oldEmail: String
     @State var newEmail = ""
     @State var oldPassword = ""

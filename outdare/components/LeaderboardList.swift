@@ -7,11 +7,11 @@
 import SwiftUI
 
 struct LeaderboardList: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     
     var body: some View {
         ScrollView {
-            ForEach(vm.usersSorted, id: \.self) { user in
+            ForEach(vm.usersSorted.dropFirst(3), id: \.self) { user in
                 ZStack {
                 RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color.theme.transparent)

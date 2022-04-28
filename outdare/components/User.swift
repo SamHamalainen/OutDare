@@ -19,5 +19,4 @@ struct CurrentUser: Hashable, Decodable, Identifiable {
     var id: String
     var username, location, email, profilePicture: String
     var score: Int
-    var goneUp: Bool
 }

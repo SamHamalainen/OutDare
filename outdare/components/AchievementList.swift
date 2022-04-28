@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AchievementList: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     
     let columns = [
             GridItem(.adaptive(minimum: 80)),

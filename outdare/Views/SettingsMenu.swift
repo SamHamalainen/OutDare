@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsMenu: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     @State var changeCredentials = false
     @State var changeInformationOpen = false
     

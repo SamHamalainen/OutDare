@@ -100,10 +100,8 @@
 		B194B3A3280040FD000F056E /* SingleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A2280040FD000F056E /* SingleProfile.swift */; };
 		B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A928007C50000F056E /* ProfileBackground.swift */; };
 		B1A867AC28118D0F001B38F1 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AB28118D0F001B38F1 /* UserViewModel.swift */; };
-		B1A867AE28118DC1001B38F1 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AD28118DC1001B38F1 /* UserSettings.swift */; };
 		B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AF28118E31001B38F1 /* ImagePicker.swift */; };
 		B1A867B428118F60001B38F1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B328118F60001B38F1 /* FirebaseManager.swift */; };
-		B1A867B628118FC6001B38F1 /* GetCurrentUserPrevRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,10 +220,8 @@
 		B194B3A2280040FD000F056E /* SingleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProfile.swift; sourceTree = "<group>"; };
 		B194B3A928007C50000F056E /* ProfileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBackground.swift; sourceTree = "<group>"; };
 		B1A867AB28118D0F001B38F1 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
-		B1A867AD28118DC1001B38F1 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		B1A867AF28118E31001B38F1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B1A867B328118F60001B38F1 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrentUserPrevRanking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,7 +279,6 @@
 				0664DC862808792900899F55 /* ChallengeInfo.swift */,
 				060A10D9280BF9280077F71F /* CountdownTimer.swift */,
 				6A8930E628195A0B005294BC /* DirectionsList.swift */,
-				B1A867B528118FC6001B38F1 /* GetCurrentUserPrevRanking.swift */,
 				B1A867AF28118E31001B38F1 /* ImagePicker.swift */,
 				B194B3A02800337B000F056E /* LeaderboardList.swift */,
 				064F120B28100D9B00C642CF /* LoginForm.swift */,
@@ -330,7 +325,6 @@
 				065FEC652811830700237AFB /* DirectionsView.swift */,
 				065FEC662811830700237AFB /* LyricsView.swift */,
 				065FEC672811830700237AFB /* ChallengeCompleted.swift */,
-				B1A867AD28118DC1001B38F1 /* UserSettings.swift */,
 				6AF5294D2811AD74005189F3 /* TwisterView.swift */,
 				6AF5295C28130663005189F3 /* StringGameView.swift */,
 				065FEC9D281820B600237AFB /* PointPurchaseView.swift */,
@@ -650,7 +644,6 @@
 				065FEC732811830700237AFB /* DirectionsView.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				065FEC94281183FB00237AFB /* Challenge.swift in Sources */,
-				B1A867AE28118DC1001B38F1 /* UserSettings.swift in Sources */,
 				6AF5296728158110005189F3 /* ResultHandler.swift in Sources */,
 				060A10E2280BF9280077F71F /* ChallengeTimerBar.swift in Sources */,
 				6A6CDF9E27FB6CBA002106F8 /* ChallengeDetailedPreview.swift in Sources */,
@@ -675,7 +668,6 @@
 				B12527682817C383005E3DC3 /* CustomTextFieldStyle.swift in Sources */,
 				06312258280C25F0004BF504 /* TopProfiles.swift in Sources */,
 				6AF529632814CB4C005189F3 /* QuizGame.swift in Sources */,
-				B1A867B628118FC6001B38F1 /* GetCurrentUserPrevRanking.swift in Sources */,
 				060A10E3280BF9280077F71F /* ChallengeCount.swift in Sources */,
 				B1A867B428118F60001B38F1 /* FirebaseManager.swift in Sources */,
 				065FEC92281183FB00237AFB /* Lyrics.swift in Sources */,
