@@ -19,9 +19,9 @@ class ChallengeDAO: ObservableObject {
     @Published var lyrics: Lyrics? = nil
     @Published var twister: Twister? = nil
     @Published var annotations: [MKPointAnnotation] = []
+    @Published var oldAnnotations: [MKPointAnnotation] = []
     
     func challengeToAnnotation() {
-        var count = 0
         print("dao count: \(challenges.count)")
         challenges.forEach { challenge in
             let annotation = MKPointAnnotation()
@@ -29,9 +29,45 @@ class ChallengeDAO: ObservableObject {
             annotation.title = "\(challenge.name)"
             annotation.subtitle = challenge.icon
             annotations.append(annotation)
-            count += 1
+            print("annotationCount \(annotations.count)")
         }
 
+    }
+    
+    func updateAnnotationsBasedOnDistance(userLoc: CLLocationCoordinate2D, annotationsArray: [MKPointAnnotation]) -> [MKPointAnnotation] {
+//        oldAnnotations = annotations
+        print("annotationUpdate \(annotationsArray)")
+        let newAnnotations: [MKPointAnnotation] = annotationsArray.map { annotation in
+            let isInRadius = userLoc.distance(to: annotation.coordinate) <= 150
+            let wasGray = annotation.subtitle!.contains("-gray")
+            var subtitle = ""
+            
+            if wasGray {
+                if isInRadius {
+                    subtitle = annotation.subtitle!.components(separatedBy: "-gray")[0]
+                } else {
+                    subtitle = annotation.subtitle!
+                }
+            } else {
+                if isInRadius {
+                    subtitle = annotation.subtitle!
+                } else {
+                    subtitle = annotation.subtitle! + "-gray"
+                }
+            }
+            
+            
+            
+            let newAnnotation = MKPointAnnotation()
+            newAnnotation.coordinate = annotation.coordinate
+            newAnnotation.title = "\(annotation.title)"
+            newAnnotation.subtitle = subtitle
+            return newAnnotation
+        }
+        return newAnnotations
+//        print("count before: \(annotations.count)")
+//        annotations = newAnnotations
+//        print("count after: \(annotations.count)")
     }
     
     func convertToChallenge(data: [String:Any]) -> Challenge {

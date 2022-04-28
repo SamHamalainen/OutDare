@@ -35,7 +35,8 @@ struct MapView: View {
                     viewModel: viewModel,
                     dao: dao, challengeInfoOpened: $viewModel.challengeInfoOpen,
                     navigationRoute: navigationRoute,
-                    annotations: dao.annotations
+                    annotations: dao.annotations,
+                    oldAnnotations: dao.oldAnnotations
                 )
                 .ignoresSafeArea(edges: .bottom)
                 Button(action: setLocationToUser) {
@@ -84,7 +85,7 @@ struct MapView: View {
         .onAppear {
             dao.getChallenges()
             loginViewModel.userDao.getLoggedInUserScore()
-            self.viewModel.setup(self.loginViewModel.userDao)
+            self.viewModel.setup(self.loginViewModel.userDao, self.dao)
         }
     }
 }

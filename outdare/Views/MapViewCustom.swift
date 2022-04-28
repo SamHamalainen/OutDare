@@ -16,6 +16,7 @@ struct MapViewCustom: UIViewRepresentable {
     @Binding public var challengeInfoOpened: Bool
     @ObservedObject var navigationRoute: NavigationRoute
     let annotations: [MKAnnotation]
+    let oldAnnotations: [MKAnnotation]
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self, vm: viewModel, dao: dao, nr: navigationRoute)
@@ -35,21 +36,13 @@ struct MapViewCustom: UIViewRepresentable {
         mapView.showsCompass = false
         mapView.mapType = .mutedStandard
         mapView.userTrackingMode = .none
-        
-//        let span = viewModel.userLocation != nil
-//            ? MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.001)
-//            : MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15)
-        
         mapView.setRegion(viewModel.mapRegion, animated: true)
-        mapView.addAnnotations(annotations)
-        
         return mapView
     }
     
     func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapViewCustom>) {
         if viewModel.userSelectedTracking {
             mapView.userTrackingMode = .follow
-//            mapView.addAnnotations(annotations)
         } else {
             mapView.userTrackingMode = .none
         }
