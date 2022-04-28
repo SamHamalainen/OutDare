@@ -128,7 +128,10 @@ struct StringGameView: View {
 extension StringGameView {
     func next() {
         print(game.results)
-        resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results)
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            return
+        }
+        resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results)
         state = "done"
     }
     

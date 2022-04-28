@@ -49,11 +49,7 @@ struct MapView: View {
                 .offset(x: UIScreen.main.bounds.width * 0.42, y: 25)
                 let formatted = String(format: "Distance: %.1f meters", viewModel.distanceTravelled)
                 Text("\(formatted)")
-                    .padding(.top, 200)
-                if let score = loginViewModel.userDao.loggedUserScore {
-                    Text("\(score)")
-                        .padding(.top, 100)
-                }
+                    .padding(.top, 150)
                 
                 
             } else {
@@ -87,7 +83,7 @@ struct MapView: View {
         }
         .onAppear {
             dao.getChallenges()
-//            viewModel.getUserLocation()
+            loginViewModel.userDao.getLoggedInUserScore()
             self.viewModel.setup(self.loginViewModel.userDao)
         }
     }

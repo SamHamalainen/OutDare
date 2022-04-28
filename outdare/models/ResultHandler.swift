@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ResultHandler {
     let dao = ChallengeDAO()
-    var userId: Int = 0
+    var userId: String = ""
     var challengeId: Int = 0
     var results: [ResultItem] = []
     var time: Int? = nil

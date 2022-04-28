@@ -90,15 +90,12 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             showCircle(coordinate: location.coordinate, radius: 150, mapView: self.map)
         }
         if let userDao = userDao {
-            if distanceTravelled >= 900 {
-                userDao.getLoggedInUserScore()
-            }
+//            if distanceTravelled >= 900 {
+//                userDao.getLoggedInUserScore()
+//            }
             if distanceTravelled >= 1000 {
-                if let userScore = userDao.loggedUserScore {
-                    userDao.updateUsersScore(newScore: userScore + 5)
-                    userDao.loggedUserScore = userScore + 5
-                    distanceTravelled = 0
-                }
+                userDao.updateWalkingScore()
+                distanceTravelled = 0
             }
         }
         

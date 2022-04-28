@@ -126,7 +126,10 @@ extension QuizView {
             timer.restart()
         } else {
             print(game.results)
-            resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
+            guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+                return
+            }
+            resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
             resultHandler.pushToDB()
             state = "done"
         }

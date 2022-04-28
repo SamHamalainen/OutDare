@@ -52,6 +52,9 @@
 		065FEC98281183FB00237AFB /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC8E281183FB00237AFB /* MapViewModel.swift */; };
 		065FEC99281183FB00237AFB /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC8F281183FB00237AFB /* Quiz.swift */; };
 		065FEC9B281183FB00237AFB /* LyricsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC91281183FB00237AFB /* LyricsData.swift */; };
+		065FEC9E281820B600237AFB /* PointPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC9D281820B600237AFB /* PointPurchaseView.swift */; };
+		065FECA0281834E000237AFB /* PointPurchaseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC9F281834E000237AFB /* PointPurchaseItem.swift */; };
+		065FECA22819C18D00237AFB /* PurchasePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FECA12819C18D00237AFB /* PurchasePopUp.swift */; };
 		0664DC872808792900899F55 /* ChallengeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664DC862808792900899F55 /* ChallengeInfo.swift */; };
 		6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */; };
 		6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */; };
@@ -166,6 +169,10 @@
 		065FEC8F281183FB00237AFB /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		065FEC91281183FB00237AFB /* LyricsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsData.swift; sourceTree = "<group>"; };
 		065FEC9C2815A4E800237AFB /* routeAroundMeteopolia.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = routeAroundMeteopolia.gpx; sourceTree = "<group>"; };
+		065FEC9D281820B600237AFB /* PointPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPurchaseView.swift; sourceTree = "<group>"; };
+		065FEC9F281834E000237AFB /* PointPurchaseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPurchaseItem.swift; sourceTree = "<group>"; };
+		065FECA12819C18D00237AFB /* PurchasePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePopUp.swift; sourceTree = "<group>"; };
+		0663432C280477580046C92F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0664DC862808792900899F55 /* ChallengeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfo.swift; sourceTree = "<group>"; };
 		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestRoute.gpx; sourceTree = "<group>"; };
@@ -252,6 +259,7 @@
 				6A9F88A4280BF6A2009168D2 /* SRButton.swift */,
 				6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */,
 				6A9F88A8280BF7F6009168D2 /* SpeechAnalyzer.swift */,
+				0663432C280477580046C92F /* CircleImage.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -289,6 +297,8 @@
 				6AF52968281586B9005189F3 /* ResultRow.swift */,
 				6AF5296A2815F81D005189F3 /* LyricsGame.swift */,
 				6AF5296C28161613005189F3 /* TwisterGame.swift */,
+				065FEC9F281834E000237AFB /* PointPurchaseItem.swift */,
+				065FECA12819C18D00237AFB /* PurchasePopUp.swift */,
 				B12527672817C383005E3DC3 /* CustomTextFieldStyle.swift */,
 				B125277928185054005E3DC3 /* AchievementItem.swift */,
 				B125277B281853DE005E3DC3 /* AchievementList.swift */,
@@ -316,6 +326,7 @@
 				B1A867AD28118DC1001B38F1 /* UserSettings.swift */,
 				6AF5294D2811AD74005189F3 /* TwisterView.swift */,
 				6AF5295C28130663005189F3 /* StringGameView.swift */,
+				065FEC9D281820B600237AFB /* PointPurchaseView.swift */,
 				B125276D2817F172005E3DC3 /* ChangeCredentials.swift */,
 				B125277128180A3D005E3DC3 /* SettingsMenu.swift */,
 				B1252773281814D7005E3DC3 /* ChangeInformation.swift */,
@@ -602,6 +613,7 @@
 			files = (
 				065FEC6F2811830700237AFB /* SideMenuView.swift in Sources */,
 				6A9F88A5280BF6A3009168D2 /* SRButton.swift in Sources */,
+				065FECA22819C18D00237AFB /* PurchasePopUp.swift in Sources */,
 				6AF529522811AF80005189F3 /* Twister.swift in Sources */,
 				6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */,
 				B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */,
@@ -663,6 +675,8 @@
 				065FEC98281183FB00237AFB /* MapViewModel.swift in Sources */,
 				065FEC742811830700237AFB /* LyricsView.swift in Sources */,
 				0631225C280C2BC0004BF504 /* RankingListItem.swift in Sources */,
+				065FECA0281834E000237AFB /* PointPurchaseItem.swift in Sources */,
+				065FEC9E281820B600237AFB /* PointPurchaseView.swift in Sources */,
 				060A10E0280BF9280077F71F /* CountdownTimer.swift in Sources */,
 				6AF5295F2814779C005189F3 /* ResultItem.swift in Sources */,
 				065FEC96281183FB00237AFB /* QuizData.swift in Sources */,

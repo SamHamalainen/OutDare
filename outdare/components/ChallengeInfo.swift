@@ -77,10 +77,7 @@ struct ChallengeInfo: View {
     
     func revealChallenge() {
         revealedChallenge = true
-        if let userScore = userVM.userDao.loggedUserScore {
-            print("userScore \(userScore)")
-            userVM.userDao.updateUsersScore(newScore: userScore - 50)
-        }
+        userVM.userDao.updateUsersScore(newScore: -25)
     }
     
     var body: some View {
