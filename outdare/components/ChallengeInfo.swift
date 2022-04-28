@@ -136,7 +136,9 @@ struct ChallengeInfo: View {
                             },
                                   secondaryButton: .cancel())
                         }
-                        Button(action: {addToRouteFirst()}) {
+                        Button(action: {addToRouteFirst()
+                            challengeInfoOpened = false
+                        }) {
                             Text("Add to the route(first)")
                                 .font(Font.customFont.btnText)
                                 .fontWeight(.semibold)
@@ -150,6 +152,7 @@ struct ChallengeInfo: View {
                         .offset(y: buttonEndOffsetY)
                         Button(action: {
                             navigationRoute.directionsArray.isEmpty ? addToRouteFirst() : addToRouteLast()
+                            challengeInfoOpened = false
                         }) {
                             Text("Add to the route(last)")
                                 .font(Font.customFont.btnText)

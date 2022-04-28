@@ -11,7 +11,7 @@ import SwiftUI
 enum SideMenuViewModel: Int, CaseIterable {
     
     case map, leaderboard, profile
-    
+        
     // Sets the navigation title
     var title: String {
         switch self {
@@ -31,13 +31,14 @@ enum SideMenuViewModel: Int, CaseIterable {
     }
     
     // Returns the view which in the menu item will lead to
-    @ViewBuilder
-    func getView() -> some View {
-        switch self {
-            case .map: MapView()
-            case .leaderboard: Leaderboard()
-            case .profile: UserProfile()
-        }
-    }
+//    @ViewBuilder
+//    func getView() -> some View {
+//        switch self {
+//            case .map: MapView()
+//            case .leaderboard: Leaderboard()
+//            case .profile: UserProfile()
+//        }
+//    }
+
 }
 
