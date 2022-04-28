@@ -10,11 +10,12 @@ import SDWebImageSwiftUI
 // List item for leadearboard ranking list
 struct RankingListItem: View {
     let users: CurrentUser
+    
     var body: some View {
         HStack {
             VStack {
                 if users.goneUp == true {
-                Text("1")
+                    Text("1")
                 Image(systemName: "arrowtriangle.up.fill")
                     .foregroundColor(Color.theme.rankingUp)
             } else {
