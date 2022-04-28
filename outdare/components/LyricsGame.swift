@@ -106,7 +106,7 @@ class LyricsGame: ObservableObject {
             results.append(ResultItem(text: "Perfect match", score: maxPerQ))
             return
         }
-        
+        correct = false
         if ans.isEmpty {
             print("No answer", "0/\(correctWordsCount)")
             resultString = "No answer 🧐"

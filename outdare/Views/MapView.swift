@@ -48,9 +48,9 @@ struct MapView: View {
                         .cornerRadius(10)
                 }
                 .offset(x: UIScreen.main.bounds.width * 0.42, y: 25)
-                let formatted = String(format: "Distance: %.1f meters", viewModel.distanceTravelled)
-                Text("\(formatted)")
-                    .padding(.top, 150)
+//                let formatted = String(format: "Distance: %.1f meters", viewModel.distanceTravelled)
+//                Text("\(formatted)")
+//                    .padding(.top, 150)
                 
                 
             } else {
