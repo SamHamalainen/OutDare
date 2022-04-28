@@ -130,9 +130,13 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotationTitle = view.annotation?.title {
+            print("opened before: \(viewModel.challengeInfoOpen)")
             viewModel.challengeInfoOpen = true
+            print("opened after: \(viewModel.challengeInfoOpen)")
+            print("selection before: \(String(describing: viewModel.selection))")
             selection = dao.challenges.first(where:{ $0.name == annotationTitle && $0.coordinates == view.annotation!.coordinate})
             viewModel.selection = self.selection
+            print("selection after: \(String(describing: viewModel.selection))")
             mapView.setRegion(MKCoordinateRegion(center: view.annotation!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)), animated: true)
             
         }

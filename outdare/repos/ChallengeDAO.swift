@@ -60,7 +60,7 @@ class ChallengeDAO: ObservableObject {
             
             let newAnnotation = MKPointAnnotation()
             newAnnotation.coordinate = annotation.coordinate
-            newAnnotation.title = "\(annotation.title)"
+            newAnnotation.title = annotation.title
             newAnnotation.subtitle = subtitle
             return newAnnotation
         }

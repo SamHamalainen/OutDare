@@ -127,7 +127,7 @@ struct ChallengeInfo: View {
                         .offset(y: buttonEndOffsetY)
                         .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Are you sure you want to reveal challenge?"),
-                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 50 points."),
+                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 25 points."),
                                   primaryButton: .default(Text("Reveal")) {
                                 revealChallenge()
                             },
