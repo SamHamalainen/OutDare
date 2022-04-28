@@ -33,14 +33,15 @@ enum SideMenuViewModel: Int, CaseIterable {
     }
     
     // Returns the view which in the menu item will lead to
-    @ViewBuilder
-    func getView() -> some View {
-        switch self {
-            case .map: MapView()
-            case .leaderboard: Leaderboard()
-            case .profile: UserProfile()
-            case .store: PointPurchaseView()
-        }
-    }
+//    @ViewBuilder
+//    func getView() -> some View {
+//        switch self {
+//            case .map: MapView()
+//            case .leaderboard: Leaderboard()
+//            case .profile: UserProfile()
+//            case .store: PointPurchaseView()
+//        }
+//    }
+
 }
 

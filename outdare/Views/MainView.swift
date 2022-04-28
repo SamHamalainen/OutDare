@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-
+/// Applications main view
 struct MainView: View {
     @State private var isShowingMenu = false
     @State private var currentTitle = "Map"
     @State private var currentView: AnyView = AnyView(MapView())
     @StateObject private var userDao = UserDAO()
     @EnvironmentObject var vm: AppViewModel
+    private let mapView = MapView()
     
     var body: some View {
         NavigationView {
@@ -21,7 +22,18 @@ struct MainView: View {
                 // View that displays the selected view
                 ZStack {
                     Color(.white)
-                    currentView
+//                    currentView
+                    switch currentTitle {
+                    case "Map":
+                        mapView
+                    case "Leaderboard":
+                        Leaderboard()
+                    case "Profile":
+                        UserProfile()
+
+                    default:
+                        mapView
+                    }
                 }
                 .ignoresSafeArea(edges: .bottom)
                     .onTapGesture {

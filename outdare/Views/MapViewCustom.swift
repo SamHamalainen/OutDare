@@ -51,13 +51,6 @@ struct MapViewCustom: UIViewRepresentable {
                 mapView.deselectAnnotation(annotation, animated: false)
             }
         }
-        if !navigationRoute.directionsArray.isEmpty {
-            let firstDestination = navigationRoute.directionsArray.first?.destination
-            if (firstDestination?.coordinates.distance(to: viewModel.userLocation!))! <= 150 {
-                navigationRoute.removeDirections(destination: firstDestination)
-            }
-        }
-        
     }
 }
 
@@ -145,7 +138,6 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
         }
     }
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        // print("location changed")
         navigationRoute.updateDirections(userLocation: userLocation.coordinate)
     }
 }
