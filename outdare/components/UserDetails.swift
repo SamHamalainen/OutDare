@@ -9,6 +9,8 @@ import SDWebImageSwiftUI
 
 struct UserDetails: View {
     @ObservedObject private var vm = UserViewModel()
+    @ObservedObject private var userDao = UserDAO()
+    
     @State var showImagePicker = false
     @State var image: UIImage?
     @State var errorMessage = ""
@@ -60,7 +62,7 @@ struct UserDetails: View {
                 .opacity(0.5)
                 .shadow(color: Color.theme.textDark, radius: 1, x: 1, y: 1)
                 HStack {
-                    Text("\(vm.currentUser?.score ?? 0)")
+                    Text("\(userDao.loggedUserScore ?? 0)")
                 .font(Font.customFont.extraLargeText)
                 .foregroundColor(Color.theme.textLight)
                 }

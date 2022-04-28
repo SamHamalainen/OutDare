@@ -80,7 +80,7 @@ class UserViewModel: ObservableObject {
             }
             let currentUser = self.convertToUser(data: data)
             self.currentUser = currentUser
-            self.fetchUserAchievements(id: currentUser.id)
+            self.fetchUserAchievements(uid: uid)
         }
     }
     
@@ -116,21 +116,30 @@ class UserViewModel: ObservableObject {
     }
     
     // Fetching current user achievements
-    func fetchUserAchievements(id: Int) {
+    func fetchUserAchievements(uid: String) {
         let attemptRef = FirebaseManager.shared.firestore.collection("attempts")
-        let query = attemptRef.whereField("userId", isEqualTo: id)
+        let query = attemptRef.whereField("userId", isEqualTo: uid)
         query.getDocuments() {[self] (querySnapshot, err) in
             if let err = err {
-                print("Error getting achievements: \(err)")
+                print("Error getting user attempts: \(err)")
             }
                 for document in querySnapshot!.documents {
                     let data = document.data()
                     let achievement = self.convertToAchievement(data: data)
                     achievements.append(achievement)
+                    print(self.achievements)
                 }
+            let filtered = achievements.filter {
+                $0.id != -1
+            }
+            self.achievements = filtered
             getCategories()
             }
         }
+    
+    func fetchUserScores() {
+        
+    }
     
     func getCategories() {
         let challengeRef = FirebaseManager.shared.firestore.collection("challenges")
