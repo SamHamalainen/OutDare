@@ -36,26 +36,26 @@ struct PointPurchaseView: View {
                         .frame(width: UIScreen.main.bounds.width * 0.9, height: 2)
                 }
                 HStack (spacing: 15) {
-                    PointPurchaseItem(pointAmount: 500, icon: "coin")
+                    PointPurchaseItem(pointAmount: 50, icon: "coin")
                         .onTapGesture {
-                            selectedItem = PointOrdered(name: "smallest", points: 500, price: "FREE")
+                            selectedItem = PointOrdered(name: "smallest", points: 50, price: "FREE")
                             vm.userDao.getLoggedInUserScore()
                         }
-                    PointPurchaseItem(pointAmount: 2500, icon: "money")
+                    PointPurchaseItem(pointAmount: 100, icon: "money")
                         .onTapGesture {
-                            selectedItem = PointOrdered(name: "medium", points: 2500, price: "FREE")
+                            selectedItem = PointOrdered(name: "medium", points: 100, price: "FREE")
                             vm.userDao.getLoggedInUserScore()
                         }
                 }
                 HStack (spacing: 15) {
-                    PointPurchaseItem(pointAmount: 5000, icon: "coins")
+                    PointPurchaseItem(pointAmount: 250, icon: "coins")
                         .onTapGesture {
-                            selectedItem = PointOrdered(name: "large", points: 5000, price: "FREE")
+                            selectedItem = PointOrdered(name: "large", points: 250, price: "FREE")
                             vm.userDao.getLoggedInUserScore()
                         }
-                    PointPurchaseItem(pointAmount: 10000, icon: "gold-ingots")
+                    PointPurchaseItem(pointAmount: 500, icon: "gold-ingots")
                         .onTapGesture {
-                            selectedItem = PointOrdered(name: "mega", points: 10000, price: "FREE")
+                            selectedItem = PointOrdered(name: "mega", points: 500, price: "FREE")
                             vm.userDao.getLoggedInUserScore()
                         }
                 }
@@ -102,9 +102,7 @@ struct PointPurchaseView: View {
                 primaryButton: .default(Text("Purchase")) {
                     pointsPopUp = item.points
                     popUpVisible = true
-                    if let userScore = vm.userDao.loggedUserScore {
-                        vm.userDao.updateUsersScore(newScore: userScore + item.points)
-                    }
+                    vm.userDao.updateUsersScore(newScore: item.points)
                 },
                 secondaryButton: .cancel()
             )

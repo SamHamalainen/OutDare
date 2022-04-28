@@ -11,6 +11,7 @@ struct MainView: View {
     @State private var isShowingMenu = false
     @State private var currentTitle = "Map"
     @State private var currentView: AnyView = AnyView(MapView())
+    @StateObject private var userDao = UserDAO()
     @EnvironmentObject var vm: AppViewModel
     
     var body: some View {
@@ -57,11 +58,12 @@ struct MainView: View {
                                     Image("oneCoin")
                                         .resizable()
                                         .frame(width: 24, height: 24)
-                                    Text("\(vm.userDao.loggedUserScore ?? 0)")
+                                    Text("\(userDao.loggedUserScore ?? 0)")
                                         .font(Font.customFont.normalText)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                 }
+                                .frame(minWidth: 75, minHeight: 24)
                             }
                         }
                     }

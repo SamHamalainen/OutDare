@@ -8,7 +8,7 @@
 import Foundation
 
 struct Attempt {
-    var userId = 0
+    var userId = ""
     let challengeId: Int
     let score: Int
     let time: Int?

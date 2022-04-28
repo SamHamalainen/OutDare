@@ -119,7 +119,10 @@ extension LyricsView {
             timer.restart()
         } else {
             print(game.results)
-            resultHandler = ResultHandler(userId: 1, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
+            guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+                return
+            }
+            resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
             state = "done"
         }
     }
