@@ -17,7 +17,7 @@ class UserViewModel: ObservableObject {
     
     // All users in the users db
     @Published var users: [CurrentUser] = []
-    @Published var rankedUsers = []
+    @Published var userScore: Int?
     
     // Top users
     @Published var firstUser: CurrentUser? = nil
@@ -80,43 +80,68 @@ class UserViewModel: ObservableObject {
             }
             let currentUser = self.convertToUser(data: data)
             self.currentUser = currentUser
-            self.fetchUserAchievements(uid: uid)
+            self.fetchLoggedUserAchievements(uid: uid)
         }
     }
     
     // Fetching all users
     private func fetchAllUsers() {
         let userRef = FirebaseManager.shared.firestore.collection("users")
-        let query = userRef.order(by: "score", descending: true).limit(to: 20)
+        let query = userRef.limit(to: 20)
         query.getDocuments() { [self] (querySnapshot, error) in
             if let error = error {
                 self.errorMessage = "Failed to fetch users: \(error)"
                 print("Failed to fetch users: \(error)")
                 return
             }
+            // Will be deleted
             let firstUser = querySnapshot!.documents[0]
             let secondUser = querySnapshot!.documents[1]
             let thirdUser = querySnapshot!.documents[2]
-            
             let userOne = self.convertToUser(data: firstUser.data())
             let userTwo = self.convertToUser(data: secondUser.data())
             let userThree = self.convertToUser(data: thirdUser.data())
-            
             self.firstUser = userOne
             self.secondUser = userTwo
             self.thirdUser = userThree
+            // Will be deleted
             
             for document in querySnapshot!.documents {
                 let data = document.data()
+                let uid = document.documentID
+                print("HERE IT IS:", uid)
                 let user = self.convertToUser(data: data)
                 users.append(user)
             }
+            
+//            for var user in users {
+//                let score = fetchAllScores(uid: )
+//            }
+            
             self.errorMessage = "Successfully fetched users"
         }
     }
     
     // Fetching current user achievements
-    func fetchUserAchievements(uid: String) {
+    func fetchAllScores(uid: String) {
+        let attemptRef = FirebaseManager.shared.firestore.collection("attempts")
+        let query = attemptRef.whereField("userId", isEqualTo: uid)
+        query.getDocuments() {[self] (querySnapshot, err) in
+            if let err = err {
+                print("Error getting user attempts: \(err)")
+            }
+            var scores: [Int] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let score = data["score"] as? Int ?? 0
+                    scores.append(score)
+                }
+            self.userScore = scores.reduce(0, +)
+            }
+        }
+    
+    // Fetching current user achievements
+    func fetchLoggedUserAchievements(uid: String) {
         let attemptRef = FirebaseManager.shared.firestore.collection("attempts")
         let query = attemptRef.whereField("userId", isEqualTo: uid)
         query.getDocuments() {[self] (querySnapshot, err) in
@@ -136,10 +161,6 @@ class UserViewModel: ObservableObject {
             getCategories()
             }
         }
-    
-    func fetchUserScores() {
-        
-    }
     
     func getCategories() {
         let challengeRef = FirebaseManager.shared.firestore.collection("challenges")
