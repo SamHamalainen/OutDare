@@ -30,6 +30,8 @@ struct MainView: View {
                         Leaderboard()
                     case "Profile":
                         UserProfile()
+                    case "Store":
+                        PointPurchaseView()
 
                     default:
                         mapView
