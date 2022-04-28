@@ -52,7 +52,7 @@ struct ChallengeContainer: View {
                         let game = TwisterGame(twister: twister)
                         TwisterView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
-                case "string":
+                case "stringGame":
                     StringGameView(state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                 default:
                     Text("invalid category")

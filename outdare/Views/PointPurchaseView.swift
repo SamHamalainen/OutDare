@@ -60,6 +60,7 @@ struct PointPurchaseView: View {
                         }
                 }
             }
+            .allowsHitTesting(!popUpVisible)
             if popUpVisible {
             ZStack {
                 ZStack (alignment: .top) {

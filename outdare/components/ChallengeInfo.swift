@@ -224,27 +224,30 @@ struct ChallengeInfo: View {
                 .offset(y: currentDragOffsetY)
                 .offset(y: endingOffsetY)
                 .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            withAnimation(.spring()) {
-                                currentDragOffsetY = value.translation.height
-                                challengeInfoHeight = UIScreen.main.bounds.height * 0.85
-                            }
-                        }
-                        .onEnded { value in
-                            withAnimation(.spring()) {
-                                if currentDragOffsetY < -150 {
-                                    endingOffsetY = -startingOffsetY + 15
-                                    buttonEndOffsetY = 400
-                                    challengeInfoExpanded = true
-                                } else if endingOffsetY != 0 && currentDragOffsetY > 150 {
-                                    endingOffsetY = 0
-                                    buttonEndOffsetY = 0
-                                    challengeInfoExpanded = false
+                     !challengeStarted ?
+                        DragGesture()
+                            .onChanged { value in
+                                withAnimation(.spring()) {
+                                    currentDragOffsetY = value.translation.height
+                                    challengeInfoHeight = UIScreen.main.bounds.height * 0.85
                                 }
-                                currentDragOffsetY = 0
                             }
-                        }
+                            .onEnded { value in
+                                withAnimation(.spring()) {
+                                    if currentDragOffsetY < -150 {
+                                        endingOffsetY = -startingOffsetY + 15
+                                        buttonEndOffsetY = 400
+                                        challengeInfoExpanded = true
+                                    } else if endingOffsetY != 0 && currentDragOffsetY > 150 {
+                                        endingOffsetY = 0
+                                        buttonEndOffsetY = 0
+                                        challengeInfoExpanded = false
+                                    }
+                                    currentDragOffsetY = 0
+                                }
+                            }
+                     :
+                        nil
                 )
             }
         }
