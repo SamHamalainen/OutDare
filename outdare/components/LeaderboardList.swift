@@ -11,7 +11,7 @@ struct LeaderboardList: View {
     
     var body: some View {
         ScrollView {
-            ForEach(vm.users.dropFirst(3)) { user in
+            ForEach(vm.usersSorted, id: \.self) { user in
                 ZStack {
                 RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color.theme.transparent)

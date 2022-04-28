@@ -7,6 +7,7 @@
 import Foundation
 import SDWebImageSwiftUI
 import Firebase
+import SwiftUI
 
 class UserViewModel: ObservableObject {
     @Published var errorMessage = ""
@@ -16,9 +17,9 @@ class UserViewModel: ObservableObject {
     @Published var currentUser: CurrentUser?
     
     // All users in the users db
-    @Published var users: [CurrentUser] = []
-    @Published var userScore: Int?
-    @Published var usersWithScores: [CurrentUser] = []
+    private var users: [CurrentUser] = []
+    private var usersWithScores: [CurrentUser] = []
+    @Published var usersSorted: [CurrentUser] = []
     
     // Top users
     @Published var firstUser: CurrentUser? = nil
@@ -40,10 +41,9 @@ class UserViewModel: ObservableObject {
         let location = data["location"] as? String ?? ""
         let email = data["email"] as? String ?? ""
         let profilePicture = data["profilePicture"] as? String ?? ""
-        let score = data["score"] as? Int ?? 0
         let goneUp = data["goneUp"] as? Bool ?? false
         
-        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: score, goneUp: goneUp)
+        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: 0, goneUp: goneUp)
     }
     
     func convertToAchievement(data: [String:Any]) -> Achievement {
@@ -107,37 +107,42 @@ class UserViewModel: ObservableObject {
             self.thirdUser = userThree
             // Will be deleted
             
+            
             for document in querySnapshot!.documents {
                 let data = document.data()
-                let uid = document.documentID
+                let useruid = document.documentID
                 let user = self.convertToUser(data: data)
-                fetchAllScores(uid: uid)
-                
-                usersWithScores.append(CurrentUser(id: uid, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore ?? 0, goneUp: user.goneUp))
+                users.append(CurrentUser(id: useruid, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: user.score, goneUp: user.goneUp))
             }
             self.errorMessage = "Successfully fetched users"
+            fetchAllScores()
         }
-        
-        print("users", self.usersWithScores.last ?? "")
     }
     
     // Fetching current user achievements
-    func fetchAllScores(uid: String) {
+    func fetchAllScores() {
         let attemptRef = FirebaseManager.shared.firestore.collection("attempts")
-        let query = attemptRef.whereField("userId", isEqualTo: uid)
-        query.getDocuments() {[self] (querySnapshot, err) in
-            if let err = err {
-                print("Error getting user attempts: \(err)")
-            }
-            var scores: [Int] = []
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    let score = data["score"] as? Int ?? 0
-                    scores.append(score)
+        for user in users {
+            let query = attemptRef.whereField("userId", isEqualTo: user.id)
+            query.getDocuments() {[self] (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting user attempts: \(err)")
                 }
-            self.userScore = scores.reduce(0, +)
-            }
+                var scores: [Int] = []
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        let score = data["score"] as? Int ?? 0
+                        print("scoreInLogged: \(score)")
+                        scores.append(score)
+                    }
+                let userScore = scores.reduce(0, +)
+                
+                usersWithScores.append(CurrentUser(id: user.id, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore , goneUp: user.goneUp))
+                
+                self.usersSorted = usersWithScores.sorted(by: { $0.score > $1.score })
         }
+    }
+}
     
     // Fetching current user achievements
     func fetchLoggedUserAchievements(uid: String) {
@@ -174,7 +179,6 @@ class UserViewModel: ObservableObject {
                 let category = self.convertToCategory(data: data)
                 
                 achievementsWithCategory.append(Achievement(id: item.id, score: item.score, time: item.time, userId: item.userId, date: item.date, speedBonus: item.speedBonus, category: category.name))
-                print(self.achievementsWithCategory.last ?? "")
             }
         }
     }

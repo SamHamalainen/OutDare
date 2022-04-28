@@ -51,7 +51,7 @@ class UserDAO: ObservableObject {
                 for document in querySnapshot!.documents {
                     let data = document.data()
                     let score = data["score"] as? Int ?? 0
-                    print("scoreInLogged: \(score)")
+                    // print("scoreInLogged: \(score)")
                     scores.append(score)
                 }
             self.loggedUserScore = scores.reduce(0, +)
