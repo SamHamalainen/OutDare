@@ -63,6 +63,10 @@
 		6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6A6CDFE627FF0BF2002106F8 /* .gitignore */; };
 		6A825B5E2819E6CD004A40A2 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B5D2819E6CD004A40A2 /* correct.mp3 */; };
 		6A825B602819E84D004A40A2 /* success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B5F2819E84D004A40A2 /* success.mp3 */; };
+		6A825B62281ABB5E004A40A2 /* TriviaApiDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A825B61281ABB5E004A40A2 /* TriviaApiDAO.swift */; };
+		6A825B65281ABC6B004A40A2 /* HTMLEntities in Frameworks */ = {isa = PBXBuildFile; productRef = 6A825B64281ABC6B004A40A2 /* HTMLEntities */; };
+		6A825B67281AD0B0004A40A2 /* QuizGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A825B66281AD0B0004A40A2 /* QuizGeneratorView.swift */; };
+		6A825B6B281B51A2004A40A2 /* SelectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A825B6A281B51A2004A40A2 /* SelectList.swift */; };
 		6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */; };
 		6A9F88A5280BF6A3009168D2 /* SRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A4280BF6A2009168D2 /* SRButton.swift */; };
 		6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A8280BF7F6009168D2 /* SpeechAnalyzer.swift */; };
@@ -174,6 +178,9 @@
 		6A6CDFE627FF0BF2002106F8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6A825B5D2819E6CD004A40A2 /* correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correct.mp3; sourceTree = "<group>"; };
 		6A825B5F2819E84D004A40A2 /* success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success.mp3; sourceTree = "<group>"; };
+		6A825B61281ABB5E004A40A2 /* TriviaApiDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaApiDAO.swift; sourceTree = "<group>"; };
+		6A825B66281AD0B0004A40A2 /* QuizGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizGeneratorView.swift; sourceTree = "<group>"; };
+		6A825B6A281B51A2004A40A2 /* SelectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectList.swift; sourceTree = "<group>"; };
 		6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeTimer.swift; path = outdare/components/ChallengeTimer.swift; sourceTree = SOURCE_ROOT; };
 		6A9F88A4280BF6A2009168D2 /* SRButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SRButton.swift; path = outdare/components/SRButton.swift; sourceTree = SOURCE_ROOT; };
 		6A9F88A8280BF7F6009168D2 /* SpeechAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechAnalyzer.swift; path = outdare/components/SpeechAnalyzer.swift; sourceTree = SOURCE_ROOT; };
@@ -218,6 +225,7 @@
 			files = (
 				6AF5297528181D9D005189F3 /* Subsonic in Frameworks */,
 				6AF529572811B040005189F3 /* WrappingStack in Frameworks */,
+				6A825B65281ABC6B004A40A2 /* HTMLEntities in Frameworks */,
 				6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */,
 				062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */,
 				062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */,
@@ -286,6 +294,7 @@
 				6AF52968281586B9005189F3 /* ResultRow.swift */,
 				6AF5296A2815F81D005189F3 /* LyricsGame.swift */,
 				6AF5296C28161613005189F3 /* TwisterGame.swift */,
+				6A825B6A281B51A2004A40A2 /* SelectList.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -294,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				065FEC5A2811830700237AFB /* Leaderboard.swift */,
+				6A825B66281AD0B0004A40A2 /* QuizGeneratorView.swift */,
 				065FEC5B2811830700237AFB /* StartView.swift */,
 				065FEC5C2811830700237AFB /* MapViewCustom.swift */,
 				065FEC5D2811830700237AFB /* ChallengesTestView.swift */,
@@ -371,6 +381,7 @@
 			children = (
 				6A6CDFDE27FDC3E2002106F8 /* ChallengeDAO.swift */,
 				064F12132810340A00C642CF /* UserDAO.swift */,
+				6A825B61281ABB5E004A40A2 /* TriviaApiDAO.swift */,
 			);
 			path = repos;
 			sourceTree = "<group>";
@@ -475,6 +486,7 @@
 				6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */,
 				6AF529562811B040005189F3 /* WrappingStack */,
 				6AF5297428181D9D005189F3 /* Subsonic */,
+				6A825B64281ABC6B004A40A2 /* HTMLEntities */,
 			);
 			productName = outdare;
 			productReference = B167D31A27FAE4CE00BF950E /* outdare.app */;
@@ -553,6 +565,7 @@
 				6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */,
 				6AF5297328181D9D005189F3 /* XCRemoteSwiftPackageReference "Subsonic" */,
+				6A825B63281ABC6A004A40A2 /* XCRemoteSwiftPackageReference "swift-html-entities" */,
 			);
 			productRefGroup = B167D31B27FAE4CE00BF950E /* Products */;
 			projectDirPath = "";
@@ -618,6 +631,7 @@
 				065FEC6B2811830700237AFB /* ChallengesTestView.swift in Sources */,
 				6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */,
 				6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */,
+				6A825B62281ABB5E004A40A2 /* TriviaApiDAO.swift in Sources */,
 				065FEC712811830700237AFB /* openingpageView.swift in Sources */,
 				060A10E4280BF9280077F71F /* ChallengeSmallPreview.swift in Sources */,
 				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
@@ -649,12 +663,14 @@
 				064F121028100DDA00C642CF /* SignUpForm.swift in Sources */,
 				B194B3A3280040FD000F056E /* SingleProfile.swift in Sources */,
 				065FEC722811830700237AFB /* MainView.swift in Sources */,
+				6A825B6B281B51A2004A40A2 /* SelectList.swift in Sources */,
 				065FEC6A2811830700237AFB /* MapViewCustom.swift in Sources */,
 				065FEC97281183FB00237AFB /* NavigationRoute.swift in Sources */,
 				B194B3A12800337B000F056E /* LeaderboardList.swift in Sources */,
 				065FEC812811832F00237AFB /* Color.swift in Sources */,
 				065FEC93281183FB00237AFB /* Attempt.swift in Sources */,
 				B166D21827FC0D0D00EADF66 /* Trapezium.swift in Sources */,
+				6A825B67281AD0B0004A40A2 /* QuizGeneratorView.swift in Sources */,
 				065FEC99281183FB00237AFB /* Quiz.swift in Sources */,
 				06312258280C25F0004BF504 /* TopProfiles.swift in Sources */,
 				6AF529632814CB4C005189F3 /* QuizGame.swift in Sources */,
@@ -1025,6 +1041,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		6A825B63281ABC6A004A40A2 /* XCRemoteSwiftPackageReference "swift-html-entities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kitura/swift-html-entities";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/diniska/swiftui-wrapping-stack";
@@ -1063,6 +1087,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		6A825B64281ABC6B004A40A2 /* HTMLEntities */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A825B63281ABC6A004A40A2 /* XCRemoteSwiftPackageReference "swift-html-entities" */;
+			productName = HTMLEntities;
 		};
 		6AF529562811B040005189F3 /* WrappingStack */ = {
 			isa = XCSwiftPackageProductDependency;
