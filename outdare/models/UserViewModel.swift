@@ -9,6 +9,17 @@ import SDWebImageSwiftUI
 import Firebase
 import SwiftUI
 
+struct RankingItem: Identifiable {
+    var id: UUID = UUID()
+    var rank: Int
+    var user: CurrentUser
+    
+    init(_ rank: Int, _ user: CurrentUser) {
+        self.rank = rank
+        self.user = user
+    }
+}
+
 class UserViewModel: ObservableObject {
     @Published var errorMessage = ""
     
@@ -19,6 +30,7 @@ class UserViewModel: ObservableObject {
     private var users: [CurrentUser] = []
     private var usersWithScores: [CurrentUser] = []
     @Published var usersSorted: [CurrentUser] = []
+    @Published var rankingSorted: [RankingItem] = []
     
     private var achievements: [Achievement] = []
     @Published var achievementsWithCategory: [Achievement] = []
@@ -120,11 +132,19 @@ class UserViewModel: ObservableObject {
                 
                 usersWithScores.append(CurrentUser(id: user.id, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore))
                 self.usersSorted = usersWithScores.sorted(by: { $0.score > $1.score })
+                
+                let rankings = getUserRanking(users: usersSorted).sorted(by: {$0.rank <= $1.rank})
+                
+                self.rankingSorted = rankings
+                
+                for e in rankingSorted {
+                    print(e.rank, e.user)
+            }
         }
     }
 }
     
-    func getUserRanking(users: [CurrentUser]) -> [Int:[CurrentUser]] {
+    func getUserRanking(users: [CurrentUser]) -> [RankingItem] {
         let sorted = users.sorted(by: {$0.score > $1.score})
         var previousScore = sorted[0].score
         var grouped: [[CurrentUser]] = Array(repeating: [], count: sorted.count)
@@ -148,7 +168,16 @@ class UserViewModel: ObservableObject {
                ranking[rank] = userArray
                rank += userArray.count
            }
-        return ranking
+        var pairs: [RankingItem] = []
+        
+        for rank in ranking.keys {
+            if let users = ranking[rank] {
+                for user in users {
+                    pairs.append(RankingItem(rank, user))
+                }
+            }
+        }
+        return pairs
     }
     
     // Fetching current user achievements

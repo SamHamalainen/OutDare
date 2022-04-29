@@ -18,12 +18,6 @@ struct SettingsMenu: View {
                 .fill(Color.theme.background2)
                 .frame(height: 640)
             VStack(alignment: .leading) {
-            Rectangle()
-                    .frame(width: 100, height: 5)
-                    .padding(.leading, 140)
-                    .padding(.top, 20)
-                    .foregroundColor(Color.theme.button)
-                    
             Section {
                 Button (
                     action: {
@@ -31,7 +25,7 @@ struct SettingsMenu: View {
                             changeCredentials.toggle()
                         }
                     }, label: {
-                            Text("Change credentials")
+                            Text("Credentials")
                             Spacer()
                             Image(systemName: "wallet.pass.fill").foregroundColor(.white)
                     })
@@ -46,7 +40,7 @@ struct SettingsMenu: View {
                             changeInformationOpen.toggle()
                         }
                     }, label: {
-                            Text("Change user information")
+                            Text("User information")
                             Spacer()
                             Image(systemName: "info").foregroundColor(.white)
                     })
