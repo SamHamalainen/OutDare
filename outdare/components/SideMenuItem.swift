@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/// Component for sideMenuView's list. Has the view's icon and title
 struct SideMenuItem: View {
     let viewModel: SideMenuViewModel
     var body: some View {
