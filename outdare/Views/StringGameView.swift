@@ -132,6 +132,7 @@ extension StringGameView {
             return
         }
         resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results)
+        resultHandler.pushToDB()
         state = "done"
     }
     

@@ -69,6 +69,7 @@ struct MainView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             ZStack (alignment: .leading) {
                                 HStack {
+                                    Spacer()
                                     Image("oneCoin")
                                         .resizable()
                                         .frame(width: 24, height: 24)
@@ -77,7 +78,7 @@ struct MainView: View {
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                 }
-                                .frame(minWidth: 75, minHeight: 24)
+                                .frame(minWidth: UIScreen.main.bounds.width * 0.35, minHeight: 24, alignment: .trailing)
                             }
                         }
                     }

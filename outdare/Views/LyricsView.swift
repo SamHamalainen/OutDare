@@ -64,6 +64,7 @@ struct LyricsView: View {
                         .foregroundColor(game.correct == true ? Color.theme.rankingUp : Color.theme.textDark)
                         .font(Font.customFont.normalText)
                         .autocapitalization(.none)
+                        .disableAutocorrection(true)
                         .onChange(of: speechAnalyzer.recognizedText ?? "") {newValue in
                             if newValue.count > 0 && game.correct != true {
                                 input = newValue
@@ -123,6 +124,7 @@ extension LyricsView {
                 return
             }
             resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
+            resultHandler.pushToDB()
             state = "done"
         }
     }
