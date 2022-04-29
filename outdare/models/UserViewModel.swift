@@ -131,15 +131,10 @@ class UserViewModel: ObservableObject {
                 let userScore = scores.reduce(0, +)
                 
                 usersWithScores.append(CurrentUser(id: user.id, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore))
+                
                 self.usersSorted = usersWithScores.sorted(by: { $0.score > $1.score })
-                
                 let rankings = getUserRanking(users: usersSorted).sorted(by: {$0.rank <= $1.rank})
-                
                 self.rankingSorted = rankings
-                
-                for e in rankingSorted {
-                    print(e.rank, e.user)
-            }
         }
     }
 }

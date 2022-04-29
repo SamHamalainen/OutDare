@@ -26,6 +26,8 @@ struct UserProfile: View {
                     }
                 }, label: {
                         Image(systemName: "ellipsis").foregroundColor(.black)
+                }).sheet(isPresented: $settingsOpened, content: {
+                    SettingsMenu()
                 })
                     .font(.largeTitle)
                     .rotationEffect(Angle(degrees: 90))
@@ -36,19 +38,6 @@ struct UserProfile: View {
                     .frame(width: 350, alignment: .leading)
                     .padding(.top, 60)
             AchievementList()
-        }
-            
-            if settingsOpened {
-                ZStack(alignment: .bottom) {
-                Rectangle()
-                    .ignoresSafeArea()
-                    .opacity(0.45)
-                    .onTapGesture {
-                        settingsOpened = false
-                    }
-                    SettingsMenu()
-                    }
-                .edgesIgnoringSafeArea(.bottom)
             }
         }
     }

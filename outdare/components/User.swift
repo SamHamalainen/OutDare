@@ -3,6 +3,7 @@
 //  outdare
 //
 //  Created by Jasmin Partanen on 5.4.2022.
+//  Description: User struct for storing user details
 //
 import Foundation
 import SwiftUI

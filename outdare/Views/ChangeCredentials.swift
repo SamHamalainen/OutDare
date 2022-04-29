@@ -3,10 +3,11 @@
 //  outdare
 //
 //  Created by Jasmin Partanen on 26.4.2022.
-//
+//  Description: View for changing user password and email
 
 import SwiftUI
 import FirebaseAuth
+import Combine
 
 struct ChangeCredentials: View {
     @StateObject private var vm = UserViewModel()
@@ -15,43 +16,68 @@ struct ChangeCredentials: View {
     @State var oldPassword = ""
     @State var newPassword = ""
     @State var errorMessage = ""
+    @State var showValidationMessage = false
+    @State var message: String?
     
     
     var body: some View {
         ZStack (alignment: .top) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.theme.background2)
-                .frame(height: 640)
+            Color.theme.background2
+            
+            RoundedRectangle(cornerRadius: 5)
+                .frame(width: 120, height: 5)
+                .padding()
+                .foregroundColor(Color.theme.button)
+            
             VStack {
-                    VStack(alignment: .leading) {
-                    Text("Email")
+                Text("Change credentials")
+                    .font(Font.customFont.largeText)
+                    .padding(.top, 60)
+                
+                Section(header: Text("Email")) {
                     TextField(vm.currentUser?.email ?? "Old email", text: $oldEmail)
                     TextField("New email", text: $newEmail)
-                    } .textFieldStyle(CustomTextFieldStyle())
-                    .padding(.vertical, 20)
-                        
-                    VStack(alignment: .leading) {
-                    Text("Password")
+                }
+                .padding(.vertical, 2)
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                    
+                Section(header: Text("Password")) {
                     SecureField("Old password", text: $oldPassword)
                     SecureField("New password", text: $newPassword)
-                    } .textFieldStyle(CustomTextFieldStyle())
-                    .padding(.vertical, 20)
+                    }
+                    .padding(.vertical, 2)
+                    .keyboardType(.default)
+                    .autocapitalization(.none)
                         
-                        Button {
+                Section {
+                    if showValidationMessage {
+                        Text(message ?? "")
+                            .foregroundColor(Color.theme.difficultyHard)
+                            .padding(.vertical, 10)
+                    }
+                    Button {
+                        if let validationError = validCredentials(newEmail: newEmail, oldPassword: oldPassword, newPassword: newPassword) {
+                            showValidationMessage = true
+                            message = validationError
+                            return
+                        }
                             updateEmailAndPassword()
+                            
                         } label: {
                                 Text("UPDATE")
                         }
                             .padding()
-                            .frame(width: 100)
                             .background(Color.theme.button)
                             .foregroundColor(Color.theme.textLight)
                             .cornerRadius(20)
                 }
+            }
                 .foregroundColor(Color.theme.textDark)
                 .font(Font.customFont.normalText)
                 .frame(width: 300)
                 .padding()
+                .textFieldStyle(RoundedTextFieldStyle(alignment: .leading))
             }
         .ignoresSafeArea(edges: .bottom)
         }

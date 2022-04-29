@@ -14,26 +14,33 @@ struct SettingsMenu: View {
     
     var body: some View {
         ZStack (alignment: .top) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.theme.background2)
-                .frame(height: 640)
+            Color.theme.background2
+            
+            RoundedRectangle(cornerRadius: 5)
+                .frame(width: 120, height: 5)
+                .padding()
+                .foregroundColor(Color.theme.button)
+            
             VStack(alignment: .leading) {
             Section {
                 Button (
                     action: {
                         withAnimation(.spring()) {
-                            changeCredentials.toggle()
+                            changeCredentials = true
                         }
                     }, label: {
                             Text("Credentials")
                             Spacer()
                             Image(systemName: "wallet.pass.fill").foregroundColor(.white)
+                    }).sheet(isPresented: $changeCredentials, content: {
+                        ChangeCredentials(oldEmail: vm.currentUser?.email ?? "")
                     })
-                .padding(.top, 40)
+                .padding(.top, 60)
                 Text("Password and email used for login")
                     .font(Font.customFont.smallText)
                     .offset(y: -20)
                 
+            Section {
                 Button (
                     action: {
                         withAnimation(.spring()) {
@@ -43,43 +50,20 @@ struct SettingsMenu: View {
                             Text("User information")
                             Spacer()
                             Image(systemName: "info").foregroundColor(.white)
+                    }).sheet(isPresented: $changeInformationOpen, content: {
+                        ChangeInformation(username: vm.currentUser?.username ?? "", location: vm.currentUser?.location ?? "")
                     })
                 Text("Username and location")
                     .font(Font.customFont.smallText)
                     .offset(y: -20)
                 }
+            }
             .font(Font.customFont.largeText)
             .foregroundColor(Color.theme.textDark)
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
             }
         } .ignoresSafeArea(edges: .bottom)
-        
-        if changeCredentials {
-            ZStack(alignment: .bottom) {
-            Rectangle()
-                .ignoresSafeArea()
-                .opacity(0.45)
-                .onTapGesture {
-                    changeCredentials = false
-                }
-                ChangeCredentials(oldEmail: vm.currentUser?.email ?? "")
-                }
-            .edgesIgnoringSafeArea(.bottom)
-        }
-        
-        if changeInformationOpen {
-            ZStack(alignment: .bottom) {
-            Rectangle()
-                .ignoresSafeArea()
-                .opacity(0.45)
-                .onTapGesture {
-                    changeInformationOpen = false
-                }
-                ChangeInformation(username: vm.currentUser?.username ?? "", location: vm.currentUser?.location ?? "")
-                }
-            .edgesIgnoringSafeArea(.bottom)
-        }
     }
 }
 

@@ -7,47 +7,67 @@
 
 import SwiftUI
 
+
 struct ChangeInformation: View {
     @StateObject private var vm = UserViewModel()
-    @StateObject private var settingsVm = SettingsViewModel()
+    @State var errorMessage = ""
     @State var username: String
     @State var location: String
-    @State var errorMessage = ""
+    @State var showValidationMessage = false
+    @State var message: String?
     
     var body: some View {
         ZStack (alignment: .top) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.theme.background2)
-                .frame(height: 640)
+            Color.theme.background2
             
-            VStack(alignment: .center) {
-                VStack(alignment: .leading) {
-                    Text("Username")
-                    TextField("Username", text: $username)
-                } .textFieldStyle(CustomTextFieldStyle())
-                    .padding(.vertical, 20)
+            RoundedRectangle(cornerRadius: 5)
+                .frame(width: 120, height: 5)
+                .padding()
+                .foregroundColor(Color.theme.button)
+            
+//            LottieView(lottieFile: "close_button")
+//                .frame(width: 80, height: 80)
+//                .offset(y: -90)
                 
-                VStack(alignment: .leading) {
+            VStack(alignment: .center) {
+                Text("Change information")
+                    .font(Font.customFont.largeText)
+                    .padding(.top, 60)
+            
+                Section(header: Text("Username")) {
+                    TextField("Username", text: $username)
                     Text("Location")
                     TextField(vm.currentUser?.location ?? "Location", text: $location)
-                } .textFieldStyle(CustomTextFieldStyle())
-                    .padding(.vertical, 20)
+                }
+                .autocapitalization(.none)
+                .padding(.vertical, 5)
                 
+                Section {
+                    if showValidationMessage {
+                        Text(message ?? "")
+                            .foregroundColor(Color.theme.difficultyHard)
+                            .padding(.vertical, 10)
+                    }
                 Button {
+                    if let validationError = validInformation(location: location, username: username) {
+                        showValidationMessage = true
+                        message = validationError
+                        return
+                    }
                     updateUserDetails()
                 } label: {
                     Text("UPDATE")
                 }
                 .padding()
-                .frame(width: 100)
                 .background(Color.theme.button)
                 .foregroundColor(Color.theme.textLight)
                 .cornerRadius(20)
             }
+        }
             .foregroundColor(Color.theme.textDark)
             .font(Font.customFont.normalText)
-            .frame(width: 300)
-            .padding()
+            .padding(.horizontal, 40)
+            .textFieldStyle(RoundedTextFieldStyle(alignment: .leading))
         }
         .ignoresSafeArea(edges: .bottom)
     }

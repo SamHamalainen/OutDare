@@ -3,7 +3,8 @@
 //  outdare
 //
 //  Created by Jasmin Partanen on 8.4.2022.
-//
+//  Description: List component for iterating through the users in leaderboard list
+
 import SwiftUI
 
 struct LeaderboardList: View {
