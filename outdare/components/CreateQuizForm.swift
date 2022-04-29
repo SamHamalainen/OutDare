@@ -23,12 +23,14 @@ struct CreateQuizForm: View {
     @State var showToast = false
     @State var message = ""
     @State var success = false
+    @State var adding = false
     
     func handleCreate() {
         if title.isEmpty {
             message = "Please enter a title at least"
             showToast = true
         } else {
+            adding = true
             dao.addQuiz(triviaQuestions: selected, title: title, description: description, coords: chosenCoords)
         }
     }
@@ -36,6 +38,10 @@ struct CreateQuizForm: View {
     var body: some View {
         let pinSize = CGFloat(30.0)
         ZStack {
+            if adding {
+                ProgressView()
+                    .zIndex(1000)
+            }
             Rectangle()
                 .ignoresSafeArea()
                 .opacity(0.45)
@@ -90,7 +96,7 @@ struct CreateQuizForm: View {
             }
             VStack {
                 if success {
-                    VStack(spacing: 20) {
+                    VStack(spacing: 40) {
                         Text("Quiz Added 🤩")
                             .font(Font.customFont.largeText)
                         Button(action: {
@@ -105,7 +111,6 @@ struct CreateQuizForm: View {
                                 .cornerRadius(40)
                         }
                     }
-                    .padding()
                     .padding()
                 } else {
                     Text("New Quiz")
@@ -172,7 +177,11 @@ struct CreateQuizForm: View {
             .zIndex(10)
             .padding()
         }
-        .onChange(of: dao.challengeAdded, perform: {success = $0})
+        .onChange(of: dao.challengeAdded, perform: { added in
+            success = added
+            adding = false
+        })
+        .allowsHitTesting(!adding)
         .present(isPresented: self.$showToast, type: .toast, position: .bottom, autohideDuration: 2.0) {
             Text(message)
                 .padding()

@@ -59,7 +59,6 @@ class UserViewModel: ObservableObject {
                 return
             }
             let currentUser = self.convertToUser(data: data)
-            UserDefaults.standard.set(currentUser.id, forKey: "userId")
             self.currentUser = currentUser
         }
     }
