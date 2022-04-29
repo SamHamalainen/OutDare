@@ -19,6 +19,7 @@ class ChallengeDAO: ObservableObject {
     @Published var lyrics: Lyrics? = nil
     @Published var twister: Twister? = nil
     @Published var annotations: [MKPointAnnotation] = []
+    @Published var challengeAdded = false
     
     func challengeToAnnotation() {
         var count = 0
@@ -191,6 +192,83 @@ class ChallengeDAO: ObservableObject {
                 } else {
                     print("Document added!")
                 }
+        }
+    }
+    
+    func addChallenge(challenge: Challenge) {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            fatalError("Cannot get UID")
+        }
+        let challengeRef = db.collection("challenges")
+        let query = challengeRef.order(by: "id", descending: true).limit(to: 1)
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let document = querySnapshot!.documents[0]
+                guard let id = document.data()["id"] as? Int else {
+                    return
+                }
+                let newId = id + 1
+                print("newId", newId)
+                challengeRef.addDocument(data: [
+                    "category": challenge.category,
+                    "challengeId": challenge.challengeId,
+                    "description": challenge.description,
+                    "difficulty": challenge.difficulty,
+                    "id": newId,
+                    "latitude": Double(challenge.coordinates.latitude),
+                    "longitude": Double(challenge.coordinates.longitude),
+                    "name": challenge.name,
+                    "creator": String(uid),
+                    "created": Timestamp(),
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Challenge added: \(newId) \(challenge.name)")
+                        self.challengeAdded = true
+                    }
+                }
+            }
+        }
+    }
+    
+    func addQuiz(triviaQuestions: [TriviaQuestion], title: String, description: String = "", coords: CLLocationCoordinate2D) {
+        let quizRef = db.collection("quizzes")
+        let query = quizRef.order(by: "id", descending: true).limit(to: 1)
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let document = querySnapshot!.documents[0]
+                guard let id = document.data()["id"] as? Int else {
+                    return
+                }
+                let newId = id + 1
+                print("newId", newId)
+                let questions = triviaQuestions.map { $0.question }
+                let correctAns = triviaQuestions.map { $0.correct_answer }
+                let answers = triviaQuestions.map { $0.getAllAnswers() }
+                let answersDict = Dictionary(uniqueKeysWithValues: answers.indices.map { (String($0), answers[$0]) })
+                let difficulty = triviaQuestions[0].difficulty
+                
+                quizRef.addDocument(data: [
+                    "id": newId,
+                    "answers": answersDict,
+                    "correctAns": correctAns,
+                    "difficulty": difficulty,
+                    "timePerQ": 13,
+                    "questions": questions
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Quiz added: \(newId)")
+                        self.addChallenge(challenge: Challenge(id: -1, challengeId: newId, name: title, difficulty: difficulty, category: "quiz", description: description, coordinates: coords))
+                    }
+                }
+            }
         }
     }
     

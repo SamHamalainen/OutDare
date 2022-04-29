@@ -8,6 +8,7 @@
 import Foundation
 import HTMLEntities
 import Combine
+import CoreLocation
 
 //[{"id":9,"name":"General Knowledge"},{"id":10,"name":"Entertainment: Books"},{"id":11,"name":"Entertainment: Film"},{"id":12,"name":"Entertainment: Music"},{"id":13,"name":"Entertainment: Musicals & Theatres"},{"id":14,"name":"Entertainment: Television"},{"id":15,"name":"Entertainment: Video Games"},{"id":16,"name":"Entertainment: Board Games"},{"id":17,"name":"Science & Nature"},{"id":18,"name":"Science: Computers"},{"id":19,"name":"Science: Mathematics"},{"id":20,"name":"Mythology"},{"id":21,"name":"Sports"},{"id":22,"name":"Geography"},{"id":23,"name":"History"},{"id":24,"name":"Politics"},{"id":25,"name":"Art"},{"id":26,"name":"Celebrities"},{"id":27,"name":"Animals"},{"id":28,"name":"Vehicles"},{"id":29,"name":"Entertainment: Comics"},{"id":30,"name":"Science: Gadgets"},{"id":31,"name":"Entertainment: Japanese Anime & Manga"},{"id":32,"name":"Entertainment: Cartoon & Animations"}]
 
@@ -124,27 +125,13 @@ class TriviaApiDao: ObservableObject {
         task.resume()
     }
         
-    func formatForFB(triviaQuestions: [TriviaQuestion]) -> [String:Any] {
-        let difficulty = triviaQuestions[0].difficulty
-        let category = triviaQuestions[0].category
-        let questions = triviaQuestions.map {$0.question}
-        let correctAnswers = triviaQuestions.map {$0.correct_answer}
-        let answers = triviaQuestions.map {$0.getAllAnswers()}
-        return [
-            "difficulty": difficulty,
-            "category": category,
-            "questions": questions,
-            "correctAns": correctAnswers,
-            "answers": answers
-        ]
+    func pushToDB(triviaQuestions: [TriviaQuestion], title: String, description: String = "", coords: CLLocationCoordinate2D) {
+        guard triviaQuestions.count == 5 else {
+            print("Wrong number of trivia questions. Need 5")
+            return
+        }
+        challengeDao.addQuiz(triviaQuestions: triviaQuestions, title: title, description: description, coords: coords)
     }
-    
-//    func addToFB(triviaQuestions: [TriviaQuestion], latitude: Int, longitude: Int) {
-//        let arrays = triviaQuestions.chunked(into: 5)
-//        for arr in arrays {
-//            challengeDao.addQuiz(triviaQuestions: arr)
-//        }
-//    }
 }
 
 struct TriviaQuestion: Decodable, Hashable {
@@ -160,4 +147,16 @@ struct TriviaQuestion: Decodable, Hashable {
         answers.append(correct_answer)
         return answers.shuffled()
     }
+}
+
+extension TriviaQuestion {
+    static let sample = [
+        TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "Who is the only voice actor to have a speaking part in all of the Disney Pixar feature films? ", correct_answer: "John Ratzenberger", incorrect_answers: ["Tom Hanks", "Dave Foley", "Geoffrey Rush"]),
+        TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "When did the last episode of Futurama air?", correct_answer: "September 4, 2013", incorrect_answers: ["December 25, 2010", "March 28, 1999", "On Going"]),
+        TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "What was the first Disney movie to use CGI?", correct_answer: "The Black Cauldron", incorrect_answers: ["Tron", "Toy Story", "Fantasia"]),
+        TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "In the Pixar film, Toy Story what was the name of the child who owned the toys?", correct_answer: "Andy", incorrect_answers: ["Edward", "Danny", "Matt"]),
+        TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "Who created the Cartoon Network series Regular Show?", correct_answer: "J. G. Quintel", incorrect_answers: ["Ben Bocquelet", "Pendleton Ward", "Rebecca Sugar"])
+    ]
+    
+    
 }

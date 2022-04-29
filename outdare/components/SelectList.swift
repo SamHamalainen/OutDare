@@ -19,8 +19,9 @@ struct SelectList: View {
                 .padding(.vertical)
             Text("\(selected.count) selected")
                 .font(Font.customFont.smallText)
+                .foregroundColor(selected.count == limit ? Color.theme.background : Color.theme.textDark)
                 .padding(.bottom)
-            ScrollView {
+            ScrollView(showsIndicators: true) {
                 VStack {
                     ForEach(questions, id: \.self) { q in
                         let isSelected = selected.contains(q)

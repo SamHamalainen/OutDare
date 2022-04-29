@@ -17,23 +17,21 @@ struct outdareApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            Group {
-//                if showMap {
-//                    MainView()
-//                        .environmentObject(viewModel)
-//                } else {
-//                    openingpageView()
-//                        .environmentObject(viewModel)
-//                }
-//            }
-//            .onChange(of: viewModel.signedIn) { signedIn in
-//                showMap = signedIn
-//            }
-//            .onAppear {
-//                showMap = viewModel.signedIn
-//                print(UserDefaults.standard.integer(forKey: "userId"))
-//            }
-            QuizGeneratorView()
+            Group {
+                if showMap {
+                    MainView()
+                        .environmentObject(viewModel)
+                } else {
+                    openingpageView()
+                        .environmentObject(viewModel)
+                }
+            }
+            .onChange(of: viewModel.signedIn) { signedIn in
+                showMap = signedIn
+            }
+            .onAppear {
+                showMap = viewModel.signedIn
+            }
         }
     }
 }

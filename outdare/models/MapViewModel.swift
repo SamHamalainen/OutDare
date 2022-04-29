@@ -37,6 +37,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var distanceTravelled: Double = 0
     @Published var circle: MKCircle?
     @Published var map = MKMapView()
+    @Published var region = MKCoordinateRegion()
     var locationOld: CLLocation? = nil
     
     func setup(_ userDao: UserDAO){
@@ -49,6 +50,16 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
 //        locationManager = CLLocationManager()
 //        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482)
 //    }
+    
+    func getUserLocation() {
+        locationManager = CLLocationManager()
+        if let location = locationManager?.location {
+            region = MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude),
+                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+            )
+        }
+    }
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {

@@ -10,7 +10,7 @@ import SwiftUI
 
 enum SideMenuViewModel: Int, CaseIterable {
     
-    case map, leaderboard, profile
+    case map, leaderboard, profile, quizGenerator
     
     // Sets the navigation title
     var title: String {
@@ -18,6 +18,7 @@ enum SideMenuViewModel: Int, CaseIterable {
             case .map: return "Map"
             case .leaderboard: return "Leaderboard"
             case .profile: return "Profile"
+            case .quizGenerator: return "Generator"
         }
     }
     
@@ -27,6 +28,7 @@ enum SideMenuViewModel: Int, CaseIterable {
             case .map: return "map"
             case .leaderboard: return "chart.bar"
             case .profile: return "person"
+            case .quizGenerator: return "dice"
         }
     }
     
@@ -37,6 +39,7 @@ enum SideMenuViewModel: Int, CaseIterable {
             case .map: MapView()
             case .leaderboard: Leaderboard()
             case .profile: UserProfile()
+            case .quizGenerator: QuizGeneratorView()
         }
     }
 }
