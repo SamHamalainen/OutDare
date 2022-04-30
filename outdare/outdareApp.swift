@@ -17,7 +17,7 @@ struct outdareApp: App {
     
     var body: some Scene {
         WindowGroup {
-            Group {
+            ZStack {
                 if showMap {
                     MainView()
                         .environmentObject(viewModel)

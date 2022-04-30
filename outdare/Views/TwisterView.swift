@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WrappingStack
 
 struct TwisterView: View {
     let game: TwisterGame
@@ -37,33 +36,16 @@ struct TwisterView: View {
                     }
                 
                 ChallengeCount(index: game.index, limit: game.length)
-                
-                WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 5, verticalSpacing: 10) {
-                    ForEach(game.textArray.indices, id: \.self) {i in
-                        VStack {
-                            Text(game.textArray[i])
-                                .font(Font.customFont.normalText)
-                                .foregroundColor(game.matchingIndices.contains(i) ? Color.theme.rankingUp : Color.theme.textDark)
-                                .frame(minWidth: CGFloat(game.textArray[i].count * 12), alignment: .leading)
-                            if let last = game.matchingIndices.last {
-                                if i == last + 1 {
-                                    Image(systemName: "arrowtriangle.up.fill")
-                                        .font(.system(size: 5))
-                                }
+                WrappedText(words: game.textArray, matchingIndices: game.matchingIndices)
+                    .onChange(of: speechAnalyzer.recognizedText) { newText in
+                        if let last = newText?.components(separatedBy: " ").last {
+                            if game.matchingIndices.count < game.textArray.count {
+                                game.checkWord(word: last)
                             }
                         }
-                        .frame(height: 20)
                     }
-                }
-                .onChange(of: speechAnalyzer.recognizedText) { newText in
-                    if let last = newText?.components(separatedBy: " ").last {
-                        if game.matchingIndices.count < game.textArray.count {
-                            game.checkWord(word: last)
-                        }                        
-                    }
-                }
-                .frame(maxHeight: .infinity)
-                .padding()
+                    .frame(maxHeight: .infinity)
+                    .padding()
                 
                 SRButton(speechAnalyzer: speechAnalyzer, size: 40, padding: 40, text: "Tap to speak")
                     .padding(.bottom)
@@ -108,3 +90,74 @@ extension TwisterView {
 //        TwisterView(twister: Twister.sample[0], setState: {_ in}, setResult: {_ in})
 //    }
 //}
+
+
+struct WordEnumerated: Identifiable, Hashable {
+    let id: UUID = UUID()
+    let index: Int
+    let word: String
+    
+    init(_ index: Int, _ word: String) {
+        self.index = index
+        self.word = word
+    }
+}
+
+struct WrappedText: View {
+    let words: [String]
+    var grouped: [[WordEnumerated]] {
+        return createGrouped(words)
+    }
+    let screenWidth = UIScreen.main.bounds.width
+    let matchingIndices: [Int]
+    
+    private func createGrouped(_ words: [String]) -> [[WordEnumerated]] {
+        var grouped: [[WordEnumerated]] = [[WordEnumerated]]()
+        var tempItems: [WordEnumerated] =  [WordEnumerated]()
+        var width: CGFloat = 0
+        
+        for (index, word) in words.enumerated() {
+            let label = UILabel()
+            label.text = word
+            label.sizeToFit()
+            
+            let labelWidth = label.frame.size.width + 32
+            
+            if (width + labelWidth + 55) < screenWidth {
+                width += labelWidth
+                tempItems.append(WordEnumerated(index, word))
+            } else {
+                width = labelWidth
+                grouped.append(tempItems)
+                tempItems.removeAll()
+                tempItems.append(WordEnumerated(index, word))
+            }
+        }
+        grouped.append(tempItems)
+        return grouped
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            ForEach(grouped, id: \.self) { subItems in
+                HStack(spacing: 10) {
+                    ForEach(subItems) { wordEnum in
+                        VStack {
+                            Text(wordEnum.word)
+                                .fixedSize()
+                                .font(Font.customFont.normalText)
+                                .foregroundColor(matchingIndices.contains(wordEnum.index) ? Color.theme.rankingUp : Color.theme.textDark)
+                            if let last = matchingIndices.last {
+                                if wordEnum.index == last + 1 {
+                                    Image(systemName: "arrowtriangle.up.fill")
+                                        .font(.system(size: 5))
+                                }
+                            }
+                        }
+                        .frame(height: 20)
+                    }
+                }
+            }
+        }
+    }
+}

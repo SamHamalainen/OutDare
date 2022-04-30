@@ -95,7 +95,7 @@ struct openingpageView: View {
                     .padding(.top)
                     .scaledToFit()
                     .frame(width: 200.0)
-                Button("CONTINUE") {
+                Button("Continue") {
                     isPresented.toggle()
                 }
                 .font(Font.customFont.btnText)
