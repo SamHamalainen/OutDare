@@ -39,13 +39,7 @@ let quizCategories = [
     "Entertainment: Cartoon & Animations": 32
 ]
 
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
-            Array(self[$0 ..< Swift.min($0 + size, count)])
-        }
-    }
-}
+
 
 class TriviaApiDao: ObservableObject {
     let challengeDao = ChallengeDAO()
@@ -124,14 +118,6 @@ class TriviaApiDao: ObservableObject {
         }
         task.resume()
     }
-        
-    func pushToDB(triviaQuestions: [TriviaQuestion], title: String, description: String = "", coords: CLLocationCoordinate2D) {
-        guard triviaQuestions.count == 5 else {
-            print("Wrong number of trivia questions. Need 5")
-            return
-        }
-        challengeDao.addQuiz(triviaQuestions: triviaQuestions, title: title, description: description, coords: coords)
-    }
 }
 
 struct TriviaQuestion: Decodable, Hashable {
@@ -157,6 +143,12 @@ extension TriviaQuestion {
         TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "In the Pixar film, Toy Story what was the name of the child who owned the toys?", correct_answer: "Andy", incorrect_answers: ["Edward", "Danny", "Matt"]),
         TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "Who created the Cartoon Network series Regular Show?", correct_answer: "J. G. Quintel", incorrect_answers: ["Ben Bocquelet", "Pendleton Ward", "Rebecca Sugar"])
     ]
-    
-    
+}
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
 }

@@ -19,8 +19,8 @@ struct Attempt {
             "userId": userId,
             "challengeId": challengeId,
             "score": score,
-            "time": time ?? nil,
-            "speedBonus": speedBonus ?? nil
+            "time": time as Any,
+            "speedBonus": speedBonus as Any
         ]
     }
 }

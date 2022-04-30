@@ -37,7 +37,7 @@ class TwisterGame: ObservableObject {
         return data.count
     }
     
-    var difficulty: String {
+    var difficulty: ChallengeDifficulty {
         return twister.difficulty
     }
     

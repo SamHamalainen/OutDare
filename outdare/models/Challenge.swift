@@ -12,16 +12,9 @@ struct Challenge: Identifiable, Equatable {
     let id: Int
     let challengeId: Int
     let name: String
-    let difficulty: String
+    let difficulty: ChallengeDifficulty
     var points: Int {
-        switch difficulty {
-        case "easy":
-           return 20
-        case "medium":
-           return 50
-        default:
-           return 100
-        }
+        return getPoints(difficulty: difficulty)
     }
     let category: ChallengeCategory
     let description: String
@@ -35,8 +28,6 @@ struct Challenge: Identifiable, Equatable {
             return "tongueTwister"
         case .lyrics:
             return "lyrics"
-        default:
-           return "quiz"
         }
     }
     let coordinates: CLLocationCoordinate2D
@@ -46,13 +37,17 @@ enum ChallengeCategory: String {
     case quiz = "quiz", twister = "twister", string = "stringGame", lyrics = "lyrics"
 }
 
-func getPoints(difficulty: String) -> Int {
+enum ChallengeDifficulty: String {
+    case easy, medium, hard
+}
+
+func getPoints(difficulty: ChallengeDifficulty) -> Int {
     switch difficulty {
-    case "easy" :
+    case .easy :
         return 20
-    case "medium" :
+    case .medium :
         return 40
-    default:
+    case .hard:
         return 50
     }
 }
