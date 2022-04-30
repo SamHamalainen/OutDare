@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Subsonic
 
 struct StringGameView: View {
     @StateObject var game = StringGame()
@@ -140,6 +141,7 @@ extension StringGameView {
             let result = game.checkWord(word: input)
             status = result
             if ["Outstanding", "Excellent", "Good"].contains(result) {
+                play(sound: "correct.mp3")
                 speechAnalyzer.stop()
                 input = ""
             }

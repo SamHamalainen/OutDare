@@ -9,6 +9,7 @@ import SwiftUI
 import CoreLocation
 import MapKit
 import SSToastMessage
+import Subsonic
 
 struct CreateQuizForm: View {
     @Binding var showForm: Bool
@@ -178,6 +179,7 @@ struct CreateQuizForm: View {
             .padding()
         }
         .onChange(of: dao.challengeAdded, perform: { added in
+            play(sound: "correct.mp3")
             success = added
             adding = false
         })
