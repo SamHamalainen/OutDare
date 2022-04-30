@@ -11,7 +11,7 @@ import Speech
 
 struct ChallengeDetailedPreview: View {
     let challenge: Challenge
-    @Binding var state: String
+    @Binding var state: ChallengeState
     @State var ready = false
     @State var countdownOver = false
     @State private var showingAlert = false
@@ -49,7 +49,7 @@ struct ChallengeDetailedPreview: View {
                         CountdownTimer(timer: 3, over: $countdownOver)
                             .onChange(of: countdownOver) { over in
                                 if over {
-                                    state = "playing"
+                                    state = .playing
                                 }
                             }
                     }
@@ -64,7 +64,7 @@ struct ChallengeDetailedPreview: View {
 
 extension ChallengeDetailedPreview {
     func checkSRPermission() {
-        if SFSpeechRecognizer.authorizationStatus() == .authorized || challenge.category == "quiz" {
+        if SFSpeechRecognizer.authorizationStatus() == .authorized || challenge.category == .quiz {
             ready = true
         } else {
             showingAlert = true

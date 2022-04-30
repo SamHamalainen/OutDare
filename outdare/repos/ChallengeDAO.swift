@@ -39,17 +39,14 @@ class ChallengeDAO: ObservableObject {
         let id = data["id"] as? Int ?? 0
         let challengeId = data["challengeId"] as? Int ?? 0
         let name = data["name"] as? String ?? "no name"
-        let difficulty = data["difficulty"] as? String ?? "easy"
-        let category = data["category"] as? String ?? "quiz"
+        let difficulty = data["difficulty"] as? String ?? ""
+        let category = data["category"] as? String ?? ""
+        let categoryEnum = ChallengeCategory(rawValue: category) ?? .string
         let description = data["description"] as? String ?? "no description"
         let latitude = data["latitude"] as? Double ?? 0
         let longitude = data["longitude"] as? Double ?? 0
-        
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        if category == "twister" {
-            print("twister")
-        }
-        return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficulty, category: category, description: description, coordinates: coordinates)
+        return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficulty, category: categoryEnum, description: description, coordinates: coordinates)
     }
     
     func convertToLyrics (data: [String:Any]) -> Lyrics {
@@ -126,11 +123,11 @@ class ChallengeDAO: ObservableObject {
                 self.challenge = challenge
                 if let id = self.challenge?.challengeId, let category = self.challenge?.category {
                     switch category {
-                    case "quiz":
+                    case .quiz:
                         self.getQuiz(id: id)
-                    case "lyrics":
+                    case .lyrics:
                         self.getLyrics(id: id)
-                    case "twister":
+                    case .twister:
                         self.getTwister(id: id)
                     default:
                         return
@@ -212,7 +209,7 @@ class ChallengeDAO: ObservableObject {
                 let newId = id + 1
                 print("newId", newId)
                 challengeRef.addDocument(data: [
-                    "category": challenge.category,
+                    "category": challenge.category.rawValue,
                     "challengeId": challenge.challengeId,
                     "description": challenge.description,
                     "difficulty": challenge.difficulty,
@@ -265,7 +262,7 @@ class ChallengeDAO: ObservableObject {
                         print("Error adding document: \(err)")
                     } else {
                         print("Quiz added: \(newId)")
-                        self.addChallenge(challenge: Challenge(id: -1, challengeId: newId, name: title, difficulty: difficulty, category: "quiz", description: description, coordinates: coords))
+                        self.addChallenge(challenge: Challenge(id: -1, challengeId: newId, name: title, difficulty: difficulty, category: .quiz, description: description, coordinates: coords))
                     }
                 }
             }

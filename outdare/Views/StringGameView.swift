@@ -10,7 +10,7 @@ import Subsonic
 
 struct StringGameView: View {
     @StateObject var game = StringGame()
-    @Binding var state: String
+    @Binding var state: ChallengeState
     @Binding var resultHandler: ResultHandler
     @State var input = ""
     @StateObject var timer = ChallengeTimer()
@@ -131,7 +131,7 @@ extension StringGameView {
         let challengeId = resultHandler.challengeId        
         resultHandler = ResultHandler(challengeId: challengeId, results: game.results)
         resultHandler.pushToDB()
-        state = "done"
+        state = .done
     }
     
     func onSubmit() {

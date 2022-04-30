@@ -10,7 +10,7 @@ import WrappingStack
 
 struct TwisterView: View {
     let game: TwisterGame
-    @Binding var state: String
+    @Binding var state: ChallengeState
     @Binding var resultHandler: ResultHandler
     @StateObject var timer: ChallengeTimer = ChallengeTimer()
     @StateObject private var speechAnalyzer = SpeechAnalyzer()
@@ -98,7 +98,7 @@ extension TwisterView {
             let challengeId = resultHandler.challengeId
             resultHandler = ResultHandler(challengeId: challengeId, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
             resultHandler.pushToDB()
-            state = "done"
+            state = .done
         }
     }
 }

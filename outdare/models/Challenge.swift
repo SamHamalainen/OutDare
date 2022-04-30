@@ -23,23 +23,27 @@ struct Challenge: Identifiable, Equatable {
            return 100
         }
     }
-    let category: String
+    let category: ChallengeCategory
     let description: String
     var icon: String {
         switch category {
-        case "quiz":
+        case .quiz:
            return "quiz"
-        case "twister":
+        case .twister:
            return "tongueTwister"
-        case "string":
+        case .string:
             return "tongueTwister"
-        case "lyrics":
+        case .lyrics:
             return "lyrics"
         default:
            return "quiz"
         }
     }
     let coordinates: CLLocationCoordinate2D
+}
+
+enum ChallengeCategory: String {
+    case quiz = "quiz", twister = "twister", string = "stringGame", lyrics = "lyrics"
 }
 
 func getPoints(difficulty: String) -> Int {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizView: View {
     @StateObject var game: QuizGame
-    @Binding var state: String
+    @Binding var state: ChallengeState
     @Binding var resultHandler: ResultHandler
     @State var score: Int = 0
     @StateObject var timer: ChallengeTimer = ChallengeTimer()
@@ -130,7 +130,7 @@ extension QuizView {
             let challengeId = resultHandler.challengeId
             resultHandler = ResultHandler(challengeId: challengeId, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
             resultHandler.pushToDB()
-            state = "done"
+            state = .done
         }
     }
     
