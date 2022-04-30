@@ -24,10 +24,6 @@ struct ResultHandler {
     }
     var maxTime: Int? = nil
     
-    func addResult(results: [ResultItem], time: Int? = nil, maxTime: Int? = nil) {
-        
-    }
-    
     func gotSpeedBonus() -> Bool? {
         if let time = time, let maxTime = maxTime {
             return time < maxTime/2
