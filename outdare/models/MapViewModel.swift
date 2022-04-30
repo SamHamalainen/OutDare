@@ -69,6 +69,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             locationManager = CLLocationManager()
             if let locManager = locationManager {
                 self.userLocation = locManager.location?.coordinate
+                self.mapRegion = MKCoordinateRegion(center: locManager.location!.coordinate, span: MapDetails.defaultSpan)
                 locManager.delegate = self
                 locManager.desiredAccuracy = kCLLocationAccuracyBest
                 locManager.startUpdatingLocation()
@@ -117,14 +118,16 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
        }
     
     func updateAnnotations(coordinate: CLLocationCoordinate2D, mapView: MKMapView) {
+        let oldAnnotations = self.annotationsArray ?? []
+        self.annotationsArray = dao!.updateAnnotationsBasedOnDistance(userLoc: coordinate, annotationsArray: dao!.annotations)
         if let annotationsArray1 = self.annotationsArray {
-            self.annotationsArray = dao!.updateAnnotationsBasedOnDistance(userLoc: coordinate, annotationsArray: dao!.annotations)
-            mapView.addAnnotations(annotationsArray!)
-            map.removeAnnotations(annotationsArray1)
-        } else {
-            self.annotationsArray = dao!.updateAnnotationsBasedOnDistance(userLoc: coordinate, annotationsArray: dao!.annotations)
-            mapView.addAnnotations(annotationsArray!)
+            mapView.addAnnotations(annotationsArray1)
+            map.removeAnnotations(oldAnnotations)
         }
+//            else {
+//            self.annotationsArray = dao!.updateAnnotationsBasedOnDistance(userLoc: coordinate, annotationsArray: dao!.annotations)
+//            mapView.addAnnotations(annotationsArray!)
+//        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

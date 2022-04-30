@@ -30,6 +30,8 @@ struct MainView: View {
                         Leaderboard()
                     case "Profile":
                         UserProfile()
+                    case "Generator":
+                        QuizGeneratorView()
                     case "Store":
                         PointPurchaseView()
 

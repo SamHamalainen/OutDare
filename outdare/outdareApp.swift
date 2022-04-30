@@ -7,41 +7,46 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 @main
 struct outdareApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-//    @StateObject private var modelData = UserViewModel()
-    @State var showMap = false
+    //    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    //    @StateObject private var modelData = UserViewModel()
+    init (){
+        FirebaseApp.configure()
+    }
+    @State var login = false
     @StateObject var viewModel = AppViewModel()
+    
     
     var body: some Scene {
         WindowGroup {
-            VStack {
-                if showMap {
+            Group {
+                let auth = Auth.auth()
+                if auth.currentUser != nil {
                     MainView()
                         .environmentObject(viewModel)
-                } else {
-                    openingpageView()
-                        .environmentObject(viewModel)
+                }else{
+                    if !login {
+                        OpeningPageView(login: $login)
+                            .environmentObject(viewModel)
+                    }else{
+                        LogInOrSignIn()
+                            .environmentObject(viewModel)
+                    }
                 }
-            }
-            .onChange(of: viewModel.signedIn) { signedIn in
-                showMap = signedIn
-            }
-            .onAppear {
-                showMap = viewModel.signedIn
             }
         }
     }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
-    [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-      
-        FirebaseApp.configure()
-        
-        return true
-    }
-}
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+//    [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+//
+//        FirebaseApp.configure()
+//
+//        return true
+//    }
+//}

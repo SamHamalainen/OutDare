@@ -22,7 +22,7 @@ class ChallengeDAO: ObservableObject {
     @Published var oldAnnotations: [MKPointAnnotation] = []
     @Published var challengeAdded = false
     
-    func challengeToAnnotation() {
+    func challengeToAnnotation(challenges: [Challenge]) {
         print("dao count: \(challenges.count)")
         challenges.forEach { challenge in
             let annotation = MKPointAnnotation()
@@ -66,9 +66,6 @@ class ChallengeDAO: ObservableObject {
             return newAnnotation
         }
         return newAnnotations
-//        print("count before: \(annotations.count)")
-//        annotations = newAnnotations
-//        print("count after: \(annotations.count)")
     }
     
     func convertToChallenge(data: [String:Any]) -> Challenge {
@@ -137,16 +134,18 @@ class ChallengeDAO: ObservableObject {
     }
     
     func getChallenges() {
-        db.collection("challenges").getDocuments() { [self] (querySnapshot, err) in
+        db.collection("challenges").addSnapshotListener() { [self] (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
+                var newChallenges: [Challenge] = []
                 for document in querySnapshot!.documents {
                     let data = document.data()
                     let challenge = self.convertToChallenge(data: data)
-                    challenges.append(challenge)
+                    newChallenges.append(challenge)
                 }
-                challengeToAnnotation()
+                self.challenges = newChallenges
+                challengeToAnnotation(challenges: newChallenges)
             }
         }
     }

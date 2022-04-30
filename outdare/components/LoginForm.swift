@@ -12,6 +12,7 @@ struct LogInForm: View {
     @State var email = ""
     @State var password = ""
     
+    
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
@@ -26,6 +27,8 @@ struct LogInForm: View {
                     .background(Color.theme.textLight)
                     .cornerRadius(20)
                     .shadow(color: .theme.icon, radius: 5, x: 3, y: 3)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
 
                 SecureField("PASSWORD", text: $password)
                     .font(Font.customFont.normalText)
@@ -33,6 +36,8 @@ struct LogInForm: View {
                     .background(Color.theme.textLight)
                     .cornerRadius(20)
                     .shadow(color: .theme.icon, radius: 5, x: 3, y: 3)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
 
                 Button(action:{
                     

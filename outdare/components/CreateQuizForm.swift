@@ -52,7 +52,13 @@ struct CreateQuizForm: View {
             
             if showMap {
                 ZStack {
-                    Map(coordinateRegion: $mapVM.region)
+                    Map(coordinateRegion: $mapVM.region, annotationItems: dao.challenges) { challenge in
+                        MapAnnotation(coordinate: challenge.coordinates) {
+                            Image(challenge.icon)
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }
+                    }
                     Image(systemName: "mappin")
                         .font(.system(size: pinSize))
                         .foregroundColor(Color.theme.rankingDown)
@@ -119,9 +125,11 @@ struct CreateQuizForm: View {
                         .padding(.bottom)
                     VStack(spacing: 15) {
                         TextField("Title", text: $title)
+                            .disableAutocorrection(true)
                             .textFieldStyle(RoundedTextFieldStyle())
-                        
+    
                         TextField("Description", text: $description)
+                            .disableAutocorrection(true)
                             .textFieldStyle(RoundedTextFieldStyle())
                         
                         if locationChosen {
@@ -183,6 +191,9 @@ struct CreateQuizForm: View {
             success = added
             adding = false
         })
+        .onAppear {
+            dao.getChallenges()
+        }
         .allowsHitTesting(!adding)
         .present(isPresented: self.$showToast, type: .toast, position: .bottom, autohideDuration: 2.0) {
             Text(message)

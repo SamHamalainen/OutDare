@@ -82,6 +82,9 @@ struct MapView: View {
             }
             
         }
+        .onChange(of: dao.challenges) {
+            print("dao challenges: \($0.count)")
+        }
         .onAppear {
             dao.getChallenges()
             loginViewModel.userDao.getLoggedInUserScore()

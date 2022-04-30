@@ -5,79 +5,34 @@
 //  Created by Maiju Himberg on 8.4.2022.
 //
 import SwiftUI
-import FirebaseAuth
-
-class AppViewModel: ObservableObject {
-    @Published var userDao = UserDAO()
-    
-    let auth = Auth.auth()
-    
-    @Published var signedIn = false
-    
-    var isSignedIn: Bool {
-        return auth.currentUser != nil
-    }
-    func signIn(email: String, password: String){
-        auth.signIn(withEmail: email, password: password){[weak self] result, error in
-            guard result != nil, error == nil else {
-                return
-            }
-            DispatchQueue.main.async {
-                //Success
-                self?.signedIn = true
-            }
-        }
-    }
-    func signUp(email: String, password: String){
-        auth.createUser(withEmail: email, password: password){[weak self] result, error in
-            guard result != nil, error == nil else {
-                return
-            }
-            DispatchQueue.main.async {
-                //Success
-                self?.signedIn = true
-            }
-            
-        }
-        
-    }
-    func signOut(){
-        try? auth.signOut()
-        self.signedIn = false
-        UserDefaults.standard.removeObject(forKey: "userId")
-    }
-}
 
 
-struct ContentView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var viewModel: AppViewModel
-    var body: some View {
-        
-        NavigationView {
-            
-            if viewModel.signedIn {
-                //                VStack{
-                //                    Button(action: {viewModel.signOut()}, label: {Text("Sign Out")
-                //                            .foregroundColor(Color.pink)
-                //                    })
-                //                    Text("Welcome")
-                //                }
-            }else{
-                LogInOrSignIn()
-            }
-            
-        }
-        .onAppear{
-            viewModel.signedIn = viewModel.isSignedIn
-        }
-    }
-}
 
-struct openingpageView: View {
+
+//struct ContentView: View {
+//    @Environment(\.presentationMode) var presentationMode
+//    @EnvironmentObject var viewModel: AppViewModel
+//    var body: some View {
+//
+//        NavigationView {
+//
+//            if viewModel.signedIn {
+////
+//            }else{
+//                LogInOrSignIn()
+//            }
+//
+//        }
+//        .onAppear{
+//            viewModel.signedIn = viewModel.isSignedIn
+//        }
+//    }
+//    }
+
+struct OpeningPageView: View {
     
-    @State private var isPresented = false
-    
+//    @State private var isPresented = false
+    @Binding var login : Bool
     var body: some View {
         ZStack{
             Image("mapBackround")
@@ -96,7 +51,7 @@ struct openingpageView: View {
                     .scaledToFit()
                     .frame(width: 200.0)
                 Button("CONTINUE") {
-                    isPresented.toggle()
+                    login = true
                 }
                 .font(Font.customFont.btnText)
                 .padding(.vertical, 10)
@@ -108,6 +63,6 @@ struct openingpageView: View {
                 .shadow(color: .theme.icon, radius: 5, x: 3, y: 3)
             }
         }
-        .fullScreenCover(isPresented: $isPresented, content: ContentView.init)
+//        .fullScreenCover(isPresented: $isPresented, content: ContentView.init)
     }
 }
