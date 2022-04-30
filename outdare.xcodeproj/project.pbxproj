@@ -81,7 +81,6 @@
 		6AF52969281586B9005189F3 /* ResultRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF52968281586B9005189F3 /* ResultRow.swift */; };
 		6AF5296B2815F81D005189F3 /* LyricsGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5296A2815F81D005189F3 /* LyricsGame.swift */; };
 		6AF5296D28161613005189F3 /* TwisterGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5296C28161613005189F3 /* TwisterGame.swift */; };
-		B1229932281D71C5002407C4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B1229931281D71C4002407C4 /* README.md */; };
 		B1229938281D721B002407C4 /* landing.png in Resources */ = {isa = PBXBuildFile; fileRef = B1229937281D721B002407C4 /* landing.png */; };
 		B122993B281D763F002407C4 /* twister.png in Resources */ = {isa = PBXBuildFile; fileRef = B122993A281D763F002407C4 /* twister.png */; };
 		B122993D281D764A002407C4 /* leaderboard.png in Resources */ = {isa = PBXBuildFile; fileRef = B122993C281D764A002407C4 /* leaderboard.png */; };
@@ -206,7 +205,6 @@
 		6AF52968281586B9005189F3 /* ResultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRow.swift; sourceTree = "<group>"; };
 		6AF5296A2815F81D005189F3 /* LyricsGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsGame.swift; sourceTree = "<group>"; };
 		6AF5296C28161613005189F3 /* TwisterGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwisterGame.swift; sourceTree = "<group>"; };
-		B1229931281D71C4002407C4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B1229937281D721B002407C4 /* landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landing.png; sourceTree = "<group>"; };
 		B122993A281D763F002407C4 /* twister.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twister.png; sourceTree = "<group>"; };
 		B122993C281D764A002407C4 /* leaderboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leaderboard.png; sourceTree = "<group>"; };
@@ -473,7 +471,6 @@
 				6A6CDFDD27FDC3A1002106F8 /* repos */,
 				B167D32327FAE4CF00BF950E /* Preview Content */,
 				6A6CDFE627FF0BF2002106F8 /* .gitignore */,
-				B1229931281D71C4002407C4 /* README.md */,
 			);
 			path = outdare;
 			sourceTree = "<group>";
@@ -636,7 +633,6 @@
 				B122993B281D763F002407C4 /* twister.png in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,
 				B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */,
-				B1229932281D71C5002407C4 /* README.md in Resources */,
 				6A59BFE52811A3E10043D6E7 /* TestRoute.gpx in Resources */,
 				B1229941281D7651002407C4 /* routes.png in Resources */,
 			);
