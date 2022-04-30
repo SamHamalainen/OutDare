@@ -12,17 +12,17 @@ struct Leaderboard: View {
             Trapezium()
             VStack {
                 TopProfiles()
-                    .padding(.bottom, 120)
+                    .padding(.bottom, UIScreen.main.bounds.height * 0.03)
                 LeaderboardList()
-                    .frame(height: 370)
+                    .frame(height: UIScreen.main.bounds.height * 0.44)
+                    .offset(y: UIScreen.main.bounds.height * 0.11)
+                    .padding(.bottom, UIScreen.main.bounds.height * 0.046)
             }
-            Image(systemName: "arrowtriangle.down.fill")
-                .resizable()
-                .frame(width: 30, height: 15)
-                .foregroundColor(Color.theme.textLight)
-                .offset(y: 360)
-                .shadow(color: Color.theme.textDark, radius: 10, x: 2, y: 4)
+                LottieView(lottieFile: "arrows")
+                    .frame(width: 120, height: 120)
+                    .offset(y: UIScreen.main.bounds.height * 0.4)
         }
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 }
 struct Leaderboard_Previews: PreviewProvider {

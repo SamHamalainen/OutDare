@@ -12,11 +12,11 @@ struct ProfileBackground: View {
         ZStack {
         RoundedRectangle(cornerRadius: 0)
             .fill(Color.theme.background2)
-            .frame(height: .infinity)
+            .frame(height: UIScreen.main.bounds.height)
             
         RoundedRectangle(cornerRadius: 0)
             .fill(Color.theme.background)
-            .frame(height: 250)
+            .frame(height: UIScreen.main.bounds.height / 3.5)
             .offset(y: -340)
             .shadow(color: Color.theme.textDark, radius: 5, x: 0, y: 1)
             

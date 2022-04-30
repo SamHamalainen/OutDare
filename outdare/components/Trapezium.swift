@@ -26,13 +26,13 @@ struct TrapeziumShape: Shape {
 
 struct Trapezium: View {
     var body: some View {
-        VStack(spacing: -45) {
+        VStack(spacing: -50) {
             TrapeziumShape(offset: 0.9, corner: .bottomLeft)
                 .fill(Color.theme.background)
             TrapeziumShape(offset: 0.1, corner: .topRight)
                 .fill(Color.theme.background2)
         }
-        .frame(height: .infinity)
+        .frame(maxHeight: .infinity)
         .edgesIgnoringSafeArea(.vertical)
     }
 }

@@ -19,14 +19,14 @@ struct TopProfiles: View {
                 Text("2.")
                     SingleProfile(users: vm.usersSorted[1])
                 }
-                    .offset(x: 20, y: 65)
+                .offset(x: UIScreen.main.bounds.width * 0.05, y: UIScreen.main.bounds.height * 0.07)
             }
             
             if vm.usersSorted.indices.contains(0) {
                 VStack {
                 Image("crown")
                         .resizable()
-                        .frame(width: 70, height: 50)
+                        .frame(width: UIScreen.main.bounds.width * 0.2, height: UIScreen.main.bounds.width * 0.15)
                     SingleProfile(users: vm.usersSorted[0])
                 }
                 .zIndex(4)
@@ -36,7 +36,7 @@ struct TopProfiles: View {
                 Text("3.")
                     SingleProfile(users: vm.usersSorted[2])
                 }
-                    .offset(x: -20, y: 65)
+                    .offset(x: -UIScreen.main.bounds.width * 0.05, y: UIScreen.main.bounds.height * 0.07)
             }
         }
         .foregroundColor(Color.theme.textLight)

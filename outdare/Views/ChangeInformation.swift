@@ -24,10 +24,6 @@ struct ChangeInformation: View {
                 .frame(width: 120, height: 5)
                 .padding()
                 .foregroundColor(Color.theme.button)
-            
-//            LottieView(lottieFile: "close_button")
-//                .frame(width: 80, height: 80)
-//                .offset(y: -90)
                 
             VStack(alignment: .center) {
                 Text("Change information")

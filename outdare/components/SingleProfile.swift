@@ -15,23 +15,25 @@ struct SingleProfile: View {
             VStack {
                 if users.profilePicture == "" {
                     Image(systemName: "person.fill")
-                        .font(.system(size: 80))
+                        .font(.system(size: UIScreen.main.bounds.width * 0.23))
                         .padding()
                 } else {
                     WebImage(url: URL(string: users.profilePicture))
                         .resizable()
-                        .frame(width: 120, height: 120)
+                        .frame(width: UIScreen.main.bounds.width * 0.32, height: UIScreen.main.bounds.width * 0.32)
                         .clipped()
-                        .cornerRadius(100)
+                        .cornerRadius(UIScreen.main.bounds.width * 0.32)
                 }
             }
-            .overlay(RoundedRectangle(cornerRadius: 80)
+            .overlay(RoundedRectangle(cornerRadius: UIScreen.main.bounds.width * 0.32)
                 .stroke(Color.theme.stroke, lineWidth: 4))
             .foregroundColor(Color.theme.textDark)
+            .shadow(color: Color.theme.button, radius: 4, x: 4, y: 4)
             
                 Text(users.username)
                     .foregroundColor(Color.theme.textLight)
                     .font(Font.customFont.normalText)
+                    .padding(.top, UIScreen.main.bounds.height * 0.01)
                 Text("\(users.score)")
                     .foregroundColor(Color.theme.stroke)
                     .font(Font.customFont.largeText)

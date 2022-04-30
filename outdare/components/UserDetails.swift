@@ -26,21 +26,22 @@ struct UserDetails: View {
                                 Image(uiImage: image)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 170, height: 170)
-                                    .cornerRadius(85)
+                                    .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.width * 0.5)
+                                    .cornerRadius(UIScreen.main.bounds.width * 0.25)
                             } else {
                                 if vm.currentUser?.profilePicture == "" {
                                     Image(systemName: "person.fill")
-                                        .font(.system(size: 120))
+                                        .font(.system(size: UIScreen.main.bounds.width * 0.5))
                                 } else {
                                     WebImage(url: URL(string: vm.currentUser?.profilePicture ?? ""))
                                         .resizable()
-                                        .frame(width: 170, height: 170)
+                                        .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.width * 0.5)
                                         .clipped()
-                                        .cornerRadius(170)
+                                        .cornerRadius(UIScreen.main.bounds.width * 0.5)
                                 }
                             }
                         }
+                        .shadow(color: Color.theme.textDark, radius: 4, x: 4, y: 4)
                         .foregroundColor(Color.theme.textDark)
                     }
                 
@@ -52,27 +53,29 @@ struct UserDetails: View {
                     Text(vm.currentUser?.location ?? "")
                         .font(Font.customFont.normalText)
                 }
-                .padding(.vertical, 2)
+                .padding(.vertical, UIScreen.main.bounds.height * 0.002)
                     }
             
-            ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.theme.button)
-                .frame(width: 120, height: 70)
-                .opacity(0.5)
-                .shadow(color: Color.theme.textDark, radius: 1, x: 1, y: 1)
-                HStack {
+                Label {
                     Text("\(userDao.loggedUserScore ?? 0)")
-                .font(Font.customFont.extraLargeText)
-                .foregroundColor(Color.theme.textLight)
+                        .font(Font.customFont.extraLargeText)
+                        .foregroundColor(Color.theme.textLight)
+                        .padding(15)
+                } icon: {
+                    Image(systemName: "dollarsign.circle.fill")
+                        .foregroundColor(.yellow)
+                        .padding(15)
                 }
-            }
+                .background(Color.theme.button)
+                .cornerRadius(20)
+                .opacity(0.75)
+                .shadow(color: Color.theme.textDark, radius: 4, x: 4, y: 4)
         }
         .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
             ImagePicker(image: $image)
                 .onDisappear {
                     saveImageToStorage()
-                }
+            }
         }
     }
     

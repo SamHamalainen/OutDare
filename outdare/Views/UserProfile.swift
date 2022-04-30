@@ -17,7 +17,7 @@ struct UserProfile: View {
             
             VStack {
             UserDetails()
-                    .padding(.top, 30)
+                    .padding(.top, UIScreen.main.bounds.height * 0.11)
             
             Button (
                 action: {
@@ -31,15 +31,18 @@ struct UserProfile: View {
                 })
                     .font(.largeTitle)
                     .rotationEffect(Angle(degrees: 90))
-                    .offset(x: 150, y: -170)
+                    .offset(x: UIScreen.main.bounds.width * 0.4, y: -170)
                 
+                
+                VStack {
                 Text("Achievements")
                     .font(Font.customFont.largeText)
-                    .frame(width: 350, alignment: .leading)
-                    .padding(.top, 60)
+                    .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .leading)
             AchievementList()
+                }
+                .padding(.top, UIScreen.main.bounds.height * 0.07)
             }
-        }
+        } .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 }
 

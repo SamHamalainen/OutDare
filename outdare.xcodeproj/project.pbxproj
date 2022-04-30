@@ -81,10 +81,16 @@
 		6AF52969281586B9005189F3 /* ResultRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF52968281586B9005189F3 /* ResultRow.swift */; };
 		6AF5296B2815F81D005189F3 /* LyricsGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5296A2815F81D005189F3 /* LyricsGame.swift */; };
 		6AF5296D28161613005189F3 /* TwisterGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5296C28161613005189F3 /* TwisterGame.swift */; };
+		B1229932281D71C5002407C4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B1229931281D71C4002407C4 /* README.md */; };
+		B1229938281D721B002407C4 /* landing.png in Resources */ = {isa = PBXBuildFile; fileRef = B1229937281D721B002407C4 /* landing.png */; };
+		B122993B281D763F002407C4 /* twister.png in Resources */ = {isa = PBXBuildFile; fileRef = B122993A281D763F002407C4 /* twister.png */; };
+		B122993D281D764A002407C4 /* leaderboard.png in Resources */ = {isa = PBXBuildFile; fileRef = B122993C281D764A002407C4 /* leaderboard.png */; };
+		B1229940281D7651002407C4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = B122993E281D7651002407C4 /* map.png */; };
+		B1229941281D7651002407C4 /* routes.png in Resources */ = {isa = PBXBuildFile; fileRef = B122993F281D7651002407C4 /* routes.png */; };
 		B122CECD281C84A500A45F60 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B122CECC281C84A500A45F60 /* Lottie */; };
-		B122CED0281C84FB00A45F60 /* close_button.json in Resources */ = {isa = PBXBuildFile; fileRef = B122CECF281C84FA00A45F60 /* close_button.json */; };
 		B122CED2281C853200A45F60 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122CED1281C853200A45F60 /* LottieView.swift */; };
 		B122CED6281C96A200A45F60 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122CED5281C96A200A45F60 /* InputValidation.swift */; };
+		B122CED8281C9FC900A45F60 /* arrows.json in Resources */ = {isa = PBXBuildFile; fileRef = B122CED7281C9FC900A45F60 /* arrows.json */; };
 		B125276E2817F172005E3DC3 /* ChangeCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125276D2817F172005E3DC3 /* ChangeCredentials.swift */; };
 		B125277228180A3D005E3DC3 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125277128180A3D005E3DC3 /* SettingsMenu.swift */; };
 		B1252774281814D7005E3DC3 /* ChangeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1252773281814D7005E3DC3 /* ChangeInformation.swift */; };
@@ -200,9 +206,15 @@
 		6AF52968281586B9005189F3 /* ResultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRow.swift; sourceTree = "<group>"; };
 		6AF5296A2815F81D005189F3 /* LyricsGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsGame.swift; sourceTree = "<group>"; };
 		6AF5296C28161613005189F3 /* TwisterGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwisterGame.swift; sourceTree = "<group>"; };
-		B122CECF281C84FA00A45F60 /* close_button.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = close_button.json; sourceTree = "<group>"; };
+		B1229931281D71C4002407C4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B1229937281D721B002407C4 /* landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landing.png; sourceTree = "<group>"; };
+		B122993A281D763F002407C4 /* twister.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twister.png; sourceTree = "<group>"; };
+		B122993C281D764A002407C4 /* leaderboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leaderboard.png; sourceTree = "<group>"; };
+		B122993E281D7651002407C4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
+		B122993F281D7651002407C4 /* routes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = routes.png; sourceTree = "<group>"; };
 		B122CED1281C853200A45F60 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		B122CED5281C96A200A45F60 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
+		B122CED7281C9FC900A45F60 /* arrows.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = arrows.json; sourceTree = "<group>"; };
 		B125276D2817F172005E3DC3 /* ChangeCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCredentials.swift; sourceTree = "<group>"; };
 		B125277128180A3D005E3DC3 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		B1252773281814D7005E3DC3 /* ChangeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeInformation.swift; sourceTree = "<group>"; };
@@ -401,10 +413,21 @@
 			path = repos;
 			sourceTree = "<group>";
 		};
+		B1229939281D760C002407C4 /* screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				B122993A281D763F002407C4 /* twister.png */,
+				B122993E281D7651002407C4 /* map.png */,
+				B122993F281D7651002407C4 /* routes.png */,
+				B122993C281D764A002407C4 /* leaderboard.png */,
+			);
+			path = screenshots;
+			sourceTree = "<group>";
+		};
 		B122CECE281C84D100A45F60 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				B122CECF281C84FA00A45F60 /* close_button.json */,
+				B122CED7281C9FC900A45F60 /* arrows.json */,
 				B122CED1281C853200A45F60 /* LottieView.swift */,
 			);
 			path = Lottie;
@@ -435,11 +458,13 @@
 		B167D31C27FAE4CE00BF950E /* outdare */ = {
 			isa = PBXGroup;
 			children = (
+				B1229939281D760C002407C4 /* screenshots */,
 				B122CECE281C84D100A45F60 /* Lottie */,
 				065FEC5728108B2D00237AFB /* GoogleService-Info.plist */,
 				062FE88F27FF2EF400F2D0F7 /* Info.plist */,
 				6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */,
 				B167D32127FAE4CF00BF950E /* Assets.xcassets */,
+				B1229937281D721B002407C4 /* landing.png */,
 				B167D31D27FAE4CE00BF950E /* outdareApp.swift */,
 				060A10D6280BF9280077F71F /* components */,
 				065FEC592811830700237AFB /* Views */,
@@ -448,6 +473,7 @@
 				6A6CDFDD27FDC3A1002106F8 /* repos */,
 				B167D32327FAE4CF00BF950E /* Preview Content */,
 				6A6CDFE627FF0BF2002106F8 /* .gitignore */,
+				B1229931281D71C4002407C4 /* README.md */,
 			);
 			path = outdare;
 			sourceTree = "<group>";
@@ -570,7 +596,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				fi,
+				ja,
+				hu,
 			);
 			mainGroup = B167D31127FAE4CE00BF950E;
 			packageReferences = (
@@ -596,15 +624,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				065FEC822811832F00237AFB /* JetBrainsMono-Bold.ttf in Resources */,
+				B122993D281D764A002407C4 /* leaderboard.png in Resources */,
 				065FEC832811832F00237AFB /* JetBrainsMono-Regular.ttf in Resources */,
 				6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */,
 				065FEC842811832F00237AFB /* JetBrainsMono-ExtraBold.ttf in Resources */,
-				B122CED0281C84FB00A45F60 /* close_button.json in Resources */,
 				065FEC5828108B2D00237AFB /* GoogleService-Info.plist in Resources */,
+				B122CED8281C9FC900A45F60 /* arrows.json in Resources */,
 				065FEC862811832F00237AFB /* JetBrainsMono-Medium.ttf in Resources */,
+				B1229938281D721B002407C4 /* landing.png in Resources */,
+				B1229940281D7651002407C4 /* map.png in Resources */,
+				B122993B281D763F002407C4 /* twister.png in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,
 				B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */,
+				B1229932281D71C5002407C4 /* README.md in Resources */,
 				6A59BFE52811A3E10043D6E7 /* TestRoute.gpx in Resources */,
+				B1229941281D7651002407C4 /* routes.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,10 +18,10 @@ struct LeaderboardList: View {
                         .foregroundColor(Color.theme.transparent)
                         .shadow(color: Color.theme.icon, radius: 2, x: 2, y: 3)
                     RankingListItem(item: rankingItem)
-                        .padding(.horizontal, 15)
+                        .padding(.horizontal, UIScreen.main.bounds.width * 0.04)
             }
         }
-            .padding(15)
+            .padding(UIScreen.main.bounds.width * 0.04)
         }
     }
 }
