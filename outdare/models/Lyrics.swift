@@ -9,12 +9,12 @@ import Foundation
 
 struct Lyrics {
     var id: Int = 0
-    var difficulty: String
+    var difficulty: ChallengeDifficulty
     let data: [LyricsData]
 }
 
 extension Lyrics {
     static let sample = [
-        Lyrics(difficulty: "easy", data: LyricsData.sample)
+        Lyrics(difficulty: .easy, data: LyricsData.sample)
     ]
 }

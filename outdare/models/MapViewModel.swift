@@ -6,6 +6,7 @@
 //
 import MapKit
 import SwiftUI
+import Speech
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 60.22418227428884, longitude: 24.758741356204567)
@@ -37,6 +38,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var circle: MKCircle?
     @Published var annotationsArray: [MKPointAnnotation]?
     @Published var map = MKMapView()
+    @Published var region = MKCoordinateRegion()
     var locationOld: CLLocation? = nil
     @Published var count = 0
     
@@ -46,6 +48,21 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
     
     private var locationManager: CLLocationManager?
+    
+//    func getUserLocation() {
+//        locationManager = CLLocationManager()
+//        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482)
+//    }
+    
+    func getUserLocation() {
+        locationManager = CLLocationManager()
+        if let location = locationManager?.location {
+            region = MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude),
+                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+            )
+        }
+    }
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
@@ -60,6 +77,25 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             }
         } else {
             print("Please turn on location services from the phone settings")
+        }
+    }
+    
+    func checkSRPermission() {
+        if SFSpeechRecognizer.authorizationStatus() != .authorized {
+            SFSpeechRecognizer.requestAuthorization({ (status) in
+                switch status {
+                case .notDetermined:
+                    print("SR permission not determined")
+                case .denied:
+                    print("SR permission denied")
+                case .restricted:
+                    print("SR permission restricted")
+                case .authorized:
+                    return
+                @unknown default:
+                    print("SR permision status unknown")
+                }
+            })
         }
     }
     

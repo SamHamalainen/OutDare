@@ -5,7 +5,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>OutDate will use your microphone to pick up your answers in voice challenges</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>OutDare will use speech recognition to evaluate your answers to voice challenges :)</string>
+	<string>OutDare uses Speech Recognition to make challenges more interactive. Without it, you won&apos;t be able to participate in all challenges.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>JetBrainsMono-Medium.ttf</string>

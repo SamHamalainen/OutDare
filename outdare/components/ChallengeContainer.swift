@@ -14,61 +14,64 @@ struct ChallengeContainer: View {
     @Binding var revealedChallenge: Bool
     let challenge: Challenge
     let notifyParent: () -> Void
-    @State var challengeState = "awaiting"
-    @State var resultHandler = ResultHandler()
+    @State var challengeState = ChallengeState.awaiting
+    @State var resultHandler: ResultHandler = ResultHandler()
     @StateObject var dao = ChallengeDAO()
     
     var body: some View {
         Group {
             switch challengeState {
-            case "awaiting":
+            case .awaiting:
                 ChallengeDetailedPreview(challenge: challenge, state: $challengeState)
                     .onAppear() {
+                        resultHandler = ResultHandler(challengeId: challenge.id)
                         switch challenge.category {
-                        case "quiz":
+                        case .quiz:
                             dao.getQuiz(id: challenge.challengeId)
-                        case "lyrics":
+                        case .lyrics:
                             dao.getLyrics(id: challenge.challengeId)
-                        case "twister":
+                        case .twister:
                             dao.getTwister(id: challenge.challengeId)
                         default:
                             return
                         }
                     }
-            case "playing":
+            case .playing:
                 switch challenge.category {
-                case "quiz":
+                case .quiz:
                     if let quiz = dao.quiz {
                         let game = QuizGame(quiz: quiz)
                         QuizView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
-                case "lyrics":
+                case .lyrics:
                     if let lyrics = dao.lyrics {
                         let game = LyricsGame(lyricsChallenge: lyrics)
                         LyricsView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
-                case "twister":
+                case .twister:
                     if let twister = dao.twister {
                         let game = TwisterGame(twister: twister)
                         TwisterView(game: game, state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                     }
-                case "stringGame":
+                case .string:
                     StringGameView(state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
-                default:
-                    Text("invalid category")
                 }
                 
                 
-            default:
+            case .done:
                 ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, resultHandler: $resultHandler, revealedChallenge: $revealedChallenge)
             }
         }
         .onChange(of: challengeState) { state in
-            if state != "awaiting" {
+            if state != ChallengeState.awaiting {
                 notifyParent()
             }
         }
     }
+}
+
+enum ChallengeState {
+    case awaiting, playing, done
 }
 
 //struct ChallengeContainer_Previews: PreviewProvider {

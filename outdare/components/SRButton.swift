@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct SRButton: View {
     @ObservedObject var speechAnalyzer: SpeechAnalyzer
     var size: CGFloat = 50
     var padding = 50.0
     var text: String = "Tap to speak"
+    let systemSoundID: SystemSoundID = 1110
     
     @State var isAtMinScale = false
     private let animation = Animation.easeInOut(duration: 0.6)
@@ -19,7 +21,10 @@ struct SRButton: View {
     
     var body: some View {
         VStack {
-            Button(action: {toggleSpeechRecognition()}) {
+            Button(action: {
+                toggleSpeechRecognition()
+                AudioServicesPlaySystemSound(systemSoundID)
+            }) {
                     Image(systemName: speechAnalyzer.isProcessing ? "mic.fill" : "mic")
                         .resizable()
                         .foregroundColor(speechAnalyzer.isProcessing ? Color.theme.background : Color.theme.icon)

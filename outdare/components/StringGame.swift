@@ -25,7 +25,7 @@ class StringGame: ObservableObject {
     }
     
     func checkOccurence(word: String, characters: String) -> Int {
-        if word.lowercased().contains(characters) {
+        if word.lowercased().contains(characters.lowercased()) {
             let occurences = word.components(separatedBy: characters).count - 1
             return occurences
         } else {
@@ -35,23 +35,26 @@ class StringGame: ObservableObject {
     
     func checkWord(word: String) -> String {
         var status = ""
+        let wordLower = word.lowercased()
+        let randomLower = random.lowercased()
+        
         if isReal(word: word) {
-            let repeated = checkOccurence(word: word, characters: random) > 1
-            if word.lowercased().contains(random.lowercased()) {
+            let repeated = checkOccurence(word: wordLower, characters: random) > 1
+            if word.lowercased().contains(randomLower) {
                 if word.count >= (random.count + excellentThreshold) {
                     if repeated {
                         status = "Outstanding"
-                        results.append(ResultItem(text: "\(status)\n\tLong and Repeated", score: outstandingScore))
+                        results.append(ResultItem(text: status, comment: "\(randomLower) > \(wordLower)", score: outstandingScore))
                     } else {
                         status = "Excellent"
-                        results.append(ResultItem(text: "\(status)\n\tLong word", score: excellentScore))
+                        results.append(ResultItem(text: status, comment: "\(randomLower) > \(wordLower)", score: excellentScore))
                     }
                 } else if repeated {
                     status = "Excellent"
-                    results.append(ResultItem(text: "\(status)\n\tRepeated in word", score: excellentScore))
+                    results.append(ResultItem(text: status, comment: "\(randomLower) > \(wordLower)", score: excellentScore))
                 } else {
                     status = "Good"
-                    results.append(ResultItem(text: status, score: goodScore))
+                    results.append(ResultItem(text: status, comment: "\(randomLower) > \(wordLower)", score: goodScore))
                 }
                 getScore()
                 randomString()

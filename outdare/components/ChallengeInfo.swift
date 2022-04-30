@@ -32,14 +32,12 @@ struct ChallengeInfo: View {
     
     func getDifficultyColor() -> Color {
         switch locationPassed!.difficulty {
-        case "hard":
+        case .hard:
             return Color("DifficultyHard")
-        case "medium":
+        case .medium:
             return Color("DifficultyMedium")
-        case "easy":
+        case .easy:
             return Color("DifficultyEasy")
-        default:
-            return Color(.black)
         }
     }
     
@@ -97,7 +95,7 @@ struct ChallengeInfo: View {
                                     .fontWeight(.bold)
                                     .padding(.top)
                                     .frame(width: 200, alignment: .topLeading)
-                                Text("\(locationPassed!.difficulty.capitalized)")
+                                Text("\(locationPassed!.difficulty.rawValue.capitalized)")
                                     .font(.headline)
                                     .foregroundColor(getDifficultyColor())
                                     .frame(width: 200, alignment: .leading)
@@ -184,7 +182,7 @@ struct ChallengeInfo: View {
                                     .fontWeight(.bold)
                                     .padding(.top)
                                     .frame(width: 200, alignment: .topLeading)
-                                Text("\(locationPassed!.difficulty.capitalized)")
+                                Text("\(locationPassed!.difficulty.rawValue.capitalized)")
                                     .font(.headline)
                                     .foregroundColor(getDifficultyColor())
                                     .frame(width: 200, alignment: .leading)

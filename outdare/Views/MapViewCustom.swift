@@ -25,6 +25,7 @@ struct MapViewCustom: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         viewModel.checkIfLocationServicesIsEnabled()
+        viewModel.checkSRPermission()
         let mapView = viewModel.map
         navigationRoute.mapView = mapView
         if let userLocation = viewModel.userLocation {

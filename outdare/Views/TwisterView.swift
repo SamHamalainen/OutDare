@@ -10,7 +10,7 @@ import WrappingStack
 
 struct TwisterView: View {
     let game: TwisterGame
-    @Binding var state: String
+    @Binding var state: ChallengeState
     @Binding var resultHandler: ResultHandler
     @StateObject var timer: ChallengeTimer = ChallengeTimer()
     @StateObject private var speechAnalyzer = SpeechAnalyzer()
@@ -98,9 +98,10 @@ extension TwisterView {
             guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
                 return
             }
-            resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
+            let challengeId = resultHandler.challengeId
+            resultHandler = ResultHandler(userId: uid, challengeId: challengeId, results: game.results, time: Int(timer.totalTime), maxTime: game.data.map {$0.timeLimit}.reduce(0, +))
             resultHandler.pushToDB()
-            state = "done"
+            state = .done
         }
     }
 }

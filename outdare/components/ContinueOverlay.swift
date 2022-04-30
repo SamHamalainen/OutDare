@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Subsonic
 
 struct ContinueOverlay: View {
     var message: String
@@ -42,6 +43,11 @@ struct ContinueOverlay: View {
         .zIndex(2)
         .ignoresSafeArea()
         .transition(.move(edge: .bottom))
+        .onAppear {
+            if correct {
+                play(sound: "correct.mp3")
+            }
+        }
     }
 }
 

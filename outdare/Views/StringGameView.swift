@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Subsonic
 
 struct StringGameView: View {
     @StateObject var game = StringGame()
-    @Binding var state: String
+    @Binding var state: ChallengeState
     @Binding var resultHandler: ResultHandler
     @State var input = ""
     @StateObject var timer = ChallengeTimer()
@@ -29,17 +30,18 @@ struct StringGameView: View {
                         timer.setTimeLimit(limit: 60.0)
                         timer.start()
                     }
-                HStack {
-                    VStack (alignment: .leading){
+                HStack(alignment: .top) {
+                    VStack {
                         Text("Score")
                             .font(Font.customFont.normalText)
-                        Text("\(game.score)")
-                            .font(Font.customFont.smallText)
+                        Text("\(Int(game.score))")
+                            .font(Font.customFont.largeText)
+                            .foregroundColor(Color.theme.background)
                     }
                     Spacer()
-                    VStack (alignment: .trailing){
+                    VStack {
                         Text("Skips left: \(game.skips)")
-                            .font(Font.customFont.smallText)
+                            .font(Font.customFont.normalText)
                         Button(action: {
                             game.skip()
                         }) {
@@ -53,9 +55,8 @@ struct StringGameView: View {
                         }
                         .disabled(game.skips == 0)
                     }
-                    .frame(height: 70)
-                .padding(.horizontal)
                 }
+                .padding(.horizontal)
                 
                 Text(game.random)
                     .padding(50)
@@ -119,7 +120,7 @@ struct StringGameView: View {
                 SRButton(speechAnalyzer: speechAnalyzer, size: 30, padding: 30)
             }
             .padding()
-            
+            .allowsHitTesting(timer.isRunning)
         }
         
     }
@@ -131,9 +132,10 @@ extension StringGameView {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return
         }
-        resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results)
+        let challengeId = resultHandler.challengeId  
+        resultHandler = ResultHandler(userId: uid, challengeId: challengeId, results: game.results)
         resultHandler.pushToDB()
-        state = "done"
+        state = .done
     }
     
     func onSubmit() {
@@ -143,6 +145,7 @@ extension StringGameView {
             let result = game.checkWord(word: input)
             status = result
             if ["Outstanding", "Excellent", "Good"].contains(result) {
+                play(sound: "correct.mp3")
                 speechAnalyzer.stop()
                 input = ""
             }

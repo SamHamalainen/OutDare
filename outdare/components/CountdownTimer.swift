@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Subsonic
 
 struct CountdownTimer: View {
     @State var timer: Int
@@ -16,10 +17,15 @@ struct CountdownTimer: View {
             .font(.title)
             .onReceive(countdown) {_ in
                 if timer > 0 {
+                    play(sound: "countdown.wav")
                     timer -= 1
                 } else {
+                    play(sound: "start.wav")
                     over = true
                 }
+            }
+            .onAppear {
+                play(sound: "countdown.wav")
             }
     }
 }

@@ -20,6 +20,7 @@ class ChallengeDAO: ObservableObject {
     @Published var twister: Twister? = nil
     @Published var annotations: [MKPointAnnotation] = []
     @Published var oldAnnotations: [MKPointAnnotation] = []
+    @Published var challengeAdded = false
     
     func challengeToAnnotation() {
         print("dao count: \(challenges.count)")
@@ -74,17 +75,15 @@ class ChallengeDAO: ObservableObject {
         let id = data["id"] as? Int ?? 0
         let challengeId = data["challengeId"] as? Int ?? 0
         let name = data["name"] as? String ?? "no name"
-        let difficulty = data["difficulty"] as? String ?? "easy"
-        let category = data["category"] as? String ?? "quiz"
+        let difficulty = data["difficulty"] as? String ?? ""
+        let difficultyEnum = ChallengeDifficulty(rawValue: difficulty) ?? .easy
+        let category = data["category"] as? String ?? ""
+        let categoryEnum = ChallengeCategory(rawValue: category) ?? .string
         let description = data["description"] as? String ?? "no description"
         let latitude = data["latitude"] as? Double ?? 0
         let longitude = data["longitude"] as? Double ?? 0
-        
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        if category == "twister" {
-            print("twister")
-        }
-        return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficulty, category: category, description: description, coordinates: coordinates)
+        return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficultyEnum, category: categoryEnum, description: description, coordinates: coordinates)
     }
     
     func convertToLyrics (data: [String:Any]) -> Lyrics {
@@ -94,6 +93,7 @@ class ChallengeDAO: ObservableObject {
         let titles = data["titles"] as? [String] ?? []
         let lyrics = data["lyrics"] as? [String] ?? []
         let difficulty = data["difficulty"] as? String ?? ""
+        let difficultyEnum = ChallengeDifficulty(rawValue: difficulty) ?? .easy
         let missingWords = data["missingWords"] as? [String] ?? []
         
         var lyricsData: [LyricsData] = []
@@ -102,7 +102,7 @@ class ChallengeDAO: ObservableObject {
             data.toMultiLine()
             lyricsData.append(data)
         }
-        return Lyrics(id: id, difficulty: difficulty, data: lyricsData)
+        return Lyrics(id: id, difficulty: difficultyEnum, data: lyricsData)
     }
     
     func convertToQuiz(data: [String:Any]) -> Quiz {
@@ -111,6 +111,7 @@ class ChallengeDAO: ObservableObject {
         let questions = data["questions"] as? [String] ?? []
         let correctAns = data["correctAns"] as? [String] ?? []
         let difficulty = data["difficulty"] as? String ?? ""
+        let difficultyEnum = ChallengeDifficulty(rawValue: difficulty) ?? .easy
         let answersFetched = data["answers"] as? [String:[String]] ?? [:]
         let answers = answersFetched.sorted {$0.key < $1.key}.map {$1}
         var quizData: [QuizData] = []
@@ -118,7 +119,7 @@ class ChallengeDAO: ObservableObject {
             let data = QuizData(question: questions[i], answers: answers[i], correctAns: correctAns[i])
             quizData.append(data)
         }
-        return Quiz(id: id, timePerQuestion: timePerQ, data: quizData, difficulty: difficulty)
+        return Quiz(id: id, timePerQuestion: timePerQ, data: quizData, difficulty: difficultyEnum)
     }
     
     func convertToTwister(data: [String:Any]) -> Twister {
@@ -126,12 +127,13 @@ class ChallengeDAO: ObservableObject {
         let texts = data["texts"] as? [String] ?? []
         let timeLimits = data["timeLimits"] as? [Int] ?? []
         let difficulty = data["difficulty"] as? String ?? ""
+        let difficultyEnum = ChallengeDifficulty(rawValue: difficulty) ?? .easy
         var twisterData: [TwisterData] = []
         for i in texts.indices {
             let data = TwisterData(timeLimit: timeLimits[i], text: texts[i])
             twisterData.append(data)
         }
-        return Twister(id: id, difficulty: difficulty, data: twisterData)
+        return Twister(id: id, difficulty: difficultyEnum, data: twisterData)
     }
     
     func getChallenges() {
@@ -161,11 +163,11 @@ class ChallengeDAO: ObservableObject {
                 self.challenge = challenge
                 if let id = self.challenge?.challengeId, let category = self.challenge?.category {
                     switch category {
-                    case "quiz":
+                    case .quiz:
                         self.getQuiz(id: id)
-                    case "lyrics":
+                    case .lyrics:
                         self.getLyrics(id: id)
-                    case "twister":
+                    case .twister:
                         self.getTwister(id: id)
                     default:
                         return
@@ -229,4 +231,83 @@ class ChallengeDAO: ObservableObject {
                 }
         }
     }
+    
+    func addChallenge(challenge: Challenge) {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            fatalError("Cannot get UID")
+        }
+        let challengeRef = db.collection("challenges")
+        let query = challengeRef.order(by: "id", descending: true).limit(to: 1)
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let document = querySnapshot!.documents[0]
+                guard let id = document.data()["id"] as? Int else {
+                    return
+                }
+                let newId = id + 1
+                print("newId", newId)
+                challengeRef.addDocument(data: [
+                    "category": challenge.category.rawValue,
+                    "challengeId": challenge.challengeId,
+                    "description": challenge.description,
+                    "difficulty": challenge.difficulty.rawValue,
+                    "id": newId,
+                    "latitude": Double(challenge.coordinates.latitude),
+                    "longitude": Double(challenge.coordinates.longitude),
+                    "name": challenge.name,
+                    "creator": String(uid),
+                    "created": Timestamp(),
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Challenge added: \(newId) \(challenge.name)")
+                        self.challengeAdded = true
+                    }
+                }
+            }
+        }
+    }
+    
+    func addQuiz(triviaQuestions: [TriviaQuestion], title: String, description: String = "", coords: CLLocationCoordinate2D) {
+        let quizRef = db.collection("quizzes")
+        let query = quizRef.order(by: "id", descending: true).limit(to: 1)
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let document = querySnapshot!.documents[0]
+                guard let id = document.data()["id"] as? Int else {
+                    return
+                }
+                let newId = id + 1
+                print("newId", newId)
+                let questions = triviaQuestions.map { $0.question }
+                let correctAns = triviaQuestions.map { $0.correct_answer }
+                let answers = triviaQuestions.map { $0.getAllAnswers() }
+                let answersDict = Dictionary(uniqueKeysWithValues: answers.indices.map { (String($0), answers[$0]) })
+                let difficulty = triviaQuestions[0].difficulty
+                let difficultyEnum = ChallengeDifficulty(rawValue: difficulty) ?? .easy
+                
+                quizRef.addDocument(data: [
+                    "id": newId,
+                    "answers": answersDict,
+                    "correctAns": correctAns,
+                    "difficulty": difficulty,
+                    "timePerQ": 13,
+                    "questions": questions
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Quiz added: \(newId)")
+                        self.addChallenge(challenge: Challenge(id: -1, challengeId: newId, name: title, difficulty: difficultyEnum, category: .quiz, description: description, coordinates: coords))
+                    }
+                }
+            }
+        }
+    }
+    
 }

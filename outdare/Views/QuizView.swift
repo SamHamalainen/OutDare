@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizView: View {
     @StateObject var game: QuizGame
-    @Binding var state: String
+    @Binding var state: ChallengeState
     @Binding var resultHandler: ResultHandler
     @State var score: Int = 0
     @StateObject var timer: ChallengeTimer = ChallengeTimer()
@@ -30,6 +30,7 @@ struct QuizView: View {
                     if let question = game.question {
                         Text(question)
                             .frame(maxWidth: .infinity, maxHeight: 100)
+                            .padding(.horizontal)
                             .background(Color.theme.background)
                             .foregroundColor(Color.white)
                             .cornerRadius(20)
@@ -129,9 +130,10 @@ extension QuizView {
             guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
                 return
             }
-            resultHandler = ResultHandler(userId: uid, challengeId: id, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
+            let challengeId = resultHandler.challengeId
+            resultHandler = ResultHandler(userId: uid, challengeId: challengeId, results: game.results, time: Int(timer.totalTime), maxTime: game.length * game.timePerQ)
             resultHandler.pushToDB()
-            state = "done"
+            state = .done
         }
     }
     
