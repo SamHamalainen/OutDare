@@ -101,7 +101,6 @@ class UserViewModel: ObservableObject {
         userRef.getDocuments() { [self] (querySnapshot, error) in
             if let error = error {
                 self.errorMessage = "Failed to fetch users: \(error)"
-                print("Failed to fetch users: \(error)")
                 return
             }
             for document in querySnapshot!.documents {
@@ -128,7 +127,6 @@ class UserViewModel: ObservableObject {
                     for document in querySnapshot!.documents {
                         let data = document.data()
                         let score = data["score"] as? Int ?? 0
-                        print("scoreInLogged: \(score)")
                         scores.append(score)
                     }
                 let userScore = scores.reduce(0, +)
@@ -191,7 +189,6 @@ class UserViewModel: ObservableObject {
                     let data = document.data()
                     let achievement = self.convertToAchievement(data: data)
                     achievements.append(achievement)
-                    print(self.achievements)
                 }
             let filtered = achievements.filter {
                 $0.id != -1
