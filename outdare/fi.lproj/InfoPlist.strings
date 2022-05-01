@@ -1,0 +1,12 @@
+/* Bundle name */
+"CFBundleName" = "outdare";
+
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "Tämä sovellus tarvitsee sinun sijaintiasi näyttääkseen sen kartalla.";
+
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "OutDare käyttää mikrofoniasi, jotta voit vastata äänellä puhe haasteissa.";
+
+/* Privacy - Speech Recognition Usage Description */
+"NSSpeechRecognitionUsageDescription" = "OutDare käyttää puheentunnistusta haasteiden interaktiivisuuden lisäämistä varten. Ilman sitä et voi osallistua kaikkiin haasteisiin.";
+

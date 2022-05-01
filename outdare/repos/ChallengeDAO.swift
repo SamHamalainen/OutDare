@@ -37,7 +37,6 @@ class ChallengeDAO: ObservableObject {
     
     func updateAnnotationsBasedOnDistance(userLoc: CLLocationCoordinate2D, annotationsArray: [MKPointAnnotation]) -> [MKPointAnnotation] {
 //        oldAnnotations = annotations
-        print("annotationUpdate \(annotationsArray)")
         let newAnnotations: [MKPointAnnotation] = annotationsArray.map { annotation in
             let isInRadius = userLoc.distance(to: annotation.coordinate) <= 150
             let wasGray = annotation.subtitle!.contains("-gray")

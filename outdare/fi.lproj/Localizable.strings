@@ -1,0 +1,261 @@
+/* No comment provided by engineer. */
+"\t%@" = "%@";
+
+/* No comment provided by engineer. */
+"%.2f" = "%.2f";
+
+/* No comment provided by engineer. */
+"%@" = "%@";
+
+/* No comment provided by engineer. */
+"%@ - %@" = "%@ - %@";
+
+/* No comment provided by engineer. */
+"%lf" = "%lf";
+
+/* No comment provided by engineer. */
+"%lld" = "%lld";
+
+/* No comment provided by engineer. */
+"%lld Points" = "%lld Pistettä";
+
+/* No comment provided by engineer. */
+"%lld points has been added to your account." = "%lld pistettä on lisätty tilillesi.";
+
+/* No comment provided by engineer. */
+"%lld selected" = "%lld valittu";
+
+/* No comment provided by engineer. */
+"+%lld" = "+%lld";
+
+/* No comment provided by engineer. */
+"1" = "1";
+
+/* No comment provided by engineer. */
+"2." = "2.";
+
+/* No comment provided by engineer. */
+"3." = "3.";
+
+/* No comment provided by engineer. */
+"Achievements" = "Saavutukset";
+
+/* No comment provided by engineer. */
+"Add to the route(first)" = "Lisää reitille(ensimmäinen)";
+
+/* No comment provided by engineer. */
+"Add to the route(last)" = "Lisää reitille(viimeinen)";
+
+/* No comment provided by engineer. */
+"Are you sure you want to reveal challenge?" = "Oletko varma että haluat paljastaa haasteen";
+
+/* No comment provided by engineer. */
+"By purchasing this item, %lld points will be added to your accounts points." = "Ostamalla tämän tuotteen %lld pistettä lisätään sinun tilillesi.";
+
+/* No comment provided by engineer. */
+"Cancel" = "Peruuta";
+
+/* No comment provided by engineer. */
+"Challenge completed 🎉" = "Haaste suoritettu 🎉";
+
+/* No comment provided by engineer. */
+"Change credentials" = "Päivitä kirjautumistietojasi";
+
+/* No comment provided by engineer. */
+"Change user information" = "Päivitä käyttätietojasi";
+
+/* No comment provided by engineer. */
+"Choose location" = "Valitse sijainti";
+
+/* No comment provided by engineer. */
+"Continue" = "Jatka";
+
+/* No comment provided by engineer. */
+"CONTINUE" = "JATKA";
+
+/* No comment provided by engineer. */
+"COUNTRY" = "MAA";
+
+/* No comment provided by engineer. */
+"Create" = "Luo";
+
+/* No comment provided by engineer. */
+"Create Quiz!" = "Luo Tietokilpailu!";
+
+/* No comment provided by engineer. */
+"Description" = "Kuvaus";
+
+/* No comment provided by engineer. */
+"Directions info" = "Reittiohjeet";
+
+/* No comment provided by engineer. */
+"Email" = "Email";
+
+/* No comment provided by engineer. */
+"EMAIL" = "EMAIL";
+
+/* No comment provided by engineer. */
+"Exit" = "Poistu";
+
+/* No comment provided by engineer. */
+"Finish" = "Lopeta";
+
+/* No comment provided by engineer. */
+"FREE" = "ILMAINEN";
+
+/* No comment provided by engineer. */
+"Generate" = "Tuota";
+
+/* No comment provided by engineer. */
+"Get ready!" = "Valmistaudu!";
+
+/* No comment provided by engineer. */
+"Go to settings" = "Mene asetuksiin";
+
+/* No comment provided by engineer. */
+"Hello, World!" = "Terve, Maailma!";
+
+/* No comment provided by engineer. */
+"I'm ready!" = "Olen valmis!";
+
+/* No comment provided by engineer. */
+"Location" = "Sijainti";
+
+/* No comment provided by engineer. */
+"LOGIN" = "KIRJAUTUMINEN";
+
+/* No comment provided by engineer. */
+"Logout" = "Kirjaudu ulos";
+
+/* No comment provided by engineer. */
+"New email" = "Uusi sähköposti";
+
+/* No comment provided by engineer. */
+"New password" = "Uusi salasana";
+
+/* No comment provided by engineer. */
+"New Quiz" = "Uusi Tietokilpailu";
+
+/* No comment provided by engineer. */
+"Not enough questions 😕\nPlease try other parameters" = "Liian vähän kysymyksiä 😕 Yritä muita parametrejä";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Old password" = "Vanha salasana";
+
+/* No comment provided by engineer. */
+"Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 25 points." = "Kun paljastat tämän tehtävän, sinun täytyy suorittaa se heti, muuten sinun täytyy paljastaa se uudelleen. Haasteen paljastaminen maksaa 25 pistettä.";
+
+/* No comment provided by engineer. */
+"Password" = "Salasana";
+
+/* No comment provided by engineer. */
+"PASSWORD" = "SALASANA";
+
+/* No comment provided by engineer. */
+"Password and email used for login" = "Salasana ja sähköposti kirjautumista varten";
+
+/* No comment provided by engineer. */
+"Please choose a category" = "Valitse kategoria";
+
+/* No comment provided by engineer. */
+"Please choose a difficulty" = "Valitse vaikeustaso";
+
+/* No comment provided by engineer. */
+"Point Store" = "Piste Kauppa";
+
+/* No comment provided by engineer. */
+"Points added!" = "Pisteet lisätty!";
+
+/* No comment provided by engineer. */
+"Purchace %lld points?" = "Osta %lld pistettä";
+
+/* No comment provided by engineer. */
+"Purchase" = "Osta";
+
+/* No comment provided by engineer. */
+"Quiz Added 🤩" = "Tietokilpailu lisätty 🤩";
+
+/* No comment provided by engineer. */
+"Quiz Generator" = "Tietokilpailu generaattori";
+
+/* No comment provided by engineer. */
+"Remove all" = "Poista kaikki";
+
+/* No comment provided by engineer. */
+"Reveal" = "Paljasta";
+
+/* No comment provided by engineer. */
+"Reveal Challenge" = "Paljasta haaste";
+
+/* No comment provided by engineer. */
+"Score" = "Tulos";
+
+/* No comment provided by engineer. */
+"Select %lld questions to create a quiz" = "Valitse %lld kysymystä luodaksesi tietokilpailun";
+
+/* No comment provided by engineer. */
+"Select a challenge from the map to add directions to the route" = "Valitse haaste kartalta lisätääksesi se reitille";
+
+/* No comment provided by engineer. */
+"SIGNUP" = "REKISTERÖI";
+
+/* No comment provided by engineer. */
+"Sing or type here" = "Laula tai kirjoita tähän";
+
+/* No comment provided by engineer. */
+"Skip" = "Ohita";
+
+/* No comment provided by engineer. */
+"Skips left: %lld" = "Ohituksia jäljellä %lld";
+
+/* No comment provided by engineer. */
+"Sort by distance" = "Järjestä etäisyyden perusteella";
+
+/* No comment provided by engineer. */
+"Speak or type" = "Puhu tai kirjoita";
+
+/* No comment provided by engineer. */
+"Speech Recognition permission is needed to complete challenges. Please authorize it in app settings" = "Puheentunnistukselle tarvitaan lupa suorittaaksesi haasteita. Mene asetuksiin antaaksesi lupa.";
+
+/* No comment provided by engineer. */
+"Speed bonus" = "Nopeus bonus";
+
+/* No comment provided by engineer. */
+"Start" = "Aloita";
+
+/* No comment provided by engineer. */
+"Submit" = "Julkaise";
+
+/* No comment provided by engineer. */
+"Title" = "Titteli";
+
+/* No comment provided by engineer. */
+"Total" = "Loppusumma";
+
+/* No comment provided by engineer. */
+"Type here if you cannot talk" = "Kirjoita tähän jos et voi puhua";
+
+/* No comment provided by engineer. */
+"UPDATE" = "PÄIVITÄ";
+
+/* No comment provided by engineer. */
+"Username" = "Käyttäjänimi";
+
+/* No comment provided by engineer. */
+"USERNAME" = "KÄYTTÄJÄNIMI";
+
+/* No comment provided by engineer. */
+"Username and location" = "Käyttäjänimi ja sijainti";
+
+/* No comment provided by engineer. */
+"x%.2f" = "x%.2f";
+
+/* No comment provided by engineer. */
+"Your route" = "Sinun reittisi";
+
+/* No comment provided by engineer. */
+"Your route is currently empty" = "Sinun reittisi on tyhjä";
+

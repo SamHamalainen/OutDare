@@ -55,9 +55,9 @@ struct QuizGeneratorView: View {
                     
                     VStack(spacing: 20){
                             VStack {
-                                Picker("Please choose a category", selection: $category) {
+                                Picker(LocalizedStringKey("Please choose a category"), selection: $category) {
                                     ForEach(categories, id: \.self) {
-                                        Text($0)
+                                        Text(LocalizedStringKey($0))
                                     }
                                 }
                                 .colorMultiply(Color.black)
@@ -69,7 +69,7 @@ struct QuizGeneratorView: View {
                             VStack {
                                 Picker(selection: $difficulty, label: Text("Please choose a difficulty")) {
                                     ForEach(["Choose a difficulty", "easy", "medium", "hard"], id: \.self) {
-                                        Text($0.capitalizingFirstLetter())
+                                        Text(LocalizedStringKey($0.capitalizingFirstLetter()))
                                     }
                                 }
                                 .colorMultiply(Color.black)
