@@ -20,6 +20,6 @@ struct Directions: Identifiable {
 enum DirectionsOption: Equatable {
     case makeFirst
     case makeLast
-    case update
+    case updateFirst
     case toIndex(Int)
 }

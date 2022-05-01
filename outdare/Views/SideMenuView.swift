@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-
+/// View for the side menu. Has a vertical list of buttons which change the view inside the mainView's navigationView
+/// plus the logout button.
 struct SideMenuView: View {
     @Binding var isShowing: Bool
     @Binding var currentTitle: LocalizedStringKey
-    @Binding var currentView: AnyView
     @EnvironmentObject var loginViewModel: AppViewModel
     
     func signOut() {
@@ -20,16 +20,12 @@ struct SideMenuView: View {
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             Color(.white)
-            ZStack() {
-                
                 VStack {
                     ForEach(SideMenuViewModel.allCases, id: \.self) { item in
                         
                         Button(action: {
                             currentTitle = item.title
                             isShowing.toggle()
-//                            currentView = AnyView(item.getView())
-                            
                         }, label: {SideMenuItem(viewModel: item)})
                     }
                     Button(action: signOut) {
@@ -46,7 +42,6 @@ struct SideMenuView: View {
                 }
             }
         }.frame(width: 200, height: 460).cornerRadius(20).ignoresSafeArea()
-        
     }
 }
 
