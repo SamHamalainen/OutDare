@@ -10,6 +10,7 @@ import MapKit
 
 // MARK: MapViewCustom
 
+
 struct MapViewCustom: UIViewRepresentable {
     @ObservedObject var viewModel: MapViewModel
     @ObservedObject var dao: ChallengeDAO
