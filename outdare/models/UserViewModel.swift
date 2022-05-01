@@ -1,14 +1,15 @@
-//
 //  UserViewModel.swift
 //  outdare
 //  Created by Jasmin Partanen on 13.4.2022.
-//  For fetching userdata from Firebase
-//
+//  Description: Working with user and firebase
+
 import Foundation
 import SDWebImageSwiftUI
 import Firebase
 import SwiftUI
 
+
+// User item in the leaderboard list
 struct RankingItem: Identifiable {
     var id: UUID = UUID()
     var rank: Int
@@ -32,6 +33,7 @@ class UserViewModel: ObservableObject {
     @Published var usersSorted: [CurrentUser] = []
     @Published var rankingSorted: [RankingItem] = []
     
+    // Users achievements
     private var achievements: [Achievement] = []
     @Published var achievementsWithCategory: [Achievement] = []
 
@@ -41,7 +43,7 @@ class UserViewModel: ObservableObject {
         fetchAllUsers()
     }
 
-    
+    // Common function to convert userData from firebase to CurrentUser struct
     func convertToUser(data: [String:Any]) -> CurrentUser {
         let id = data ["userId"] as? String ?? ""
         let username = data["username"] as? String ?? ""
@@ -52,6 +54,7 @@ class UserViewModel: ObservableObject {
         return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: 0)
     }
     
+    // function to convert achievement from firebase to Achievement struct
     func convertToAchievement(data: [String:Any]) -> Achievement {
         let id = data ["challengeId"] as? Int ?? 0
         let score = data["score"] as? Int ?? 0
@@ -62,6 +65,7 @@ class UserViewModel: ObservableObject {
         return Achievement(id: id, score: score, time: time, userId: userId, date: date, speedBonus: speedBonus, category: "")
     }
     
+    // function to convert category from firebase to category struct
     func convertToCategory(data: [String:Any]) -> Category {
         let name = data ["category"] as? String ?? ""
         return Category(name: name)
@@ -91,11 +95,10 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    // Fetching all users
+    // Fetching all user from firestore
     private func fetchAllUsers() {
         let userRef = FirebaseManager.shared.firestore.collection("users")
-        let query = userRef.limit(to: 20)
-        query.getDocuments() { [self] (querySnapshot, error) in
+        userRef.getDocuments() { [self] (querySnapshot, error) in
             if let error = error {
                 self.errorMessage = "Failed to fetch users: \(error)"
                 print("Failed to fetch users: \(error)")
@@ -139,6 +142,7 @@ class UserViewModel: ObservableObject {
     }
 }
     
+    // Get user ranking number
     func getUserRanking(users: [CurrentUser]) -> [RankingItem] {
         let sorted = users.sorted(by: {$0.score > $1.score})
         var previousScore = sorted[0].score
@@ -197,6 +201,7 @@ class UserViewModel: ObservableObject {
             }
         }
     
+    // Fetching category names for the challenges user has completed
     func getCategories() {
         let challengeRef = FirebaseManager.shared.firestore.collection("challenges")
         for item in achievements {

@@ -1,9 +1,8 @@
-//
 //  Profile.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 8.4.2022.
-//
+//  Description: User profile view
+
 import SwiftUI
 import Firebase
 
@@ -16,29 +15,29 @@ struct UserProfile: View {
             ProfileBackground()
             
             VStack {
-            UserDetails()
+                UserDetails()
                     .padding(.top, UIScreen.main.bounds.height * 0.11)
-            
-            Button (
-                action: {
-                    withAnimation(.spring()) {
-                        settingsOpened.toggle()
-                    }
-                }, label: {
+                
+                Button (
+                    action: {
+                        withAnimation(.spring()) {
+                            settingsOpened.toggle()
+                        }
+                    }, label: {
                         Image(systemName: "ellipsis").foregroundColor(.black)
-                }).sheet(isPresented: $settingsOpened, content: {
-                    SettingsMenu()
-                })
+                    }).sheet(isPresented: $settingsOpened, content: {
+                        SettingsMenu()
+                    })
                     .font(.largeTitle)
                     .rotationEffect(Angle(degrees: 90))
                     .offset(x: UIScreen.main.bounds.width * 0.4, y: -170)
                 
                 
                 VStack {
-                Text("Achievements")
-                    .font(Font.customFont.largeText)
-                    .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .leading)
-            AchievementList()
+                    Text("Achievements")
+                        .font(Font.customFont.largeText)
+                        .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .leading)
+                    AchievementList()
                 }
                 .padding(.top, UIScreen.main.bounds.height * 0.07)
             }

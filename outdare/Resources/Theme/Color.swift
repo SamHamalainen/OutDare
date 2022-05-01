@@ -1,9 +1,7 @@
-//
 //  Color.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 4.4.2022.
-//
+//  Description: Initiating application color theme
 
 import Foundation
 import SwiftUI

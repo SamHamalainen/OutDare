@@ -1,9 +1,9 @@
-//
 //  SingleProfile.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 8.4.2022.
-//
+//  Description: Single user in the leaderboard top ranked profiles
+
+
 import SwiftUI
 import SDWebImageSwiftUI
 
@@ -30,13 +30,13 @@ struct SingleProfile: View {
             .foregroundColor(Color.theme.textDark)
             .shadow(color: Color.theme.button, radius: 4, x: 4, y: 4)
             
-                Text(users.username)
-                    .foregroundColor(Color.theme.textLight)
-                    .font(Font.customFont.normalText)
-                    .padding(.top, UIScreen.main.bounds.height * 0.01)
-                Text("\(users.score)")
-                    .foregroundColor(Color.theme.stroke)
-                    .font(Font.customFont.largeText)
+            Text(users.username)
+                .foregroundColor(Color.theme.textLight)
+                .font(Font.customFont.normalText)
+                .padding(.top, UIScreen.main.bounds.height * 0.01)
+            Text("\(users.score)")
+                .foregroundColor(Color.theme.stroke)
+                .font(Font.customFont.largeText)
         }
     }
 }

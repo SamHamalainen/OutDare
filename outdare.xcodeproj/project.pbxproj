@@ -106,6 +106,7 @@
 		B194B3A12800337B000F056E /* LeaderboardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A02800337B000F056E /* LeaderboardList.swift */; };
 		B194B3A3280040FD000F056E /* SingleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A2280040FD000F056E /* SingleProfile.swift */; };
 		B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194B3A928007C50000F056E /* ProfileBackground.swift */; };
+		B19C282F281E9B5F00B864B1 /* coin.json in Resources */ = {isa = PBXBuildFile; fileRef = B19C282E281E9B5E00B864B1 /* coin.json */; };
 		B1A867AC28118D0F001B38F1 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AB28118D0F001B38F1 /* UserViewModel.swift */; };
 		B1A867B028118E31001B38F1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867AF28118E31001B38F1 /* ImagePicker.swift */; };
 		B1A867B428118F60001B38F1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A867B328118F60001B38F1 /* FirebaseManager.swift */; };
@@ -232,6 +233,7 @@
 		B194B3A02800337B000F056E /* LeaderboardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardList.swift; sourceTree = "<group>"; };
 		B194B3A2280040FD000F056E /* SingleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProfile.swift; sourceTree = "<group>"; };
 		B194B3A928007C50000F056E /* ProfileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBackground.swift; sourceTree = "<group>"; };
+		B19C282E281E9B5E00B864B1 /* coin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coin.json; sourceTree = "<group>"; };
 		B1A867AB28118D0F001B38F1 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		B1A867AF28118E31001B38F1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B1A867B328118F60001B38F1 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 		B122CECE281C84D100A45F60 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				B19C282E281E9B5E00B864B1 /* coin.json */,
 				B122CED7281C9FC900A45F60 /* arrows.json */,
 				B122CED1281C853200A45F60 /* LottieView.swift */,
 			);
@@ -627,6 +630,7 @@
 				065FEC862811832F00237AFB /* JetBrainsMono-Medium.ttf in Resources */,
 				B1229938281D721B002407C4 /* landing.png in Resources */,
 				B1229940281D7651002407C4 /* map.png in Resources */,
+				B19C282F281E9B5F00B864B1 /* coin.json in Resources */,
 				B122993B281D763F002407C4 /* twister.png in Resources */,
 				B167D32527FAE4CF00BF950E /* Preview Assets.xcassets in Resources */,
 				B167D32227FAE4CF00BF950E /* Assets.xcassets in Resources */,

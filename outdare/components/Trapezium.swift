@@ -1,9 +1,7 @@
-//
 //  Trapezium.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 5.4.2022.
-//
+//  Description: Trapezium background for leaderboard
 
 import SwiftUI
 

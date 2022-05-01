@@ -1,12 +1,9 @@
-//
 //  ChangeInformation.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 26.4.2022.
-//
+//  Description: View to edit profile username and location
 
 import SwiftUI
-
 
 struct ChangeInformation: View {
     @StateObject private var vm = UserViewModel()
@@ -24,12 +21,12 @@ struct ChangeInformation: View {
                 .frame(width: 120, height: 5)
                 .padding()
                 .foregroundColor(Color.theme.button)
-                
+            
             VStack(alignment: .center) {
                 Text("Change information")
                     .font(Font.customFont.largeText)
                     .padding(.top, 60)
-            
+                
                 Section(header: Text("Username")) {
                     TextField("Username", text: $username)
                     Text("Location")
@@ -38,28 +35,29 @@ struct ChangeInformation: View {
                 .autocapitalization(.none)
                 .padding(.vertical, 5)
                 
+                // Field validation
                 Section {
                     if showValidationMessage {
                         Text(message ?? "")
                             .foregroundColor(Color.theme.difficultyHard)
                             .padding(.vertical, 10)
                     }
-                Button {
-                    if let validationError = validInformation(location: location, username: username) {
-                        showValidationMessage = true
-                        message = validationError
-                        return
+                    Button {
+                        if let validationError = validInformation(location: location, username: username) {
+                            showValidationMessage = true
+                            message = validationError
+                            return
+                        }
+                        updateUserDetails()
+                    } label: {
+                        Text("UPDATE")
                     }
-                    updateUserDetails()
-                } label: {
-                    Text("UPDATE")
+                    .padding()
+                    .background(Color.theme.button)
+                    .foregroundColor(Color.theme.textLight)
+                    .cornerRadius(20)
                 }
-                .padding()
-                .background(Color.theme.button)
-                .foregroundColor(Color.theme.textLight)
-                .cornerRadius(20)
             }
-        }
             .foregroundColor(Color.theme.textDark)
             .font(Font.customFont.normalText)
             .padding(.horizontal, 40)
@@ -68,7 +66,7 @@ struct ChangeInformation: View {
         .ignoresSafeArea(edges: .bottom)
     }
     
-    // Update user details to collection
+    // Update username and locaton to users collection
     func updateUserDetails() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         let userData = ["username": username, "location": location]

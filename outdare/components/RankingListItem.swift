@@ -1,13 +1,12 @@
-//
 //  CardView.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 5.4.2022.
-//
+//  Description: Single user on the leaderboard ranking list
+
+
 import SwiftUI
 import SDWebImageSwiftUI
 
-// List item for leadearboard ranking list
 struct RankingListItem: View {
     let item: RankingItem
     

@@ -1,15 +1,14 @@
-//
 //  AchievementItem.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 26.4.2022.
-//
+//  Description: Return achievement item
 
 import SwiftUI
 
 struct AchievementItem: View {
     let achievements: Achievement
     
+    // Choosing correct icon image according to string value from firebase
     func getCategoryIcon() -> Image {
         switch achievements.category {
         case "quiz":
@@ -24,7 +23,7 @@ struct AchievementItem: View {
             return Image("crown")
         }
     }
-
+    
     
     var body: some View {
         HStack {
