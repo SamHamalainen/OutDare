@@ -3,7 +3,7 @@
 //  outdare
 //
 //  Created by iosdev on 6.4.2022.
-//
+//  Description: ChallengeDAO handles fetches from database concerning the challenges.
 
 import Foundation
 import Firebase
@@ -19,30 +19,29 @@ class ChallengeDAO: ObservableObject {
     @Published var lyrics: Lyrics? = nil
     @Published var twister: Twister? = nil
     @Published var annotations: [MKPointAnnotation] = []
-    @Published var oldAnnotations: [MKPointAnnotation] = []
     @Published var challengeAdded = false
     
+    // Convert challenge into a MKPointAnnotation and add it to array of annotations so the MapView can show them on the map
     func challengeToAnnotation(challenges: [Challenge]) {
-//        print("dao count: \(challenges.count)")
         challenges.forEach { challenge in
             let annotation = MKPointAnnotation()
             annotation.coordinate = challenge.coordinates
             annotation.title = "\(challenge.name)"
             annotation.subtitle = challenge.icon
             annotations.append(annotation)
-            print("annotationCount \(annotations.count)")
         }
-
     }
     
+    // Updating the color of the annotation based on the distance from the users location
+    // Color when distance is maximum 150 meters
+    // Gray when distance is more than 150 meters
     func updateAnnotationsBasedOnDistance(userLoc: CLLocationCoordinate2D, annotationsArray: [MKPointAnnotation]) -> [MKPointAnnotation] {
-//        oldAnnotations = annotations
-//        print("annotationUpdate \(annotationsArray)")
         let newAnnotations: [MKPointAnnotation] = annotationsArray.map { annotation in
             let isInRadius = userLoc.distance(to: annotation.coordinate) <= 150
             let wasGray = annotation.subtitle!.contains("-gray")
             var subtitle = ""
             
+            // if originally gray bring back color when inRadius again
             if wasGray {
                 if isInRadius {
                     subtitle = annotation.subtitle!.components(separatedBy: "-gray")[0]
@@ -50,15 +49,13 @@ class ChallengeDAO: ObservableObject {
                     subtitle = annotation.subtitle!
                 }
             } else {
+                // otherwise turn them back to gray
                 if isInRadius {
                     subtitle = annotation.subtitle!
                 } else {
                     subtitle = annotation.subtitle! + "-gray"
                 }
             }
-            
-            
-            
             let newAnnotation = MKPointAnnotation()
             newAnnotation.coordinate = annotation.coordinate
             newAnnotation.title = annotation.title
@@ -68,6 +65,7 @@ class ChallengeDAO: ObservableObject {
         return newAnnotations
     }
     
+    // Convert data from the database into a Challenge struct
     func convertToChallenge(data: [String:Any]) -> Challenge {
         let id = data["id"] as? Int ?? 0
         let challengeId = data["challengeId"] as? Int ?? 0
@@ -83,6 +81,7 @@ class ChallengeDAO: ObservableObject {
         return Challenge(id: id, challengeId: challengeId, name: name, difficulty: difficultyEnum, category: categoryEnum, description: description, coordinates: coordinates)
     }
     
+    // Convert data from the database into Lyrics struct for the "Finish the lyrics" - challenge
     func convertToLyrics (data: [String:Any]) -> Lyrics {
         let id = data["id"] as? Int ?? 0
         let timeLimit = data["timeLimit"] as? Int ?? 0
@@ -102,6 +101,7 @@ class ChallengeDAO: ObservableObject {
         return Lyrics(id: id, difficulty: difficultyEnum, data: lyricsData)
     }
     
+    // Convert data from the database into Quiz struct for the "Quiz" - challenge
     func convertToQuiz(data: [String:Any]) -> Quiz {
         let id = data["id"] as? Int ?? 0
         let timePerQ = data["timePerQ"] as? Double ?? 0
@@ -119,6 +119,7 @@ class ChallengeDAO: ObservableObject {
         return Quiz(id: id, timePerQuestion: timePerQ, data: quizData, difficulty: difficultyEnum)
     }
     
+    // Convert data from the database into Twister struct for the "Tongue Twister" - challenge
     func convertToTwister(data: [String:Any]) -> Twister {
         let id = data["id"] as? Int ?? 0
         let texts = data["texts"] as? [String] ?? []
@@ -133,6 +134,9 @@ class ChallengeDAO: ObservableObject {
         return Twister(id: id, difficulty: difficultyEnum, data: twisterData)
     }
     
+    // Get all the challenges from the database and convert them into annotations.
+    // SnapshotListener is listening when new challenges are created.
+    // It will automatically get all challenges and update annotations.
     func getChallenges() {
         db.collection("challenges").addSnapshotListener() { [self] (querySnapshot, err) in
             if let err = err {
@@ -150,6 +154,7 @@ class ChallengeDAO: ObservableObject {
         }
     }
     
+    // Get a certain challenge from the database
     func getChallenge(id: Int) {
         let challengeRef = db.collection("challenges")
         let query = challengeRef.whereField("id", isEqualTo: id)
@@ -176,6 +181,7 @@ class ChallengeDAO: ObservableObject {
         }
     }
     
+    // Get quiz details from the database with an id and convert it to a Quiz struct
     func getQuiz(id: Int) {
         let quizRef = db.collection("quizzes")
         let query = quizRef.whereField("id", isEqualTo: id)
@@ -189,7 +195,7 @@ class ChallengeDAO: ObservableObject {
             }
         }
     }
-    
+    // Get lyrics details from the database with an id and convert it to a Lyrics struct
     func getLyrics(id: Int) {
         let quizRef = db.collection("lyrics")
         let query = quizRef.whereField("id", isEqualTo: id)
@@ -204,6 +210,7 @@ class ChallengeDAO: ObservableObject {
         }
     }
     
+    // Get tongue twister details from the database with an id and convert it to a Twister struct
     func getTwister(id: Int) {
         let quizRef = db.collection("twisters")
         let query = quizRef.whereField("id", isEqualTo: id)
@@ -218,19 +225,22 @@ class ChallengeDAO: ObservableObject {
         }
     }
     
+    // After completing challenges, purchasing coins, walking or revealing challenges
+    // an attempt will be added to the database.
     func addAttempt(attempt: Attempt) {
         let attemptRef = db.collection("attempts")
         var data = attempt.toDB()
         data["data"] = Timestamp()
         attemptRef.addDocument(data: data) { err in
             if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("Document added!")
-                }
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added!")
+            }
         }
     }
     
+    // When using the Quiz Generator to generate a quiz, this function will add it to the database
     func addChallenge(challenge: Challenge) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             fatalError("Cannot get UID")
@@ -270,6 +280,8 @@ class ChallengeDAO: ObservableObject {
         }
     }
     
+    // This function takes in an array of trivia questions and maps them into questions and answers
+    // Then adds the data to the database using addChallenge function
     func addQuiz(triviaQuestions: [TriviaQuestion], title: String, description: String = "", coords: CLLocationCoordinate2D) {
         let quizRef = db.collection("quizzes")
         let query = quizRef.order(by: "id", descending: true).limit(to: 1)

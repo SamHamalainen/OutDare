@@ -3,61 +3,73 @@
 //  outdare
 //
 //  Created by Sam Hämäläinen on 4.4.2022.
-//
+//  Description: View for showing a map with different challenges on it.
 
 import SwiftUI
 import MapKit
 
 struct MapView: View {
     
+    @EnvironmentObject var loginViewModel: AppViewModel
     @ObservedObject private var viewModel = MapViewModel()
     @ObservedObject var dao = ChallengeDAO()
     @ObservedObject private var navigationRoute = NavigationRoute()
     @State private var showingSheet = false
     @State var revealedChallenge = false
-    @EnvironmentObject var loginViewModel: AppViewModel
     
+    // Toggle between follow mode and normal mode
     func setLocationToUser() {
         viewModel.userSelectedTracking.toggle()
     }
     
+    // Change the buttons systemImage based on tracking status
     func updateUserLocationButtonUI() -> String {
         return viewModel.userSelectedTracking ? "location.fill" : "location"
     }
     
+    // Directions sheet toggle
+    func toggleShowingSheet() {
+        showingSheet.toggle()
+    }
+    
     var body: some View {
-        //let span = viewModel.mapRegion.span.latitudeDelta
-        //let isZoomedOut = (span > 0.8) ? true : false
-        
         ZStack(alignment: .top)  {
             if !dao.annotations.isEmpty {
                 MapViewCustom(
                     viewModel: viewModel,
-                    dao: dao, challengeInfoOpened: $viewModel.challengeInfoOpen,
+                    dao: dao,
+                    challengeInfoOpened: $viewModel.challengeInfoOpen,
                     navigationRoute: navigationRoute,
-                    annotations: dao.annotations,
-                    oldAnnotations: dao.oldAnnotations
+                    annotations: dao.annotations
                 )
                 .ignoresSafeArea(edges: .bottom)
-                Button(action: setLocationToUser) {
-                    Image(systemName: updateUserLocationButtonUI())
-                        .frame(width: 35, height: 35)
-                        .background(.black)
-                        .foregroundColor(.white)
-                        .opacity(0.8)
-                        .cornerRadius(10)
+                VStack {
+                    Button(action: setLocationToUser) {
+                        Image(systemName: updateUserLocationButtonUI())
+                            .frame(width: 35, height: 35)
+                            .background(.black)
+                            .foregroundColor(.white)
+                            .opacity(0.8)
+                            .cornerRadius(10)
+                    }
+                    if !navigationRoute.directionsArray.isEmpty {
+                            Button(action: toggleShowingSheet) {
+                                Image(systemName: "arrow.triangle.turn.up.right.diamond")
+                                    .frame(width: 35, height: 35)
+                                    .background(.black)
+                                    .foregroundColor(.white)
+                                    .opacity(0.8)
+                                    .cornerRadius(10)
+                        }
+                    }
                 }
                 .offset(x: UIScreen.main.bounds.width * 0.42, y: 25)
-//                let formatted = String(format: "Distance: %.1f meters", viewModel.distanceTravelled)
-//                Text("\(formatted)")
-//                    .padding(.top, 150)
-                
-                
+                if showingSheet {
+                    DirectionsView(navigationRoute: navigationRoute, isOpen: $showingSheet)
+                        .animation(.spring(), value: showingSheet)
+                }
             } else {
-                ProgressView()
-                    .progressViewStyle(.circular)
-                    .ignoresSafeArea(edges: .bottom)
-                    .scaleEffect(x: 2, y: 2, anchor: .center)
+                LottieView(lottieFile: "globeLoading", lottieLoopMode: .loop)
             }
             if viewModel.challengeInfoOpen && viewModel.selection != nil {
                 Rectangle()
@@ -74,16 +86,6 @@ struct MapView: View {
                               navigationRoute: navigationRoute
                 )
             }
-            Button("Directions info") {
-                showingSheet.toggle()
-            }.background(.white).frame(height: 50)
-            if showingSheet {
-                DirectionsView(navigationRoute: navigationRoute, isOpen: $showingSheet)
-            }
-            
-        }
-        .onChange(of: dao.challenges) {
-            print("dao challenges: \($0.count)")
         }
         .onAppear {
             dao.getChallenges()

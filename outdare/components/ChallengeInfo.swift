@@ -3,7 +3,7 @@
 //  outdare
 //
 //  Created by Sam Hämäläinen on 14.4.2022.
-//
+//  Description: When user selects a challenge on the map this info component will be displayed
 
 import SwiftUI
 import MapKit
@@ -12,6 +12,9 @@ import MapKit
 
 struct ChallengeInfo: View {
     
+    @EnvironmentObject var userVM: AppViewModel
+    
+    // Drag Gesture or animation related
     @State private var challengeInfoHeight: CGFloat = 350.0
     @State private var challengeInfoExpanded = false
     @State private var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.5
@@ -19,17 +22,20 @@ struct ChallengeInfo: View {
     @State private var endingOffsetY: CGFloat = 0
     @State private var buttonOffsetY: CGFloat = 175
     @State private var buttonEndOffsetY: CGFloat = 0
-    @State private var challengeStarted = false
-    @State private var showingAlert = false
-    @Binding var revealedChallenge: Bool
     
+    // Challenge related
+    @Binding var revealedChallenge: Bool
     @Binding var locationPassed: Challenge?
     @Binding var challengeInfoOpened: Bool
+    @State private var challengeStarted = false
+    @State private var showingAlert = false
+    
+    // Map Navigation
     @Binding var userLocation: CLLocationCoordinate2D?
     @ObservedObject var navigationRoute: NavigationRoute
     
-    @EnvironmentObject var userVM: AppViewModel
     
+    // Switch text color based on challenge difficulty
     func getDifficultyColor() -> Color {
         switch locationPassed!.difficulty {
         case .hard:
@@ -41,7 +47,7 @@ struct ChallengeInfo: View {
         }
     }
     
-    
+    // When user presses start button it will expand the component to almost full screen
     func expandChallengeInfo() {
         withAnimation(.spring()) {
             challengeInfoHeight = UIScreen.main.bounds.height * 0.85
@@ -51,25 +57,31 @@ struct ChallengeInfo: View {
         }
     }
     
+    // Toggle challenge started
     func updateUI() {
         challengeStarted.toggle()
     }
     
+    // Add directions to the beginning of directionsArray and update map polyline
     private func addToRouteFirst() {
         guard let source = userLocation else { return }
         guard let destination = locationPassed else { return }
         navigationRoute.addDirections(from: source, to: destination, option: .makeFirst)
     }
+    
+    // Add directions to the end of directionsArray and update map polyline
     private func addToRouteLast() {
         guard let source = navigationRoute.directionsArray.last?.destination.coordinates else { return }
         navigationRoute.addDirections(from: source, to: locationPassed!, option: .makeLast)
     }
     
+    // Show alert when revealing challenge outside radius
     func showAlert() {
         showingAlert = true
         userVM.userDao.getLoggedInUserScore()
     }
     
+    // When confirming reveal challenge alert, your score will be reduced by 25
     func revealChallenge() {
         revealedChallenge = true
         userVM.userDao.updateUsersScore(newScore: -25)
@@ -112,14 +124,14 @@ struct ChallengeInfo: View {
                     }
                     VStack {
                         Button(action: {showAlert()}) {
-                                Text("Reveal Challenge")
-                                    .font(Font.customFont.btnText)
-                                    .fontWeight(.semibold)
-                                    .frame(width: 200)
-                                    .padding(.vertical, 10)
-                                    .background(Color("Button"))
-                                    .foregroundColor(.white)
-                                    .cornerRadius(70)
+                            Text("Reveal Challenge")
+                                .font(Font.customFont.btnText)
+                                .fontWeight(.semibold)
+                                .frame(width: 200)
+                                .padding(.vertical, 10)
+                                .background(Color("Button"))
+                                .foregroundColor(.white)
+                                .cornerRadius(70)
                         }
                         .offset(y: buttonOffsetY)
                         .offset(y: buttonEndOffsetY)
@@ -222,29 +234,29 @@ struct ChallengeInfo: View {
                 .offset(y: currentDragOffsetY)
                 .offset(y: endingOffsetY)
                 .gesture(
-                     !challengeStarted ?
-                        DragGesture()
-                            .onChanged { value in
-                                withAnimation(.spring()) {
-                                    currentDragOffsetY = value.translation.height
-                                    challengeInfoHeight = UIScreen.main.bounds.height * 0.85
-                                }
+                    !challengeStarted ?
+                    DragGesture()
+                        .onChanged { value in
+                            withAnimation(.spring()) {
+                                currentDragOffsetY = value.translation.height
+                                challengeInfoHeight = UIScreen.main.bounds.height * 0.85
                             }
-                            .onEnded { value in
-                                withAnimation(.spring()) {
-                                    if currentDragOffsetY < -150 {
-                                        endingOffsetY = -startingOffsetY + 15
-                                        buttonEndOffsetY = 400
-                                        challengeInfoExpanded = true
-                                    } else if endingOffsetY != 0 && currentDragOffsetY > 150 {
-                                        endingOffsetY = 0
-                                        buttonEndOffsetY = 0
-                                        challengeInfoExpanded = false
-                                    }
-                                    currentDragOffsetY = 0
+                        }
+                        .onEnded { value in
+                            withAnimation(.spring()) {
+                                if currentDragOffsetY < -150 {
+                                    endingOffsetY = -startingOffsetY + 15
+                                    buttonEndOffsetY = 400
+                                    challengeInfoExpanded = true
+                                } else if endingOffsetY != 0 && currentDragOffsetY > 150 {
+                                    endingOffsetY = 0
+                                    buttonEndOffsetY = 0
+                                    challengeInfoExpanded = false
                                 }
+                                currentDragOffsetY = 0
                             }
-                     :
+                        }
+                    :
                         nil
                 )
             }

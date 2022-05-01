@@ -3,13 +3,12 @@
 //  outdare
 //
 //  Created by Sam Hämäläinen on 14.4.2022.
-//
+//  Description: MapViewCustom is a custom made map to show custom user icon and custom annotations
 
 import SwiftUI
 import MapKit
 
 // MARK: MapViewCustom
-
 
 struct MapViewCustom: UIViewRepresentable {
     @ObservedObject var viewModel: MapViewModel
@@ -17,13 +16,13 @@ struct MapViewCustom: UIViewRepresentable {
     @Binding public var challengeInfoOpened: Bool
     @ObservedObject var navigationRoute: NavigationRoute
     let annotations: [MKAnnotation]
-    let oldAnnotations: [MKAnnotation]
     
+    // Create a coordinator for mapView
     func makeCoordinator() -> Coordinator {
         Coordinator(self, vm: viewModel, dao: dao, nr: navigationRoute)
     }
     
-    
+    // When MapViewCustom is initialized this function will create the initial map UI
     func makeUIView(context: Context) -> MKMapView {
         viewModel.checkIfLocationServicesIsEnabled()
         viewModel.checkSRPermission()
@@ -42,38 +41,17 @@ struct MapViewCustom: UIViewRepresentable {
         return mapView
     }
     
+    // Update UI when map is moved, changed or otherwise needed to be modified
     func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapViewCustom>) {
         if viewModel.userSelectedTracking {
             mapView.userTrackingMode = .follow
         } else {
             mapView.userTrackingMode = .none
         }
-        if viewModel.challengeInfoOpen == false {
-            for annotation in annotations {
-                mapView.deselectAnnotation(annotation, animated: false)
-            }
+        // Deselect selection
+        if viewModel.selectedAnnotation != nil && viewModel.challengeInfoOpen == false {
+            mapView.deselectAnnotation(viewModel.selectedAnnotation, animated: false)
         }
-    }
-}
-
-extension UIImage {
-    var mono: UIImage? {
-        let context = CIContext(options: nil)
-        guard let currentFilter = CIFilter(name: "CIPhotoEffectMono") else { return nil }
-        currentFilter.setValue(CIImage(image: self), forKey: kCIInputImageKey)
-        if let output = currentFilter.outputImage,
-            let cgImage = context.createCGImage(output, from: output.extent) {
-            return UIImage(cgImage: cgImage, scale: scale, orientation: imageOrientation)
-        }
-        return nil
-    }
-}
-
-extension Array where Element: Hashable {
-    func difference(from other: [Element]) -> [Element] {
-        let thisSet = Set(self)
-        let otherSet = Set(other)
-        return Array(thisSet.symmetricDifference(otherSet))
     }
 }
 
@@ -85,6 +63,7 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
     @ObservedObject var navigationRoute: NavigationRoute
     @Published var selection: Challenge?
     var parent: MapViewCustom
+    
     init(_ parent: MapViewCustom, vm: MapViewModel, dao: ChallengeDAO, nr: NavigationRoute){
         self.parent = parent
         self.viewModel = vm
@@ -92,6 +71,7 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
         self.navigationRoute = nr
     }
     
+    // Function that creates renderers for the MKCircle and MKPolyline and displays them on the map
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: circle)
@@ -107,6 +87,10 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
         }
         return MKOverlayRenderer()
     }
+    
+    // Function that tells the map how annotations should look like
+    // Chuck the Chick as user location pin
+    // Challenge annotation is displayed as the given icon in annotation.subtitle
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             let pin = mapView.view(for: annotation) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
@@ -114,35 +98,27 @@ class Coordinator: NSObject, ObservableObject, MKMapViewDelegate, CLLocationMana
             pin.frame.size = CGSize(width: 30, height: 60)
             return pin
         } else if annotation is MKPointAnnotation {
-            if let userLocation = viewModel.userLocation {
-                if annotation.coordinate.distance(to: userLocation) <= 150 {
-                    let annotation2 = mapView.view(for: annotation) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-                    annotation2.image = UIImage(named: (annotation.subtitle!!))
-                    annotation2.frame.size = CGSize(width: 30, height: 30)
-                    return annotation2
-                } else {
-                    let annotation3 = mapView.view(for: annotation) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-                    annotation3.image = UIImage(named: (annotation.subtitle!!))?.mono
-                    annotation3.frame.size = CGSize(width: 30, height: 30)
-                    return annotation3
-                }
-            }
+            let annotation2 = mapView.view(for: annotation) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+            annotation2.image = UIImage(named: annotation.subtitle!!)
+            annotation2.frame.size = CGSize(width: 30, height: 30)
+            return annotation2
         }
         return nil
     }
+    
+    // When the user taps on an annotation, this function will tell the viewModel which one was selected
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotationTitle = view.annotation?.title {
-            print("opened before: \(viewModel.challengeInfoOpen)")
             viewModel.challengeInfoOpen = true
-            print("opened after: \(viewModel.challengeInfoOpen)")
-            print("selection before: \(String(describing: viewModel.selection))")
             selection = dao.challenges.first(where:{ $0.name == annotationTitle && $0.coordinates == view.annotation!.coordinate})
             viewModel.selection = self.selection
-            print("selection after: \(String(describing: viewModel.selection))")
+            viewModel.selectedAnnotation = view.annotation
             mapView.setRegion(MKCoordinateRegion(center: view.annotation!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)), animated: true)
             
         }
     }
+    
+    // When users location changes on the map, this function is called to update the navigation route
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         navigationRoute.updateDirections(userLocation: userLocation.coordinate)
     }

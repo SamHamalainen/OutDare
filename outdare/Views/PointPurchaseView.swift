@@ -3,10 +3,11 @@
 //  outdare
 //
 //  Created by Sam Hämäläinen on 26.4.2022.
-//
+//  Description: View for purchasing more points.
 
 import SwiftUI
 
+// Selected item for purchase
 struct PointOrdered: Identifiable {
     var id: String { name }
     let name: String
@@ -30,7 +31,7 @@ struct PointPurchaseView: View {
                 VStack (alignment: .center, spacing: 1) {
                     Text("Point Store")
                         .font(Font.customFont.countdown)
-                    .foregroundColor(.white)
+                        .foregroundColor(.white)
                     Rectangle()
                         .fill(.white)
                         .frame(width: UIScreen.main.bounds.width * 0.9, height: 2)
@@ -61,38 +62,39 @@ struct PointPurchaseView: View {
                 }
             }
             .allowsHitTesting(!popUpVisible)
+            
+            // When selected item, view it with correct details
             if popUpVisible {
-            ZStack {
-                ZStack (alignment: .top) {
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(Color("Background"))
-                    VStack {
-                        Text("Points added!")
-                            .font(Font.customFont.extraLargeText)
-                            .foregroundColor(.white)
-                            .padding(.top, 15)
-                        Rectangle()
-                            .fill(.white)
-                            .frame(width: UIScreen.main.bounds.width * 0.7, height: 2)
-                        Text("\(pointsPopUp) points has been added to your account.")
-                            .frame(width: UIScreen.main.bounds.width * 0.8, height: 100)
-                            .foregroundColor(.white)
-                        Button(action: closePopUp) {
-                            Text("OK")
-                                .frame(width: 100, height: 30)
-                                .background(Color("Button"))
-                                .cornerRadius(25)
+                ZStack {
+                    ZStack (alignment: .top) {
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color("Background"))
+                        VStack {
+                            Text("Points added!")
+                                .font(Font.customFont.extraLargeText)
                                 .foregroundColor(.white)
+                                .padding(.top, 15)
+                            Rectangle()
+                                .fill(.white)
+                                .frame(width: UIScreen.main.bounds.width * 0.7, height: 2)
+                            Text("\(pointsPopUp) points has been added to your account.")
+                                .frame(width: UIScreen.main.bounds.width * 0.8, height: 100)
+                                .foregroundColor(.white)
+                            Button(action: closePopUp) {
+                                Text("OK")
+                                    .frame(width: 100, height: 30)
+                                    .background(Color("Button"))
+                                    .cornerRadius(25)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.bottom, 15)
                         }
-                        .padding(.bottom, 15)
                     }
-                    
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(.black, lineWidth: 3)
                 }
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(.black, lineWidth: 3)
+                .frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
             }
-            .frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
-        }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color("Background"))

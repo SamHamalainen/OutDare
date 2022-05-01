@@ -3,7 +3,7 @@
 //  outdare
 //
 //  Created by Sam Hämäläinen on 20.4.2022.
-//
+//  Description: UserDao handles fetches from database concerning the user.
 
 import Foundation
 import Firebase
@@ -19,7 +19,9 @@ class UserDAO: ObservableObject {
     @Published var loggedUserScore: Int?
     
     // Logged in user
-//    @Published var currentUser: CurrentUser?
+    //    @Published var currentUser: CurrentUser?
+    
+    // Converting data from the database to CurrentUser Object
     func convertToUser(data: [String:Any]) -> CurrentUser {
         let id = data["userId"] as? String ?? ""
         let username = data["username"] as? String ?? "no username"
@@ -31,7 +33,7 @@ class UserDAO: ObservableObject {
         return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: score)
     }
     
-    // Fetching current user achievements
+    // Calculating users score by summing up all the scores in the attempts collection
     func getLoggedInUserScore() {
         // Storing current user to uid
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
@@ -46,17 +48,16 @@ class UserDAO: ObservableObject {
                 print("Error getting achievements: \(err)")
             }
             var scores: [Int] = []
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    let score = data["score"] as? Int ?? 0
-                    print("scoreInLogged: \(score)")
-                    scores.append(score)
-                }
-            self.loggedUserScore = scores.reduce(0, +)
-            print("score: \(self.loggedUserScore!)")
+            for document in querySnapshot!.documents {
+                let data = document.data()
+                let score = data["score"] as? Int ?? 0
+                scores.append(score)
             }
+            self.loggedUserScore = scores.reduce(0, +)
         }
+    }
     
+    // Add an attempt to the database
     func addAttempt(attempt: Attempt) {
         if var score = self.loggedUserScore {
             score += attempt.score
@@ -66,13 +67,14 @@ class UserDAO: ObservableObject {
         data["data"] = Timestamp()
         attemptRef.addDocument(data: data) { err in
             if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("Document added!")
-                }
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added!")
+            }
         }
     }
     
+    // Update users score by adding it as an attempt
     func updateUsersScore(newScore: Int) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Can not get firebase uid"
@@ -82,6 +84,7 @@ class UserDAO: ObservableObject {
         addAttempt(attempt: attempt)
     }
     
+    // Update users score by adding an attempt if first time, otherwise update the score of that attempt
     func updateWalkingScore() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Can not get firebase uid"
@@ -107,8 +110,6 @@ class UserDAO: ObservableObject {
                     ])
                 }
             }
-            
-            
         }
     }
 }
