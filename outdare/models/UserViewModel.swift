@@ -132,7 +132,7 @@ class UserViewModel: ObservableObject {
                 
                 usersWithScores.append(CurrentUser(id: user.id, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore))
                 
-                self.usersSorted = usersWithScores.sorted(by: { $0.score < $1.score })
+                self.usersSorted = usersWithScores.sorted(by: { $0.score > $1.score })
                 let rankings = getUserRanking(users: usersSorted).sorted(by: {$0.rank <= $1.rank})
                 self.rankingSorted = rankings
         }
@@ -192,7 +192,9 @@ class UserViewModel: ObservableObject {
             let filtered = achievements.filter {
                 $0.id != -1
             }
-            self.achievements = filtered
+            
+            let sorted = filtered.sorted(by: {$0.date > $1.date})
+            self.achievements = sorted
             getCategories()
             }
         }
@@ -211,7 +213,6 @@ class UserViewModel: ObservableObject {
                 let category = self.convertToCategory(data: data)
                 
                 achievementsWithCategory.append(Achievement(id: item.id, score: item.score, time: item.time, userId: item.userId, date: item.date, speedBonus: item.speedBonus, category: category.name))
-                print(self.achievementsWithCategory)
             }
         }
     }
