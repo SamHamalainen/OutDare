@@ -203,6 +203,8 @@
 		06BC5E57281EC55F00E31A4D /* leaderboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leaderboard.png; sourceTree = "<group>"; };
 		06BC5E58281EC55F00E31A4D /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		06BC5E59281EC55F00E31A4D /* routes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = routes.png; sourceTree = "<group>"; };
+		06BC5E62281ED75900E31A4D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		06BC5E63281ED7D500E31A4D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A2BD871281D75430059F619 /* navigationRouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = navigationRouteTests.swift; sourceTree = "<group>"; };
 		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestRoute.gpx; sourceTree = "<group>"; };
@@ -840,6 +842,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6A825B74281E9F0B004A40A2 /* fi */,
+				06BC5E63281ED7D500E31A4D /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -848,6 +851,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6A825B77281E9F0B004A40A2 /* fi */,
+				06BC5E62281ED75900E31A4D /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -985,6 +989,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "OutDare will use your microphone to pick up your answers in voice challenges";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "OutDare uses Speech Recognition to make challenges more interactive. Without it, you won't be able to participate in all challenges.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1020,6 +1026,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = outdare/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show it on the map.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "OutDare will use your microphone to pick up your answers in voice challenges";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "OutDare uses Speech Recognition to make challenges more interactive. Without it, you won't be able to participate in all challenges.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
