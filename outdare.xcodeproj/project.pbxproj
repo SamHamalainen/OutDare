@@ -72,7 +72,6 @@
 		6AF5294E2811AD74005189F3 /* TwisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5294D2811AD74005189F3 /* TwisterView.swift */; };
 		6AF529522811AF80005189F3 /* Twister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF529512811AF80005189F3 /* Twister.swift */; };
 		6AF529542811AF8F005189F3 /* TwisterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF529532811AF8F005189F3 /* TwisterData.swift */; };
-		6AF529572811B040005189F3 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF529562811B040005189F3 /* WrappingStack */; };
 		6AF5295B2813037B005189F3 /* StringGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5295A2813037B005189F3 /* StringGame.swift */; };
 		6AF5295D28130663005189F3 /* StringGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5295C28130663005189F3 /* StringGameView.swift */; };
 		6AF5295F2814779C005189F3 /* ResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5295E2814779C005189F3 /* ResultItem.swift */; };
@@ -244,7 +243,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AF529572811B040005189F3 /* WrappingStack in Frameworks */,
 				6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */,
 				062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */,
 				062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */,
@@ -524,7 +522,6 @@
 				062FE88927FEFC2B00F2D0F7 /* FirebaseFirestore */,
 				062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */,
 				6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */,
-				6AF529562811B040005189F3 /* WrappingStack */,
 				B122CECC281C84A500A45F60 /* Lottie */,
 			);
 			productName = outdare;
@@ -601,7 +598,6 @@
 			packageReferences = (
 				062FE88627FEFC2B00F2D0F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */,
 				B122CECB281C84A400A45F60 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = B167D31B27FAE4CE00BF950E /* Products */;
@@ -1088,14 +1084,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/diniska/swiftui-wrapping-stack";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		B122CECB281C84A400A45F60 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -1126,11 +1114,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A41A7FB280757450047FF2E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
-		};
-		6AF529562811B040005189F3 /* WrappingStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6AF529552811B040005189F3 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */;
-			productName = WrappingStack;
 		};
 		B122CECC281C84A500A45F60 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
