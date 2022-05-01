@@ -118,10 +118,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             mapView.addAnnotations(annotationsArray1)
             map.removeAnnotations(oldAnnotations)
         }
-//            else {
-//            self.annotationsArray = dao!.updateAnnotationsBasedOnDistance(userLoc: coordinate, annotationsArray: dao!.annotations)
-//            mapView.addAnnotations(annotationsArray!)
-//        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

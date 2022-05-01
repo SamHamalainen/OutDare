@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SideMenuView: View {
     @Binding var isShowing: Bool
-    @Binding var currentTitle: String
+    @Binding var currentTitle: LocalizedStringKey
     @Binding var currentView: AnyView
     @EnvironmentObject var loginViewModel: AppViewModel
     

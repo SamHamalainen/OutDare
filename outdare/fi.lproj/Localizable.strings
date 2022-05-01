@@ -89,10 +89,10 @@
 "Directions info" = "Reittiohjeet";
 
 /* No comment provided by engineer. */
-"Email" = "Email";
+"Email" = "Sähköposti";
 
 /* No comment provided by engineer. */
-"EMAIL" = "EMAIL";
+"EMAIL" = "SÄHKÖPOSTI";
 
 /* No comment provided by engineer. */
 "Exit" = "Poistu";
@@ -164,7 +164,7 @@
 "Please choose a difficulty" = "Valitse vaikeustaso";
 
 /* No comment provided by engineer. */
-"Point Store" = "Piste Kauppa";
+"Point Store" = "Piste kauppa";
 
 /* No comment provided by engineer. */
 "Points added!" = "Pisteet lisätty!";
@@ -259,3 +259,107 @@
 /* No comment provided by engineer. */
 "Your route is currently empty" = "Sinun reittisi on tyhjä";
 
+/* No comment provided by engineer. */
+"Easy" = "Helppo";
+
+/* No comment provided by engineer. */
+"Medium" = "Keskivaikea";
+
+/* No comment provided by engineer. */
+"Hard" = "Vaikea";
+
+/* No comment provided by engineer. */
+"Choose a difficulty" = "Valitse vaikeustaso";
+
+/* No comment provided by engineer. */
+"Choose a category" = "Valitse kategoria";
+
+/* No comment provided by engineer. */
+"Map" = "Kartta";
+
+/* No comment provided by engineer. */
+"Leaderboard" = "Tulostaulukko";
+
+/* No comment provided by engineer. */
+"Profile" = "Profiili";
+
+/* No comment provided by engineer. */
+"Generator" = "Generaattori";
+
+/* No comment provided by engineer. */
+"Store" = "Kauppa";
+
+/* No comment provided by engineer. */
+"General Knowledge" = "Yleistieto";
+
+/* No comment provided by engineer. */
+"Entertainment: Books" = "Viihde: Kirjat";
+
+/* No comment provided by engineer. */
+"Entertainment: Film" = "Viihde: Elokuvat";
+
+/* No comment provided by engineer. */
+"Entertainment: Music" = "Viihde: Musiikki";
+
+/* No comment provided by engineer. */
+"Entertainment: Musicals & Theatres" = "Viihde: Musikaalit ja Teatterit";
+
+/* No comment provided by engineer. */
+"Entertainment: Television" = "Viihde: Televisio";
+
+/* No comment provided by engineer. */
+"Entertainment: Video Games" = "Viihde: Videopelit";
+
+/* No comment provided by engineer. */
+"Entertainment: Board Games" = "Viihde: Lautapelit";
+
+/* No comment provided by engineer. */
+"Science & Nature" = "Tiede ja Luonto";
+
+/* No comment provided by engineer. */
+"Science: Computers" = "Tiede: Tietokoneet";
+
+/* No comment provided by engineer. */
+"Science: Mathematics" = "Tiede: Matematiikka";
+
+/* No comment provided by engineer. */
+"Mythology" = "Mytologia";
+
+/* No comment provided by engineer. */
+"Sports" = "Urheilu";
+
+/* No comment provided by engineer. */
+"Geography" = "Maantiede";
+
+/* No comment provided by engineer. */
+"History" = "Historia";
+
+/* No comment provided by engineer. */
+"Politics" = "Politiikka";
+
+/* No comment provided by engineer. */
+"Art" = "Taide";
+
+/* No comment provided by engineer. */
+"Celebrities" = "Julkkikset";
+
+/* No comment provided by engineer. */
+"Animals" = "Eläimet";
+
+/* No comment provided by engineer. */
+"Vehicles" = "Ajoneuvot";
+
+/* No comment provided by engineer. */
+"Entertainment: Comics" = "Viihde: Sarjakuvat";
+
+/* No comment provided by engineer. */
+"Science: Gadgets" = "Tiede: Härpättimet";
+
+/* No comment provided by engineer. */
+"Entertainment: Japanese Anime & Manga" = "Viihde: Japanilainen Anime ja Manga";
+
+/* No comment provided by engineer. */
+"Entertainment: Cartoon & Animations" = "Viihde: Piirretyt ja Animaatiot";
+
+/* No comment provided by engineer. */
+"%.0f meters" = "%.0f metriä";

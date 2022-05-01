@@ -9,7 +9,7 @@ import SwiftUI
 /// Applications main view
 struct MainView: View {
     @State private var isShowingMenu = false
-    @State private var currentTitle = "Map"
+    @State private var currentTitle = LocalizedStringKey("Map")
     @State private var currentView: AnyView = AnyView(MapView())
     @StateObject private var userDao = UserDAO()
     @EnvironmentObject var vm: AppViewModel

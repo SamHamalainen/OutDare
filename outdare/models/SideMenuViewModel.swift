@@ -13,13 +13,13 @@ enum SideMenuViewModel: Int, CaseIterable {
     case map, leaderboard, profile, quizGenerator, store
     
     // Sets the navigation title
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
-            case .map: return "Map"
-            case .leaderboard: return "Leaderboard"
-            case .profile: return "Profile"
-            case .quizGenerator: return "Generator"
-            case .store: return "Store"
+            case .map: return LocalizedStringKey("Map")
+            case .leaderboard: return LocalizedStringKey("Leaderboard")
+            case .profile: return LocalizedStringKey("Profile")
+            case .quizGenerator: return LocalizedStringKey("Generator")
+            case .store: return LocalizedStringKey("Store")
         }
     }
     
@@ -33,18 +33,5 @@ enum SideMenuViewModel: Int, CaseIterable {
             case .store: return "cart"
         }
     }
-    
-    // Returns the view which in the menu item will lead to
-//    @ViewBuilder
-//    func getView() -> some View {
-//        switch self {
-//            case .map: MapView()
-//            case .leaderboard: Leaderboard()
-//            case .profile: UserProfile()
-//            case .quizGenerator: QuizGeneratorView()
-//            case .store: PointPurchaseView()
-//        }
-//    }
-
 }
 
