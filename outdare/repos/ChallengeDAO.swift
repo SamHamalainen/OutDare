@@ -23,7 +23,7 @@ class ChallengeDAO: ObservableObject {
     @Published var challengeAdded = false
     
     func challengeToAnnotation(challenges: [Challenge]) {
-        print("dao count: \(challenges.count)")
+//        print("dao count: \(challenges.count)")
         challenges.forEach { challenge in
             let annotation = MKPointAnnotation()
             annotation.coordinate = challenge.coordinates
@@ -37,7 +37,7 @@ class ChallengeDAO: ObservableObject {
     
     func updateAnnotationsBasedOnDistance(userLoc: CLLocationCoordinate2D, annotationsArray: [MKPointAnnotation]) -> [MKPointAnnotation] {
 //        oldAnnotations = annotations
-        print("annotationUpdate \(annotationsArray)")
+//        print("annotationUpdate \(annotationsArray)")
         let newAnnotations: [MKPointAnnotation] = annotationsArray.map { annotation in
             let isInRadius = userLoc.distance(to: annotation.coordinate) <= 150
             let wasGray = annotation.subtitle!.contains("-gray")

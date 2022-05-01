@@ -49,11 +49,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     private var locationManager: CLLocationManager?
     
-//    func getUserLocation() {
-//        locationManager = CLLocationManager()
-//        userLocation = locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 61.9241, longitude: 25.75482)
-//    }
-    
     func getUserLocation() {
         locationManager = CLLocationManager()
         if let location = locationManager?.location {
@@ -69,7 +64,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             locationManager = CLLocationManager()
             if let locManager = locationManager {
                 self.userLocation = locManager.location?.coordinate
-                self.mapRegion = MKCoordinateRegion(center: locManager.location!.coordinate, span: MapDetails.defaultSpan)
                 locManager.delegate = self
                 locManager.desiredAccuracy = kCLLocationAccuracyBest
                 locManager.startUpdatingLocation()
