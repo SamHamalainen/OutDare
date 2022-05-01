@@ -1,10 +1,7 @@
-//
 //  Font.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 7.4.2022.
-//
-
+//  Description: Initiating application font family
 import Foundation
 import SwiftUI
 

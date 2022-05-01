@@ -1,37 +1,25 @@
-//
 //  CardView.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 5.4.2022.
-//
+//  Description: Single user on the leaderboard ranking list
+
 import SwiftUI
 import SDWebImageSwiftUI
 
-// List item for leadearboard ranking list
 struct RankingListItem: View {
-    let users: CurrentUser
+    let item: RankingItem
     
     var body: some View {
         HStack {
-            VStack {
-                if users.goneUp == true {
-                    Text("1")
-                Image(systemName: "arrowtriangle.up.fill")
-                    .foregroundColor(Color.theme.rankingUp)
-            } else {
-                Text("1")
-                Image(systemName: "arrowtriangle.down.fill")
-                    .foregroundColor(Color.theme.rankingDown)
-            }
-        }
-            .font(Font.customFont.smallText)
+            Text("\(item.rank).")
+                .font(Font.customFont.normalText)
             
             VStack {
-                if users.profilePicture == "" {
+                if item.user.profilePicture == "" {
                     Image(systemName: "person.crop.circle.fill")
                         .font(.system(size: 55))
                 } else {
-                    WebImage(url: URL(string: users.profilePicture))
+                    WebImage(url: URL(string: item.user.profilePicture))
                         .resizable()
                         .frame(width: 60, height: 60)
                         .clipped()
@@ -41,11 +29,11 @@ struct RankingListItem: View {
             .foregroundColor(Color.theme.textDark)
             .padding(.vertical, 10)
             
-            Text(users.username)
+            Text(item.user.username)
                 .padding(10)
                 .font(Font.customFont.normalText)
             Spacer()
-            Text("\(users.score)")
+            Text("\(item.user.score)")
                 .font(Font.customFont.btnText)
         }
         .padding(2)
@@ -53,9 +41,10 @@ struct RankingListItem: View {
 }
 
 struct RankingListItem_Previews: PreviewProvider {
-    static var users = UserViewModel().users
+    static var defaultData = CurrentUser(id: "", username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0)
+    static var users = UserViewModel().usersSorted
     static var previews: some View {
-        RankingListItem(users: users[0])
-            .previewLayout(.fixed(width: 400, height: 50))
+        RankingListItem(item: RankingItem(1, defaultData))
+            .previewLayout(.sizeThatFits)
     }
 }

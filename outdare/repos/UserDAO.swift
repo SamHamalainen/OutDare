@@ -20,17 +20,15 @@ class UserDAO: ObservableObject {
     
     // Logged in user
 //    @Published var currentUser: CurrentUser?
-    
     func convertToUser(data: [String:Any]) -> CurrentUser {
-        let id = data["userId"] as? Int ?? 0
+        let id = data["userId"] as? String ?? ""
         let username = data["username"] as? String ?? "no username"
         let email = data["email"] as? String ?? "no email"
         let location = data["location"] as? String ?? "Unknown location"
         let score = data["score"] as? Int ?? 0
-        let goneUp = data["goneUp"] as? Bool ?? false
         let profilePicture = data["profilePicture"] as? String ?? "no picture"
         
-        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: score, goneUp: goneUp)
+        return CurrentUser(id: id, username: username, location: location, email: email, profilePicture: profilePicture, score: score)
     }
     
     // Fetching current user achievements

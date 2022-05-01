@@ -1,37 +1,41 @@
-//
 //  TopRanking.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 6.4.2022.
-//
+//  Description: UI View for top ranked profiles on the leaderboard
 import SwiftUI
 
 
 struct TopProfiles: View {
-    @ObservedObject private var vm = UserViewModel()
-    let defaultData = CurrentUser(id: 2, username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0, goneUp: false)
+    @StateObject private var vm = UserViewModel()
+    let defaultData = CurrentUser(id: "", username: "Username", location: "Location not set", email: "email not set", profilePicture: "", score: 0)
+    
     
     var body: some View {
         HStack {
+            if vm.usersSorted.indices.contains(1) {
+                VStack {
+                    Text("2.")
+                    SingleProfile(users: vm.usersSorted[1])
+                }
+                .offset(x: UIScreen.main.bounds.width * 0.05, y: UIScreen.main.bounds.height * 0.07)
+            }
             
-            VStack {
-            Text("2.")
-            SingleProfile(users: vm.secondUser ?? defaultData)
+            if vm.usersSorted.indices.contains(0) {
+                VStack {
+                    Image("crown")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width * 0.2, height: UIScreen.main.bounds.width * 0.15)
+                    SingleProfile(users: vm.usersSorted[0])
+                }
+                .zIndex(4)
             }
-                .offset(x: 20, y: 65)
-            VStack {
-            Image("crown")
-                    .resizable()
-                    .frame(width: 70, height: 50)
-            SingleProfile(users: vm.firstUser ?? defaultData)
+            if vm.usersSorted.indices.contains(2) {
+                VStack {
+                    Text("3.")
+                    SingleProfile(users: vm.usersSorted[2])
+                }
+                .offset(x: -UIScreen.main.bounds.width * 0.05, y: UIScreen.main.bounds.height * 0.07)
             }
-            .zIndex(4)
-            
-            VStack {
-            Text("3.")
-            SingleProfile(users: vm.thirdUser ?? defaultData)
-            }
-                .offset(x: -20, y: 65)
         }
         .foregroundColor(Color.theme.textLight)
         .font(Font.customFont.largeText)
@@ -39,11 +43,10 @@ struct TopProfiles: View {
 }
 
 struct TopProfiles_Previews: PreviewProvider {
-    static var users = UserViewModel().firstUser
+    static var users = UserViewModel()
     static var previews: some View {
         TopProfiles()
             .environmentObject(UserViewModel())
             .previewLayout(.sizeThatFits)
     }
 }
- 

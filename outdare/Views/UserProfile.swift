@@ -1,14 +1,12 @@
-//
 //  Profile.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 8.4.2022.
-//
+//  Description: User profile view
 import SwiftUI
 import Firebase
 
 struct UserProfile: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     @State var settingsOpened = false
     
     var body: some View {
@@ -16,41 +14,33 @@ struct UserProfile: View {
             ProfileBackground()
             
             VStack {
-            UserDetails()
-                    .padding(.top, 30)
-            
-            Button (
-                action: {
-                    withAnimation(.spring()) {
-                        settingsOpened.toggle()
-                    }
-                }, label: {
+                UserDetails()
+                    .padding(.top, UIScreen.main.bounds.height * 0.11)
+                
+                Button (
+                    action: {
+                        withAnimation(.spring()) {
+                            settingsOpened.toggle()
+                        }
+                    }, label: {
                         Image(systemName: "ellipsis").foregroundColor(.black)
-                })
+                    }).sheet(isPresented: $settingsOpened, content: {
+                        SettingsMenu()
+                    })
                     .font(.largeTitle)
                     .rotationEffect(Angle(degrees: 90))
-                    .offset(x: 150, y: -170)
+                    .offset(x: UIScreen.main.bounds.width * 0.4, y: -170)
                 
-                Text("Achievements")
-                    .font(Font.customFont.largeText)
-                    .frame(width: 350, alignment: .leading)
-                    .padding(.top, 60)
-            AchievementList()
-        }
-            
-            if settingsOpened {
-                ZStack(alignment: .bottom) {
-                Rectangle()
-                    .ignoresSafeArea()
-                    .opacity(0.45)
-                    .onTapGesture {
-                        settingsOpened = false
-                    }
-                    SettingsMenu()
-                    }
-                .edgesIgnoringSafeArea(.bottom)
+                
+                VStack {
+                    Text("Achievements")
+                        .font(Font.customFont.largeText)
+                        .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .leading)
+                    AchievementList()
+                }
+                .padding(.top, UIScreen.main.bounds.height * 0.07)
             }
-        }
+        } .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 }
 

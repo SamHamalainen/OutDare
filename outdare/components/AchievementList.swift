@@ -1,15 +1,13 @@
-//
 //  AchievementList.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 26.4.2022.
-//
-
+//  Description: Grid view for showing achievement items
 import SwiftUI
 
 struct AchievementList: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     
+    // Choosing how much space each item takes in a column
     let columns = [
             GridItem(.adaptive(minimum: 80)),
         ]

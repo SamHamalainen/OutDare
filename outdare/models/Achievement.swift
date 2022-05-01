@@ -4,7 +4,6 @@
 //
 //  Created by Jasmin Partanen on 26.4.2022.
 //
-
 import Foundation
 import UIKit
 import SwiftUI

@@ -1,91 +1,70 @@
-//
 //  SettingsMenu.swift
 //  outdare
-//
 //  Created by Jasmin Partanen on 26.4.2022.
-//
-
+//  Description: Showing menu for changeCredentials and changeInformation
 import SwiftUI
 
 struct SettingsMenu: View {
-    @ObservedObject private var vm = UserViewModel()
+    @StateObject private var vm = UserViewModel()
     @State var changeCredentials = false
     @State var changeInformationOpen = false
     
     var body: some View {
         ZStack (alignment: .top) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.theme.background2)
-                .frame(height: 640)
+            Color.theme.background2
+            
+            RoundedRectangle(cornerRadius: 5)
+                .frame(width: 120, height: 5)
+                .padding()
+                .foregroundColor(Color.theme.button)
+            
             VStack(alignment: .leading) {
-            Rectangle()
-                    .frame(width: 100, height: 5)
-                    .padding(.leading, 140)
-                    .padding(.top, 20)
-                    .foregroundColor(Color.theme.button)
-                    
-            Section {
-                Button (
-                    action: {
-                        withAnimation(.spring()) {
-                            changeCredentials.toggle()
-                        }
-                    }, label: {
-                            Text("Change credentials")
+                Section {
+                    Button (
+                        action: {
+                            withAnimation(.spring()) {
+                                changeCredentials = true
+                            }
+                        }, label: {
+                            Text("Credentials")
                             Spacer()
                             Image(systemName: "wallet.pass.fill").foregroundColor(.white)
-                    })
-                .padding(.top, 40)
-                Text("Password and email used for login")
-                    .font(Font.customFont.smallText)
-                    .offset(y: -20)
-                
-                Button (
-                    action: {
-                        withAnimation(.spring()) {
-                            changeInformationOpen.toggle()
-                        }
-                    }, label: {
-                            Text("Change user information")
-                            Spacer()
-                            Image(systemName: "info").foregroundColor(.white)
-                    })
-                Text("Username and location")
-                    .font(Font.customFont.smallText)
-                    .offset(y: -20)
+                        }).sheet(isPresented: $changeCredentials, content: {
+                            
+                            // Passing logged in user email to changeCredentials view as default value
+                            ChangeCredentials(oldEmail: vm.currentUser?.email ?? "")
+                        })
+                        .padding(.top, 60)
+                    Text("Password and email used for login")
+                        .font(Font.customFont.smallText)
+                        .offset(y: -20)
+                    
+                    Section {
+                        Button (
+                            action: {
+                                withAnimation(.spring()) {
+                                    changeInformationOpen.toggle()
+                                }
+                            }, label: {
+                                Text("User information")
+                                Spacer()
+                                Image(systemName: "info").foregroundColor(.white)
+                            }).sheet(isPresented: $changeInformationOpen, content: {
+                                
+                                // Passing logged in username and location to changeInformation view as default value
+                                ChangeInformation(username: vm.currentUser?.username ?? "", location: vm.currentUser?.location ?? "")
+                            })
+                        Text("Username and location")
+                            .font(Font.customFont.smallText)
+                            .offset(y: -20)
+                    }
                 }
-            .font(Font.customFont.largeText)
-            .foregroundColor(Color.theme.textDark)
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
+                .font(Font.customFont.largeText)
+                .foregroundColor(Color.theme.textDark)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
             }
         } .ignoresSafeArea(edges: .bottom)
-        
-        if changeCredentials {
-            ZStack(alignment: .bottom) {
-            Rectangle()
-                .ignoresSafeArea()
-                .opacity(0.45)
-                .onTapGesture {
-                    changeCredentials = false
-                }
-                ChangeCredentials(oldEmail: vm.currentUser?.email ?? "")
-                }
-            .edgesIgnoringSafeArea(.bottom)
-        }
-        
-        if changeInformationOpen {
-            ZStack(alignment: .bottom) {
-            Rectangle()
-                .ignoresSafeArea()
-                .opacity(0.45)
-                .onTapGesture {
-                    changeInformationOpen = false
-                }
-                ChangeInformation(username: vm.currentUser?.username ?? "", location: vm.currentUser?.location ?? "")
-                }
-            .edgesIgnoringSafeArea(.bottom)
-        }
     }
 }
 
