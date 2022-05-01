@@ -41,7 +41,7 @@ class UserViewModel: ObservableObject {
         fetchCurrentUser()
         fetchAllUsers()
     }
-
+    
     // Common function to convert userData from firebase to CurrentUser struct
     func convertToUser(data: [String:Any]) -> CurrentUser {
         let id = data ["userId"] as? String ?? ""
@@ -59,7 +59,7 @@ class UserViewModel: ObservableObject {
         let score = data["score"] as? Int ?? 0
         let time = data["time"] as? Int ?? 0
         let userId = data["userId"] as? Int ?? 0
-        let date = data["date"] as? Date ?? Date()
+        let date = data["data"] as? Date ?? Date()
         let speedBonus = data["speedBonus"] as? Bool ?? false
         return Achievement(id: id, score: score, time: time, userId: userId, date: date, speedBonus: speedBonus, category: "")
     }
@@ -192,7 +192,9 @@ class UserViewModel: ObservableObject {
             let filtered = achievements.filter {
                 $0.id != -1
             }
-            self.achievements = filtered
+            
+            let sorted = filtered.sorted(by: {$0.date > $1.date})
+            self.achievements = sorted
             getCategories()
             }
         }
