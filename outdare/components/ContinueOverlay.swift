@@ -44,7 +44,7 @@ struct ContinueOverlay: View {
         .ignoresSafeArea()
         .transition(.move(edge: .bottom))
         .onAppear {
-            if correct {
+            if correct && !UserDefaults.standard.bool(forKey: "mute") {
                 play(sound: "correct.mp3")
             }
         }

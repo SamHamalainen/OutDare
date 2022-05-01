@@ -86,7 +86,9 @@ struct ChallengeCompleted: View {
             }
             .padding(.horizontal)
             .onAppear {
-                play(sound: "success.mp3")
+                if !UserDefaults.standard.bool(forKey: "mute") {
+                    play(sound: "success.mp3")
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                     withAnimation {
                         showScore = true

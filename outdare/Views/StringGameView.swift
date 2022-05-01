@@ -145,7 +145,9 @@ extension StringGameView {
             let result = game.checkWord(word: input)
             status = result
             if ["Outstanding", "Excellent", "Good"].contains(result) {
-                play(sound: "correct.mp3")
+                if !UserDefaults.standard.bool(forKey: "mute") {
+                    play(sound: "correct.mp3")
+                }
                 speechAnalyzer.stop()
                 input = ""
             }

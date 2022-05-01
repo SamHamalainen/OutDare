@@ -187,7 +187,9 @@ struct CreateQuizForm: View {
             .padding()
         }
         .onChange(of: dao.challengeAdded, perform: { added in
-            play(sound: "correct.mp3")
+            if added && !UserDefaults.standard.bool(forKey: "mute") {
+                play(sound: "correct.mp3")
+            }
             success = added
             adding = false
         })

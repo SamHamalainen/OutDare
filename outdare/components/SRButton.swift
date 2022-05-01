@@ -23,7 +23,9 @@ struct SRButton: View {
         VStack {
             Button(action: {
                 toggleSpeechRecognition()
-                AudioServicesPlaySystemSound(systemSoundID)
+                if !UserDefaults.standard.bool(forKey: "mute") {
+                    AudioServicesPlaySystemSound(systemSoundID)
+                }
             }) {
                     Image(systemName: speechAnalyzer.isProcessing ? "mic.fill" : "mic")
                         .resizable()

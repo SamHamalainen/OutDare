@@ -17,15 +17,21 @@ struct CountdownTimer: View {
             .font(.title)
             .onReceive(countdown) {_ in
                 if timer > 0 {
-                    play(sound: "countdown.wav")
+                    if !UserDefaults.standard.bool(forKey: "mute") {
+                        play(sound: "countdown.wav")
+                    }
                     timer -= 1
                 } else {
-                    play(sound: "start.wav")
+                    if !UserDefaults.standard.bool(forKey: "mute") {
+                        play(sound: "start.wav")
+                    }
                     over = true
                 }
             }
             .onAppear {
-                play(sound: "countdown.wav")
+                if !UserDefaults.standard.bool(forKey: "mute") {
+                    play(sound: "countdown.wav")
+                }
             }
     }
 }

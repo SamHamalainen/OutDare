@@ -12,42 +12,75 @@ struct SideMenuView: View {
     @Binding var isShowing: Bool
     @Binding var currentTitle: LocalizedStringKey
     @EnvironmentObject var loginViewModel: AppViewModel
+    @State var mute = UserDefaults.standard.bool(forKey: "mute")
     
     func signOut() {
+        UserDefaults.standard.removeObject(forKey: "mute")
         loginViewModel.signOut()
+    }
+    
+    func toggleSound() {
+        mute.toggle()
+        UserDefaults.standard.set(mute, forKey: "mute")
     }
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             Color(.white)
-                VStack {
-                    ForEach(SideMenuViewModel.allCases, id: \.self) { item in
-                        
-                        Button(action: {
-                            currentTitle = item.title
-                            isShowing.toggle()
-                        }, label: {SideMenuItem(viewModel: item)})
-                    }
-                    Button(action: signOut) {
+            VStack (spacing: 25) {
+                ForEach(SideMenuViewModel.allCases, id: \.self) { item in
+                    Button(action: {
+                        currentTitle = item.title
+                        isShowing.toggle()
+                    }, label: {SideMenuItem(viewModel: item)})
+                }
+                HStack {
+                    Button(action: toggleSound) {
                         HStack(spacing: 15) {
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                            Image(systemName: "speaker.2")
                                 .frame(width: 25, height: 25)
-                            Text("Logout")
+                            Text("Sound")
                                 .font(.system(size: 15, weight: .semibold))
-                            Spacer()
+                            Toggle("", isOn: !$mute)
+                                .allowsHitTesting(false)
+                                .toggleStyle(SwitchToggleStyle(tint: Color.theme.background))
+                                .scaleEffect(0.7)
                         }
-                        .foregroundColor(Color("DifficultyHard"))
-                        .padding()
+                        .onChange(of: mute) {
+                            UserDefaults.standard.set($0, forKey: "mute")
+                            print(mute, UserDefaults.standard.bool(forKey: "mute"))
+                        }
+                        .foregroundColor(Color.theme.textDark)
                     }
                 }
-            }.frame(width: 200, height: 460).cornerRadius(20).ignoresSafeArea()
-        }
+                
+                Button(action: signOut) {
+                    HStack(spacing: 15) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .frame(width: 25, height: 25)
+                        Text("Logout")
+                            .font(.system(size: 15, weight: .semibold))
+                        Spacer()
+                    }
+                    .foregroundColor(Color("DifficultyHard"))
+                }
+            }
+            .padding()
+        }.frame(width: 200, height: 445).cornerRadius(20).ignoresSafeArea()
     }
+}
 
 
 
-/*struct SideMenuView_Previews: PreviewProvider {
+struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenuView(isShowing: .constant(true), currentView: "Map", _view: .constant(AnyView(MapView())))
+        SideMenuView(isShowing: .constant(true), currentTitle: .constant(LocalizedStringKey("Map")))
     }
-}*/
+}
+
+extension Binding where Value == Bool {
+    static prefix func !(_ lhs: Binding<Bool>) -> Binding<Bool> {
+        return Binding<Bool>(get:{ !lhs.wrappedValue },
+                             set: { lhs.wrappedValue = !$0})
+    }
+}
