@@ -41,7 +41,7 @@ class UserViewModel: ObservableObject {
         fetchCurrentUser()
         fetchAllUsers()
     }
-
+    
     // Common function to convert userData from firebase to CurrentUser struct
     func convertToUser(data: [String:Any]) -> CurrentUser {
         let id = data ["userId"] as? String ?? ""
@@ -59,7 +59,7 @@ class UserViewModel: ObservableObject {
         let score = data["score"] as? Int ?? 0
         let time = data["time"] as? Int ?? 0
         let userId = data["userId"] as? Int ?? 0
-        let date = data["date"] as? Date ?? Date()
+        let date = data["data"] as? Date ?? Date()
         let speedBonus = data["speedBonus"] as? Bool ?? false
         return Achievement(id: id, score: score, time: time, userId: userId, date: date, speedBonus: speedBonus, category: "")
     }
@@ -132,7 +132,7 @@ class UserViewModel: ObservableObject {
                 
                 usersWithScores.append(CurrentUser(id: user.id, username: user.username, location: user.location, email: user.email, profilePicture: user.profilePicture, score: userScore))
                 
-                self.usersSorted = usersWithScores.sorted(by: { $0.score > $1.score })
+                self.usersSorted = usersWithScores.sorted(by: { $0.score < $1.score })
                 let rankings = getUserRanking(users: usersSorted).sorted(by: {$0.rank <= $1.rank})
                 self.rankingSorted = rankings
         }
@@ -211,6 +211,7 @@ class UserViewModel: ObservableObject {
                 let category = self.convertToCategory(data: data)
                 
                 achievementsWithCategory.append(Achievement(id: item.id, score: item.score, time: item.time, userId: item.userId, date: item.date, speedBonus: item.speedBonus, category: category.name))
+                print(self.achievementsWithCategory)
             }
         }
     }

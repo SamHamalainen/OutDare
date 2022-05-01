@@ -17,7 +17,7 @@ struct AchievementItem: View {
         case "twister":
             return Image("tongueTwister")
         case "stringGame":
-            return Image("tongueTwister")
+            return Image("stringGame")
         default:
             return Image("crown")
         }
