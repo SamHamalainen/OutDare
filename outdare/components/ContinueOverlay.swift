@@ -19,7 +19,7 @@ struct ContinueOverlay: View {
         VStack {
             Spacer()
             VStack(spacing: 40) {
-                Text(message)
+                Text(LocalizedStringKey(message))
                     .font(Font.customFont.largeText)
                     .padding(.top, 30)
                     .multilineTextAlignment(.center)

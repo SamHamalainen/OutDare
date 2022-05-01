@@ -91,7 +91,6 @@ class StringGame: ObservableObject {
             } else {
                 randomString()
             }
-            
         }
     }
     

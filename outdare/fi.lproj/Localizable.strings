@@ -363,3 +363,21 @@
 
 /* No comment provided by engineer. */
 "%.0f meters" = "%.0f metriä";
+
+/* No comment provided by engineer. */
+"Outstanding" = "Erinomainen";
+"Excellent" = "Loistava";
+"Good" = "Hyvä";
+"Misspelled" = "Väärin kirjoitettu";
+"Does not contain '%lld'" = "Ei sisällä '%lld'";
+"Flawless 🤩" = "Virheetöntä 🤩";
+"No input 🧐" = "🧐";
+"Incomplete!" = "Osittainen!";
+"Excellent ⭐️" = "Loistava ⭐️";
+"Nice try 🤙" = "Hyvä yritys 🤙";
+"Correct 🔥" = "Oikein 🔥";
+"Wrong answer 😕" = "Väärä vastaus 😕";
+"Perfect match 🔥" = "Täydellinen osuma🔥";
+"No answer 🧐" = "Ei vastausta 🧐";
+"No match 😕" = "Ei osumaa 😕";
+"Partial match!" = "Osittainen osuma!";
