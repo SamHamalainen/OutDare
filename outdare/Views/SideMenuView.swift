@@ -40,10 +40,9 @@ struct SideMenuView: View {
                         .padding()
                     }
                 }
-            }
-        }.frame(width: 200, height: 460).cornerRadius(20).ignoresSafeArea()
+            }.frame(width: 200, height: 460).cornerRadius(20).ignoresSafeArea()
+        }
     }
-}
 
 
 
