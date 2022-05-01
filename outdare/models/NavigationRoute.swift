@@ -22,6 +22,7 @@ final class NavigationRoute: ObservableObject {
     }
     @Published var totalTime: Double = 0.0
     @Published var totalDistance: Double = 0.0
+    
     /// Polylines array which gets updated constantly when user is moving on the map
     private var activePolylines: [MKOverlay] = []
     /// Directions which changes constantly when user is moving
@@ -37,8 +38,8 @@ final class NavigationRoute: ObservableObject {
         let polylines = mapView.overlays.filter({ $0 is MKPolyline })
         mapView.removeOverlays(polylines)
     }
-    
-    private func addPolylines() {
+    /// Adds every directions' polylines to map's overlays
+    private func addPolylinesToOverlays() {
         let polylines = directionsArray.map { $0.mkRoute.polyline }
         let staticPolylines = Array(polylines.dropFirst())
         if activePolylines.isEmpty {
@@ -53,6 +54,7 @@ final class NavigationRoute: ObservableObject {
     func removeDirections(destination: Challenge? = nil) {
         if destination != nil {
             if let i = directionsArray.firstIndex(where: {$0.destination == destination}) {
+                mapView.removeOverlay(directionsArray[i].mkRoute.polyline)
                 directionsArray.remove(at: i)
                 reCreateExistingDirections()
             }
@@ -83,7 +85,7 @@ final class NavigationRoute: ObservableObject {
         let mkDirections = MKDirections(request: request)
         mkDirections.calculate { [self] response, error in
             guard let route = response?.routes.first else { return }
-            if option == .update && activePolylines.count < 2 {
+            if option == .updateFirst && activePolylines.count < 2 {
                 activePolylines.append(route.polyline)
                 mapView.addOverlay(route.polyline)
             }
@@ -94,11 +96,11 @@ final class NavigationRoute: ObservableObject {
             addToDirectionsArray(directions: directions, option: option)
             updateDistanceAndTime()
 
-            if option != .update {
+            if /*option != .update*/option == .makeLast || option == .makeFirst {
                 // Animation when directions are made to fit thwe whole polyline on the screen
-                mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
-                removePolylines()
-                addPolylines()
+                mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100),animated: true)
+//                removePolylines()
+//                addPolylinesToOverlays()
             }
         }
     }
@@ -110,8 +112,10 @@ final class NavigationRoute: ObservableObject {
             directionsArray.insert(directions, at: 0)
             if directionsArray.count > 1 {
                 reCreateExistingDirections()
+            } else {
+                mapView.addOverlay(directions.mkRoute.polyline)
             }
-        case .update:
+        case .updateFirst:
             if directionsArray.isEmpty {
                 directionsArray.append(directions)
             } else {
@@ -119,8 +123,12 @@ final class NavigationRoute: ObservableObject {
             }
         case .makeLast:
             directionsArray.append(directions)
+            mapView.addOverlay(directions.mkRoute.polyline)
         case .toIndex(let i):
+            mapView.removeOverlay(directionsArray[i].mkRoute.polyline)
             directionsArray[i] = directions
+            if activePolylines.isEmpty || i != 0
+            {mapView.addOverlay(directionsArray[i].mkRoute.polyline)}
         }
     
     }
@@ -137,15 +145,15 @@ final class NavigationRoute: ObservableObject {
                 addDirections(from: source, to: item.destination, option: .toIndex(index))
             }
         }
-        removePolylines()
-        addPolylines()
+//        removePolylines()
+//        addPolylinesToOverlays()
     }
     /// Updates directions by replacing the first directions object by new one
     func updateDirections(userLocation: CLLocationCoordinate2D) {
         self.userLocation = userLocation
         if directionsArray.isEmpty { return }
         guard let activeDirections = activeDirections else { return }
-            addDirections(from: userLocation, to: activeDirections.destination, option: .update)
+            addDirections(from: userLocation, to: activeDirections.destination, option: .updateFirst)
                     
         let count = activePolylines.count
 
