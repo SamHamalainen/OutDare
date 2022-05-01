@@ -83,6 +83,7 @@
 		6A825B70281C44F6004A40A2 /* SSToastMessage in Frameworks */ = {isa = PBXBuildFile; productRef = 6A825B6F281C44F6004A40A2 /* SSToastMessage */; };
 		6A825B75281E9F0B004A40A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B73281E9F0B004A40A2 /* InfoPlist.strings */; };
 		6A825B78281E9F0B004A40A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B76281E9F0B004A40A2 /* Localizable.strings */; };
+		6A825B7A281ED948004A40A2 /* coins.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B79281ED948004A40A2 /* coins.json */; };
 		6A8930E52817F7B7005294BC /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8930E42817F7B7005294BC /* Directions.swift */; };
 		6A8930E728195A0B005294BC /* DirectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8930E628195A0B005294BC /* DirectionsList.swift */; };
 		6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */; };
@@ -217,6 +218,7 @@
 		6A825B6C281C0C9B004A40A2 /* CreateQuizForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuizForm.swift; sourceTree = "<group>"; };
 		6A825B74281E9F0B004A40A2 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A825B77281E9F0B004A40A2 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A825B79281ED948004A40A2 /* coins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coins.json; sourceTree = "<group>"; };
 		6A8930E42817F7B7005294BC /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
 		6A8930E628195A0B005294BC /* DirectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsList.swift; sourceTree = "<group>"; };
 		6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeTimer.swift; path = outdare/components/ChallengeTimer.swift; sourceTree = SOURCE_ROOT; };
@@ -437,6 +439,7 @@
 			children = (
 				06BC5E53281EC4D900E31A4D /* arrows.json */,
 				06BC5E51281EC4D200E31A4D /* coin.json */,
+				6A825B79281ED948004A40A2 /* coins.json */,
 				06BC5E4F281EC4CA00E31A4D /* LottieView.swift */,
 			);
 			path = Lottie;
@@ -678,6 +681,7 @@
 				6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */,
 				06BC5E5A281EC55F00E31A4D /* twister.png in Resources */,
 				065FEC842811832F00237AFB /* JetBrainsMono-ExtraBold.ttf in Resources */,
+				6A825B7A281ED948004A40A2 /* coins.json in Resources */,
 				6AF5297028181C97005189F3 /* countdown.wav in Resources */,
 				065FEC5828108B2D00237AFB /* GoogleService-Info.plist in Resources */,
 				065FEC862811832F00237AFB /* JetBrainsMono-Medium.ttf in Resources */,

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct ChallengeCompleted: View {
     @Binding var challengeInfoOpened: Bool
@@ -79,12 +80,14 @@ struct ChallengeCompleted: View {
                     }
                     .frame(maxHeight: .infinity)
                     .transition(.fade)
+                } else {
+                    LottieView(lottieFile: "coins", lottieLoopMode: .loop)
                 }
             }
             .padding(.horizontal)
             .onAppear {
                 play(sound: "success.mp3")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                     withAnimation {
                         showScore = true
                     }                    

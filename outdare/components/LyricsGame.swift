@@ -149,6 +149,7 @@ class LyricsGame: ObservableObject {
         if perfectResidualMatch && !wrong.isEmpty {
             let score = max(Double(matching.count) - Double(wrong.count) * malus, 0)
             let ratio = score/Double(correctWordsCount)
+            resultString = "Partial match!"
             print("Partial match! (some incorrect words)", "\(score)/\(correctWordsCount)")
             results.append(ResultItem(text: "Partial match! (wrong words)", score: maxPerQ * ratio))
             return
@@ -158,6 +159,7 @@ class LyricsGame: ObservableObject {
             let exactMatchNum = wordsInRightOrder(array1: matching, array2: matchingOrdered)
             let score = Double(exactMatchNum) + Double(matching.count - exactMatchNum) * partial
             let ratio = score/Double(correctWordsCount)
+            resultString = "Partial match!"
             print("Partial match! (wrong order)", "\(score)/\(correctWordsCount)")
             results.append(ResultItem(text: "Partial match! (wrong order)", score: maxPerQ * ratio))
             return
@@ -166,6 +168,7 @@ class LyricsGame: ObservableObject {
         let exactMatchNum = wordsInRightOrder(array1: matching, array2: matchingOrdered)
         let score = max(Double(exactMatchNum) - Double(wrong.count) * malus + Double(matching.count - exactMatchNum) * partial, 0)
         let ratio = score/Double(correctWordsCount)
+        resultString = "Partial match!"
         print("Partial match! (wrong order and some mistakes)", "\(score)/\(correctWordsCount)")
         results.append(ResultItem(text: "Partial match! (wrong order and words)", score: maxPerQ * ratio))
     }
