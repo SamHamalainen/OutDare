@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/// UI for the Quiz game. The logic is handled by a QuizGame instance.
+///
+/// The user is presented several questions and possible answers, and have to answer within a given amount of time. A ChallengeTimer controls the rythm of the game by indicating whether time is over or not. When time is over, the user can click continue and go to the next question.
+/// A feature for answering with voice recognition was developed and is fully functional but was not used in the final version of the app.
 struct QuizView: View {
     @StateObject var game: QuizGame
     @Binding var state: ChallengeState
@@ -111,6 +115,8 @@ struct QuizView: View {
 }
 
 extension QuizView {
+    
+    /// Sends the user's input to the QuizGame instance which evaluates it. Stops the timer and the speech analyzer (if voice mode is activated)
     func onAnswer(ans: String) {
         input = ans
         timer.stop()
@@ -120,13 +126,13 @@ extension QuizView {
         }
     }
     
+    /// Sends the results to Firestore and shows the ChallengeCompleted view if the game is over, else resets the user input and continues the game.
     func next() {
         game.next()
         if !game.over {
             input = ""
             timer.restart()
         } else {
-            print(game.results)
             guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
                 return
             }
@@ -137,6 +143,9 @@ extension QuizView {
         }
     }
     
+    /// Returns the right colors for the quiz answer tiles after the user answers.
+    ///
+    /// Green if it is the correct answer. Orange if it is the selected answer but it is incorrect and a default color otherwise.
     func getTileColor(ans: String, correctAns: String) -> Color {
         var color = Color.theme.icon
         if game.correct != nil {
@@ -151,8 +160,8 @@ extension QuizView {
     }
 }
 
-//struct QuizView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuizView(quiz: Quiz.sample[0], setState: {_ in}, setResult: {_ in})
-//    }
-//}
+struct QuizView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuizView(game: QuizGame(quiz: Quiz.sample[0]), state: .constant(.playing), resultHandler: .constant(ResultHandler()), id: 0)
+    }
+}

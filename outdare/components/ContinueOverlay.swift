@@ -8,6 +8,7 @@
 import SwiftUI
 import Subsonic
 
+/// Pop up which appears upon completing a challenge or answering a question. Contains feedback on the answer/completion and a continue button.
 struct ContinueOverlay: View {
     var message: String
     var index: Int

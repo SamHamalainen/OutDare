@@ -8,6 +8,7 @@
 import SwiftUI
 import Subsonic
 
+/// Countdown timer before a challenge starts. Notifies parent when timer is over.
 struct CountdownTimer: View {
     @State var timer: Int
     @Binding var over: Bool
@@ -36,8 +37,8 @@ struct CountdownTimer: View {
     }
 }
 
-//struct CountdownTimer_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CountdownTimer(timer: 5, countdownOver: {_ in})
-//    }
-//}
+struct CountdownTimer_Previews: PreviewProvider {
+    static var previews: some View {
+        CountdownTimer(timer: 3, over: .constant(false))
+    }
+}

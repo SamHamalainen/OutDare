@@ -11,6 +11,9 @@ import MapKit
 import SSToastMessage
 import Subsonic
 
+/// Form which enables the creation of a new Quiz game.
+///
+/// After choosing questions, the user can input a title and a description for the new Quiz, then pinpoint where they want to locate it on a map which shows the location of already existing challenges. If the creation is succesful the user is notified.
 struct CreateQuizForm: View {
     @Binding var showForm: Bool
     @Binding var selected: [TriviaQuestion]
@@ -26,6 +29,7 @@ struct CreateQuizForm: View {
     @State var success = false
     @State var adding = false
     
+    /// Checks that the user has at least input a title for the new Quiz, then adds the new quiz to Firestore.
     func handleCreate() {
         if title.isEmpty {
             message = "Please enter a title at least"
@@ -52,6 +56,7 @@ struct CreateQuizForm: View {
             
             if showMap {
                 ZStack {
+                    // Map where the user can pinpoint where they want to place the new quiz. All the already existing challenge locations are shown.
                     Map(coordinateRegion: $mapVM.region, annotationItems: dao.challenges) { challenge in
                         MapAnnotation(coordinate: challenge.coordinates) {
                             Image(challenge.icon)

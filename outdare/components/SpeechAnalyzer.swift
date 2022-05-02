@@ -8,6 +8,7 @@
 import Foundation
 import Speech
 
+/// Handles the Speech Recognition and publishes the recognized text.
 final class SpeechAnalyzer: NSObject, ObservableObject, SFSpeechRecognizerDelegate {
     @Published var recognizedText: String?
     @Published var isProcessing: Bool = false
@@ -19,6 +20,7 @@ final class SpeechAnalyzer: NSObject, ObservableObject, SFSpeechRecognizerDelega
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     
+    /// Configures the audio session, creates the input node, initiates the Speech Recognizer with a given Locale, creates the request and starts the recording/recognition.
     func start() {
         audioSession = AVAudioSession.sharedInstance()
         
@@ -73,6 +75,8 @@ final class SpeechAnalyzer: NSObject, ObservableObject, SFSpeechRecognizerDelega
         }
         
     }
+    
+    /// Stops the Voice-to-Speech
     func stop() {
         recognitionTask?.cancel()
         
@@ -90,6 +94,7 @@ final class SpeechAnalyzer: NSObject, ObservableObject, SFSpeechRecognizerDelega
         speechRecognizer = nil
     }
     
+    /// Checks the availability of the Speech Recognizer function
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             print("✅ Available")

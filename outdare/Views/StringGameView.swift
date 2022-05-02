@@ -8,6 +8,9 @@
 import SwiftUI
 import Subsonic
 
+/// UI for String game. The logic is handled by a StringGame instance.
+///
+/// The user is given randomly generated letter and has to answer a word which contains those letters e.g. hi --> philosophy
 struct StringGameView: View {
     @StateObject var game = StringGame()
     @Binding var state: ChallengeState
@@ -68,6 +71,7 @@ struct StringGameView: View {
                     .frame(maxHeight: .infinity)
                 
                 VStack {
+                    // Feedback on previous input
                     if !status.isEmpty {
                         Text(status)
                             .onChange(of: input) { _ in
@@ -91,7 +95,8 @@ struct StringGameView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 40)
                 
-                TextField("Speak or type", text: $input)
+                // Shows user input
+                TextField(LocalizedStringKey("Speak or type"), text: $input)
                     .textFieldStyle(RoundedTextFieldStyle())
                     .textCase(.lowercase)
                     .onChange(of: speechAnalyzer.recognizedText) { newText in
@@ -119,6 +124,9 @@ struct StringGameView: View {
                            
                 SRButton(speechAnalyzer: speechAnalyzer, size: 30, padding: 30)
             }
+            .onChange(of: timer.isOver) { isOver in
+                speechAnalyzer.stop()
+            }
             .padding()
             .allowsHitTesting(timer.isRunning)
         }
@@ -127,8 +135,8 @@ struct StringGameView: View {
 }
 
 extension StringGameView {
+    /// Pushes results to firestore and shows them to user on ChallengeCompleted view
     func next() {
-        print(game.results)
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return
         }
@@ -138,6 +146,7 @@ extension StringGameView {
         state = .done
     }
     
+    /// Sends the users's input to the StringGame instance for evaluation, but only allows single words
     func onSubmit() {
         if input.components(separatedBy: " ").count > 1 {
             status = "Only one word allowed"
@@ -155,8 +164,8 @@ extension StringGameView {
     }
 }
 
-//struct StringGameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StringGameView()
-//    }
-//}
+struct StringGameView_Previews: PreviewProvider {
+    static var previews: some View {
+        StringGameView(state: .constant(.playing), resultHandler: .constant(ResultHandler()), id: 1)
+    }
+}

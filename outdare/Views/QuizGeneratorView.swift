@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// View that allows the user to generate trivia questions fetched from opentdb.com.
+///
+/// After choosing a category and a difficulty level, the user can generate and choose 5 questions from the generated list to create a new quiz.
 struct QuizGeneratorView: View {
     @StateObject var dao = TriviaApiDao()
     let defCatVal = "Choose a category"
@@ -16,23 +19,17 @@ struct QuizGeneratorView: View {
     @State var selected: [TriviaQuestion] = []
     @State var showForm = false
     
-    func reset() {
-        selected = []
-        dao.loading = nil
-        category = defCatVal
-        difficulty = defDifVal
-    }
-    
     var body: some View {
         let categories = [defCatVal] + dao.quizCategories.keys.sorted(by: {$0<$1})
         let btnWidth = UIScreen.main.bounds.width * 0.35
         ZStack {
+            // Shows the form where the user can input title, description and location for the quiz
             if showForm {
                 CreateQuizForm(showForm: $showForm, selected: $selected)
                     .zIndex(1)
                     .transition(.move(edge: .bottom))
             }
-            
+            // Shows a loading animation if the list is being fetched from opentdb.com, else the list of trivia questions is displayed from which the user can select 5 questions before opening the CreateQuizForm
             VStack {
                 if let loading = dao.loading {
                     Spacer()
@@ -48,6 +45,7 @@ struct QuizGeneratorView: View {
                     Spacer()
                 }
                 
+                // View with the pickers for category and difficulty
                 VStack {
                     Text("Quiz Generator")
                         .font(Font.customFont.largeText)
@@ -80,8 +78,6 @@ struct QuizGeneratorView: View {
                         }
                         .padding(.bottom)
                         
-                   
-                    
                     HStack {
                         if category != defCatVal && difficulty != defDifVal {
                             Button(action: {
@@ -137,6 +133,8 @@ struct QuizGeneratorView_Previews: PreviewProvider {
 }
 
 extension String {
+    
+    /// Function which return a string with a capitalized first letter
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }

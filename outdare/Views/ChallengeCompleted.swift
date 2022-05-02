@@ -8,6 +8,7 @@
 import SwiftUI
 import Lottie
 
+/// Shows the results of a challenge upon completion.
 struct ChallengeCompleted: View {
     @Binding var challengeInfoOpened: Bool
     @Binding var resultHandler: ResultHandler
@@ -31,6 +32,7 @@ struct ChallengeCompleted: View {
                             .padding()
                             .foregroundColor(Color.theme.background)
                             .font(Font.customFont.largeText)
+                        // ResultItems are displayed to explain the score given to the user.
                         ScrollView {
                             VStack(spacing: 20) {
                                 ForEach(resultHandler.results, id: \.self) { item in

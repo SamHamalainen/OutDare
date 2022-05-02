@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Data for a game of trivia quiz
 struct Quiz {
     let id: Int
     let timePerQuestion: Double

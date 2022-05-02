@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Row items which display the results to a challenge which consists of a text, an optional comment and a score
 struct ResultRow: View {
     let resultItem: ResultItem 
     var body: some View {
@@ -28,8 +29,8 @@ struct ResultRow: View {
     }
 }
 
-//struct ResultRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ResultRow()
-//    }
-//}
+struct ResultRow_Previews: PreviewProvider {
+    static var previews: some View {
+        ResultRow(resultItem: ResultItem(text: "Excellent!", comment: "No mistake in the lyrics", score: 10))
+    }
+}

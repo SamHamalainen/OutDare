@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+/// Progress bar which represents the timer progression in a challenge
 struct ChallengeTimerBar: View {
     @ObservedObject var timer: ChallengeTimer
     
@@ -21,8 +22,8 @@ struct ChallengeTimerBar: View {
     }
 }
 
-//struct ChallengeTimer_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChallengeTimerBar(timeLimit: 10.0, label: "Time left...")
-//    }
-//}
+struct ChallengeTimer_Previews: PreviewProvider {
+    static var previews: some View {
+        ChallengeTimerBar(timer: ChallengeTimer())
+    }
+}

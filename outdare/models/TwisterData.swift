@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Contains the data for one single tongue twister round, basically the time limit to pronounce the tongue twister and the text.
 struct TwisterData {
     let timeLimit: Int
     let text: String

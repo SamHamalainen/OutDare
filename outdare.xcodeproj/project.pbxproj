@@ -10,7 +10,6 @@
 		060A10E0280BF9280077F71F /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10D9280BF9280077F71F /* CountdownTimer.swift */; };
 		060A10E2280BF9280077F71F /* ChallengeTimerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10DB280BF9280077F71F /* ChallengeTimerBar.swift */; };
 		060A10E3280BF9280077F71F /* ChallengeCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10DC280BF9280077F71F /* ChallengeCount.swift */; };
-		060A10E4280BF9280077F71F /* ChallengeSmallPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10DD280BF9280077F71F /* ChallengeSmallPreview.swift */; };
 		062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88727FEFC2B00F2D0F7 /* FirebaseAuth */; };
 		062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88927FEFC2B00F2D0F7 /* FirebaseFirestore */; };
 		062FE88C27FEFC2B00F2D0F7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */; };
@@ -149,7 +148,6 @@
 		060A10DA280BF9280077F71F /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTimer.swift; sourceTree = "<group>"; };
 		060A10DB280BF9280077F71F /* ChallengeTimerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTimerBar.swift; sourceTree = "<group>"; };
 		060A10DC280BF9280077F71F /* ChallengeCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCount.swift; sourceTree = "<group>"; };
-		060A10DD280BF9280077F71F /* ChallengeSmallPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeSmallPreview.swift; sourceTree = "<group>"; };
 		062FE88F27FF2EF400F2D0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		06312257280C25F0004BF504 /* TopProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopProfiles.swift; sourceTree = "<group>"; };
 		06312259280C26D5004BF504 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 				6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */,
 				060A10DC280BF9280077F71F /* ChallengeCount.swift */,
 				6A6CDF9A27FB6CBA002106F8 /* ChallengeDetailedPreview.swift */,
-				060A10DD280BF9280077F71F /* ChallengeSmallPreview.swift */,
 				060A10DA280BF9280077F71F /* ChallengeTimer.swift */,
 				060A10DB280BF9280077F71F /* ChallengeTimerBar.swift */,
 				06BC5E40281ACE0A00E31A4D /* ContinueOverlay.swift */,
@@ -733,7 +730,6 @@
 				6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */,
 				6A825B62281ABB5E004A40A2 /* TriviaApiDAO.swift in Sources */,
 				065FEC712811830700237AFB /* OpeningPageView.swift in Sources */,
-				060A10E4280BF9280077F71F /* ChallengeSmallPreview.swift in Sources */,
 				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
 				065FEC692811830700237AFB /* StartView.swift in Sources */,

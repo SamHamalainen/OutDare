@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Indicator that shows the progress of the user into the challenge e.g. 4 questions out of 5
 struct ChallengeCount: View {
     let index: Int
     let limit: Int

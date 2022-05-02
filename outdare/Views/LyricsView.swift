@@ -7,16 +7,9 @@
 
 import SwiftUI
 
-extension String {
-    func replacingOccurrences(of: String, with: [Text]) -> Text {
-        return self.components(separatedBy: of).enumerated().map({(i, s) in
-            return i < with.count ? Text(s) + with[i] : Text(s)
-        }).reduce(Text(""), { (r, t) in
-            return r + t
-        })
-    }
-}
-
+/// UI for Lyrics game. The logic is handled by a LyricsGame instance.
+///
+/// The user is shown incomplete lyrics of a song and has to provide the missing part either by speaking or typing.
 struct LyricsView: View {
     let game: LyricsGame
     @Binding var state: ChallengeState
@@ -29,6 +22,7 @@ struct LyricsView: View {
     
     var body: some View {
         ZStack {
+            // Pop up that gives a feedback to the user on their previous answer and allows them to continue the game
             if showAns {
                 if let correct = game.correct {
                     ContinueOverlay(message: game.resultString, index: game.index, correct: correct, length: game.length, action: {next()})
@@ -49,6 +43,7 @@ struct LyricsView: View {
                     if let artist = game.artist, let title = game.title {
                         Text("\(title) - \(artist)").font(Font.customFont.normalText)
                     }
+                    // TextView which first shows the incomplete lyrics with the missing part being hidden then shows the complete lyrics upon answer.
                     if let missingPart = game.missingPart {
                         game.lyrics.replacingOccurrences(of: "___", with: [Text(missingPart).foregroundColor(showAns ? Color.theme.rankingUp : Color.theme.background).bold()])
                             .font(Font.customFont.normalText.leading(.loose))
@@ -58,8 +53,9 @@ struct LyricsView: View {
                     }
                 }
                 .padding()
+                // Text Field that shows the user input (vocal or typed)
                 HStack {
-                    TextField("Sing or type here", text: $input)
+                    TextField(LocalizedStringKey("Sing or type here"), text: $input)
                         .textFieldStyle(RoundedTextFieldStyle())
                         .foregroundColor(game.correct == true ? Color.theme.rankingUp : Color.theme.textDark)
                         .font(Font.customFont.normalText)
@@ -103,6 +99,7 @@ struct LyricsView: View {
 }
 
 extension LyricsView {
+    /// Sends the user's answer to the LyricsGame instance which evaluates the answer. Speech Analyzer and timer are stopped
     func onAnswer(ans: String) {
         showAns = true
         speechAnalyzer.stop()
@@ -112,6 +109,7 @@ extension LyricsView {
         }
     }
     
+    /// Ends the game by showing results and sending it to firestore if the last lyrics where completed. Otherwise, restarts the timer and continues the game.
     func next() {
         game.next()
         if !game.over {
@@ -129,12 +127,22 @@ extension LyricsView {
             state = .done
         }
     }
-    
-    
 }
 
-//struct LyricsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LyricsView(lyricsChallenge: Lyrics.sample[0])
-//    }
-//}
+extension String {
+    /// Returns a Text view which displays a string in which the occurrences OF a given string have been replaced WITH provided Text views. Useful to replace words in lyrics with hidden strings.
+    func replacingOccurrences(of: String, with: [Text]) -> Text {
+        return self.components(separatedBy: of).enumerated().map({(i, s) in
+            return i < with.count ? Text(s) + with[i] : Text(s)
+        }).reduce(Text(""), { (r, t) in
+            return r + t
+        })
+    }
+}
+
+
+struct LyricsView_Previews: PreviewProvider {
+    static var previews: some View {
+        LyricsView(game: LyricsGame(lyricsChallenge: Lyrics.sample[0]), state: .constant(.playing), resultHandler: .constant(ResultHandler()), id: 1)
+    }
+}

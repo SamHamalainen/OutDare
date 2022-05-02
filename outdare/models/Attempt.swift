@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Contains all the information needed to record the results of a challenge to Firestore
 struct Attempt {
     var userId = ""
     let challengeId: Int

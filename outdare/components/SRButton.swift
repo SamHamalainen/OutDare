@@ -8,6 +8,7 @@
 import SwiftUI
 import AVFoundation
 
+/// Button which toggles the Speech Recognizer on and off. Has some animation when toggled on
 struct SRButton: View {
     @ObservedObject var speechAnalyzer: SpeechAnalyzer
     var size: CGFloat = 50
@@ -57,6 +58,7 @@ struct SRButton: View {
 }
 
 extension SRButton {
+    /// Toggles Speech Recognition on and off
     func toggleSpeechRecognition() {
         if speechAnalyzer.isProcessing {
             speechAnalyzer.stop()
@@ -66,8 +68,8 @@ extension SRButton {
     }
 }
     
-//struct SRButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SRButton()
-//    }
-//}
+struct SRButton_Previews: PreviewProvider {
+    static var previews: some View {
+        SRButton(speechAnalyzer: SpeechAnalyzer())
+    }
+}

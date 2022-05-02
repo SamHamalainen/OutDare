@@ -11,6 +11,9 @@ import Combine
 import CoreLocation
 import SwiftUI
 
+/// Entity which enables the fetching of TriviaQuestions from opentdb.com, according to category, difficulty and amount.
+///
+/// The questions are fetched in JSON format then decoded into TriviaQuestions
 class TriviaApiDao: ObservableObject {
     let challengeDao = ChallengeDAO()
     @Published var fetchedQuestions: [TriviaQuestion] = []
@@ -42,6 +45,9 @@ class TriviaApiDao: ObservableObject {
         "Entertainment: Cartoon & Animations": 32
     ]
     
+    /// Generates TriviaQuestions given a category, a difficulty and an amount.
+    ///
+    /// The questions are fetched in JSON format, formatted then decoded into an array of TriviaQuestions
     func generateQuestions(amount: Int = 10, categoryName: String, difficulty: String = "easy") {
         DispatchQueue.main.async {
             self.loading = true
@@ -90,6 +96,7 @@ class TriviaApiDao: ObservableObject {
     }
 }
 
+/// Decodable structure that contains the fetched data for TriviaQuestions, including questions, their corresponding correct answer as well as wrong answers.
 struct TriviaQuestion: Decodable, Hashable {
     let category: String
     let type: String
@@ -98,6 +105,7 @@ struct TriviaQuestion: Decodable, Hashable {
     let correct_answer: String
     var incorrect_answers: [String]
     
+    /// Puts all the answers together, correct and wrong, and shuffles them
     func getAllAnswers() -> [String] {
         var answers = incorrect_answers
         answers.append(correct_answer)
@@ -113,12 +121,4 @@ extension TriviaQuestion {
         TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "In the Pixar film, Toy Story what was the name of the child who owned the toys?", correct_answer: "Andy", incorrect_answers: ["Edward", "Danny", "Matt"]),
         TriviaQuestion(category: "Entertainment: Cartoon & Animations", type: "multiple", difficulty: "easy", question: "Who created the Cartoon Network series Regular Show?", correct_answer: "J. G. Quintel", incorrect_answers: ["Ben Bocquelet", "Pendleton Ward", "Rebecca Sugar"])
     ]
-}
-
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
-            Array(self[$0 ..< Swift.min($0 + size, count)])
-        }
-    }
 }
