@@ -3,13 +3,14 @@
 //  outdare
 //
 //  Created by Sam Hämäläinen on 26.4.2022.
-//
+//  Description: List item in the PointPurchacingView
 
 import SwiftUI
 
 struct PointPurchaseItem: View {
     private var pointAmount: Int
     private var icon: String
+    
     init(pointAmount: Int, icon: String) {
         self.pointAmount = pointAmount
         self.icon = icon
