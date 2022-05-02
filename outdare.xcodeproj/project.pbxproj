@@ -29,7 +29,6 @@
 		065FEC6E2811830700237AFB /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC602811830700237AFB /* QuizView.swift */; };
 		065FEC6F2811830700237AFB /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC612811830700237AFB /* SideMenuView.swift */; };
 		065FEC702811830700237AFB /* LogInOrSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC622811830700237AFB /* LogInOrSignIn.swift */; };
-		065FEC712811830700237AFB /* OpeningPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC632811830700237AFB /* OpeningPageView.swift */; };
 		065FEC722811830700237AFB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC642811830700237AFB /* MainView.swift */; };
 		065FEC732811830700237AFB /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC652811830700237AFB /* DirectionsView.swift */; };
 		065FEC742811830700237AFB /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FEC662811830700237AFB /* LyricsView.swift */; };
@@ -66,6 +65,7 @@
 		06BC5E65281F141D00E31A4D /* globeLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 06BC5E64281F141D00E31A4D /* globeLoading.json */; };
 		06BC5E69281FF8CE00E31A4D /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = 06BC5E68281FF8CE00E31A4D /* quiz.json */; };
 		06DF0E82281FFEE000C4C49F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06DF0E81281FFEE000C4C49F /* GoogleService-Info.plist */; };
+		06DF0E842820053800C4C49F /* OpeningPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DF0E832820053800C4C49F /* OpeningPageView.swift */; };
 		6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */; };
 		6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */; };
 		6A59BFE52811A3E10043D6E7 /* TestRoute.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */; };
@@ -166,7 +166,6 @@
 		065FEC602811830700237AFB /* QuizView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		065FEC612811830700237AFB /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		065FEC622811830700237AFB /* LogInOrSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInOrSignIn.swift; sourceTree = "<group>"; };
-		065FEC632811830700237AFB /* OpeningPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningPageView.swift; sourceTree = "<group>"; };
 		065FEC642811830700237AFB /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		065FEC652811830700237AFB /* DirectionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
 		065FEC662811830700237AFB /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
@@ -206,6 +205,7 @@
 		06BC5E64281F141D00E31A4D /* globeLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = globeLoading.json; sourceTree = "<group>"; };
 		06BC5E68281FF8CE00E31A4D /* quiz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quiz.json; sourceTree = "<group>"; };
 		06DF0E81281FFEE000C4C49F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		06DF0E832820053800C4C49F /* OpeningPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningPageView.swift; sourceTree = "<group>"; };
 		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestRoute.gpx; sourceTree = "<group>"; };
 		6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeContainer.swift; sourceTree = "<group>"; };
@@ -364,7 +364,6 @@
 				065FEC602811830700237AFB /* QuizView.swift */,
 				065FEC612811830700237AFB /* SideMenuView.swift */,
 				065FEC622811830700237AFB /* LogInOrSignIn.swift */,
-				065FEC632811830700237AFB /* OpeningPageView.swift */,
 				065FEC642811830700237AFB /* MainView.swift */,
 				065FEC652811830700237AFB /* DirectionsView.swift */,
 				065FEC662811830700237AFB /* LyricsView.swift */,
@@ -375,6 +374,7 @@
 				B125276D2817F172005E3DC3 /* ChangeCredentials.swift */,
 				B125277128180A3D005E3DC3 /* SettingsMenu.swift */,
 				B1252773281814D7005E3DC3 /* ChangeInformation.swift */,
+				06DF0E832820053800C4C49F /* OpeningPageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -734,7 +734,6 @@
 				6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */,
 				6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */,
 				6A825B62281ABB5E004A40A2 /* TriviaApiDAO.swift in Sources */,
-				065FEC712811830700237AFB /* OpeningPageView.swift in Sources */,
 				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
 				065FEC692811830700237AFB /* StartView.swift in Sources */,
@@ -790,6 +789,7 @@
 				065FECA0281834E000237AFB /* PointPurchaseItem.swift in Sources */,
 				065FEC9E281820B600237AFB /* PointPurchaseView.swift in Sources */,
 				060A10E0280BF9280077F71F /* CountdownTimer.swift in Sources */,
+				06DF0E842820053800C4C49F /* OpeningPageView.swift in Sources */,
 				6AF5295F2814779C005189F3 /* ResultItem.swift in Sources */,
 				065FEC96281183FB00237AFB /* QuizData.swift in Sources */,
 				B125277C281853DF005E3DC3 /* AchievementList.swift in Sources */,
