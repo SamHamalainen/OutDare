@@ -46,7 +46,7 @@ For players:
 
 ## Backend and APIs service:
 
-Application uses Firebase as a backend
+Application uses Firebase as a backend. Trivia questions are fetched from opentdb.com to create quizzes.
 
 ## Set up
 
