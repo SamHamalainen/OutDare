@@ -9,9 +9,9 @@ import UIKit
 import SwiftUI
 
 
-struct Achievement: Identifiable, Hashable {
-    var id, score, time, userId: Int
-    var date: Date
+struct Achievement: Hashable {
+    var challengeId, score, time: Int
+    var userId: String
     var speedBonus: Bool
     var category: String
 }

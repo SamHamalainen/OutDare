@@ -40,7 +40,7 @@ struct UserProfile: View {
                 }
                 .padding(.top, UIScreen.main.bounds.height * 0.07)
             }
-        } .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        }
     }
 }
 

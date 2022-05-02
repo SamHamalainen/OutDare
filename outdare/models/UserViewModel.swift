@@ -55,13 +55,12 @@ class UserViewModel: ObservableObject {
     
     // function to convert achievement from firebase to Achievement struct
     func convertToAchievement(data: [String:Any]) -> Achievement {
-        let id = data ["challengeId"] as? Int ?? 0
+        let challengeId = data ["challengeId"] as? Int ?? 0
         let score = data["score"] as? Int ?? 0
         let time = data["time"] as? Int ?? 0
-        let userId = data["userId"] as? Int ?? 0
-        let date = data["data"] as? Date ?? Date()
+        let userId = data["userId"] as? String ?? ""
         let speedBonus = data["speedBonus"] as? Bool ?? false
-        return Achievement(id: id, score: score, time: time, userId: userId, date: date, speedBonus: speedBonus, category: "")
+        return Achievement(challengeId: challengeId, score: score, time: time, userId: userId, speedBonus: speedBonus, category: "")
     }
     
     // function to convert category from firebase to category struct
@@ -179,22 +178,25 @@ class UserViewModel: ObservableObject {
     // Fetching current user achievements
     func fetchLoggedUserAchievements(uid: String) {
         let attemptRef = FirebaseManager.shared.firestore.collection("attempts")
-        let query = attemptRef.whereField("userId", isEqualTo: uid)
+        let query = attemptRef.order(by: "data", descending: true)
         query.getDocuments() {[self] (querySnapshot, err) in
             if let err = err {
                 print("Error getting user attempts: \(err)")
             }
                 for document in querySnapshot!.documents {
                     let data = document.data()
-                    let achievement = self.convertToAchievement(data: data)
-                    achievements.append(achievement)
+                    if let userId = data["userId"] as? String {
+                        if userId == uid {
+                            let achievement = self.convertToAchievement(data: data)
+                            print("categories", achievement.score)
+                            achievements.append(achievement)
+                        }
+                    }
                 }
             let filtered = achievements.filter {
-                $0.id != -1
+                $0.challengeId != -1
             }
-            
-            let sorted = filtered.sorted(by: {$0.date > $1.date})
-            self.achievements = sorted
+            self.achievements = filtered
             getCategories()
             }
         }
@@ -203,7 +205,7 @@ class UserViewModel: ObservableObject {
     func getCategories() {
         let challengeRef = FirebaseManager.shared.firestore.collection("challenges")
         for item in achievements {
-            let query = challengeRef.whereField("id", isEqualTo: item.id).limit(to: 1)
+            let query = challengeRef.whereField("id", isEqualTo: item.challengeId).limit(to: 1)
             query.getDocuments() {[self] (challengeSnapshot, error) in
                  if let error = error {
                     print("Error getting challenges: \(error)")
@@ -212,7 +214,7 @@ class UserViewModel: ObservableObject {
                 let data = challenge.data()
                 let category = self.convertToCategory(data: data)
                 
-                achievementsWithCategory.append(Achievement(id: item.id, score: item.score, time: item.time, userId: item.userId, date: item.date, speedBonus: item.speedBonus, category: category.name))
+                achievementsWithCategory.append(Achievement(challengeId: item.challengeId, score: item.score, time: item.time, userId: item.userId, speedBonus: item.speedBonus, category: category.name))
             }
         }
     }

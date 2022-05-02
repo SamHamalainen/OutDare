@@ -15,7 +15,7 @@ struct AchievementList: View {
     var body: some View {
         ScrollView () {
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(vm.achievementsWithCategory.prefix(12), id: \.self) { achievement in
+                ForEach(vm.achievementsWithCategory, id: \.self) { achievement in
                 ZStack {
                 RoundedRectangle(cornerRadius: 45)
                         .foregroundColor(Color.theme.textLight)
@@ -26,8 +26,8 @@ struct AchievementList: View {
                 }
             }
         }
-            .frame(maxHeight: 300)
             .padding(.horizontal)
+            .padding(.bottom, UIScreen.main.bounds.height * 0.07)
         }
     }
 }

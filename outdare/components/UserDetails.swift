@@ -41,7 +41,7 @@ struct UserDetails: View {
                             }
                         }
                     }
-                    .shadow(color: Color.theme.textDark, radius: 4, x: 4, y: 4)
+                    .shadow(color: Color.theme.stroke, radius: 4, x: 4, y: 4)
                     .foregroundColor(Color.theme.textDark)
                 }
                 
