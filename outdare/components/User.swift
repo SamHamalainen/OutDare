@@ -5,14 +5,6 @@
 import Foundation
 import SwiftUI
 
-struct User: Hashable, Codable, Identifiable {
-    var id: Int
-    var username: String
-    var score: Int
-    var goneUp: Bool
-    var profilePicture: String
-}
-
 // Struct for basic user profile
 struct CurrentUser: Decodable, Identifiable {
     var id: String
