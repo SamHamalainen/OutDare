@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-/// Applications main view. Selected view (map, leaderboard, profile or store) is rendered inside the navigationview.
+/// Applications main view. Selected view (map, leaderboard, profile, generator or store) is rendered inside the navigationview.
+/// Navigation bar has a menu button which will open a menu on top of the view. Bar also has a title and the coins count.
 struct MainView: View {
     @State private var isShowingMenu = false
     @State private var currentTitle = LocalizedStringKey("Map")
@@ -20,9 +21,9 @@ struct MainView: View {
                 
                 // View that displays the selected view
                 selectedView
-                .navigationBarTitleDisplayMode(.inline).toolbar {
-                    toolBarContent()
-                }
+                    .navigationBarTitleDisplayMode(.inline).toolbar {
+                        toolBarContent()
+                    }
                 
                 if isShowingMenu {
                     // Makes views under under menu darker
@@ -89,6 +90,7 @@ struct MainView: View {
             }
         }
     }
+    /// Button for opening the side menu
     private var menuButton: some View {
         Button(
             action: {
@@ -102,6 +104,7 @@ struct MainView: View {
                     Image(systemName: "list.bullet").foregroundColor(.black)
                 }
             })
+        .accessibilityLabel("Menu button")
     }
     
     

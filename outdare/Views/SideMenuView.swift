@@ -33,6 +33,7 @@ struct SideMenuView: View {
                         currentTitle = item.title
                         isShowing.toggle()
                     }, label: {SideMenuItem(viewModel: item)})
+                    .accessibilityLabel(item.title)
                 }
                 HStack {
                     Button(action: toggleSound) {

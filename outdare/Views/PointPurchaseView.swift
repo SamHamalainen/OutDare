@@ -59,6 +59,8 @@ struct PointPurchaseView: View {
                             selectedItem = PointOrdered(name: "mega", points: 500, price: "FREE")
                             vm.userDao.getLoggedInUserScore()
                         }
+                        .accessibility(addTraits: .isButton)
+                        .accessibilityLabel("Mega coins")
                 }
             }
             .allowsHitTesting(!popUpVisible)
@@ -88,6 +90,7 @@ struct PointPurchaseView: View {
                                     .foregroundColor(.white)
                             }
                             .padding(.bottom, 15)
+                            .accessibilityLabel("Points added")
                         }
                     }
                     RoundedRectangle(cornerRadius: 25)
