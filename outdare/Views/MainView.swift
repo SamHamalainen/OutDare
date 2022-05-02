@@ -36,6 +36,7 @@ struct MainView: View {
                 }
             }
             .background(Color("Background"))
+            .ignoresSafeArea(edges: .bottom)
         }
     }
     /// View that is selected from the menu. Initially is the map view

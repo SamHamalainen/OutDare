@@ -381,11 +381,6 @@
 "No answer 🧐" = "Ei vastausta 🧐";
 "No match 😕" = "Ei osumaa 😕";
 "Partial match!" = "Osittainen osuma!";
-
-//"Sing or type here"
-//
-//"Speak or type"
-
-
-
-// Sound
+"Sing or type here" = "Laula tai kirjoita tähän";
+"Speak or type" = "Puhu tai kirjoita";
+"Sound" = "Äänet";
