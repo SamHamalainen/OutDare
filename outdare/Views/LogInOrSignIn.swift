@@ -6,6 +6,8 @@
 //
 import SwiftUI
 
+//In this view toggle between login or signin forms
+
 struct LogInOrSignIn: View {
     @State var signUpIsShowing = false
     var body: some View {
@@ -47,13 +49,5 @@ struct LogInOrSignIn: View {
             .shadow(color: .theme.icon, radius: 5, x: 3, y: 3)
             .padding(.horizontal, 20)
         }
-    }
-}
-
-
-
-struct LogInOrSignIn_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInOrSignIn()
     }
 }
