@@ -53,6 +53,8 @@ struct SRButton: View {
                     .foregroundColor(speechAnalyzer.isProcessing ? Color.theme.background : Color.theme.icon)
                     .font(Font.customFont.normalText)
             }
+            .padding(.bottom)
+            .padding(.bottom)
         }
     }
 }
