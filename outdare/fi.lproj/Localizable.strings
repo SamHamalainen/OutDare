@@ -209,7 +209,7 @@
 "Skip" = "Ohita";
 
 /* No comment provided by engineer. */
-"Skips left: %lld" = "Ohituksia jäljellä %lld";
+"Skips left: %lld" = "Ohituksia jäljellä: %lld";
 
 /* No comment provided by engineer. */
 "Sort by distance" = "Järjestä etäisyyden perusteella";
