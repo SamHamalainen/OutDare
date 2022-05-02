@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 /// Contains all the data related to a challenge. ChallengeId is a bit confusing but it represents the id of the firestore document which contains the data needed for the challenges (quiz, tongue twister and finish the lyrics)
 struct Challenge: Identifiable, Equatable {
@@ -60,4 +61,16 @@ extension Challenge {
     static let sample: [Challenge] = [
         Challenge(id: 1, challengeId: 1, name: "Test", difficulty: .easy, category: .quiz, description: "Some description", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672))
     ]
+}
+
+// Switch text color based on challenge difficulty
+func getDifficultyColor(challengeDifficulty: ChallengeDifficulty) -> Color {
+    switch challengeDifficulty {
+    case .hard:
+        return Color("DifficultyHard")
+    case .medium:
+        return Color("DifficultyMedium")
+    case .easy:
+        return Color("DifficultyEasy")
+    }
 }

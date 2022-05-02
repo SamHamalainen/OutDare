@@ -43,6 +43,11 @@ struct QuizGeneratorView: View {
                         }
                     }
                     Spacer()
+                } else {
+                    Spacer()
+                    LottieView(lottieFile: "quiz", lottieLoopMode: .loop)
+                        .frame(width: 200, height: 200)
+                    Spacer()
                 }
                 
                 // View with the pickers for category and difficulty

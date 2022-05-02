@@ -34,10 +34,11 @@ struct MapViewCustom: UIViewRepresentable {
         
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
-        mapView.showsCompass = false
-        mapView.mapType = .mutedStandard
-        mapView.userTrackingMode = .none
+//        mapView.showsCompass = true
+//        mapView.mapType = .mutedStandard
+        
         mapView.setRegion(viewModel.mapRegion, animated: true)
+        mapView.userTrackingMode = .follow
         return mapView
     }
     

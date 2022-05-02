@@ -63,9 +63,10 @@
 		06BC5E5C281EC55F00E31A4D /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BC5E58281EC55F00E31A4D /* map.png */; };
 		06BC5E5D281EC55F00E31A4D /* routes.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BC5E59281EC55F00E31A4D /* routes.png */; };
 		06BC5E65281F141D00E31A4D /* globeLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 06BC5E64281F141D00E31A4D /* globeLoading.json */; };
-		06BC5E69281FF8CE00E31A4D /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = 06BC5E68281FF8CE00E31A4D /* quiz.json */; };
 		06DF0E82281FFEE000C4C49F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06DF0E81281FFEE000C4C49F /* GoogleService-Info.plist */; };
 		06DF0E842820053800C4C49F /* OpeningPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DF0E832820053800C4C49F /* OpeningPageView.swift */; };
+		06DF0E86282014E900C4C49F /* AchievementDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DF0E85282014E900C4C49F /* AchievementDetail.swift */; };
+		06DF0E882820213C00C4C49F /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = 06DF0E872820213C00C4C49F /* quiz.json */; };
 		6A41A7E2280585DC0047FF2E /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */; };
 		6A41A7FD280757450047FF2E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A41A7FC280757450047FF2E /* SDWebImageSwiftUI */; };
 		6A59BFE52811A3E10043D6E7 /* TestRoute.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */; };
@@ -203,9 +204,10 @@
 		06BC5E62281ED75900E31A4D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		06BC5E63281ED7D500E31A4D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06BC5E64281F141D00E31A4D /* globeLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = globeLoading.json; sourceTree = "<group>"; };
-		06BC5E68281FF8CE00E31A4D /* quiz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quiz.json; sourceTree = "<group>"; };
 		06DF0E81281FFEE000C4C49F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06DF0E832820053800C4C49F /* OpeningPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningPageView.swift; sourceTree = "<group>"; };
+		06DF0E85282014E900C4C49F /* AchievementDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementDetail.swift; sourceTree = "<group>"; };
+		06DF0E872820213C00C4C49F /* quiz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quiz.json; sourceTree = "<group>"; };
 		6A41A7E1280585DC0047FF2E /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		6A59BFE42811A3E10043D6E7 /* TestRoute.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestRoute.gpx; sourceTree = "<group>"; };
 		6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeContainer.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				0631225D280C2BEC004BF504 /* UserDetails.swift */,
 				6A825B6A281B51A2004A40A2 /* SelectList.swift */,
 				6A825B6C281C0C9B004A40A2 /* CreateQuizForm.swift */,
+				06DF0E85282014E900C4C49F /* AchievementDetail.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -438,7 +441,7 @@
 		06BC5E4E281EC4A000E31A4D /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				06BC5E68281FF8CE00E31A4D /* quiz.json */,
+				06DF0E872820213C00C4C49F /* quiz.json */,
 				06BC5E64281F141D00E31A4D /* globeLoading.json */,
 				06BC5E53281EC4D900E31A4D /* arrows.json */,
 				06BC5E51281EC4D200E31A4D /* coin.json */,
@@ -675,7 +678,7 @@
 			files = (
 				06BC5E65281F141D00E31A4D /* globeLoading.json in Resources */,
 				6AF5297228181CC9005189F3 /* start.wav in Resources */,
-				06BC5E69281FF8CE00E31A4D /* quiz.json in Resources */,
+				06DF0E882820213C00C4C49F /* quiz.json in Resources */,
 				06BC5E54281EC4D900E31A4D /* arrows.json in Resources */,
 				6A825B75281E9F0B004A40A2 /* InfoPlist.strings in Resources */,
 				06BC5E5D281EC55F00E31A4D /* routes.png in Resources */,
@@ -751,6 +754,7 @@
 				065FEC732811830700237AFB /* DirectionsView.swift in Sources */,
 				B167D31E27FAE4CE00BF950E /* outdareApp.swift in Sources */,
 				065FEC94281183FB00237AFB /* Challenge.swift in Sources */,
+				06DF0E86282014E900C4C49F /* AchievementDetail.swift in Sources */,
 				6AF5296728158110005189F3 /* ResultHandler.swift in Sources */,
 				06BC5E4D281EC44500E31A4D /* InputValidation.swift in Sources */,
 				060A10E2280BF9280077F71F /* ChallengeTimerBar.swift in Sources */,

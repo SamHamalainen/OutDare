@@ -16,6 +16,7 @@ struct SignUpForm: View {
     @State var username = ""
     @State var location = ""
     @State var image: UIImage?
+    @State var showPassword = false
     
     
     @State var errorMessage = ""
@@ -56,14 +57,45 @@ struct SignUpForm: View {
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
             
-            SecureField("PASSWORD", text: $password)
-                .font(Font.customFont.normalText)
-                .padding()
-                .background(Color.theme.textLight)
-                .cornerRadius(20)
-                .shadow(color: .theme.icon, radius: 5, x: 3, y: 3)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
+            if !showPassword {
+                ZStack {
+                    SecureField("PASSWORD", text: $password)
+                        .font(Font.customFont.normalText)
+                        .padding()
+                        .background(Color.theme.textLight)
+                        .cornerRadius(20)
+                        .shadow(color: .theme.icon, radius: 5, x: 3, y: 3)
+                        .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                    HStack {
+                        Spacer()
+                        Image(systemName: "eye")
+                            .padding(.trailing, 10)
+                            .onTapGesture {
+                                showPassword.toggle()
+                        }
+                    }
+                }
+            } else {
+                ZStack {
+                    TextField("PASSWORD", text: $password)
+                        .font(Font.customFont.normalText)
+                        .padding()
+                        .background(Color.theme.textLight)
+                        .cornerRadius(20)
+                        .shadow(color: .theme.icon, radius: 5, x: 3, y: 3)
+                        .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                    HStack {
+                        Spacer()
+                        Image(systemName: "eye.slash")
+                            .padding(.trailing, 10)
+                            .onTapGesture {
+                                showPassword.toggle()
+                        }
+                    }
+                }
+            }
             
             TextField("USERNAME", text: $username)
                 .font(Font.customFont.normalText)

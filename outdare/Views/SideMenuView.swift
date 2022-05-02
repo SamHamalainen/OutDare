@@ -49,7 +49,6 @@ struct SideMenuView: View {
                         }
                         .onChange(of: mute) {
                             UserDefaults.standard.set($0, forKey: "mute")
-                            print(mute, UserDefaults.standard.bool(forKey: "mute"))
                         }
                         .foregroundColor(Color.theme.textDark)
                     }

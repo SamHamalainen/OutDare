@@ -28,10 +28,7 @@ extension CLLocationCoordinate2D: Equatable {
 
 // MapViewModel is for handling all MapView related functions.
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var mapRegion = MKCoordinateRegion(
-        center: MapDetails.startingLocation,
-        span: MapDetails.defaultSpan
-    )
+    
     // Daos
     @Published var dao: ChallengeDAO?
     @Published var userDao: UserDAO?
@@ -47,6 +44,10 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var region = MKCoordinateRegion()
     @Published var circle: MKCircle?
     @Published var annotationsArray: [MKPointAnnotation]?
+    @Published var mapRegion = MKCoordinateRegion(
+        center: MapDetails.startingLocation,
+        span: MapDetails.defaultSpan
+    )
     
     // Challenge related
     @Published var challengeInfoOpen: Bool = false
@@ -84,6 +85,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 locManager.startUpdatingLocation()
                 locManager.pausesLocationUpdatesAutomatically = true
                 locManager.activityType = .fitness
+                if let userLoc = self.userLocation {
+                    self.mapRegion.center = userLoc
+                }
             }
         } else {
             print("Please turn on location services from the phone settings")

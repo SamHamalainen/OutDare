@@ -29,23 +29,12 @@ struct ChallengeInfo: View {
     @Binding var challengeInfoOpened: Bool
     @State private var challengeStarted = false
     @State private var showingAlert = false
+    @State private var poor = false
+    
     
     // Map Navigation
     @Binding var userLocation: CLLocationCoordinate2D?
     @ObservedObject var navigationRoute: NavigationRoute
-    
-    
-    // Switch text color based on challenge difficulty
-    func getDifficultyColor() -> Color {
-        switch locationPassed!.difficulty {
-        case .hard:
-            return Color("DifficultyHard")
-        case .medium:
-            return Color("DifficultyMedium")
-        case .easy:
-            return Color("DifficultyEasy")
-        }
-    }
     
     // When user presses start button it will expand the component to almost full screen
     func expandChallengeInfo() {
@@ -77,8 +66,11 @@ struct ChallengeInfo: View {
     
     // Show alert when revealing challenge outside radius
     func showAlert() {
-        showingAlert = true
-        userVM.userDao.getLoggedInUserScore()
+        print("current money \(userVM.userDao.loggedUserScore ?? 0)")
+        if let score = userVM.userDao.loggedUserScore {
+            poor = score < 25
+            showingAlert = true
+        }
     }
     
     // When confirming reveal challenge alert, your score will be reduced by 25
@@ -107,9 +99,9 @@ struct ChallengeInfo: View {
                                     .fontWeight(.bold)
                                     .padding(.top)
                                     .frame(width: 200, alignment: .topLeading)
-                                Text("\(locationPassed!.difficulty.rawValue.capitalized)")
+                                Text(LocalizedStringKey(locationPassed!.difficulty.rawValue.capitalized))
                                     .font(.headline)
-                                    .foregroundColor(getDifficultyColor())
+                                    .foregroundColor(getDifficultyColor(challengeDifficulty: locationPassed!.difficulty))
                                     .frame(width: 200, alignment: .leading)
                             }
                             Text("+\(locationPassed!.points)")
@@ -136,12 +128,18 @@ struct ChallengeInfo: View {
                         .offset(y: buttonOffsetY)
                         .offset(y: buttonEndOffsetY)
                         .alert(isPresented: $showingAlert) {
-                            Alert(title: Text("Are you sure you want to reveal challenge?"),
-                                  message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 25 points."),
-                                  primaryButton: .default(Text("Reveal")) {
-                                revealChallenge()
-                            },
-                                  secondaryButton: .cancel())
+                            if !poor {
+                                return Alert(title: Text("Are you sure you want to reveal challenge?"),
+                                      message: Text("Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 25 points."),
+                                      primaryButton: .default(Text("Reveal")) {
+                                    revealChallenge()
+                                },
+                                      secondaryButton: .cancel())
+                            } else {
+                                return Alert(title: Text("Not enough funds!"),
+                                             message: Text("Revealing a challenge costs 25 points."),
+                                             dismissButton: .cancel())
+                            }
                         }
                         Button(action: {addToRouteFirst()
                             challengeInfoOpened = false
@@ -175,6 +173,9 @@ struct ChallengeInfo: View {
                     }
                     
                 }
+                .onAppear {
+                    userVM.userDao.getLoggedInUserScore()
+                }
                 .offset(y: startingOffsetY)
             } else if (locationPassed?.coordinates.distance(to: userLocation))! <= 150 || revealedChallenge {
                 ZStack(alignment: .top) {
@@ -194,9 +195,9 @@ struct ChallengeInfo: View {
                                     .fontWeight(.bold)
                                     .padding(.top)
                                     .frame(width: 200, alignment: .topLeading)
-                                Text("\(locationPassed!.difficulty.rawValue.capitalized)")
+                                Text(LocalizedStringKey(locationPassed!.difficulty.rawValue.capitalized))
                                     .font(.headline)
-                                    .foregroundColor(getDifficultyColor())
+                                    .foregroundColor(getDifficultyColor(challengeDifficulty: locationPassed!.difficulty))
                                     .frame(width: 200, alignment: .leading)
                             }
                             Text("+\(locationPassed!.points)")

@@ -30,8 +30,10 @@ struct UserDetails: View {
                                 .cornerRadius(UIScreen.main.bounds.width * 0.25)
                         } else {
                             if vm.currentUser?.profilePicture == "" {
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: UIScreen.main.bounds.width * 0.5))
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.width * 0.5)
                             } else {
                                 WebImage(url: URL(string: vm.currentUser?.profilePicture ?? ""))
                                     .resizable()
@@ -41,7 +43,7 @@ struct UserDetails: View {
                             }
                         }
                     }
-                    .shadow(color: Color.theme.stroke, radius: 4, x: 4, y: 4)
+                    .shadow(color: Color.theme.stroke, radius: 3, x: 4, y: 4)
                     .foregroundColor(Color.theme.textDark)
                 }
                 

@@ -261,12 +261,15 @@
 
 /* No comment provided by engineer. */
 "Easy" = "Helppo";
+"easy" = "helppo";
 
 /* No comment provided by engineer. */
 "Medium" = "Keskivaikea";
+"medium" = "keskivaikea";
 
 /* No comment provided by engineer. */
 "Hard" = "Vaikea";
+"hard" = "vaikea";
 
 /* No comment provided by engineer. */
 "Choose a difficulty" = "Valitse vaikeustaso";
@@ -384,3 +387,5 @@
 "Sing or type here" = "Laula tai kirjoita tähän";
 "Speak or type" = "Puhu tai kirjoita";
 "Sound" = "Äänet";
+"Not enough funds!" = "Ei ole tarpeeksi rahaa!";
+"Revealing a challenge costs 25 points." = "Haasteen paljastaminen maksaa 25 pistettä.";
