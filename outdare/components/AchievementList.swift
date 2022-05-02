@@ -6,6 +6,7 @@ import SwiftUI
 
 struct AchievementList: View {
     @StateObject private var vm = UserViewModel()
+    @State var toggleId: Int = -1
     
     // Choosing how much space each item takes in a column
     let columns = [
@@ -15,14 +16,22 @@ struct AchievementList: View {
     var body: some View {
         ScrollView () {
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(vm.achievementsWithCategory, id: \.self) { achievement in
+                ForEach(vm.achievementsWithCategory.sorted(by: { $0.id < $1.id }), id: \.self) { achievement in
                 ZStack {
                 RoundedRectangle(cornerRadius: 45)
                         .foregroundColor(Color.theme.textLight)
                         .shadow(color: Color.theme.icon, radius: 2, x: 2, y: 3)
                         .frame(width: 80, height: 80)
-                    AchievementItem(achievements: achievement)
+                    AchievementItem(achievements: achievement, flippedId: $toggleId)
                         .padding(.horizontal, 15)
+                }
+                .onTapGesture {
+                    if toggleId == achievement.id {
+                        toggleId = -1
+                    } else {
+                        toggleId = achievement.id
+                    }
+                    
                 }
             }
         }

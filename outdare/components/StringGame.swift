@@ -83,7 +83,7 @@ class StringGame: ObservableObject {
         let randomWord = longEnough.randomElement()
         if let randomWord = randomWord {
             if randomWord.count == length {random = randomWord}
-            let randomIndex = Int.random(in: 0...(randomWord.count - (length + 1)))
+            let randomIndex = Int.random(in: 0...(randomWord.count - (length)))
             let start = randomWord.index(randomWord.startIndex, offsetBy: randomIndex)
             let end = randomWord.index(randomWord.startIndex, offsetBy: randomIndex + length)
             if String(randomWord[start..<end]) != random {

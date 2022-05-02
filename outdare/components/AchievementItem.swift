@@ -6,6 +6,7 @@ import SwiftUI
 
 struct AchievementItem: View {
     let achievements: Achievement
+    @Binding var flippedId: Int
     
     // Choosing correct icon image according to string value from firebase
     func getCategoryIcon() -> Image {
@@ -25,17 +26,22 @@ struct AchievementItem: View {
     
     
     var body: some View {
-        HStack {
+        if achievements.id != flippedId {
             getCategoryIcon()
                 .resizable()
                 .frame(width: 50, height: 50)
+        } else {
+            Text("\(achievements.score)")
+                .font(Font.customFont.extraLargeText)
+                .frame(width: 50, height: 50)
         }
+        
     }
 }
 
 struct AchievementItem_Previews: PreviewProvider {
     static var achievements = UserViewModel().achievementsWithCategory
     static var previews: some View {
-        AchievementItem(achievements: achievements[0])
+        AchievementItem(achievements: achievements[0], flippedId: .constant(5))
     }
 }

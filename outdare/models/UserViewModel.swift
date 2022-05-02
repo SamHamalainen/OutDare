@@ -54,19 +54,20 @@ class UserViewModel: ObservableObject {
     }
     
     // function to convert achievement from firebase to Achievement struct
-    func convertToAchievement(data: [String:Any]) -> Achievement {
+    func convertToAchievement(data: [String:Any], index: Int) -> Achievement {
         let challengeId = data ["challengeId"] as? Int ?? 0
         let score = data["score"] as? Int ?? 0
         let time = data["time"] as? Int ?? 0
         let userId = data["userId"] as? String ?? ""
         let speedBonus = data["speedBonus"] as? Bool ?? false
-        return Achievement(challengeId: challengeId, score: score, time: time, userId: userId, speedBonus: speedBonus, category: "")
+        return Achievement(id: index, challengeId: challengeId, score: score, time: time, userId: userId, speedBonus: speedBonus, category: "", difficulty: "")
     }
     
     // function to convert category from firebase to category struct
-    func convertToCategory(data: [String:Any]) -> Category {
+    func convertToCategoryAndDifficulty(data: [String:Any]) -> CategoryAndDifficulty {
         let name = data ["category"] as? String ?? ""
-        return Category(name: name)
+        let difficulty = data["difficulty"] as? String ?? ""
+        return CategoryAndDifficulty(name: name, difficulty: difficulty)
     }
     
     
@@ -183,13 +184,15 @@ class UserViewModel: ObservableObject {
             if let err = err {
                 print("Error getting user attempts: \(err)")
             }
-                for document in querySnapshot!.documents {
+            var index = 0
+            for document in querySnapshot!.documents {
                     let data = document.data()
                     if let userId = data["userId"] as? String {
                         if userId == uid {
-                            let achievement = self.convertToAchievement(data: data)
+                            let achievement = self.convertToAchievement(data: data, index: index)
                             print("categories", achievement.score)
                             achievements.append(achievement)
+                            index += 1
                         }
                     }
                 }
@@ -212,9 +215,9 @@ class UserViewModel: ObservableObject {
                  }
                 let challenge = challengeSnapshot!.documents[0]
                 let data = challenge.data()
-                let category = self.convertToCategory(data: data)
+                let catDif = self.convertToCategoryAndDifficulty(data: data)
                 
-                achievementsWithCategory.append(Achievement(challengeId: item.challengeId, score: item.score, time: item.time, userId: item.userId, speedBonus: item.speedBonus, category: category.name))
+                achievementsWithCategory.append(Achievement(id: item.id, challengeId: item.challengeId, score: item.score, time: item.time, userId: item.userId, speedBonus: item.speedBonus, category: catDif.name, difficulty: catDif.difficulty))
             }
         }
     }

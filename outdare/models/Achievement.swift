@@ -10,12 +10,15 @@ import SwiftUI
 
 
 struct Achievement: Hashable {
+    var id: Int
     var challengeId, score, time: Int
     var userId: String
     var speedBonus: Bool
     var category: String
+    var difficulty: String
 }
 
-struct Category {
+struct CategoryAndDifficulty {
     var name: String
+    var difficulty: String
 }
