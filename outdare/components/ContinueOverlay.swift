@@ -8,6 +8,7 @@
 import SwiftUI
 import Subsonic
 
+/// Pop up which appears upon completing a challenge or answering a question. Contains feedback on the answer/completion and a continue button.
 struct ContinueOverlay: View {
     var message: String
     var index: Int
@@ -44,7 +45,7 @@ struct ContinueOverlay: View {
         .ignoresSafeArea()
         .transition(.move(edge: .bottom))
         .onAppear {
-            if correct {
+            if correct && !UserDefaults.standard.bool(forKey: "mute") {
                 play(sound: "correct.mp3")
             }
         }

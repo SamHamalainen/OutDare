@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Data for one quiz question
 struct QuizData {
     let question: String
     let answers: [String]

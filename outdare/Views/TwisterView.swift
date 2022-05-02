@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// UI for the Tongue Twister game. The logic is handled by a TwisterGame instance.
+///
+/// The user is presented a Tongue Twister, which they have to pronounce as fast and accurately as possible. Speech Recognition is used to record the words pronounced by the user. The last pronounced word is compared to the next word to be pronounced. If they match, the next word can be pronounced and so on. This was the most difficult game to create since Speech Recognition is not perfect as it is not always accurate and is a bit slower than normal speech speed.
 struct TwisterView: View {
     let game: TwisterGame
     @Binding var state: ChallengeState
@@ -18,6 +21,7 @@ struct TwisterView: View {
     
     var body: some View {
         ZStack {
+            // Shows a feedback to the users performance on the previous tongue twister and prompts them to continue
             if game.matchingIndices.count == game.textArray.count || timer.isOver {
                 ContinueOverlay(message: game.message, index: game.index, correct: game.correct, length: game.length, action: {next()})
             }
@@ -36,6 +40,8 @@ struct TwisterView: View {
                     }
                 
                 ChallengeCount(index: game.index, limit: game.length)
+                
+                // Displays the tongue twister and updates the color of words to green as they get pronounced
                 WrappedText(words: game.textArray, matchingIndices: game.matchingIndices)
                     .onChange(of: speechAnalyzer.recognizedText) { newText in
                         if let last = newText?.components(separatedBy: " ").last {
@@ -64,12 +70,14 @@ struct TwisterView: View {
 }
 
 extension TwisterView {
+    /// When a tongue twister has been pronounced or time is over, stops the timer and speech recognition, and creates a ResultItem
     func onOver() {
         speechAnalyzer.stop()
         timer.stop()
         game.makeResult()
     }
     
+    // Shows the results and push them to firestore if the game is over. Sets up the next tongue twister otherwise
     func next() {
         game.next()
         if !game.over {
@@ -88,13 +96,13 @@ extension TwisterView {
     }
 }
 
-//struct TwisterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TwisterView(twister: Twister.sample[0], setState: {_ in}, setResult: {_ in})
-//    }
-//}
+struct TwisterView_Previews: PreviewProvider {
+    static var previews: some View {
+        TwisterView(game: TwisterGame(twister: Twister.sample[0]), state: .constant(.playing), resultHandler: .constant(ResultHandler()), id: 1)
+    }
+}
 
-
+/// Pairs a string with its index in an array to facilitate the WrappedText view
 struct WordEnumerated: Identifiable, Hashable {
     let id: UUID = UUID()
     let index: Int
@@ -106,6 +114,7 @@ struct WordEnumerated: Identifiable, Hashable {
     }
 }
 
+/// View which displays the words of a text as in a Hstack of individual Text views which wraps to new lines.
 struct WrappedText: View {
     let words: [String]
     var grouped: [[WordEnumerated]] {
@@ -114,6 +123,7 @@ struct WrappedText: View {
     let screenWidth = UIScreen.main.bounds.width
     let matchingIndices: [Int]
     
+    /// Creates an array of arrays of WordEnumerated objects. Each inner array represents is a new row of the wrapped text view. It is calculated by measuring the width taken up by a word and comparing it to the total width of a screen. When words take up more space then the screen size, a new inner array is created and so on.
     private func createGrouped(_ words: [String]) -> [[WordEnumerated]] {
         var grouped: [[WordEnumerated]] = [[WordEnumerated]]()
         var tempItems: [WordEnumerated] =  [WordEnumerated]()

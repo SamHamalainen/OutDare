@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Structure meant to record points for a challenge and facilitate their display on a ChallengeCompleted view
 struct ResultItem: Hashable {
     let text: String
     var comment: String? = nil

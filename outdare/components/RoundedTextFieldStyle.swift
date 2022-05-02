@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+/// Custom style for rounded textfield
 struct RoundedTextFieldStyle: TextFieldStyle {
     var alignment: TextAlignment = .center
     func _body(configuration: TextField<Self._Label>) -> some View {

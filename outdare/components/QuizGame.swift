@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// Contains the logic behind the Quiz game.
+///
+/// Provides the questions and possible answers at each round and records the results in a ResultItem array.
 class QuizGame: ObservableObject {
     let quiz: Quiz
     @Published var index: Int = 0
@@ -31,15 +34,18 @@ class QuizGame: ObservableObject {
     init(quiz: Quiz) {
         self.quiz = quiz
     }
-    
+
+    ///Sets the current question
     func getQuestion() {
         question = data[index].question
     }
     
+    ///Sets the current possible answers
     func getAnswers() {
         answers = data[index].answers
     }
     
+    ///Sets the current correct question
     func getCorrectAns() {
         correctAns = data[index].correctAns
     }
@@ -50,6 +56,12 @@ class QuizGame: ObservableObject {
         answers = nil
     }
     
+    /// Compares a string to the correct answer string.
+    ///
+    /// Gives 0 for a wrong answer and ( max quiz points / number of questions ) if correct. The results are logged into an array of ResultItems
+    ///
+    /// - Parameters:
+    ///     - ans: String to be compared to the correct answer
     func checkAns(ans: String) {
         let data = quiz.data[index]
         correct = (ans == data.correctAns)
@@ -63,12 +75,14 @@ class QuizGame: ObservableObject {
         }
     }
     
+    /// Gathers all the data needed for the Quiz game UI
     func gatherData() {
         getQuestion()
         getAnswers()
         getCorrectAns()
     }
     
+    /// Ends the game the last question has been answered. Otherwise, sets up the next question and answers
     func next() {
         if index < quiz.data.count - 1 {
             reset()

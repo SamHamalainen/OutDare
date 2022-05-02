@@ -9,6 +9,9 @@ import SwiftUI
 import CoreLocation
 import Speech
 
+/// View that contains a challenge preview view, the challenge view and the challenge result view
+///
+/// Fetches the relevant data for a given challenge according to its category, then displays the right view according to the advancement state of the challenge.
 struct ChallengeContainer: View {
     @Binding var challengeInfoOpened: Bool
     @Binding var revealedChallenge: Bool
@@ -20,7 +23,10 @@ struct ChallengeContainer: View {
     
     var body: some View {
         Group {
+            // Displays the right view (according to ChallengeState) for the right challenge (according to ChallengeCategory)
             switch challengeState {
+                
+                // Showing challenge preview
             case .awaiting:
                 ChallengeDetailedPreview(challenge: challenge, state: $challengeState)
                     .onAppear() {
@@ -36,6 +42,8 @@ struct ChallengeContainer: View {
                             return
                         }
                     }
+                
+                // Showing the challenge view where the user plays the game
             case .playing:
                 switch challenge.category {
                 case .quiz:
@@ -57,7 +65,7 @@ struct ChallengeContainer: View {
                     StringGameView(state: $challengeState, resultHandler: $resultHandler, id: challenge.id)
                 }
                 
-                
+                // Showing the results of the challenge
             case .done:
                 ChallengeCompleted(challengeInfoOpened: $challengeInfoOpened, resultHandler: $resultHandler, revealedChallenge: $revealedChallenge)
             }
@@ -70,12 +78,15 @@ struct ChallengeContainer: View {
     }
 }
 
+/// Describes the state of the current challenge
+///
+/// Awaiting means the preview is shown, playing means the user is playing and done means that the user is shown the results
 enum ChallengeState {
     case awaiting, playing, done
 }
 
-//struct ChallengeContainer_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChallengeContainer(challenge: Challenge(id: 1, challengeId: 1, name: "quizzz", difficulty: "easy", category: "quiz", description: "Answer these 5 super easy questions you have 10 seconds per question.", coordinates: CLLocationCoordinate2D(latitude: 60.224810974873215, longitude: 24.75657413146672)), notifyParent2: {})
-//    }
-//}
+struct ChallengeContainer_Previews: PreviewProvider {
+    static var previews: some View {        
+        ChallengeContainer(challengeInfoOpened: .constant(true), revealedChallenge: .constant(true), challenge: Challenge.sample[0], notifyParent: {})
+    }
+}

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Data for one round of a game of finish the lyrics
 struct LyricsData {
     let timeLimit: Int
     let artist: String
@@ -14,6 +15,7 @@ struct LyricsData {
     var lyrics: String
     let missingWords: String
     
+    /// Transforms a string into a multiline string. When stored in Firestore, a second "\" is added automatically in front of a line break, which needs to be removed
     mutating func toMultiLine() {
         if lyrics.contains("\\n") {
             lyrics = lyrics.replacingOccurrences(of: "\\n", with: "\n")
@@ -50,11 +52,4 @@ extension LyricsData {
                    missingWords: "from the tambourine"),
         
     ]
-}
-
-struct LyricsResult {
-    let matchStatus: String
-    var comment: String = ""
-    let score: Double
-    let total: Int
 }

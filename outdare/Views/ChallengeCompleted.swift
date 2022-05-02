@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
+import Lottie
 
+/// Shows the results of a challenge upon completion.
 struct ChallengeCompleted: View {
     @Binding var challengeInfoOpened: Bool
     @Binding var resultHandler: ResultHandler
@@ -30,6 +32,7 @@ struct ChallengeCompleted: View {
                             .padding()
                             .foregroundColor(Color.theme.background)
                             .font(Font.customFont.largeText)
+                        // ResultItems are displayed to explain the score given to the user.
                         ScrollView {
                             VStack(spacing: 20) {
                                 ForEach(resultHandler.results, id: \.self) { item in
@@ -79,12 +82,16 @@ struct ChallengeCompleted: View {
                     }
                     .frame(maxHeight: .infinity)
                     .transition(.fade)
+                } else {
+                    LottieView(lottieFile: "coins", lottieLoopMode: .loop)
                 }
             }
             .padding(.horizontal)
             .onAppear {
-                play(sound: "success.mp3")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if !UserDefaults.standard.bool(forKey: "mute") {
+                    play(sound: "success.mp3")
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                     withAnimation {
                         showScore = true
                     }                    

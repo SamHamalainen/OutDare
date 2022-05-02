@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Contains the data needed for a LyricsGame
 struct Lyrics {
     var id: Int = 0
     var difficulty: ChallengeDifficulty

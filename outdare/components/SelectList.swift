@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// List of selectable trivia questions. The number of selectable items is limited. Selected items turn orange.
 struct SelectList: View {
     @Binding var selected: [TriviaQuestion]
     let questions: [TriviaQuestion]
@@ -56,8 +57,8 @@ struct SelectList: View {
     }
 }
 
-//struct SelectList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SelectList()
-//    }
-//}
+struct SelectList_Previews: PreviewProvider {
+    static var previews: some View {
+        SelectList(selected: .constant([]), questions: TriviaQuestion.sample)
+    }
+}

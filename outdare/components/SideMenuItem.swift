@@ -17,7 +17,6 @@ struct SideMenuItem: View {
             Spacer()
         }
         .foregroundColor(Color("TextDark"))
-        .padding()
     }
 }
 

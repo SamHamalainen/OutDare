@@ -10,7 +10,6 @@
 		060A10E0280BF9280077F71F /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10D9280BF9280077F71F /* CountdownTimer.swift */; };
 		060A10E2280BF9280077F71F /* ChallengeTimerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10DB280BF9280077F71F /* ChallengeTimerBar.swift */; };
 		060A10E3280BF9280077F71F /* ChallengeCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10DC280BF9280077F71F /* ChallengeCount.swift */; };
-		060A10E4280BF9280077F71F /* ChallengeSmallPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A10DD280BF9280077F71F /* ChallengeSmallPreview.swift */; };
 		062FE88827FEFC2B00F2D0F7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88727FEFC2B00F2D0F7 /* FirebaseAuth */; };
 		062FE88A27FEFC2B00F2D0F7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88927FEFC2B00F2D0F7 /* FirebaseFirestore */; };
 		062FE88C27FEFC2B00F2D0F7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 062FE88B27FEFC2B00F2D0F7 /* FirebaseStorage */; };
@@ -84,6 +83,7 @@
 		6A825B70281C44F6004A40A2 /* SSToastMessage in Frameworks */ = {isa = PBXBuildFile; productRef = 6A825B6F281C44F6004A40A2 /* SSToastMessage */; };
 		6A825B75281E9F0B004A40A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B73281E9F0B004A40A2 /* InfoPlist.strings */; };
 		6A825B78281E9F0B004A40A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B76281E9F0B004A40A2 /* Localizable.strings */; };
+		6A825B7A281ED948004A40A2 /* coins.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A825B79281ED948004A40A2 /* coins.json */; };
 		6A8930E52817F7B7005294BC /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8930E42817F7B7005294BC /* Directions.swift */; };
 		6A8930E728195A0B005294BC /* DirectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8930E628195A0B005294BC /* DirectionsList.swift */; };
 		6A9F88A3280BF69A009168D2 /* ChallengeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */; };
@@ -149,7 +149,6 @@
 		060A10DA280BF9280077F71F /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTimer.swift; sourceTree = "<group>"; };
 		060A10DB280BF9280077F71F /* ChallengeTimerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTimerBar.swift; sourceTree = "<group>"; };
 		060A10DC280BF9280077F71F /* ChallengeCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCount.swift; sourceTree = "<group>"; };
-		060A10DD280BF9280077F71F /* ChallengeSmallPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeSmallPreview.swift; sourceTree = "<group>"; };
 		062FE88F27FF2EF400F2D0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		06312257280C25F0004BF504 /* TopProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopProfiles.swift; sourceTree = "<group>"; };
 		06312259280C26D5004BF504 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -221,6 +220,7 @@
 		6A825B6C281C0C9B004A40A2 /* CreateQuizForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuizForm.swift; sourceTree = "<group>"; };
 		6A825B74281E9F0B004A40A2 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A825B77281E9F0B004A40A2 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A825B79281ED948004A40A2 /* coins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coins.json; sourceTree = "<group>"; };
 		6A8930E42817F7B7005294BC /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
 		6A8930E628195A0B005294BC /* DirectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsList.swift; sourceTree = "<group>"; };
 		6A9F88A2280BF69A009168D2 /* ChallengeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeTimer.swift; path = outdare/components/ChallengeTimer.swift; sourceTree = SOURCE_ROOT; };
@@ -316,7 +316,6 @@
 				6A6CDF9927FB6CBA002106F8 /* ChallengeContainer.swift */,
 				060A10DC280BF9280077F71F /* ChallengeCount.swift */,
 				6A6CDF9A27FB6CBA002106F8 /* ChallengeDetailedPreview.swift */,
-				060A10DD280BF9280077F71F /* ChallengeSmallPreview.swift */,
 				060A10DA280BF9280077F71F /* ChallengeTimer.swift */,
 				060A10DB280BF9280077F71F /* ChallengeTimerBar.swift */,
 				06BC5E40281ACE0A00E31A4D /* ContinueOverlay.swift */,
@@ -442,6 +441,7 @@
 				06BC5E64281F141D00E31A4D /* globeLoading.json */,
 				06BC5E53281EC4D900E31A4D /* arrows.json */,
 				06BC5E51281EC4D200E31A4D /* coin.json */,
+				6A825B79281ED948004A40A2 /* coins.json */,
 				06BC5E4F281EC4CA00E31A4D /* LottieView.swift */,
 			);
 			path = Lottie;
@@ -684,6 +684,7 @@
 				6A6CDFE727FF0BF2002106F8 /* .gitignore in Resources */,
 				06BC5E5A281EC55F00E31A4D /* twister.png in Resources */,
 				065FEC842811832F00237AFB /* JetBrainsMono-ExtraBold.ttf in Resources */,
+				6A825B7A281ED948004A40A2 /* coins.json in Resources */,
 				6AF5297028181C97005189F3 /* countdown.wav in Resources */,
 				065FEC5828108B2D00237AFB /* GoogleService-Info.plist in Resources */,
 				065FEC862811832F00237AFB /* JetBrainsMono-Medium.ttf in Resources */,
@@ -733,7 +734,6 @@
 				6A9F88A9280BF7F6009168D2 /* SpeechAnalyzer.swift in Sources */,
 				6A825B62281ABB5E004A40A2 /* TriviaApiDAO.swift in Sources */,
 				065FEC712811830700237AFB /* OpeningPageView.swift in Sources */,
-				060A10E4280BF9280077F71F /* ChallengeSmallPreview.swift in Sources */,
 				064F120C28100D9B00C642CF /* LoginForm.swift in Sources */,
 				B194B3AA28007C50000F056E /* ProfileBackground.swift in Sources */,
 				065FEC692811830700237AFB /* StartView.swift in Sources */,
