@@ -57,7 +57,7 @@ To run this project, installing locally by cloning to Xcode and run
 
 Some of the views 
 
-<img src="/outdare/screenshots/map.png" width="250"> <img src="/outdare/screenshots/twister.png" width="250"> <img src="/outdare/screenshots/leaderboard.png" width="250"> <img src="/outdare/screenshots/routes.png" width="250">
+<img src="/outdare/screenshots/map.png" width="200"> <img src="/outdare/screenshots/twister.png" width="200"> <img src="/outdare/screenshots/leaderboard.png" width="200"> <img src="/outdare/screenshots/routes.png" width="200">
 
 
 ## Contributors
