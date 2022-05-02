@@ -1,0 +1,12 @@
+/* Bundle name */
+"CFBundleName" = "outdare";
+
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "This app needs your location to show it on the map.";
+
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "OutDare will use your microphone to pick up your answers in voice challenges";
+
+/* Privacy - Speech Recognition Usage Description */
+"NSSpeechRecognitionUsageDescription" = "OutDare uses Speech Recognition to make challenges more interactive. Without it, you won't be able to participate in all challenges.";
+

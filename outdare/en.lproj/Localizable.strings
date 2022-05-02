@@ -1,0 +1,382 @@
+/* No comment provided by engineer. */
+"\t%@" = "%@";
+
+/* No comment provided by engineer. */
+"%.2f" = "%.2f";
+
+/* No comment provided by engineer. */
+"%@" = "%@";
+
+/* No comment provided by engineer. */
+"%@ - %@" = "%@ - %@";
+
+/* No comment provided by engineer. */
+"%lf" = "%lf";
+
+/* No comment provided by engineer. */
+"%lld" = "%lld";
+
+/* No comment provided by engineer. */
+"%lld Points" = "%lld Points";
+
+/* No comment provided by engineer. */
+"%lld points has been added to your account." = "%lld points has been added to your account.";
+
+/* No comment provided by engineer. */
+"%lld selected" = "%lld selected";
+
+/* No comment provided by engineer. */
+"+%lld" = "+%lld";
+
+/* No comment provided by engineer. */
+"1" = "1";
+
+/* No comment provided by engineer. */
+"2." = "2.";
+
+/* No comment provided by engineer. */
+"3." = "3.";
+
+/* No comment provided by engineer. */
+"Achievements" = "Achievements";
+
+/* No comment provided by engineer. */
+"Add to the route(first)" = "Add to the route(first)";
+
+/* No comment provided by engineer. */
+"Add to the route(last)" = "Add to the route(last)";
+
+/* No comment provided by engineer. */
+"Are you sure you want to reveal challenge?" = "Are you sure you want to reveal challenge?";
+
+/* No comment provided by engineer. */
+"By purchasing this item, %lld points will be added to your accounts points." = "By purchasing this item, %lld points will be added to your accounts points.";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"Challenge completed 🎉" = "Challenge completed 🎉";
+
+/* No comment provided by engineer. */
+"Change credentials" = "Change credentials";
+
+/* No comment provided by engineer. */
+"Change user information" = "Change user information";
+
+/* No comment provided by engineer. */
+"Choose location" = "Choose location";
+
+/* No comment provided by engineer. */
+"Continue" = "Continue";
+
+/* No comment provided by engineer. */
+"CONTINUE" = "CONTINUE";
+
+/* No comment provided by engineer. */
+"COUNTRY" = "COUNTRY";
+
+/* No comment provided by engineer. */
+"Create" = "Create";
+
+/* No comment provided by engineer. */
+"Create Quiz!" = "Create Quiz!";
+
+/* No comment provided by engineer. */
+"Description" = "Description";
+
+/* No comment provided by engineer. */
+"Directions info" = "Directions info";
+
+/* No comment provided by engineer. */
+"Email" = "Email";
+
+/* No comment provided by engineer. */
+"EMAIL" = "EMAIL";
+
+/* No comment provided by engineer. */
+"Exit" = "Exit";
+
+/* No comment provided by engineer. */
+"Finish" = "Finish";
+
+/* No comment provided by engineer. */
+"FREE" = "FREE";
+
+/* No comment provided by engineer. */
+"Generate" = "Generate";
+
+/* No comment provided by engineer. */
+"Get ready!" = "Get ready!";
+
+/* No comment provided by engineer. */
+"Go to settings" = "Go to settings";
+
+/* No comment provided by engineer. */
+"I'm ready!" = "I'm ready!";
+
+/* No comment provided by engineer. */
+"Location" = "Location";
+
+/* No comment provided by engineer. */
+"LOGIN" = "LOGIN";
+
+/* No comment provided by engineer. */
+"Logout" = "Logout";
+
+/* No comment provided by engineer. */
+"New email" = "New email";
+
+/* No comment provided by engineer. */
+"New password" = "New password";
+
+/* No comment provided by engineer. */
+"New Quiz" = "New Quiz";
+
+/* No comment provided by engineer. */
+"Not enough questions 😕\nPlease try other parameters" = "Not enough questions 😕\nPlease try other parameters";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Old password" = "Old password";
+
+/* No comment provided by engineer. */
+"Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 25 points." = "Once you reveal this challenge you will have to finish the challenge or else you will have to reveal it again. Revealing will cost 25 points.";
+
+/* No comment provided by engineer. */
+"Password" = "Password";
+
+/* No comment provided by engineer. */
+"PASSWORD" = "PASSWORD";
+
+/* No comment provided by engineer. */
+"Password and email used for login" = "Password and email used for login";
+
+/* No comment provided by engineer. */
+"Please choose a category" = "Please choose a category";
+
+/* No comment provided by engineer. */
+"Please choose a difficulty" = "Please choose a difficulty";
+
+/* No comment provided by engineer. */
+"Point Store" = "Point Store";
+
+/* No comment provided by engineer. */
+"Points added!" = "Points added!";
+
+/* No comment provided by engineer. */
+"Purchace %lld points?" = "Purchace %lld points?";
+
+/* No comment provided by engineer. */
+"Purchase" = "Purchase";
+
+/* No comment provided by engineer. */
+"Quiz Added 🤩" = "Quiz Added 🤩";
+
+/* No comment provided by engineer. */
+"Quiz Generator" = "Quiz Generator";
+
+/* No comment provided by engineer. */
+"Remove all" = "Remove all";
+
+/* No comment provided by engineer. */
+"Reveal" = "Reveal";
+
+/* No comment provided by engineer. */
+"Reveal Challenge" = "Reveal Challenge";
+
+/* No comment provided by engineer. */
+"Score" = "Score";
+
+/* No comment provided by engineer. */
+"Select %lld questions to create a quiz" = "Select %lld questions to create a quiz";
+
+/* No comment provided by engineer. */
+"Select a challenge from the map to add directions to the route" = "Select a challenge from the map to add directions to the route";
+
+/* No comment provided by engineer. */
+"SIGNUP" = "SIGNUP";
+
+/* No comment provided by engineer. */
+"Sing or type here" = "Sing or type here";
+
+/* No comment provided by engineer. */
+"Skip" = "Skip";
+
+/* No comment provided by engineer. */
+"Skips left: %lld" = "Skips left: %lld";
+
+/* No comment provided by engineer. */
+"Sort by distance" = "Sort by distance";
+
+/* No comment provided by engineer. */
+"Speak or type" = "Speak or type";
+
+/* No comment provided by engineer. */
+"Speech Recognition permission is needed to complete challenges. Please authorize it in app settings" = "Speech Recognition permission is needed to complete challenges. Please authorize it in app settings";
+
+/* No comment provided by engineer. */
+"Speed bonus" = "Speed bonus";
+
+/* No comment provided by engineer. */
+"Start" = "Start";
+
+/* No comment provided by engineer. */
+"Submit" = "Submit";
+
+/* No comment provided by engineer. */
+"Title" = "Title";
+
+/* No comment provided by engineer. */
+"Total" = "Total";
+
+/* No comment provided by engineer. */
+"Type here if you cannot talk" = "Type here if you cannot talk";
+
+/* No comment provided by engineer. */
+"UPDATE" = "UPDATE";
+
+/* No comment provided by engineer. */
+"Username" = "Username";
+
+/* No comment provided by engineer. */
+"USERNAME" = "USERNAME";
+
+/* No comment provided by engineer. */
+"Username and location" = "Username and location";
+
+/* No comment provided by engineer. */
+"x%.2f" = "x%.2f";
+
+/* No comment provided by engineer. */
+"Your route" = "Your route";
+
+/* No comment provided by engineer. */
+"Your route is currently empty" = "Your route is currently empty";
+
+/* No comment provided by engineer. */
+"Easy" = "Easy";
+
+/* No comment provided by engineer. */
+"Medium" = "Medium";
+
+/* No comment provided by engineer. */
+"Hard" = "Hard";
+
+/* No comment provided by engineer. */
+"Choose a difficulty" = "Choose a difficulty";
+
+/* No comment provided by engineer. */
+"Choose a category" = "Choose a category";
+
+/* No comment provided by engineer. */
+"Map" = "Map";
+
+/* No comment provided by engineer. */
+"Leaderboard" = "Leaderboard";
+
+/* No comment provided by engineer. */
+"Profile" = "Profile";
+
+/* No comment provided by engineer. */
+"Generator" = "Generator";
+
+/* No comment provided by engineer. */
+"Store" = "Store";
+
+/* No comment provided by engineer. */
+"General Knowledge" = "General Knowledge";
+
+/* No comment provided by engineer. */
+"Entertainment: Books" = "Entertainment: Books";
+
+/* No comment provided by engineer. */
+"Entertainment: Film" = "Entertainment: Film";
+
+/* No comment provided by engineer. */
+"Entertainment: Music" = "Entertainment: Music";
+
+/* No comment provided by engineer. */
+"Entertainment: Musicals & Theatres" = "Entertainment: Musicals & Theatres";
+
+/* No comment provided by engineer. */
+"Entertainment: Television" = "Entertainment: Television";
+
+/* No comment provided by engineer. */
+"Entertainment: Video Games" = "Entertainment: Video Games";
+
+/* No comment provided by engineer. */
+"Entertainment: Board Games" = "Entertainment: Board Games";
+
+/* No comment provided by engineer. */
+"Science & Nature" = "Science & Nature";
+
+/* No comment provided by engineer. */
+"Science: Computers" = "Science: Computers";
+
+/* No comment provided by engineer. */
+"Science: Mathematics" = "Science: Mathematics";
+
+/* No comment provided by engineer. */
+"Mythology" = "Mythology";
+
+/* No comment provided by engineer. */
+"Sports" = "Sports";
+
+/* No comment provided by engineer. */
+"Geography" = "Geography";
+
+/* No comment provided by engineer. */
+"History" = "History";
+
+/* No comment provided by engineer. */
+"Politics" = "Politics";
+
+/* No comment provided by engineer. */
+"Art" = "Art";
+
+/* No comment provided by engineer. */
+"Celebrities" = "Celebrities";
+
+/* No comment provided by engineer. */
+"Animals" = "Animals";
+
+/* No comment provided by engineer. */
+"Vehicles" = "Vehicles";
+
+/* No comment provided by engineer. */
+"Entertainment: Comics" = "Entertainment: Comics";
+
+/* No comment provided by engineer. */
+"Science: Gadgets" = "Science: Gadgets";
+
+/* No comment provided by engineer. */
+"Entertainment: Japanese Anime & Manga" = "Entertainment: Japanese Anime & Manga";
+
+/* No comment provided by engineer. */
+"Entertainment: Cartoon & Animations" = "Entertainment: Cartoon & Animations";
+
+/* No comment provided by engineer. */
+"%.0f meters" = "%.0f meters";
+
+"Outstanding" = "Outstanding";
+"Excellent" = "Excellent";
+"Good" = "Good";
+"Misspelled" = "Misspelled";
+"Does not contain '%lld'" = "Does not contain '%lld'";
+"Flawless 🤩" = "Flawless 🤩";
+"No input 🧐" = "No input 🧐";
+"Incomplete!" = "Incomplete!";
+"Excellent ⭐️" = "Excellent ⭐️";
+"Nice try 🤙" = "Nice try 🤙";
+"Correct 🔥" = "Correct 🔥";
+"Wrong answer 😕" = "Wrong answer 😕";
+"Perfect match 🔥" = "Perfect match 🔥";
+"No answer 🧐" = "No answer 🧐";
+"No match 😕" = "No match 😕";
+"Partial match!" = "Partial match!";
+"Sing or type here" = "Sing or type here";
+"Speak or type" = "Speak or type";
+"Sound" = "Sound";
