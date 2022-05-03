@@ -7,7 +7,7 @@ Swift group project - Spring 2022 - Metropolia University Of Applied Sciences. I
 - Overview
 - General info
 - App features
-- Frameworks
+- Frameworks/libraries
 - Back-end and API service
 - Set up
 - Presentation
@@ -36,13 +36,15 @@ For players:
 - Add avatar, edit details, change password or your username in profile
 - See your own achievements and which challenges you have completed
 - Buy points to build your way up the leaderboard
+- Generate your own challenge
+- Reveal challenge outside your radar buy paying with points
 
-## Frameworks:
+## Frameworks/libraries:
 
 - MapKit Apple framework - [MapKit framework](https://developer.apple.com/documentation/mapkit/)
 - UIKit Apple framework - [UIKit framework](https://developer.apple.com/documentation/uikit)
 - SwiftUI Apple framework - [SwiftUI framework](https://developer.apple.com/xcode/swiftui/)
-
+- Lottie - [Lottie](https://lottiefiles.com/getting-started)
 
 ## Backend and APIs service:
 
